@@ -1,0 +1,759 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Semana 1 · Pensamiento computacional y Git</title>
+<meta name="description" content="Guía de estudio, semana 1: algoritmos, diagramas de flujo, entorno de Python y fundamentos de Git/GitHub.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/guia.css">
+<script>try{var t=localStorage.getItem("ids-guia-v1-tema");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+</head>
+<body data-semana="s1">
+
+<header class="topbar">
+  <a class="brand" href="../index.html">IDS <span>·</span> <small>Guía de estudio</small></a>
+  <nav aria-label="Semanas">
+    <a href="semana-01.html" aria-current="page">S1</a>
+    <a href="semana-02.html">S2</a>
+    <a href="semana-03.html">S3</a>
+    <a href="semana-04.html">S4</a>
+    <a href="semana-05.html">S5</a>
+  </nav>
+  <button class="theme-btn" type="button" aria-label="Cambiar tema claro/oscuro">◐</button>
+</header>
+
+<div class="layout with-toc">
+<aside class="toc" aria-label="Contenido de la semana">
+  <p>Semana 1</p>
+  <ol>
+    <li><a href="#uso">Cómo usar la guía</a></li>
+    <li><a href="#mapa">Qué puedes usar</a></li>
+    <li><a href="#lecturas">Lecturas</a></li>
+    <li><a href="#checkpoint">Reading checkpoint</a></li>
+    <li><a href="#vida">Ciclo de vida</a></li>
+    <li><a href="#algoritmos">Algoritmos y diagramas</a></li>
+    <li><a href="#entorno">Entorno y terminal</a></li>
+    <li><a href="#git">Git y GitHub</a></li>
+    <li><a href="#trazas">Tablas de traza</a></li>
+    <li><a href="#ejercicios">Ejercicios</a></li>
+    <li><a href="#proyecto">Proyecto: Fase 1</a></li>
+    <li><a href="#evaluacion">Rumbo al Control 1</a></li>
+    <li><a href="#fuentes">Fuentes</a></li>
+  </ol>
+</aside>
+
+<main>
+<section class="hero">
+  <p class="eyebrow">Semana 1 · Módulo 1</p>
+  <h1>Pensamiento computacional, entorno y control de versiones</h1>
+  <p class="lead">Antes de escribir código hay que saber <em>describir</em> un proceso sin ambigüedad. Esta semana aprendes a convertir una regla de negocio en un algoritmo, a dibujarla como diagrama de flujo, a ejecutar tu primer programa de Python y a guardar tu trabajo con Git.</p>
+  <div class="pregunta"><small>Pregunta orientadora</small>¿Cómo le explico a una computadora un proceso de negocio de forma que no pueda malinterpretarlo, y cómo guardo cada versión de ese trabajo?</div>
+  <ul class="chips">
+    <li class="chip lect">Lecturas: BOU 1 · PCC 1 + Apéndice D · GIT 1</li>
+    <li class="chip proy">Proyecto: Fase 1 (esta semana)</li>
+    <li class="chip eval">Control 1: la próxima semana</li>
+  </ul>
+  <div class="progress" data-progreso-pagina>
+    <div class="progress-bar"><span></span></div>
+    <div class="progress-label"></div>
+  </div>
+</section>
+
+<section id="uso">
+  <h2>Cómo usar esta guía</h2>
+  <p>El curso es <strong>aula invertida</strong>: el libro es la primera fuente, la clase es laboratorio. Usa esta página en cuatro momentos:</p>
+  <div class="momentos">
+    <div><strong>Antes de clase</strong>Lee los capítulos de la lista y responde el <a href="#checkpoint">reading checkpoint</a>. Es el mismo tipo de control que tendrás en Moodle.</div>
+    <div><strong>Durante el laboratorio</strong>Tenla abierta junto a VS Code: comandos de terminal, comandos de Git, símbolos de diagramas.</div>
+    <div><strong>Después de clase</strong>Llena las <a href="#trazas">tablas de traza</a> a mano y resuelve los <a href="#ejercicios">ejercicios</a> antes de abrir la solución.</div>
+    <div><strong>Antes de evaluar</strong>Repasa la lista de <a href="#evaluacion">“puedo…”</a> y las preguntas de defensa del <a href="#proyecto">proyecto</a>.</div>
+  </div>
+  <p>Cada tema sigue el mismo ciclo. Acostúmbrate a él: es la forma en la que se resuelve un problema real y la forma en que te van a preguntar en la defensa.</p>
+  <ul class="ciclo-leyenda" aria-label="Ciclo de trabajo">
+    <li>Pregunta</li><li class="sep">→</li><li>Exploración</li><li class="sep">→</li><li>Implementación</li><li class="sep">→</li><li>Resultado</li><li class="sep">→</li><li>Interpretación</li><li class="sep">→</li><li class="v">Verificación</li>
+  </ul>
+</section>
+
+<section id="mapa">
+  <h2>Qué puedes usar esta semana</h2>
+  <p>Regla de progresión: en esta guía nunca se usa algo que el curso enseña en una semana posterior. Si lo ves antes, está marcado como <em>adelanto opcional</em>.</p>
+  <div class="permisos">
+    <div class="si">
+      <h4>Sí, desde ahora</h4>
+      <ul>
+        <li>Pseudocódigo y diagramas de flujo</li>
+        <li>Terminal: moverte entre carpetas y ejecutar <code>python archivo.py</code></li>
+        <li>Python: <code>print()</code> con texto y comentarios <code>#</code></li>
+        <li>Git: <code>config</code>, <code>init</code>, <code>status</code>, <code>add</code>, <code>commit</code>, <code>log</code>, <code>branch</code>, <code>switch</code>, <code>merge</code>, <code>remote</code>, <code>push</code>, <code>pull</code>, <code>clone</code></li>
+        <li><code>.gitignore</code> y <code>README.md</code></li>
+      </ul>
+    </div>
+    <div class="no">
+      <h4>Todavía no</h4>
+      <ul>
+        <li>Variables y tipos de Python → semana 2</li>
+        <li><code>if</code> / <code>elif</code> / <code>else</code> en Python → semana 2</li>
+        <li><code>input()</code> y bucles → semana 3</li>
+        <li>Funciones propias (<code>def</code>) → semana 4</li>
+      </ul>
+      <p style="margin-top:.5rem;font-size:.9rem">En pseudocódigo sí puedes decidir y repetir: el algoritmo es independiente del lenguaje.</p>
+    </div>
+  </div>
+</section>
+
+<section id="lecturas">
+  <h2>Lecturas de preparación</h2>
+  <p>Marca cada lectura cuando la termines. Tu avance se guarda en este navegador.</p>
+  <ul class="check">
+    <li><input type="checkbox" id="s1-l1" data-track="s1-l1"><label for="s1-l1"><span class="ref">[BOU] Cap. 1</span> “Algorithmic Thinking and Flowcharts”. Enfócate en: qué hace a un algoritmo correcto, los símbolos del diagrama de flujo y cómo se pasa de un enunciado a pasos.</label></li>
+    <li><input type="checkbox" id="s1-l2" data-track="s1-l2"><label for="s1-l2"><span class="ref">[PCC] Cap. 1</span> “Getting Started”. Enfócate en: instalar Python, configurar VS Code, ejecutar <code>hello_world.py</code> desde el editor y desde la terminal, y qué hacer si no corre.</label></li>
+    <li><input type="checkbox" id="s1-l3" data-track="s1-l3"><label for="s1-l3"><span class="ref">[PCC] Apéndice D</span> “Using Git for Version Control”. Enfócate en: el flujo <code>add</code> → <code>commit</code>, revisar el historial y volver a un estado anterior.</label></li>
+    <li><input type="checkbox" id="s1-l4" data-track="s1-l4"><label for="s1-l4"><span class="ref">[GIT] Cap. 1</span> “Inicio - Sobre el control de versiones”. Es de acceso libre en español: <a href="https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Acerca-del-Control-de-Versiones" target="_blank" rel="noopener">git-scm.com/book/es/v2</a>. Enfócate en: local vs. centralizado vs. distribuido, y los tres estados de un archivo.</label></li>
+  </ul>
+  <div class="box nota">
+    <span class="box-title">Complementos gratuitos</span>
+    <ul>
+      <li><a href="https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Configurando-Git-por-primera-vez" target="_blank" rel="noopener">Pro Git 1.6 — Configurando Git por primera vez</a></li>
+      <li><a href="https://git-scm.com/book/es/v2/Fundamentos-de-Git-Guardando-cambios-en-el-Repositorio" target="_blank" rel="noopener">Pro Git 2.2 — Guardando cambios en el repositorio</a> (el ciclo de vida de un archivo, con diagrama)</li>
+      <li><a href="https://git-scm.com/book/es/v2/Ramificaciones-en-Git-%C2%BFQu%C3%A9-es-una-rama%3F" target="_blank" rel="noopener">Pro Git 3.1 — ¿Qué es una rama?</a></li>
+      <li><a href="https://docs.github.com/es/authentication/connecting-to-github-with-ssh" target="_blank" rel="noopener">GitHub Docs — Conectar con GitHub mediante SSH</a> y <a href="https://docs.github.com/es/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens" target="_blank" rel="noopener">tokens de acceso personal</a></li>
+      <li><a href="https://code.visualstudio.com/docs/python/python-tutorial" target="_blank" rel="noopener">VS Code — Tutorial de Python</a> (en inglés)</li>
+    </ul>
+  </div>
+</section>
+
+<section id="checkpoint">
+  <h2>Reading checkpoint</h2>
+  <p>Responde <strong>después</strong> de leer y sin volver al libro. Cada respuesta muestra por qué es correcta o no.</p>
+  <div class="quiz">
+    <div class="qq" data-q="s1-q1">
+      <p>Un gerente te da estas instrucciones para programar. ¿Cuál <strong>no</strong> puede ser un paso de un algoritmo tal como está escrita?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>“Aplica un descuento razonable a los clientes buenos.”</button>
+        <button class="quiz-opt">“Si el subtotal es mayor o igual a $50, el descuento es el 10 % del subtotal.”</button>
+        <button class="quiz-opt">“Repite el cobro de cuotas hasta que el saldo sea $0.”</button>
+        <button class="quiz-opt">“Muestra el total a pagar.”</button>
+      </div>
+      <p class="why">Un algoritmo exige pasos <strong>precisos</strong>: ¿qué es “razonable”? ¿quién es un “cliente bueno”? Dos personas lo ejecutarían distinto. Las otras tres opciones se pueden ejecutar sin interpretar.</p>
+    </div>
+    <div class="qq" data-q="s1-q2">
+      <p>En un diagrama de flujo, ¿qué símbolo representa una <strong>decisión</strong> (una pregunta de sí/no)?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Rombo</button>
+        <button class="quiz-opt">Rectángulo</button>
+        <button class="quiz-opt">Paralelogramo</button>
+        <button class="quiz-opt">Óvalo</button>
+      </div>
+      <p class="why">Rombo = decisión (tiene dos salidas: sí/no). Rectángulo = proceso o cálculo. Paralelogramo = entrada o salida de datos. Óvalo = inicio o fin.</p>
+    </div>
+    <div class="qq" data-q="s1-q3">
+      <p>“Leer el precio y la cantidad que digita el cajero” se dibuja con…</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>un paralelogramo (entrada/salida)</button>
+        <button class="quiz-opt">un rectángulo (proceso)</button>
+        <button class="quiz-opt">un rombo (decisión)</button>
+        <button class="quiz-opt">un óvalo (terminal)</button>
+      </div>
+      <p class="why">Todo dato que <em>entra</em> al algoritmo o que se <em>muestra</em> al usuario va en paralelogramo. El cálculo del subtotal, en cambio, sería un rectángulo.</p>
+    </div>
+    <div class="qq" data-q="s1-q4">
+      <p>¿Qué distingue a un sistema de control de versiones <strong>distribuido</strong> como Git de uno centralizado?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Cada copia (clon) contiene el historial completo del proyecto.</button>
+        <button class="quiz-opt">Solo funciona si hay conexión a internet.</button>
+        <button class="quiz-opt">Solo una persona puede trabajar a la vez.</button>
+        <button class="quiz-opt">Guarda solo la última versión de cada archivo.</button>
+      </div>
+      <p class="why">En un sistema distribuido cada clon es un respaldo completo: puedes hacer commits sin red y, si el servidor se pierde, cualquier copia puede restaurarlo. En uno centralizado, el historial vive solo en el servidor.</p>
+    </div>
+    <div class="qq" data-q="s1-q5">
+      <p>¿Qué hace exactamente <code>git add informe.md</code>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Pasa los cambios actuales de <code>informe.md</code> al área de preparación (staging) para el próximo commit.</button>
+        <button class="quiz-opt">Guarda permanentemente <code>informe.md</code> en el historial.</button>
+        <button class="quiz-opt">Sube <code>informe.md</code> a GitHub.</button>
+        <button class="quiz-opt">Crea el archivo <code>informe.md</code>.</button>
+      </div>
+      <p class="why"><code>add</code> <em>prepara</em>; <code>commit</code> <em>guarda</em> en el historial local; <code>push</code> <em>sube</em> al remoto. Son tres pasos distintos y en la defensa te lo van a preguntar.</p>
+    </div>
+    <div class="qq" data-q="s1-q6">
+      <p>Modificas <code>README.md</code> y ejecutas <code>git commit -m "Actualiza README"</code> sin hacer <code>git add</code>. ¿Qué pasa?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Git no guarda nada y avisa que no hay cambios preparados para el commit.</button>
+        <button class="quiz-opt">Git guarda el README modificado.</button>
+        <button class="quiz-opt">Git borra los cambios del README.</button>
+        <button class="quiz-opt">Git sube el README a GitHub.</button>
+      </div>
+      <p class="why">Un commit guarda solo lo que está en staging. Sin <code>add</code>, el staging está vacío y Git responde algo como <em>“no changes added to commit”</em>. Tus cambios siguen en el archivo, intactos.</p>
+    </div>
+    <div class="qq" data-q="s1-q7">
+      <p>¿Qué es una <strong>rama</strong> en Git?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Un apuntador móvil a un commit, que permite desarrollar una línea de trabajo sin afectar a otra.</button>
+        <button class="quiz-opt">Una copia completa de la carpeta del proyecto en otro directorio.</button>
+        <button class="quiz-opt">Un respaldo que se sube automáticamente a GitHub.</button>
+        <button class="quiz-opt">Un archivo que lista qué ignorar.</button>
+      </div>
+      <p class="why">Crear una rama es barato: Git solo crea un apuntador nuevo. Por eso el flujo profesional es “una rama por tarea” y luego <code>merge</code> a <code>main</code>.</p>
+    </div>
+    <div class="qq" data-q="s1-q8">
+      <p>Tienes <code>hola.py</code> en la carpeta actual de la terminal. ¿Cómo lo ejecutas?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>python hola.py</code> (o <code>python3 hola.py</code> en macOS/Linux)</button>
+        <button class="quiz-opt"><code>run hola</code></button>
+        <button class="quiz-opt"><code>git hola.py</code></button>
+        <button class="quiz-opt">Haciendo doble clic en la carpeta</button>
+      </div>
+      <p class="why">El intérprete de Python recibe el nombre del archivo y ejecuta sus instrucciones de arriba hacia abajo. Si responde “no se reconoce el comando”, Python no está en el PATH: revisa la instalación (PCC cap. 1).</p>
+    </div>
+    <div class="qq" data-q="s1-q9">
+      <p>En el ciclo de vida del software, ¿en qué fase se comprueba que el programa cumple lo que el negocio pidió?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Pruebas (verificación)</button>
+        <button class="quiz-opt">Análisis de requerimientos</button>
+        <button class="quiz-opt">Despliegue</button>
+        <button class="quiz-opt">Mantenimiento</button>
+      </div>
+      <p class="why">Los requerimientos dicen <em>qué</em> debe hacer; las pruebas comprueban <em>que lo hace</em>. Por eso el proyecto exige casos de borde desde la Fase 2 y pruebas automáticas en la Fase 5.</p>
+    </div>
+    <div class="quiz-score"><span data-score></span><button class="btn sec" type="button" data-reset>Reiniciar quiz</button></div>
+  </div>
+  <ul class="check">
+    <li><input type="checkbox" id="s1-cp" data-track="s1-cp"><label for="s1-cp">Respondí el checkpoint y entiendo por qué fallé las que fallé.</label></li>
+  </ul>
+</section>
+
+<section id="vida">
+  <h2>El ciclo de vida del software</h2>
+  <p>Un programa no empieza en el teclado. Empieza en una necesidad del negocio y termina (si termina) cuando nadie lo usa. Las fases básicas:</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Fase</th><th>Pregunta que responde</th><th>Ejemplo: sistema de facturación</th></tr></thead>
+    <tbody>
+      <tr><td>1. Requerimientos</td><td>¿Qué necesita el negocio?</td><td>“Calcular el total con IVA y aplicar descuento por volumen.”</td></tr>
+      <tr><td>2. Diseño</td><td>¿Cómo se va a resolver?</td><td>Algoritmo en pseudocódigo + diagrama de flujo.</td></tr>
+      <tr><td>3. Implementación</td><td>¿Cómo se escribe en código?</td><td>El programa en Python.</td></tr>
+      <tr><td>4. Pruebas</td><td>¿Hace lo que se pidió?</td><td>Casos como “subtotal exactamente $50”.</td></tr>
+      <tr><td>5. Despliegue</td><td>¿Cómo llega a quien lo usa?</td><td>Instalarlo en las cajas.</td></tr>
+      <tr><td>6. Mantenimiento</td><td>¿Qué cambia después?</td><td>Cambia la tasa del IVA o la política de descuentos.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="box negocio">
+    <span class="box-title">Por qué le importa a un negocio</span>
+    Un error encontrado en la fase de diseño cuesta un borrador. El mismo error encontrado después del despliegue cuesta facturas mal cobradas, clientes molestos y horas de corrección. Diseñar y probar antes es ahorro, no burocracia.
+  </div>
+</section>
+
+<section id="algoritmos">
+  <h2>Algoritmos y diagramas de flujo</h2>
+  <p>Un <strong>algoritmo</strong> es una secuencia finita de pasos precisos que transforma unas entradas en unas salidas. Tres pruebas rápidas para saber si lo que escribiste es un algoritmo:</p>
+  <ol>
+    <li><strong>Precisión:</strong> dos personas distintas que lo sigan obtienen lo mismo.</li>
+    <li><strong>Finitud:</strong> termina siempre, para cualquier entrada válida.</li>
+    <li><strong>Entradas y salidas definidas:</strong> sabes qué datos necesita y qué entrega.</li>
+  </ol>
+
+  <div class="ciclo">
+    <h3>Caso: el total de una factura en la Distribuidora La Ceiba</h3>
+    <div class="paso"><div>
+      <span class="etq">Pregunta</span>
+      <p>La distribuidora vende al por mayor. Regla de negocio: si el subtotal de la compra es de <strong>$50 o más</strong>, se descuenta el 10 %; luego se cobra el <strong>IVA del 13 %</strong> sobre el monto con descuento. ¿Cuánto paga el cliente?</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Exploración</span>
+      <p>Antes de escribir nada, identifica:</p>
+      <ul>
+        <li><strong>Entradas:</strong> precio unitario, cantidad.</li>
+        <li><strong>Salida:</strong> total a pagar.</li>
+        <li><strong>Decisión:</strong> ¿el subtotal llega a $50?</li>
+        <li><strong>Orden importa:</strong> primero descuento, luego IVA. Si lo haces al revés, el cliente paga IVA sobre dinero que no pagó.</li>
+        <li><strong>Frontera:</strong> “$50 o más” incluye el 50 exacto. Es un <em>caso borde</em>.</li>
+      </ul>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Implementación (pseudocódigo)</span>
+<pre data-file="factura.pseudo"><code class="language-none">INICIO
+  LEER precio_unitario, cantidad
+  subtotal ← precio_unitario × cantidad
+  SI subtotal ≥ 50 ENTONCES
+      descuento ← subtotal × 0.10
+  SINO
+      descuento ← 0
+  FIN SI
+  base  ← subtotal − descuento
+  iva   ← base × 0.13
+  total ← base + iva
+  MOSTRAR total
+FIN</code></pre>
+      <figure class="diagrama">
+        <svg class="fc" viewBox="0 0 540 592" width="540" role="img" aria-labelledby="fc1-t">
+          <title id="fc1-t">Diagrama de flujo del cálculo de una factura con descuento e IVA</title>
+          <defs><marker id="fc1-m" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="punta" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+          <rect class="term" x="200" y="10" width="120" height="36" rx="18"/><text x="260" y="33" text-anchor="middle">Inicio</text>
+          <path class="flecha" d="M260 46 V68" marker-end="url(#fc1-m)"/>
+          <polygon class="io" points="185,70 360,70 335,110 160,110"/><text x="260" y="95" text-anchor="middle">Leer precio, cantidad</text>
+          <path class="flecha" d="M260 110 V132" marker-end="url(#fc1-m)"/>
+          <rect class="proc" x="150" y="134" width="220" height="40"/><text class="mono" x="260" y="159" text-anchor="middle">subtotal ← precio × cantidad</text>
+          <path class="flecha" d="M260 174 V196" marker-end="url(#fc1-m)"/>
+          <polygon class="dec" points="260,198 350,238 260,278 170,238"/><text x="260" y="243" text-anchor="middle">¿subtotal ≥ 50?</text>
+          <path class="flecha" d="M350 238 H430 V298" marker-end="url(#fc1-m)"/><text class="rot" x="372" y="230">Sí</text>
+          <path class="flecha" d="M170 238 H90 V298" marker-end="url(#fc1-m)"/><text class="rot" x="138" y="230">No</text>
+          <rect class="proc" x="332" y="300" width="196" height="40"/><text class="mono" x="430" y="325" text-anchor="middle">descuento ← subtotal×0.10</text>
+          <rect class="proc" x="15" y="300" width="150" height="40"/><text class="mono" x="90" y="325" text-anchor="middle">descuento ← 0</text>
+          <path class="flecha" d="M90 340 V370 H260"/>
+          <path class="flecha" d="M430 340 V370 H260 V390" marker-end="url(#fc1-m)"/>
+          <rect class="proc" x="145" y="392" width="230" height="66"/>
+          <text class="mono" x="260" y="413" text-anchor="middle">base ← subtotal − descuento</text>
+          <text class="mono" x="260" y="430" text-anchor="middle">iva ← base × 0.13</text>
+          <text class="mono" x="260" y="447" text-anchor="middle">total ← base + iva</text>
+          <path class="flecha" d="M260 458 V480" marker-end="url(#fc1-m)"/>
+          <polygon class="io" points="195,482 350,482 325,522 170,522"/><text x="260" y="507" text-anchor="middle">Mostrar total</text>
+          <path class="flecha" d="M260 522 V544" marker-end="url(#fc1-m)"/>
+          <rect class="term" x="200" y="546" width="120" height="36" rx="18"/><text x="260" y="569" text-anchor="middle">Fin</text>
+        </svg>
+        <figcaption>Símbolos: óvalo = inicio/fin · paralelogramo = entrada/salida · rectángulo = proceso · rombo = decisión.</figcaption>
+      </figure>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Resultado</span>
+      <p>Con precio $12.50 y cantidad 4: subtotal $50.00 → descuento $5.00 → base $45.00 → IVA $5.85 → <strong>total $50.85</strong>.</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Interpretación</span>
+      <p>El cliente que compra justo $50 paga $50.85, pero uno que compra $49 paga $55.37 ($49 × 1.13). ¡Comprar un poco más le sale <em>más barato</em>! Eso no es un error del algoritmo: es una consecuencia de la regla de negocio. Un buen analista la detecta y se la comunica al gerente.</p>
+    </div></div>
+    <div class="paso verif"><div>
+      <span class="etq">Verificación — ¿cómo sé que es correcto?</span>
+      <ul>
+        <li>Recórrelo a mano con al menos un caso de cada rama (sí / no) y el caso frontera ($50 exacto). Eso es una <a href="#trazas">tabla de traza</a>.</li>
+        <li>Compara contra una calculadora o una hoja de cálculo.</li>
+        <li>Pregúntate: ¿el total es siempre mayor que la base? (Debe serlo, porque el IVA es positivo.)</li>
+      </ul>
+    </div></div>
+  </div>
+</section>
+
+<section id="entorno">
+  <h2>Entorno y terminal</h2>
+  <p>La terminal es una forma de darle órdenes a la computadora escribiendo. Vas a usarla para ejecutar Python y para Git. Los comandos mínimos:</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Quiero…</th><th>Windows (PowerShell)</th><th>macOS / Linux</th></tr></thead>
+    <tbody>
+      <tr><td>ver en qué carpeta estoy</td><td><code>pwd</code></td><td><code>pwd</code></td></tr>
+      <tr><td>listar archivos</td><td><code>dir</code> o <code>ls</code></td><td><code>ls</code></td></tr>
+      <tr><td>entrar a una carpeta</td><td><code>cd proyecto</code></td><td><code>cd proyecto</code></td></tr>
+      <tr><td>subir un nivel</td><td><code>cd ..</code></td><td><code>cd ..</code></td></tr>
+      <tr><td>crear una carpeta</td><td><code>mkdir proyecto</code></td><td><code>mkdir proyecto</code></td></tr>
+      <tr><td>ver la versión de Python</td><td><code>python --version</code></td><td><code>python3 --version</code></td></tr>
+      <tr><td>ejecutar un programa</td><td><code>python hola.py</code></td><td><code>python3 hola.py</code></td></tr>
+    </tbody>
+  </table></div>
+  <p>Tu primer programa (PCC cap. 1). Créalo en VS Code, guárdalo como <code>hola.py</code> y ejecútalo desde la terminal integrada (<kbd>Ctrl</kbd>+<kbd>ñ</kbd> o menú <em>Terminal → New Terminal</em>):</p>
+<pre data-file="hola.py"><code class="language-python"># Mi primer programa en Python
+print("Hola, Distribuidora La Ceiba")
+print("Sistema de facturación v0.1")</code></pre>
+<pre class="salida" data-file="salida en la terminal"><code>Hola, Distribuidora La Ceiba
+Sistema de facturación v0.1</code></pre>
+  <div class="box error">
+    <span class="box-title">Errores frecuentes del primer día</span>
+    <ul>
+      <li><code>python: command not found</code> / <em>“no se reconoce como comando”</em> → Python no está instalado o no se marcó <em>“Add Python to PATH”</em> al instalar en Windows.</li>
+      <li><code>can't open file 'hola.py': No such file or directory</code> → la terminal no está en la carpeta del archivo. Usa <code>pwd</code> y <code>cd</code>.</li>
+      <li><code>SyntaxError</code> → olvidaste una comilla o un paréntesis. Python señala la línea con <code>^</code>.</li>
+      <li><code>NameError: name 'Print' is not defined</code> → Python distingue mayúsculas: es <code>print</code>.</li>
+    </ul>
+  </div>
+  <ul class="check">
+    <li><input type="checkbox" id="s1-env" data-track="s1-env"><label for="s1-env">Ejecuté <code>hola.py</code> desde VS Code y desde la terminal.</label></li>
+  </ul>
+</section>
+
+<section id="git">
+  <h2>Git y GitHub</h2>
+  <div class="ciclo">
+    <h3>Caso: cuatro personas, un mismo sistema</h3>
+    <div class="paso"><div>
+      <span class="etq">Pregunta</span>
+      <p>Tu equipo de cuatro va a construir el proyecto integrador durante 11 semanas. ¿Cómo trabajan sin pisarse los cambios, sin mandarse archivos <code>final_v3_ahora_si.py</code> por WhatsApp y demostrando quién hizo qué?</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Exploración: los tres lugares de Git</span>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Lugar</th><th>Qué hay ahí</th><th>Analogía contable</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Directorio de trabajo</strong></td><td>Tus archivos tal como los editas.</td><td>El borrador en tu escritorio.</td></tr>
+          <tr><td><strong>Área de preparación</strong> (staging)</td><td>Los cambios que irán en el próximo commit.</td><td>Los documentos que metes al sobre para archivar.</td></tr>
+          <tr><td><strong>Repositorio</strong> (<code>.git</code>)</td><td>El historial de commits, cada uno con autor, fecha y mensaje.</td><td>El libro mayor: cada asiento queda registrado y no se borra.</td></tr>
+        </tbody>
+      </table></div>
+      <p>Por eso un archivo puede estar: <strong>sin seguimiento</strong> (Git no lo conoce), <strong>modificado</strong>, <strong>preparado</strong> o <strong>confirmado</strong>.</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Implementación: configuración inicial (una sola vez por computadora)</span>
+<pre data-file="terminal"><code class="language-bash">git config --global user.name "Tu Nombre Apellido"
+git config --global user.email "tu_correo@esen.edu.sv"
+git config --global init.defaultBranch main
+git config --list          # para comprobar</code></pre>
+      <p>El correo debe ser el mismo de tu cuenta de GitHub; así tus commits aparecen a tu nombre (y eso cuenta en la rúbrica).</p>
+      <p><strong>Flujo diario:</strong></p>
+<pre data-file="terminal"><code class="language-bash">mkdir la-ceiba && cd la-ceiba
+git init                           # crea el repositorio (.git)
+git status                         # ¿qué cambió? úsalo TODO el tiempo
+git add README.md                  # prepara un archivo
+git add .                          # prepara todo lo que cambió (revisa antes con status)
+git commit -m "Agrega ficha técnica del proyecto"
+git log --oneline                  # historial resumido</code></pre>
+      <p><strong>Ramas:</strong> una rama por tarea; <code>main</code> siempre debe funcionar.</p>
+<pre data-file="terminal"><code class="language-bash">git branch feature/ficha-tecnica   # crea la rama
+git switch feature/ficha-tecnica   # cámbiate a ella (en versiones viejas: git checkout)
+# ... editas, add, commit ...
+git switch main                    # vuelves a main
+git merge feature/ficha-tecnica    # integras el trabajo
+git branch -d feature/ficha-tecnica  # borra la rama ya integrada</code></pre>
+      <p><strong>GitHub (repositorio remoto):</strong></p>
+<pre data-file="terminal"><code class="language-bash">git remote add origin git@github.com:usuario/la-ceiba.git   # con SSH
+git push -u origin main            # la primera vez; después basta con: git push
+git pull                           # trae lo que subieron tus compañeros
+git clone git@github.com:usuario/la-ceiba.git   # tus compañeros, para obtener copia</code></pre>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Autenticación: SSH o token</span>
+      <p>GitHub ya no acepta tu contraseña para <code>push</code>. Tienes dos opciones:</p>
+      <ul>
+        <li><strong>SSH (recomendada en tu computadora):</strong> generas un par de llaves, subes la <em>pública</em> a GitHub → <em>Settings → SSH and GPG keys</em>.
+<pre data-file="terminal"><code class="language-bash">ssh-keygen -t ed25519 -C "tu_correo@esen.edu.sv"
+# muestra la llave pública para copiarla a GitHub:
+cat ~/.ssh/id_ed25519.pub
+ssh -T git@github.com              # prueba: debe saludarte por tu usuario</code></pre></li>
+        <li><strong>Token de acceso personal (HTTPS):</strong> útil en computadoras del laboratorio. Lo creas en <em>Settings → Developer settings → Personal access tokens</em> y lo pegas cuando Git pida contraseña. Trátalo como una contraseña: nunca lo subas al repositorio.</li>
+      </ul>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Resultado</span>
+      <p><code>git log --oneline</code> muestra algo así (los códigos cambian en tu máquina):</p>
+<pre class="salida" data-file="salida"><code>3f2a9c1 (HEAD -> main) Integra ficha técnica
+8b41e07 Agrega .gitignore para Python
+c05d2aa Crea README inicial</code></pre>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Interpretación</span>
+      <p>Cada línea es un punto al que puedes volver. El historial es evidencia: la rúbrica del proyecto revisa que los commits estén <strong>distribuidos entre los cuatro</strong> y <strong>a lo largo de las 11 semanas</strong>. Un solo commit gigante la noche antes se califica como deficiente.</p>
+    </div></div>
+    <div class="paso verif"><div>
+      <span class="etq">Verificación — ¿cómo sé que salió bien?</span>
+      <ul>
+        <li><code>git status</code> dice <em>“nothing to commit, working tree clean”</em>.</li>
+        <li><code>git log --oneline</code> muestra tu commit con tu mensaje.</li>
+        <li>En GitHub, el commit aparece con tu foto/usuario (si no, revisa <code>user.email</code>).</li>
+      </ul>
+    </div></div>
+  </div>
+  <div class="box ojo">
+    <span class="box-title">Buenos mensajes de commit</span>
+    Imperativo, específico, corto: <code>Agrega cálculo de IVA</code>, <code>Corrige descuento en subtotal de $50</code>. Evita <code>cambios</code>, <code>asdf</code>, <code>final</code>. En la defensa te pueden pedir que expliques un commit concreto.
+  </div>
+  <ul class="check">
+    <li><input type="checkbox" id="s1-git1" data-track="s1-git1"><label for="s1-git1">Configuré <code>user.name</code> y <code>user.email</code>.</label></li>
+    <li><input type="checkbox" id="s1-git2" data-track="s1-git2"><label for="s1-git2">Creé un repositorio, hice al menos 3 commits y lo subí a GitHub.</label></li>
+    <li><input type="checkbox" id="s1-git3" data-track="s1-git3"><label for="s1-git3">Creé una rama, hice un commit en ella y la integré a <code>main</code> con <code>merge</code>.</label></li>
+  </ul>
+</section>
+
+<section id="trazas">
+  <h2>Tablas de traza</h2>
+  <p>Una traza es ejecutar el algoritmo <em>tú</em>, paso a paso, anotando el valor de cada variable. Llena las celdas, pulsa <strong>Comprobar</strong> y solo al final mira la solución. Usa punto decimal (<code>5.85</code>).</p>
+
+  <h3>Traza 1 · Factura con descuento</h3>
+  <p>Usa el pseudocódigo de <a href="#algoritmos">factura.pseudo</a>. En “¿≥ 50?” escribe <em>sí</em> o <em>no</em>.</p>
+  <div class="traza">
+    <div class="table-wrap"><table>
+      <thead><tr><th>precio × cantidad</th><th>subtotal</th><th>¿≥ 50?</th><th>descuento</th><th>base</th><th>iva</th><th>total</th></tr></thead>
+      <tbody>
+        <tr><td class="dado">12.50 × 4</td><td><input data-a="50"></td><td><input data-a="sí|si"></td><td><input data-a="5"></td><td><input data-a="45"></td><td><input data-a="5.85"></td><td><input data-a="50.85"></td></tr>
+        <tr><td class="dado">8.00 × 3</td><td><input data-a="24"></td><td><input data-a="no"></td><td><input data-a="0"></td><td><input data-a="24"></td><td><input data-a="3.12"></td><td><input data-a="27.12"></td></tr>
+        <tr><td class="dado">30.00 × 2</td><td><input data-a="60"></td><td><input data-a="sí|si"></td><td><input data-a="6"></td><td><input data-a="54"></td><td><input data-a="7.02"></td><td><input data-a="61.02"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="acciones"><button class="btn" type="button" data-comprobar>Comprobar</button><button class="btn sec" type="button" data-solucion>Ver solución</button><button class="btn sec" type="button" data-limpiar>Limpiar</button><span class="resultado" aria-live="polite"></span></div>
+  </div>
+
+  <h3>Traza 2 · El estado de un archivo en Git</h3>
+  <p>Después de cada comando, ¿en qué estado queda <code>README.md</code>? Opciones: <em>sin seguimiento</em>, <em>modificado</em>, <em>preparado</em>, <em>confirmado</em>, o combinaciones como <em>preparado y modificado</em>.</p>
+  <div class="traza">
+    <div class="table-wrap"><table>
+      <thead><tr><th>#</th><th>Acción</th><th>Estado de README.md</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td class="dado" style="text-align:left">Creas <code>README.md</code> en un repo recién iniciado</td><td><input data-a="sin seguimiento|untracked"></td></tr>
+        <tr><td>2</td><td class="dado" style="text-align:left"><code>git add README.md</code></td><td><input data-a="preparado|staged"></td></tr>
+        <tr><td>3</td><td class="dado" style="text-align:left"><code>git commit -m "Crea README"</code></td><td><input data-a="confirmado|committed|sin cambios"></td></tr>
+        <tr><td>4</td><td class="dado" style="text-align:left">Editas una línea del README y guardas</td><td><input data-a="modificado|modified"></td></tr>
+        <tr><td>5</td><td class="dado" style="text-align:left"><code>git add README.md</code></td><td><input data-a="preparado|staged"></td></tr>
+        <tr><td>6</td><td class="dado" style="text-align:left">Editas <em>otra</em> línea y guardas (sin <code>add</code>)</td><td><input data-a="preparado y modificado|modificado y preparado"></td></tr>
+        <tr><td>7</td><td class="dado" style="text-align:left"><code>git commit -m "Actualiza README"</code></td><td><input data-a="modificado|modified"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="acciones"><button class="btn" type="button" data-comprobar>Comprobar</button><button class="btn sec" type="button" data-solucion>Ver solución</button><button class="btn sec" type="button" data-limpiar>Limpiar</button><span class="resultado" aria-live="polite"></span></div>
+  </div>
+  <details class="defensa"><summary>¿Por qué los pasos 6 y 7 dan eso?</summary><div>
+    <p><code>git add</code> toma una <em>foto</em> del archivo en ese instante. En el paso 6 el staging tiene la foto del paso 5 y el archivo en disco tiene un cambio más: está preparado <em>y</em> modificado a la vez. El commit del paso 7 guarda solo la foto preparada; el segundo cambio sigue pendiente como “modificado”. Moraleja: revisa <code>git status</code> antes de cada commit.</p>
+  </div></details>
+  <ul class="check">
+    <li><input type="checkbox" id="s1-t1" data-track="s1-t1"><label for="s1-t1">Completé la traza 1 sin ver la solución.</label></li>
+    <li><input type="checkbox" id="s1-t2" data-track="s1-t2"><label for="s1-t2">Completé la traza 2 y puedo explicar los pasos 6 y 7.</label></li>
+  </ul>
+</section>
+
+<section id="ejercicios">
+  <h2>Ejercicios</h2>
+  <p>Intenta cada uno <strong>en papel primero</strong>. Abre la pista solo si llevas 10 minutos atascado; abre la solución solo después de tener tu versión.</p>
+
+  <article class="ejercicio">
+    <header><h3>E1 · Cobro de parqueo</h3><span class="nivel">pseudocódigo + diagrama · ★★</span></header>
+    <div class="cuerpo">
+      <p>El parqueo de un centro comercial cobra: <strong>$1.00 la primera hora</strong> y <strong>$0.75 cada hora adicional o fracción</strong>. El cobro máximo del día es <strong>$6.00</strong>. Si el cliente presenta un <strong>sello de compra</strong>, se le descuenta $1.00.</p>
+      <ol>
+        <li>Escribe el pseudocódigo (entrada: minutos, tiene_sello; salida: cobro).</li>
+        <li>Dibuja el diagrama de flujo (puedes usar <a href="https://www.drawio.com/" target="_blank" rel="noopener">draw.io</a>).</li>
+        <li>Calcula el cobro para 60, 61 y 600 minutos sin sello, y 30 y 600 minutos con sello.</li>
+      </ol>
+    </div>
+    <details><summary>Pista</summary><div class="det">
+      <p>“Fracción” significa que 61 minutos cuentan como 2 horas: redondeas <em>hacia arriba</em> (función techo). Y hay una ambigüedad escondida: ¿el sello se descuenta antes o después de aplicar el máximo de $6.00?</p>
+    </div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="parqueo.pseudo"><code class="language-none">INICIO
+  LEER minutos, tiene_sello
+  horas ← techo(minutos / 60)
+  cobro ← 1.00 + (horas − 1) × 0.75
+  SI cobro > 6.00 ENTONCES
+      cobro ← 6.00
+  FIN SI
+  SI tiene_sello ENTONCES
+      cobro ← cobro − 1.00
+  FIN SI
+  SI cobro < 0 ENTONCES
+      cobro ← 0
+  FIN SI
+  MOSTRAR cobro
+FIN</code></pre>
+      <div class="table-wrap"><table>
+        <thead><tr><th>minutos</th><th>sello</th><th>horas</th><th>antes del tope</th><th class="num">cobro</th></tr></thead>
+        <tbody>
+          <tr><td>60</td><td>no</td><td>1</td><td>1.00</td><td class="num">$1.00</td></tr>
+          <tr><td>61</td><td>no</td><td>2</td><td>1.75</td><td class="num">$1.75</td></tr>
+          <tr><td>600</td><td>no</td><td>10</td><td>7.75</td><td class="num">$6.00</td></tr>
+          <tr><td>30</td><td>sí</td><td>1</td><td>1.00</td><td class="num">$0.00</td></tr>
+          <tr><td>600</td><td>sí</td><td>10</td><td>7.75</td><td class="num">$5.00</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>La ambigüedad:</strong> con 600 minutos y sello, si se aplica el sello <em>antes</em> del tope, el cliente paga $6.00 (7.75 − 1 = 6.75 → tope 6.00); si se aplica <em>después</em>, paga $5.00. Ambas son “correctas” según cómo se lea el enunciado. <strong>No lo decide el programador</strong>: se pregunta al negocio y se documenta como supuesto. Esta solución eligió “después del tope”.</p>
+      <p><strong>Verificación:</strong> 60 y 61 minutos prueban la frontera de la fracción; 600 prueba el tope; 30 con sello prueba que el cobro nunca sea negativo.</p>
+    </div></details>
+    <ul class="check" style="padding:0 1.2rem .6rem"><li><input type="checkbox" id="s1-e1" data-track="s1-e1"><label for="s1-e1">Resuelto</label></li></ul>
+  </article>
+
+  <article class="ejercicio">
+    <header><h3>E2 · Instrucciones del gerente</h3><span class="nivel">pensamiento algorítmico · ★</span></header>
+    <div class="cuerpo">
+      <p>El gerente de ventas manda esto para que lo programen:</p>
+      <blockquote>“Si el cliente es frecuente, dale descuento. Si compra mucho, también. Al final, cobra el IVA.”</blockquote>
+      <p>Lista <strong>todas</strong> las ambigüedades y reescribe la regla como pasos precisos (inventa valores razonables y márcalos como supuestos).</p>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p>Busca cada palabra que admita dos lecturas: “frecuente”, “descuento”, “mucho”, “también”, “al final”.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+      <ul>
+        <li><strong>“frecuente”:</strong> ¿cuántas compras y en qué periodo? → Supuesto: 5 o más compras en los últimos 90 días.</li>
+        <li><strong>“descuento”:</strong> ¿cuánto? ¿porcentaje o monto fijo? → Supuesto: 5 %.</li>
+        <li><strong>“mucho”:</strong> ¿en dólares o en unidades? → Supuesto: subtotal ≥ $100.</li>
+        <li><strong>“también”:</strong> si cumple ambas, ¿se suman los descuentos (10 %), se aplica el mayor o se aplican en cadena? → Supuesto: se suman.</li>
+        <li><strong>“al final”:</strong> ¿el IVA va sobre el monto con o sin descuento? → Supuesto: sobre el monto con descuento.</li>
+      </ul>
+<pre data-file="descuentos.pseudo"><code class="language-none">LEER subtotal, compras_90_dias
+tasa ← 0
+SI compras_90_dias ≥ 5 ENTONCES tasa ← tasa + 0.05
+SI subtotal ≥ 100      ENTONCES tasa ← tasa + 0.05
+base  ← subtotal × (1 − tasa)
+total ← base × 1.13
+MOSTRAR total</code></pre>
+      <p><strong>Verificación:</strong> cuatro casos cubren todas las combinaciones (frecuente sí/no × monto alto sí/no).</p>
+    </div></details>
+    <ul class="check" style="padding:0 1.2rem .6rem"><li><input type="checkbox" id="s1-e2" data-track="s1-e2"><label for="s1-e2">Resuelto</label></li></ul>
+  </article>
+
+  <article class="ejercicio">
+    <header><h3>E3 · Flujo de ramas completo</h3><span class="nivel">Git · ★★</span></header>
+    <div class="cuerpo">
+      <p>Escribe, en orden, los comandos para: (1) crear la carpeta <code>ceiba</code> e iniciar un repositorio; (2) crear un <code>README.md</code> y hacer el primer commit; (3) crear la rama <code>feature/ficha-tecnica</code>, cambiarte a ella, crear <code>ficha.md</code> y hacer commit; (4) volver a <code>main</code> e integrar la rama; (5) conectar con GitHub y subir <code>main</code>.</p>
+    </div>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="terminal"><code class="language-bash">mkdir ceiba
+cd ceiba
+git init
+# crea README.md en VS Code
+git add README.md
+git commit -m "Crea README inicial"
+git branch feature/ficha-tecnica
+git switch feature/ficha-tecnica
+# crea ficha.md en VS Code
+git add ficha.md
+git commit -m "Agrega ficha técnica del proyecto"
+git switch main
+git merge feature/ficha-tecnica
+git remote add origin git@github.com:usuario/ceiba.git
+git push -u origin main</code></pre>
+      <p><strong>Verificación:</strong> después del <code>merge</code>, <code>ls</code> en <code>main</code> debe mostrar <code>ficha.md</code>, y <code>git log --oneline</code> los dos commits. En GitHub deben verse ambos archivos.</p>
+    </div></details>
+    <ul class="check" style="padding:0 1.2rem .6rem"><li><input type="checkbox" id="s1-e3" data-track="s1-e3"><label for="s1-e3">Resuelto (y lo ejecuté de verdad en mi computadora)</label></li></ul>
+  </article>
+
+  <article class="ejercicio">
+    <header><h3>E4 · Ticket de caja con <code>print</code></h3><span class="nivel">Python · ★</span></header>
+    <div class="cuerpo">
+      <p>Solo con <code>print()</code> (todavía no hay variables), escribe <code>ticket.py</code> que muestre un ticket de la Distribuidora La Ceiba con encabezado, dos productos, subtotal, IVA y total, usando los números de la traza 1 (primer caso).</p>
+    </div>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="ticket.py"><code class="language-python"># Ticket de caja: solo texto por ahora (las variables llegan en la semana 2)
+print("==============================")
+print("   DISTRIBUIDORA LA CEIBA")
+print("==============================")
+print("4 x Aceite 1 L @ 12.50  50.00")
+print("Descuento 10 %          -5.00")
+print("Base                    45.00")
+print("IVA 13 %                 5.85")
+print("------------------------------")
+print("TOTAL                   50.85")</code></pre>
+      <p><strong>Interpretación:</strong> este ticket es correcto solo para <em>ese</em> caso. Si cambia la cantidad, hay que reescribirlo. Esa es exactamente la limitación que resuelven las variables de la semana 2.</p>
+    </div></details>
+    <ul class="check" style="padding:0 1.2rem .6rem"><li><input type="checkbox" id="s1-e4" data-track="s1-e4"><label for="s1-e4">Resuelto</label></li></ul>
+  </article>
+
+  <article class="ejercicio">
+    <header><h3>E5 · Auditoría: la comisión que desaparece</h3><span class="nivel">auditoría · ★★</span></header>
+    <div class="cuerpo">
+      <p>Alguien escribió este algoritmo de comisiones. Encuentra el error <strong>con una traza</strong>, no a ojo:</p>
+<pre data-file="comision.pseudo"><code class="language-none">LEER ventas
+SI ventas > 1000 ENTONCES
+    comision ← ventas × 0.05
+FIN SI
+SI ventas > 5000 ENTONCES
+    comision ← ventas × 0.08
+SINO
+    comision ← 0
+FIN SI
+MOSTRAR comision</code></pre>
+      <p>¿Qué comisión recibe un vendedor con ventas de $2,000? ¿Cuál debería recibir?</p>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p>Traza con ventas = 2000. El primer <code>SI</code> asigna algo… ¿qué hace el <code>SINO</code> del segundo?</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+      <p>Con 2000: el primer SI asigna 100; el segundo SI es falso, así que su SINO <strong>sobrescribe</strong> la comisión con 0. Resultado: $0 en lugar de $100. El error es tener dos decisiones independientes cuando la regla es una sola con tres tramos. Corrección: una sola cadena, del tramo más alto al más bajo.</p>
+<pre data-file="comision_corregida.pseudo"><code class="language-none">LEER ventas
+SI ventas > 5000 ENTONCES
+    comision ← ventas × 0.08
+SINO SI ventas > 1000 ENTONCES
+    comision ← ventas × 0.05
+SINO
+    comision ← 0
+FIN SI
+MOSTRAR comision</code></pre>
+      <p><strong>Verificación:</strong> traza 500, 1000, 1001, 5000 y 5001. Las fronteras son donde viven los errores. Esta es la estructura <code>if/elif/else</code> de la semana 2.</p>
+    </div></details>
+    <ul class="check" style="padding:0 1.2rem .6rem"><li><input type="checkbox" id="s1-e5" data-track="s1-e5"><label for="s1-e5">Resuelto</label></li></ul>
+  </article>
+</section>
+
+<section id="proyecto">
+  <h2>Proyecto integrador · Fase 1</h2>
+  <p><strong>Semana 1 · Definición del problema y setup del repositorio.</strong> El proyecto vale el 30 % de la nota y se construye durante todo el ciclo, no al final.</p>
+  <div class="card">
+    <h3>Entregables de esta fase</h3>
+    <ul class="check">
+      <li><input type="checkbox" id="s1-p1" data-track="s1-p1"><label for="s1-p1"><strong>Ficha técnica:</strong> nombre del sistema, dominio de negocio (finanzas, retail, logística…) y problema que resuelve.</label></li>
+      <li><input type="checkbox" id="s1-p2" data-track="s1-p2"><label for="s1-p2"><strong>Repositorio en GitHub</strong> con los 4 integrantes agregados como colaboradores.</label></li>
+      <li><input type="checkbox" id="s1-p3" data-track="s1-p3"><label for="s1-p3"><strong><code>.gitignore</code></strong> para Python.</label></li>
+      <li><input type="checkbox" id="s1-p4" data-track="s1-p4"><label for="s1-p4"><strong>Primer <code>README.md</code></strong> estructurado.</label></li>
+      <li><input type="checkbox" id="s1-p5" data-track="s1-p5"><label for="s1-p5">Cada integrante hizo al menos un commit propio.</label></li>
+    </ul>
+  </div>
+  <p>Punto de partida para el <code>.gitignore</code> (GitHub mantiene una plantilla completa: <em>github/gitignore → Python.gitignore</em>):</p>
+<pre data-file=".gitignore"><code class="language-none"># Archivos generados por Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Entornos virtuales
+.venv/
+venv/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db</code></pre>
+  <p>Estructura sugerida del <code>README.md</code> (inspirada en lo que pide la Fase 6):</p>
+<pre data-file="README.md"><code class="language-none"># Nombre del sistema
+
+## Problema de negocio
+Quién lo usa, qué decisión le ayuda a tomar, qué proceso manual reemplaza.
+
+## Dominio
+Finanzas / retail / logística / servicios…
+
+## Equipo
+- Integrante 1 — usuario de GitHub
+- …
+
+## Cómo ejecutarlo
+(se completa en fases posteriores)
+
+## Supuestos del negocio
+Reglas que el equipo decidió y por qué (ej.: el sello se descuenta después del tope).
+
+## Uso de IA
+Declaración de qué partes fueron asistidas y cómo se verificaron (obligatorio por política del curso).</code></pre>
+
+  <h3>Preguntas de defensa (practica en voz alta)</h3>
+  <p>En la sustentación de la semana 11 cada integrante responde preguntas individuales sobre <em>todo</em> el sistema. Empieza a practicar desde ya:</p>
+  <details class="defensa"><summary>¿Qué problema de negocio resuelve su sistema y quién toma decisiones con él?</summary><div><p>Responde con un usuario concreto (“el encargado de bodega”), una decisión concreta (“cuándo reordenar”) y el costo de no tener el sistema (“se quedan sin stock / compran de más”).</p></div></details>
+  <details class="defensa"><summary>¿Por qué usan Git y no una carpeta compartida en la nube?</summary><div><p>Historial de cada cambio con autor y fecha; poder volver a una versión que funcionaba; ramas para trabajar en paralelo sin romper <code>main</code>; y evidencia verificable de la contribución de cada integrante.</p></div></details>
+  <details class="defensa"><summary>¿Qué diferencia hay entre <code>commit</code> y <code>push</code>?</summary><div><p><code>commit</code> registra los cambios preparados en el historial <em>local</em>. <code>push</code> envía esos commits al repositorio remoto (GitHub) para que el equipo los vea. Puedes tener commits que aún no subiste.</p></div></details>
+  <details class="defensa"><summary>¿Qué pusieron en el <code>.gitignore</code> y por qué?</summary><div><p>Archivos que se generan solos (<code>__pycache__</code>), entornos virtuales y archivos del sistema operativo: no aportan al código, cambian en cada máquina y generan conflictos. También nunca se suben contraseñas ni tokens.</p></div></details>
+  <details class="defensa"><summary>¿Qué pasa si dos integrantes modifican la misma línea del mismo archivo?</summary><div><p>Al integrar, Git no puede decidir cuál versión conservar y marca un <strong>conflicto</strong>. Una persona abre el archivo, elige o combina las versiones, borra los marcadores <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code>, <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> y hace un commit. Se evita trabajando en ramas pequeñas y haciendo <code>pull</code> seguido.</p></div></details>
+</section>
+
+<section id="evaluacion">
+  <h2>Rumbo al Control 1</h2>
+  <p>El programa ubica el <strong>Control 1 en la semana 2</strong>. El temario exacto lo confirma el docente en Moodle; esta lista cubre lo de la semana 1. Recuerda: en controles y exámenes <strong>no se permite IA</strong>.</p>
+  <ul class="check">
+    <li><input type="checkbox" id="s1-v1" data-track="s1-v1"><label for="s1-v1">Puedo decir si una instrucción es precisa o ambigua, y corregirla.</label></li>
+    <li><input type="checkbox" id="s1-v2" data-track="s1-v2"><label for="s1-v2">Puedo dibujar un diagrama de flujo con los cuatro símbolos y al menos una decisión.</label></li>
+    <li><input type="checkbox" id="s1-v3" data-track="s1-v3"><label for="s1-v3">Puedo trazar un algoritmo a mano con casos normales y de frontera.</label></li>
+    <li><input type="checkbox" id="s1-v4" data-track="s1-v4"><label for="s1-v4">Puedo explicar los tres estados de Git y la diferencia entre <code>add</code>, <code>commit</code> y <code>push</code>.</label></li>
+    <li><input type="checkbox" id="s1-v5" data-track="s1-v5"><label for="s1-v5">Puedo escribir de memoria el flujo de crear rama → commit → merge.</label></li>
+  </ul>
+</section>
+
+<section id="fuentes">
+  <h2>Fuentes</h2>
+  <ul>
+    <li><strong>[BOU]</strong> Bouna, P. (2022). <em>Fundamentals of Programming Using Flowchart and Pseudocode</em>. Packt / O’Reilly. Cap. 1.</li>
+    <li><strong>[PCC]</strong> Matthes, E. (2023). <em>Python Crash Course</em>, 3.ª ed. No Starch Press / O’Reilly. Cap. 1 y Apéndice D.</li>
+    <li><strong>[GIT]</strong> Chacon, S. y Straub, B. (2014). <em>Pro Git</em>, 2.ª ed. Apress. Libre en <a href="https://git-scm.com/book/es/v2" target="_blank" rel="noopener">git-scm.com/book/es/v2</a>. Cap. 1, 2.2 y 3.1.</li>
+    <li>GitHub Docs: <a href="https://docs.github.com/es/authentication/connecting-to-github-with-ssh" target="_blank" rel="noopener">SSH</a> · <a href="https://docs.github.com/es/get-started/getting-started-with-git/about-remote-repositories" target="_blank" rel="noopener">repositorios remotos</a>.</li>
+  </ul>
+  <p style="font-size:.9rem;color:var(--ink-3)">Esta guía resume los temas asignados por el programa del curso; no reproduce el contenido de los libros ni cita páginas. Los libros de O’Reilly son la fuente principal.</p>
+  <nav class="nav-semanas" aria-label="Navegación entre semanas">
+    <a href="../index.html">← Inicio</a>
+    <a href="semana-02.html">Semana 2: variables y condicionales →</a>
+  </nav>
+</section>
+
+<footer class="pie">Guía de estudio · Introducción al Desarrollo de Software · ESEN · Ciclo III/2026. Material de apoyo no oficial; el programa y Moodle mandan.</footer>
+</main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+<script src="../assets/guia.js"></script>
+</body>
+</html>

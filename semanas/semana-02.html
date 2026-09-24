@@ -1,0 +1,794 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Semana 2 · Variables y condicionales</title>
+<meta name="description" content="Guía de estudio, semana 2: variables, tipos simples, operadores, expresiones booleanas, if/elif/else y validación defensiva.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/guia.css">
+<script>try{var t=localStorage.getItem("ids-guia-v1-tema");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+</head>
+<body data-semana="s2">
+
+<header class="topbar">
+  <a class="brand" href="../index.html">IDS <span>·</span> <small>Guía de estudio</small></a>
+  <nav aria-label="Semanas">
+    <a href="semana-01.html">S1</a>
+    <a href="semana-02.html" aria-current="page">S2</a>
+    <a href="semana-03.html">S3</a>
+    <a href="semana-04.html">S4</a>
+    <a href="semana-05.html">S5</a>
+  </nav>
+  <button class="theme-btn" type="button" aria-label="Cambiar tema claro/oscuro">◐</button>
+</header>
+
+<div class="layout with-toc">
+<aside class="toc" aria-label="Contenido de la semana">
+  <p>Semana 2</p>
+  <ol>
+    <li><a href="#uso">Cómo usar la guía</a></li>
+    <li><a href="#mapa">Qué puedes usar</a></li>
+    <li><a href="#lecturas">Lecturas</a></li>
+    <li><a href="#checkpoint">Reading checkpoint</a></li>
+    <li><a href="#tipos">Variables y tipos</a></li>
+    <li><a href="#condicionales">if / elif / else</a></li>
+    <li><a href="#defensiva">Validación defensiva</a></li>
+    <li><a href="#trazas">Tablas de traza</a></li>
+    <li><a href="#ejercicios">Ejercicios</a></li>
+    <li><a href="#proyecto">Proyecto</a></li>
+    <li><a href="#evaluacion">Control 1</a></li>
+    <li><a href="#fuentes">Fuentes</a></li>
+  </ol>
+</aside>
+
+<main>
+<section class="hero">
+  <p class="eyebrow">Semana 2 · Módulos 2–3</p>
+  <h1>Variables, tipos simples y lógica condicional</h1>
+  <p class="lead">El ticket de la semana 1 solo servía para un caso. Esta semana los datos pasan a vivir en <strong>variables</strong>, el programa calcula con ellos y <strong>decide</strong> qué regla de negocio aplicar. También aprendes a desconfiar de los datos antes de usarlos.</p>
+  <div class="pregunta"><small>Pregunta orientadora</small>¿Cómo decide un programa qué tarifa cobrar, y cómo evita cobrar mal cuando los datos vienen mal?</div>
+  <ul class="chips">
+    <li class="chip lect">Lecturas: PCC 2 · PCC 5 · BOU 2</li>
+    <li class="chip proy">Proyecto: preparar Fase 2</li>
+    <li class="chip eval">Evaluación: Control 1 (esta semana)</li>
+  </ul>
+  <div class="progress" data-progreso-pagina>
+    <div class="progress-bar"><span></span></div>
+    <div class="progress-label"></div>
+  </div>
+</section>
+
+<section id="uso">
+  <h2>Cómo usar esta guía</h2>
+  <div class="momentos">
+    <div><strong>Antes de clase</strong>Lee PCC 2 y 5 y BOU 2. Responde el <a href="#checkpoint">checkpoint</a>.</div>
+    <div><strong>Durante el laboratorio</strong>El taller es de <em>casos borde</em>: ten a mano la sección de <a href="#defensiva">validación defensiva</a>.</div>
+    <div><strong>Después de clase</strong>Trazas y <a href="#ejercicios">ejercicios</a>; el E5 es una auditoría como las de clase.</div>
+    <div><strong>Control 1</strong>Esta semana. Repasa la lista de <a href="#evaluacion">“puedo…”</a>. Sin IA.</div>
+  </div>
+  <ul class="ciclo-leyenda" aria-label="Ciclo de trabajo">
+    <li>Pregunta</li><li class="sep">→</li><li>Exploración</li><li class="sep">→</li><li>Implementación</li><li class="sep">→</li><li>Resultado</li><li class="sep">→</li><li>Interpretación</li><li class="sep">→</li><li class="v">Verificación</li>
+  </ul>
+</section>
+
+<section id="mapa">
+  <h2>Qué puedes usar esta semana</h2>
+  <div class="permisos">
+    <div class="si">
+      <h4>Sí, desde ahora</h4>
+      <ul>
+        <li>Todo lo de la semana 1</li>
+        <li>Variables, constantes por convención (<code>TASA_IVA</code>)</li>
+        <li>Tipos <code>int</code>, <code>float</code>, <code>str</code>, <code>bool</code>; <code>type()</code></li>
+        <li>Operadores <code>+ - * / // % **</code>; <code>round()</code></li>
+        <li>Conversiones <code>int()</code>, <code>float()</code>, <code>str()</code></li>
+        <li>Métodos de texto: <code>upper</code>, <code>lower</code>, <code>title</code>, <code>strip</code>, <code>replace</code>, <code>isdigit</code>…; <code>len()</code></li>
+        <li>f-strings: <code>f"{total:,.2f}"</code></li>
+        <li><code>== != &lt; &lt;= &gt; &gt;=</code>, <code>and</code>, <code>or</code>, <code>not</code>, <code>in</code> con texto</li>
+        <li><code>if</code>, <code>if-else</code>, <code>if-elif-else</code>, anidados</li>
+      </ul>
+    </div>
+    <div class="no">
+      <h4>Todavía no</h4>
+      <ul>
+        <li><code>input()</code> → semana 3. Por ahora los datos se escriben en el código (así también es más fácil probar casos).</li>
+        <li>Bucles <code>while</code>/<code>for</code> → semana 3</li>
+        <li>Funciones propias <code>def</code> → semana 4</li>
+        <li>Listas → semana 5 (PCC 5 trae una sección de <code>if</code> con listas: déjala para entonces)</li>
+        <li><code>try</code>/<code>except</code> → semana 7. Esta semana la defensa se hace con <code>if</code>.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="lecturas">
+  <h2>Lecturas de preparación</h2>
+  <ul class="check">
+    <li><input type="checkbox" id="s2-l1" data-track="s2-l1"><label for="s2-l1"><span class="ref">[PCC] Cap. 2</span> “Variables and Simple Data Types”. Enfócate en: reglas para nombrar variables, errores de nombre (<code>NameError</code>), métodos de texto, f-strings, enteros vs. flotantes, constantes.</label></li>
+    <li><input type="checkbox" id="s2-l2" data-track="s2-l2"><label for="s2-l2"><span class="ref">[PCC] Cap. 5</span> “if Statements”. Enfócate en: pruebas condicionales, <code>and</code>/<code>or</code>, cadenas <code>if-elif-else</code>, cuándo omitir el <code>else</code> y cuándo usar varios <code>if</code> independientes.</label></li>
+    <li><input type="checkbox" id="s2-l3" data-track="s2-l3"><label for="s2-l3"><span class="ref">[BOU] Cap. 2</span> “Decision Making and Branching Logic”. Enfócate en: cómo se dibuja una decisión, decisiones anidadas vs. en cadena, y cómo cubrir todos los caminos.</label></li>
+  </ul>
+  <div class="box nota">
+    <span class="box-title">Complementos gratuitos</span>
+    <ul>
+      <li><a href="https://docs.python.org/es/3/tutorial/introduction.html" target="_blank" rel="noopener">Tutorial oficial de Python — Una introducción informal</a> (números y texto, en español)</li>
+      <li><a href="https://docs.python.org/es/3/tutorial/controlflow.html" target="_blank" rel="noopener">Tutorial oficial — La sentencia <code>if</code></a> (sección 4.1)</li>
+      <li><a href="https://docs.python.org/es/3/library/stdtypes.html#string-methods" target="_blank" rel="noopener">Métodos de cadenas</a> (referencia)</li>
+      <li><a href="https://peps.python.org/pep-0008/" target="_blank" rel="noopener">PEP 8</a>: sección “Naming Conventions”</li>
+    </ul>
+  </div>
+</section>
+
+<section id="checkpoint">
+  <h2>Reading checkpoint</h2>
+  <div class="quiz">
+    <div class="qq" data-q="s2-q1">
+      <p>¿Qué tipo y valor produce <code>7 / 2</code> en Python 3?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>3.5</code>, de tipo <code>float</code></button>
+        <button class="quiz-opt"><code>3</code>, de tipo <code>int</code></button>
+        <button class="quiz-opt"><code>3.5</code>, de tipo <code>int</code></button>
+        <button class="quiz-opt">Un error, porque 7 no es divisible entre 2</button>
+      </div>
+      <p class="why">La división <code>/</code> siempre devuelve <code>float</code>, incluso <code>10 / 5</code> da <code>2.0</code>. Para la división entera se usa <code>//</code>.</p>
+    </div>
+    <div class="qq" data-q="s2-q2">
+      <p>Hay 17 cajas y cada camión lleva 5. <code>17 // 5</code> y <code>17 % 5</code> valen…</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>3</code> camiones llenos y <code>2</code> cajas sobrantes</button>
+        <button class="quiz-opt"><code>3.4</code> y <code>0</code></button>
+        <button class="quiz-opt"><code>2</code> y <code>3</code></button>
+        <button class="quiz-opt"><code>4</code> y <code>3</code></button>
+      </div>
+      <p class="why"><code>//</code> es el cociente entero y <code>%</code> el residuo. Para saber cuántos camiones <em>se necesitan</em> harían falta 4: los 3 llenos más uno para las 2 cajas que sobran.</p>
+    </div>
+    <div class="qq" data-q="s2-q3">
+      <p>¿Qué imprime <code>print("5" + "5")</code>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>55</code></button>
+        <button class="quiz-opt"><code>10</code></button>
+        <button class="quiz-opt"><code>TypeError</code></button>
+        <button class="quiz-opt"><code>5 5</code></button>
+      </div>
+      <p class="why">Con texto, <code>+</code> <em>concatena</em>. Es un error clásico cuando un número llega como texto (como pasará con <code>input()</code> en la semana 3): hay que convertir con <code>int()</code> o <code>float()</code> antes de sumar.</p>
+    </div>
+    <div class="qq" data-q="s2-q4">
+      <p>¿Qué devuelve <code>0.1 + 0.2 == 0.3</code>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>False</code></button>
+        <button class="quiz-opt"><code>True</code></button>
+        <button class="quiz-opt"><code>0.3</code></button>
+        <button class="quiz-opt">Error de sintaxis</button>
+      </div>
+      <p class="why">Los <code>float</code> se guardan en binario y muchos decimales no se representan exactamente: <code>0.1 + 0.2</code> da <code>0.30000000000000004</code>. Con dinero, redondea con <code>round(x, 2)</code> al presentar, y nunca compares flotantes con <code>==</code> sin redondear.</p>
+    </div>
+    <div class="qq" data-q="s2-q5">
+      <p>¿Cuál es la diferencia entre <code>=</code> y <code>==</code>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>=</code> asigna un valor a una variable; <code>==</code> compara dos valores y produce <code>True</code>/<code>False</code>.</button>
+        <button class="quiz-opt">Son equivalentes; <code>==</code> es solo más estricto.</button>
+        <button class="quiz-opt"><code>==</code> asigna y <code>=</code> compara.</button>
+        <button class="quiz-opt"><code>=</code> se usa con números y <code>==</code> con texto.</button>
+      </div>
+      <p class="why"><code>if total = 100:</code> es un <code>SyntaxError</code>. En la condición de un <code>if</code> siempre va una comparación.</p>
+    </div>
+    <div class="qq" data-q="s2-q6">
+      <p>Con <code>monto = 600</code>, ¿qué imprime este código?</p>
+<pre data-norun><code class="language-python">if monto > 100:
+    print("A")
+elif monto > 500:
+    print("B")
+else:
+    print("C")</code></pre>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Solo <code>A</code></button>
+        <button class="quiz-opt">Solo <code>B</code></button>
+        <button class="quiz-opt"><code>A</code> y luego <code>B</code></button>
+        <button class="quiz-opt"><code>C</code></button>
+      </div>
+      <p class="why">En una cadena <code>if-elif</code> se ejecuta <strong>solo la primera</strong> rama verdadera. Como 600 &gt; 100, entra en A y el resto se ignora: la rama B es inalcanzable. Con tramos, ordena del más exigente al menos exigente.</p>
+    </div>
+    <div class="qq" data-q="s2-q7">
+      <p><code>edad = 17</code> y <code>autorizado = True</code>. ¿Cuánto vale <code>edad &gt;= 18 or autorizado</code>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>True</code></button>
+        <button class="quiz-opt"><code>False</code></button>
+        <button class="quiz-opt"><code>17</code></button>
+        <button class="quiz-opt">Error: no se puede mezclar números y booleanos</button>
+      </div>
+      <p class="why"><code>or</code> es verdadero si <em>al menos una</em> parte lo es. <code>edad &gt;= 18</code> es <code>False</code>, pero <code>autorizado</code> es <code>True</code>.</p>
+    </div>
+    <div class="qq" data-q="s2-q8">
+      <p>¿Qué imprime <code>print(f"${1234.5:,.2f}")</code>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>$1,234.50</code></button>
+        <button class="quiz-opt"><code>$1234.5</code></button>
+        <button class="quiz-opt"><code>$1,234.5</code></button>
+        <button class="quiz-opt"><code>${1234.5:,.2f}</code></button>
+      </div>
+      <p class="why">Dentro de las llaves de una f-string, <code>:,.2f</code> significa “separador de miles y 2 decimales”. Es el formato estándar para mostrar dinero.</p>
+    </div>
+    <div class="qq" data-q="s2-q9">
+      <p>¿Cuál nombre de variable es válido y sigue PEP 8?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>total_ventas</code></button>
+        <button class="quiz-opt"><code>2do_trimestre</code></button>
+        <button class="quiz-opt"><code>total-ventas</code></button>
+        <button class="quiz-opt"><code>TotalVentas</code></button>
+      </div>
+      <p class="why">No puede empezar con número; el guion se interpreta como resta. <code>TotalVentas</code> es válido pero PEP 8 reserva ese estilo para <em>clases</em> (semana 8). Variables: <code>minusculas_con_guion_bajo</code>.</p>
+    </div>
+    <div class="qq" data-q="s2-q10">
+      <p>¿Qué pasa con <code>int("12.5")</code>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Da <code>ValueError</code>: el texto no representa un entero.</button>
+        <button class="quiz-opt">Devuelve <code>12</code>.</button>
+        <button class="quiz-opt">Devuelve <code>13</code>.</button>
+        <button class="quiz-opt">Devuelve <code>12.5</code>.</button>
+      </div>
+      <p class="why"><code>int()</code> sobre <em>texto</em> exige dígitos de un entero. <code>float("12.5")</code> sí funciona, e <code>int(12.5)</code> (un número, no texto) trunca a <code>12</code>. Por eso se valida el texto antes de convertir.</p>
+    </div>
+    <div class="quiz-score"><span data-score></span><button class="btn sec" type="button" data-reset>Reiniciar quiz</button></div>
+  </div>
+  <ul class="check">
+    <li><input type="checkbox" id="s2-cp" data-track="s2-cp"><label for="s2-cp">Respondí el checkpoint y entiendo mis errores.</label></li>
+  </ul>
+</section>
+
+<section id="tipos">
+  <h2>Variables, tipos y aritmética del dinero</h2>
+  <div class="ciclo">
+    <h3>Caso: el ticket que se recalcula solo</h3>
+    <div class="paso"><div>
+      <span class="etq">Pregunta</span>
+      <p>La Distribuidora La Ceiba quiere que el ticket de la semana 1 funcione para <em>cualquier</em> precio y cantidad, no solo para uno. ¿Cómo?</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Exploración</span>
+      <ul>
+        <li>Una <strong>variable</strong> es un nombre que apunta a un valor. Si el valor cambia, todo lo que se calcula a partir de ella cambia en la siguiente ejecución.</li>
+        <li>Cada valor tiene un <strong>tipo</strong>: <code>4</code> es <code>int</code>, <code>12.50</code> es <code>float</code>, <code>"aceite"</code> es <code>str</code>, <code>True</code> es <code>bool</code>.</li>
+        <li>Las tasas que no cambian durante el programa son <strong>constantes</strong>: por convención, en MAYÚSCULAS. Si el IVA cambia por ley, se modifica en un solo lugar.</li>
+      </ul>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Implementación</span>
+<pre data-file="ticket_v2.py"><code class="language-python"># Ticket de la Distribuidora La Ceiba, versión con variables
+TASA_IVA = 0.13
+
+producto = "aceite vegetal 1 L"
+precio_unitario = 12.50
+cantidad = 4
+
+subtotal = precio_unitario * cantidad
+iva = subtotal * TASA_IVA
+total = subtotal + iva
+
+print(f"Producto: {producto.title()}")
+print(f"{cantidad} x ${precio_unitario:.2f}")
+print(f"Subtotal: ${subtotal:,.2f}")
+print(f"IVA 13 %: ${iva:,.2f}")
+print(f"Total:    ${total:,.2f}")
+print(type(cantidad), type(precio_unitario), type(producto))</code></pre>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Resultado</span>
+<pre class="salida" data-file="salida"><code>Producto: Aceite Vegetal 1 L
+4 x $12.50
+Subtotal: $50.00
+IVA 13 %: $6.50
+Total:    $56.50
+&lt;class 'int'&gt; &lt;class 'float'&gt; &lt;class 'str'&gt;</code></pre>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Interpretación</span>
+      <p>Cambia <code>cantidad = 4</code> por <code>cantidad = 7</code> y vuelve a ejecutar: el ticket entero se recalcula. Ese es el salto de la semana 1 a la 2. Nota que <code>int × float</code> da <code>float</code>: Python “sube” al tipo más general.</p>
+      <p>Operadores que vas a necesitar en problemas de negocio:</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Operador</th><th>Ejemplo</th><th>Resultado</th><th>Uso típico</th></tr></thead>
+        <tbody>
+          <tr><td><code>/</code></td><td><code>10 / 4</code></td><td><code>2.5</code></td><td>precio promedio</td></tr>
+          <tr><td><code>//</code></td><td><code>17 // 5</code></td><td><code>3</code></td><td>cajas completas, semanas completas</td></tr>
+          <tr><td><code>%</code></td><td><code>17 % 5</code></td><td><code>2</code></td><td>unidades sobrantes; ¿es par? (<code>n % 2 == 0</code>)</td></tr>
+          <tr><td><code>**</code></td><td><code>1.05 ** 3</code></td><td><code>1.157625</code></td><td>crecimiento compuesto</td></tr>
+          <tr><td><code>round(x, 2)</code></td><td><code>round(6.4999, 2)</code></td><td><code>6.5</code></td><td>presentar dinero</td></tr>
+        </tbody>
+      </table></div>
+    </div></div>
+    <div class="paso verif"><div>
+      <span class="etq">Verificación</span>
+      <ul>
+        <li>Calcula a mano: 12.50 × 4 = 50; 50 × 0.13 = 6.50; 50 + 6.50 = 56.50. ✔</li>
+        <li>Prueba con <code>cantidad = 0</code>: ¿el total da 0? ¿Tiene sentido emitir ese ticket? (Eso lo resuelve la <a href="#defensiva">validación</a>.)</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="box ojo">
+    <span class="box-title">Dinero y float</span>
+    <p><code>print(0.1 + 0.2)</code> muestra <code>0.30000000000000004</code>, y <code>round(2.675, 2)</code> da <code>2.67</code>, no 2.68: el número guardado es en realidad un poco menor que 2.675. Para este curso basta con <strong>redondear al presentar</strong> y <strong>no comparar flotantes con <code>==</code></strong>. En sistemas contables reales se trabaja en centavos enteros (<code>5650</code> en vez de <code>56.50</code>) o con tipos decimales exactos.</p>
+  </div>
+  <div class="box adelanto">
+    <span class="box-title">Adelanto opcional · semana 10 (C#)</span>
+    <p>En Python una variable puede cambiar de tipo: <code>cantidad = 4</code> y luego <code>cantidad = "cuatro"</code> no da error hasta que intentas multiplicar. En C# el tipo se declara y no cambia: <code>int cantidad = 4;</code> y asignarle texto <em>no compila</em>. Por eso la semana 10 se llama “tipado estático”. No lo necesitas para el Control 1.</p>
+  </div>
+</section>
+
+<section id="condicionales">
+  <h2>Decisiones: <code>if</code> / <code>elif</code> / <code>else</code></h2>
+  <div class="ciclo">
+    <h3>Caso: tarifa de envío por tramos</h3>
+    <div class="paso"><div>
+      <span class="etq">Pregunta</span>
+      <p>La Ceiba cobra el envío según el peso: hasta 1 kg, $3.50; más de 1 y hasta 5 kg, $6.00; más de 5 y hasta 20 kg, $12.00. No acepta paquetes de más de 20 kg. A zona rural se le suman $2.50. ¿Cuánto se cobra por un paquete?</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Exploración</span>
+      <ul>
+        <li>Hay <strong>tramos</strong> (una sola cadena <code>if-elif-else</code>) y un <strong>recargo independiente</strong> (un <code>if</code> aparte, porque se suma a cualquier tramo).</li>
+        <li>Las fronteras son <code>1</code>, <code>5</code> y <code>20</code>. “Hasta 1 kg” incluye el 1 → <code>&lt;=</code>.</li>
+        <li>Hay entradas que no tienen sentido: peso 0 o negativo. Se rechazan <em>antes</em> de calcular.</li>
+      </ul>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Implementación</span>
+<pre data-file="envio.py"><code class="language-python">RECARGO_RURAL = 2.50
+PESO_MAXIMO = 20
+
+peso_kg = 1.01
+zona = "rural"
+
+if peso_kg <= 0:
+    print("Error: el peso debe ser mayor que 0.")
+elif peso_kg > PESO_MAXIMO:
+    print(f"No se aceptan paquetes de más de {PESO_MAXIMO} kg.")
+else:
+    if peso_kg <= 1:
+        tarifa = 3.50
+    elif peso_kg <= 5:
+        tarifa = 6.00
+    else:
+        tarifa = 12.00
+
+    if zona == "rural":
+        tarifa = tarifa + RECARGO_RURAL
+
+    print(f"Tarifa de envío: ${tarifa:.2f}")</code></pre>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Resultado</span>
+<pre class="salida" data-file="salida"><code>Tarifa de envío: $8.50</code></pre>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Interpretación</span>
+      <p>1.01 kg cae en el segundo tramo ($6.00) y la zona rural suma $2.50. Observa la estructura: primero se descartan los casos inválidos (<em>cláusulas de guarda</em>), y solo en el <code>else</code> se hace el cálculo normal. Así el cálculo nunca trabaja con datos imposibles.</p>
+      <p>Cuándo usar cada forma:</p>
+      <ul>
+        <li><strong>Una cadena <code>if-elif-else</code></strong> cuando las opciones son <em>excluyentes</em> (un paquete está en un solo tramo).</li>
+        <li><strong>Varios <code>if</code> independientes</strong> cuando las condiciones se <em>acumulan</em> (recargo rural, recargo por fragilidad, recargo por urgencia…).</li>
+        <li><strong>Omitir el <code>else</code></strong> solo cuando “no hacer nada” es una respuesta válida.</li>
+      </ul>
+    </div></div>
+    <div class="paso verif"><div>
+      <span class="etq">Verificación: matriz de casos borde</span>
+      <p>Un caso por tramo no alcanza. Prueba justo <em>en</em> cada frontera y justo <em>después</em>: 0, 0.5, 1, 1.01, 5, 5.01, 20, 20.01, y cada uno en zona urbana y rural. Esa lista es la base de la <a href="#trazas">traza 2</a> y del entregable de la Fase 2 del proyecto.</p>
+    </div></div>
+  </div>
+
+  <h3>Expresiones booleanas y operadores lógicos</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Expresión</th><th>Es verdadera cuando…</th><th>Ejemplo de negocio</th></tr></thead>
+    <tbody>
+      <tr><td><code>a and b</code></td><td>ambas lo son</td><td><code>saldo &gt;= monto and cuenta_activa</code></td></tr>
+      <tr><td><code>a or b</code></td><td>al menos una lo es</td><td><code>es_vip or compras_mes &gt;= 10</code></td></tr>
+      <tr><td><code>not a</code></td><td><code>a</code> es falsa</td><td><code>not bloqueado</code></td></tr>
+      <tr><td><code>"@" in correo</code></td><td>el texto contiene <code>@</code></td><td>validación mínima de un correo</td></tr>
+      <tr><td><code>1 &lt;= peso &lt;= 5</code></td><td>el valor está en el rango</td><td>Python permite encadenar comparaciones</td></tr>
+    </tbody>
+  </table></div>
+  <div class="box nota">
+    <span class="box-title">Evaluación en cortocircuito</span>
+    <p>En <code>a and b</code>, si <code>a</code> es falsa Python ni mira <code>b</code>. Eso permite escribir <code>cantidad != 0 and total / cantidad &gt; 10</code> sin riesgo de dividir entre cero: si la cantidad es 0, la división nunca se ejecuta.</p>
+  </div>
+</section>
+
+<section id="defensiva">
+  <h2>Validación defensiva</h2>
+  <p>Programar a la defensiva es asumir que los datos <strong>pueden venir mal</strong> y decidir qué hacer antes de que causen un cobro erróneo o un error. Esta semana la herramienta es el <code>if</code> (el manejo de excepciones con <code>try</code> llega en la semana 7).</p>
+
+  <div class="ciclo">
+    <h3>Caso: el acceso a la caja registradora</h3>
+    <div class="paso"><div>
+      <span class="etq">Pregunta</span>
+      <p>Un cajero intenta entrar al sistema. ¿Se le permite? Reglas: la cuenta debe estar activa, no debe tener 3 o más intentos fallidos, y usuario y clave deben coincidir. El usuario no distingue mayúsculas; la clave sí.</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Exploración</span>
+      <ul>
+        <li>El <strong>orden</strong> de las verificaciones es una decisión de seguridad: una cuenta bloqueada no debe entrar <em>aunque la clave sea correcta</em>.</li>
+        <li>El usuario puede venir con espacios o mayúsculas: se <strong>normaliza</strong> con <code>strip()</code> y <code>lower()</code>.</li>
+        <li>El mensaje de error no debe revelar si falló el usuario o la clave (le daría pistas a un atacante).</li>
+      </ul>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Implementación</span>
+<pre data-file="acceso.py"><code class="language-python">USUARIO_VALIDO = "cajero01"
+CLAVE_VALIDA = "Ceiba2026"
+MAX_INTENTOS = 3
+
+# Datos del intento (en la semana 3 vendrán de input())
+usuario = "  Cajero01 "
+clave = "Ceiba2026"
+intentos_fallidos = 2
+cuenta_activa = True
+
+usuario = usuario.strip().lower()
+
+if not cuenta_activa:
+    print("Cuenta desactivada. Contacte al administrador.")
+elif intentos_fallidos >= MAX_INTENTOS:
+    print("Cuenta bloqueada por intentos fallidos.")
+elif usuario == USUARIO_VALIDO and clave == CLAVE_VALIDA:
+    print("Acceso concedido.")
+else:
+    print("Usuario o clave incorrectos.")</code></pre>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Resultado</span>
+<pre class="salida" data-file="salida"><code>Acceso concedido.</code></pre>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Interpretación</span>
+      <p>Aunque el usuario llegó como <code>"  Cajero01 "</code>, la normalización lo convirtió en <code>"cajero01"</code>. Con 2 intentos fallidos aún puede entrar; con 3, no, aunque la clave sea correcta. Guardar la clave dentro del código solo es aceptable en un ejercicio: en un sistema real nunca se escribe una contraseña en el código ni se sube a GitHub.</p>
+    </div></div>
+    <div class="paso verif"><div>
+      <span class="etq">Verificación</span>
+      <p>Cambia un dato por vez y predice la salida <em>antes</em> de ejecutar: <code>cuenta_activa = False</code>; <code>intentos_fallidos = 3</code> con clave correcta; <code>clave = "ceiba2026"</code> (minúscula). Si tu predicción falla, hay algo del orden de las ramas que no entendiste.</p>
+    </div></div>
+  </div>
+
+  <h3>Validar texto antes de convertirlo</h3>
+  <p>Cuando un dato llega como texto (de un archivo o, desde la semana 3, del teclado), <code>float("12,5")</code> o <code>int("")</code> detienen el programa con <code>ValueError</code>. Sin <code>try</code>, se revisa primero:</p>
+<pre data-file="validar_monto.py"><code class="language-python">monto_texto = "150.75"   # prueba también: "", "-5", "15a", "1.2.3"
+
+# Quita a lo sumo UN punto decimal y revisa que lo demás sean dígitos
+if monto_texto.replace(".", "", 1).isdigit():
+    monto = float(monto_texto)
+    if monto > 0:
+        print(f"Monto válido: ${monto:,.2f}")
+    else:
+        print("El monto debe ser mayor que cero.")
+else:
+    print(f"'{monto_texto}' no es un monto válido.")</code></pre>
+<pre class="salida" data-file="salida"><code>Monto válido: $150.75</code></pre>
+  <div class="box ojo">
+    <span class="box-title">Límite de esta técnica</span>
+    <p>Este truco rechaza negativos (<code>"-5"</code> tiene un signo que no es dígito) y no acepta formatos como <code>"1,500.00"</code>. Es suficiente para el laboratorio; en la semana 7 verás la forma idiomática: intentar convertir y capturar el <code>ValueError</code>.</p>
+  </div>
+</section>
+
+<section id="trazas">
+  <h2>Tablas de traza</h2>
+
+  <h3>Traza 1 · Valor y tipo después de cada línea</h3>
+  <p>Escribe el valor y el tipo (<code>int</code>, <code>float</code>, <code>str</code>, <code>bool</code>) de la variable asignada en cada línea. Para texto, escribe el contenido sin comillas.</p>
+<pre data-file="traza1.py"><code class="language-python">precio = 20
+cantidad = 3
+subtotal = precio * cantidad
+precio = 25
+promedio = subtotal / cantidad
+etiqueta = "Total: " + str(subtotal)
+es_mayorista = subtotal >= 50</code></pre>
+  <div class="traza">
+    <div class="table-wrap"><table>
+      <thead><tr><th>Línea</th><th>Variable</th><th>Valor</th><th>Tipo</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td class="dado">precio</td><td><input data-a="20"></td><td><input data-a="int"></td></tr>
+        <tr><td>2</td><td class="dado">cantidad</td><td><input data-a="3"></td><td><input data-a="int"></td></tr>
+        <tr><td>3</td><td class="dado">subtotal</td><td><input data-a="60"></td><td><input data-a="int"></td></tr>
+        <tr><td>4</td><td class="dado">precio</td><td><input data-a="25"></td><td><input data-a="int"></td></tr>
+        <tr><td>5</td><td class="dado">promedio</td><td><input data-a="20.0"></td><td><input data-a="float"></td></tr>
+        <tr><td>6</td><td class="dado">etiqueta</td><td><input data-a="Total: 60"></td><td><input data-a="str"></td></tr>
+        <tr><td>7</td><td class="dado">es_mayorista</td><td><input data-a="True"></td><td><input data-a="bool"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="acciones"><button class="btn" type="button" data-comprobar>Comprobar</button><button class="btn sec" type="button" data-solucion>Ver solución</button><button class="btn sec" type="button" data-limpiar>Limpiar</button><span class="resultado" aria-live="polite"></span></div>
+  </div>
+  <details class="defensa"><summary>La trampa de la línea 4</summary><div><p>Cambiar <code>precio</code> a 25 <strong>no</strong> recalcula <code>subtotal</code>: sigue en 60. Una asignación calcula el valor <em>en ese momento</em>; no es una fórmula de hoja de cálculo que se actualiza sola.</p></div></details>
+
+  <h3>Traza 2 · Casos borde de la tarifa de envío</h3>
+  <p>Usa <a href="#condicionales">envio.py</a>. Escribe la tarifa como número (<code>8.5</code>) o, si no hay tarifa, <em>error</em> o <em>no acepta</em>.</p>
+  <div class="traza">
+    <div class="table-wrap"><table>
+      <thead><tr><th>peso_kg</th><th>zona</th><th>Tarifa o mensaje</th></tr></thead>
+      <tbody>
+        <tr><td class="dado">0.5</td><td class="dado">urbana</td><td><input data-a="3.5"></td></tr>
+        <tr><td class="dado">1</td><td class="dado">urbana</td><td><input data-a="3.5"></td></tr>
+        <tr><td class="dado">1.01</td><td class="dado">rural</td><td><input data-a="8.5"></td></tr>
+        <tr><td class="dado">5</td><td class="dado">rural</td><td><input data-a="8.5"></td></tr>
+        <tr><td class="dado">20</td><td class="dado">urbana</td><td><input data-a="12"></td></tr>
+        <tr><td class="dado">20.5</td><td class="dado">urbana</td><td><input data-a="no acepta|no se acepta|rechazado"></td></tr>
+        <tr><td class="dado">0</td><td class="dado">urbana</td><td><input data-a="error"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="acciones"><button class="btn" type="button" data-comprobar>Comprobar</button><button class="btn sec" type="button" data-solucion>Ver solución</button><button class="btn sec" type="button" data-limpiar>Limpiar</button><span class="resultado" aria-live="polite"></span></div>
+  </div>
+
+  <h3>Traza 3 · ¿Qué devuelve cada expresión?</h3>
+  <div class="traza">
+    <div class="table-wrap"><table>
+      <thead><tr><th>Expresión</th><th>Resultado</th></tr></thead>
+      <tbody>
+        <tr><td class="dado"><code>10 / 5</code></td><td><input data-a="2.0"></td></tr>
+        <tr><td class="dado"><code>17 % 5</code></td><td><input data-a="2"></td></tr>
+        <tr><td class="dado"><code>2 ** 3</code></td><td><input data-a="8"></td></tr>
+        <tr><td class="dado"><code>"IVA" + "13"</code></td><td><input data-a="IVA13"></td></tr>
+        <tr><td class="dado"><code>int(12.9)</code></td><td><input data-a="12"></td></tr>
+        <tr><td class="dado"><code>-7 // 2</code></td><td><input data-a="-4"></td></tr>
+        <tr><td class="dado"><code>not (3 &gt; 2 and 2 &gt; 5)</code></td><td><input data-a="True"></td></tr>
+        <tr><td class="dado"><code>"ceiba".title()</code></td><td><input data-a="Ceiba"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="acciones"><button class="btn" type="button" data-comprobar>Comprobar</button><button class="btn sec" type="button" data-solucion>Ver solución</button><button class="btn sec" type="button" data-limpiar>Limpiar</button><span class="resultado" aria-live="polite"></span></div>
+  </div>
+  <details class="defensa"><summary>¿Por qué <code>-7 // 2</code> da -4 y no -3?</summary><div><p><code>//</code> redondea hacia <em>abajo</em> (hacia menos infinito), no hacia cero. -3.5 hacia abajo es -4. Con números positivos no se nota; con saldos negativos sí.</p></div></details>
+  <ul class="check">
+    <li><input type="checkbox" id="s2-t1" data-track="s2-t1"><label for="s2-t1">Traza 1 completa.</label></li>
+    <li><input type="checkbox" id="s2-t2" data-track="s2-t2"><label for="s2-t2">Traza 2 completa.</label></li>
+    <li><input type="checkbox" id="s2-t3" data-track="s2-t3"><label for="s2-t3">Traza 3 completa.</label></li>
+  </ul>
+</section>
+
+<section id="ejercicios">
+  <h2>Ejercicios</h2>
+  <p>Todos se resuelven con variables escritas en el código. Para probar varios casos, cambia los valores y vuelve a ejecutar.</p>
+
+  <article class="ejercicio">
+    <header><h3>E1 · De pseudocódigo a Python</h3><span class="nivel">traducción · ★</span></header>
+    <div class="cuerpo">
+      <p>Traduce a Python el algoritmo de la factura de la <a href="semana-01.html#algoritmos">semana 1</a> (descuento del 10 % si el subtotal es ≥ $50, luego IVA del 13 %). Verifica tu programa con los tres casos de la traza 1 de esa semana.</p>
+    </div>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="factura.py"><code class="language-python">TASA_IVA = 0.13
+TASA_DESCUENTO = 0.10
+MINIMO_DESCUENTO = 50
+
+precio_unitario = 12.50
+cantidad = 4
+
+subtotal = precio_unitario * cantidad
+if subtotal >= MINIMO_DESCUENTO:
+    descuento = subtotal * TASA_DESCUENTO
+else:
+    descuento = 0
+base = subtotal - descuento
+iva = base * TASA_IVA
+total = base + iva
+
+print(f"Subtotal:  ${subtotal:.2f}")
+print(f"Descuento: ${descuento:.2f}")
+print(f"IVA:       ${iva:.2f}")
+print(f"Total:     ${total:.2f}")</code></pre>
+<pre class="salida" data-file="salida"><code>Subtotal:  $50.00
+Descuento: $5.00
+IVA:       $5.85
+Total:     $50.85</code></pre>
+      <p><strong>Verificación:</strong> con 8 × 3 debe dar $27.12 y con 30 × 2, $61.02, igual que la traza de la semana 1.</p>
+    </div></details>
+    <ul class="check" style="padding:0 1.2rem .6rem"><li><input type="checkbox" id="s2-e1" data-track="s2-e1"><label for="s2-e1">Resuelto</label></li></ul>
+  </article>
+
+  <article class="ejercicio">
+    <header><h3>E2 · Impuesto progresivo por tramos</h3><span class="nivel">tramos + economía · ★★</span></header>
+    <div class="cuerpo">
+      <p>Una tabla <strong>simplificada y ficticia</strong> de retención sobre salario mensual:</p>
+      <ul>
+        <li>Hasta $500.00: no paga.</li>
+        <li>De $500.01 a $1,000.00: 10 % sobre el <em>exceso</em> de $500.</li>
+        <li>Más de $1,000.00: $50.00 fijos + 20 % sobre el exceso de $1,000.</li>
+      </ul>
+      <p>Calcula la retención y la <strong>tasa efectiva</strong> (retención / salario). Prueba con 500, 800, 1000 y 1500. ¿Es cierto que “si me suben el sueldo y paso al tramo siguiente, gano menos”?</p>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p>“Sobre el exceso” significa <code>(salario - 500) * 0.10</code>, no <code>salario * 0.10</code>. Cuidado con la tasa efectiva cuando la retención es 0.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="retencion.py"><code class="language-python">salario = 1500
+
+if salario <= 0:
+    print("El salario debe ser positivo.")
+else:
+    if salario <= 500:
+        retencion = 0
+    elif salario <= 1000:
+        retencion = (salario - 500) * 0.10
+    else:
+        retencion = 50 + (salario - 1000) * 0.20
+
+    tasa_efectiva = retencion / salario
+    print(f"Retención: ${retencion:,.2f}")
+    print(f"Tasa efectiva: {tasa_efectiva:.1%}")</code></pre>
+<pre class="salida" data-file="salida"><code>Retención: $150.00
+Tasa efectiva: 10.0%</code></pre>
+      <div class="table-wrap"><table>
+        <thead><tr><th class="num">Salario</th><th class="num">Retención</th><th class="num">Tasa efectiva</th></tr></thead>
+        <tbody>
+          <tr><td class="num">500</td><td class="num">0.00</td><td class="num">0.0 %</td></tr>
+          <tr><td class="num">800</td><td class="num">30.00</td><td class="num">3.8 %</td></tr>
+          <tr><td class="num">1,000</td><td class="num">50.00</td><td class="num">5.0 %</td></tr>
+          <tr><td class="num">1,500</td><td class="num">150.00</td><td class="num">10.0 %</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Interpretación:</strong> no, subir de tramo no reduce el ingreso neto: la tasa mayor se aplica <em>solo al exceso</em>. Por eso la tasa efectiva crece suavemente. Ese es el concepto de tasa marginal vs. tasa efectiva.</p>
+      <p><strong>Verificación:</strong> en las fronteras los tramos deben “empatar”: con 1000 la segunda fórmula da (1000 − 500) × 0.10 = 50 y la tercera daría 50 + 0 = 50. Si no empatan, hay un error en la tabla o en el código.</p>
+    </div></details>
+    <ul class="check" style="padding:0 1.2rem .6rem"><li><input type="checkbox" id="s2-e2" data-track="s2-e2"><label for="s2-e2">Resuelto</label></li></ul>
+  </article>
+
+  <article class="ejercicio">
+    <header><h3>E3 · Reglas para crear una clave</h3><span class="nivel">autenticación · ★★</span></header>
+    <div class="cuerpo">
+      <p>Al crear un usuario de caja, la clave debe: tener al menos 8 caracteres, contener solo letras y dígitos, y tener <strong>al menos una letra y al menos un dígito</strong>. Sin bucles, escribe la validación e informa <em>qué regla</em> falló. Prueba con <code>"ceiba2026"</code>, <code>"ceibaceiba"</code>, <code>"12345678"</code>, <code>"ceiba 2026"</code> y <code>"Ceiba26"</code>.</p>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p>Si un texto es <code>isalnum()</code> (solo letras y dígitos) pero <em>no</em> es <code>isdigit()</code> (no todo son dígitos) y <em>no</em> es <code>isalpha()</code> (no todo son letras), entonces tiene de ambos.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="clave.py"><code class="language-python">clave = "ceiba2026"
+
+if len(clave) < 8:
+    print("Rechazada: debe tener al menos 8 caracteres.")
+elif not clave.isalnum():
+    print("Rechazada: solo se permiten letras y dígitos.")
+elif clave.isdigit():
+    print("Rechazada: debe incluir al menos una letra.")
+elif clave.isalpha():
+    print("Rechazada: debe incluir al menos un dígito.")
+else:
+    print("Clave aceptada.")</code></pre>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Clave</th><th>Resultado</th></tr></thead>
+        <tbody>
+          <tr><td><code>ceiba2026</code></td><td>aceptada</td></tr>
+          <tr><td><code>ceibaceiba</code></td><td>falta un dígito</td></tr>
+          <tr><td><code>12345678</code></td><td>falta una letra</td></tr>
+          <tr><td><code>ceiba 2026</code></td><td>tiene un espacio (no es alfanumérica)</td></tr>
+          <tr><td><code>Ceiba26</code></td><td>solo 7 caracteres</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Verificación:</strong> cada caso de prueba hace fallar <em>exactamente una</em> regla distinta. Así, si alguno da el mensaje equivocado, sabes qué rama revisar.</p>
+    </div></details>
+    <ul class="check" style="padding:0 1.2rem .6rem"><li><input type="checkbox" id="s2-e3" data-track="s2-e3"><label for="s2-e3">Resuelto</label></li></ul>
+  </article>
+
+  <article class="ejercicio">
+    <header><h3>E4 · Desglose del vuelto</h3><span class="nivel">// y % · ★</span></header>
+    <div class="cuerpo">
+      <p>Una caja debe dar $87 de vuelto en billetes de $20, $10, $5 y $1, usando la menor cantidad de billetes. Calcula cuántos de cada uno usando solo <code>//</code> y <code>%</code>.</p>
+    </div>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="vuelto.py"><code class="language-python">vuelto = 87
+
+billetes_20 = vuelto // 20
+resto = vuelto % 20
+billetes_10 = resto // 10
+resto = resto % 10
+billetes_5 = resto // 5
+billetes_1 = resto % 5
+
+print(f"$20: {billetes_20}  $10: {billetes_10}  $5: {billetes_5}  $1: {billetes_1}")</code></pre>
+<pre class="salida" data-file="salida"><code>$20: 4  $10: 0  $5: 1  $1: 2</code></pre>
+      <p><strong>Verificación:</strong> 4×20 + 0×10 + 1×5 + 2×1 = 87 ✔. Prueba también 0, 20 y 99. En la semana 3 podrás hacer esto con un bucle en vez de repetir el patrón.</p>
+    </div></details>
+    <ul class="check" style="padding:0 1.2rem .6rem"><li><input type="checkbox" id="s2-e4" data-track="s2-e4"><label for="s2-e4">Resuelto</label></li></ul>
+  </article>
+
+  <article class="ejercicio">
+    <header><h3>E5 · Auditoría: descuentos con fallas de cobertura</h3><span class="nivel">auditoría · ★★★</span></header>
+    <div class="cuerpo">
+      <p>Regla del negocio: desde $1,000 o si el cliente es VIP, 15 %; desde $500, 10 %; más de $100, 5 %; lo demás, sin descuento. Este código “parece” funcionar. Encuentra <strong>todas</strong> las fallas con casos de prueba concretos.</p>
+<pre data-file="descuento_auditar.py"><code class="language-python">monto = 500
+es_vip = False
+
+if monto > 100:
+    descuento = 0.05
+elif monto > 500:
+    descuento = 0.10
+elif monto > 1000 or es_vip:
+    descuento = 0.15
+
+print(f"Descuento: {descuento:.0%}")</code></pre>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p>Prueba con 50, 500, 600, 1000 y con un VIP que compra $50. Busca: ramas inalcanzables, fronteras con <code>&gt;</code> donde la regla dice “desde”, y casos donde <code>descuento</code> nunca se asigna.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+      <ol>
+        <li><strong>Orden:</strong> cualquier monto &gt; 100 entra en la primera rama, así que el 10 % y el 15 % son <em>inalcanzables</em>. Con 600 da 5 % en vez de 10 %.</li>
+        <li><strong>Fronteras:</strong> “desde $500” incluye el 500 → <code>&gt;= 500</code>, no <code>&gt; 500</code>. Lo mismo con 1000.</li>
+        <li><strong>Falta el <code>else</code>:</strong> con <code>monto = 50</code> ninguna rama asigna <code>descuento</code> y la última línea lanza <code>NameError</code>.</li>
+        <li><strong>VIP:</strong> un VIP que compra $50 nunca llega a su rama.</li>
+      </ol>
+<pre data-file="descuento_corregido.py"><code class="language-python">monto = 500
+es_vip = False
+
+if monto >= 1000 or es_vip:
+    descuento = 0.15
+elif monto >= 500:
+    descuento = 0.10
+elif monto > 100:
+    descuento = 0.05
+else:
+    descuento = 0
+
+print(f"Descuento: {descuento:.0%}")</code></pre>
+      <div class="table-wrap"><table>
+        <thead><tr><th>monto</th><th>VIP</th><th>Original</th><th>Corregido</th></tr></thead>
+        <tbody>
+          <tr><td>50</td><td>no</td><td><code>NameError</code></td><td>0 %</td></tr>
+          <tr><td>50</td><td>sí</td><td><code>NameError</code></td><td>15 %</td></tr>
+          <tr><td>100</td><td>no</td><td><code>NameError</code></td><td>0 %</td></tr>
+          <tr><td>500</td><td>no</td><td>5 %</td><td>10 %</td></tr>
+          <tr><td>1000</td><td>no</td><td>5 %</td><td>15 %</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Lección:</strong> el código original pasa si solo lo pruebas con 500 “a ojo”. Las fallas aparecen únicamente con casos elegidos a propósito: por debajo, en y por encima de cada frontera, más cada condición especial. Esto es la “auditoría inversa” que se practica en clase con código generado por IA.</p>
+    </div></details>
+    <ul class="check" style="padding:0 1.2rem .6rem"><li><input type="checkbox" id="s2-e5" data-track="s2-e5"><label for="s2-e5">Resuelto</label></li></ul>
+  </article>
+</section>
+
+<section id="proyecto">
+  <h2>Proyecto integrador · Preparar la Fase 2</h2>
+  <p>No hay entregable esta semana, pero la <strong>Fase 2 (semana 3)</strong> pide un diagrama de flujo del proceso central y una <strong>matriz de al menos 5 casos de borde</strong>. Lo de esta semana es exactamente la materia prima.</p>
+  <div class="card">
+    <h3>Tareas sugeridas para el equipo</h3>
+    <ul class="check">
+      <li><input type="checkbox" id="s2-p1" data-track="s2-p1"><label for="s2-p1">Escribir en el README las <strong>reglas de negocio</strong> del sistema como condiciones (“si el stock es menor que el mínimo, entonces…”).</label></li>
+      <li><input type="checkbox" id="s2-p2" data-track="s2-p2"><label for="s2-p2">Para cada regla, anotar su <strong>frontera</strong> y decidir si es <code>&lt;</code> o <code>&lt;=</code>. Documentarlo como supuesto.</label></li>
+      <li><input type="checkbox" id="s2-p3" data-track="s2-p3"><label for="s2-p3">Listar los <strong>datos inválidos</strong> posibles (cantidades negativas, montos vacíos, códigos inexistentes).</label></li>
+    </ul>
+  </div>
+  <h3>Preguntas de defensa</h3>
+  <details class="defensa"><summary>¿Qué tipo de dato usan para el dinero y qué riesgo tiene?</summary><div><p><code>float</code>, que puede acumular errores de representación (<code>0.1 + 0.2</code>). Lo mitigamos redondeando a 2 decimales al presentar y sin comparar flotantes con <code>==</code>. Un sistema contable real usaría centavos enteros o decimales exactos.</p></div></details>
+  <details class="defensa"><summary>En su regla principal, ¿qué pasa exactamente en la frontera?</summary><div><p>Debes poder decir el valor exacto (“con $50.00 sí aplica el descuento porque la regla dice ‘desde’, por eso usamos <code>&gt;=</code>”) y mostrar el caso de prueba que lo comprueba.</p></div></details>
+  <details class="defensa"><summary>¿Por qué el orden de los <code>elif</code> importa en su código?</summary><div><p>Porque solo se ejecuta la primera rama verdadera. Si una condición más amplia va primero, las más específicas quedan inalcanzables. Ordenamos del tramo más exigente al menos exigente.</p></div></details>
+  <details class="defensa"><summary>¿Qué validan antes de calcular y por qué en ese orden?</summary><div><p>Primero lo que hace imposible el cálculo (valores vacíos, negativos, fuera de rango), luego las reglas de negocio. Así el cálculo nunca recibe datos imposibles y el usuario recibe un mensaje claro.</p></div></details>
+  <details class="defensa"><summary>¿Por qué <code>TASA_IVA</code> está en mayúsculas?</summary><div><p>Es una constante por convención (PEP 8): indica que no debe cambiar durante la ejecución. Si la tasa cambia por ley, se modifica en un único lugar.</p></div></details>
+</section>
+
+<section id="evaluacion">
+  <h2>Control 1</h2>
+  <p>Según el programa, el Control 1 es <strong>esta semana</strong>. Es individual y <strong>sin IA</strong>. El temario exacto lo confirma el docente en Moodle; usa esta lista junto con la de la <a href="semana-01.html#evaluacion">semana 1</a>.</p>
+  <ul class="check">
+    <li><input type="checkbox" id="s2-v1" data-track="s2-v1"><label for="s2-v1">Puedo predecir el valor y el tipo de una expresión con <code>/</code>, <code>//</code>, <code>%</code>, <code>**</code> y conversiones.</label></li>
+    <li><input type="checkbox" id="s2-v2" data-track="s2-v2"><label for="s2-v2">Puedo explicar por qué <code>0.1 + 0.2 != 0.3</code> y cómo presentar dinero correctamente.</label></li>
+    <li><input type="checkbox" id="s2-v3" data-track="s2-v3"><label for="s2-v3">Puedo escribir una cadena <code>if-elif-else</code> de tramos en el orden correcto.</label></li>
+    <li><input type="checkbox" id="s2-v4" data-track="s2-v4"><label for="s2-v4">Puedo diseñar casos de prueba en, antes y después de cada frontera.</label></li>
+    <li><input type="checkbox" id="s2-v5" data-track="s2-v5"><label for="s2-v5">Puedo encontrar ramas inalcanzables y variables sin asignar en código ajeno.</label></li>
+    <li><input type="checkbox" id="s2-v6" data-track="s2-v6"><label for="s2-v6">Puedo validar datos con <code>if</code> antes de calcular (sin <code>try</code>).</label></li>
+  </ul>
+</section>
+
+<section id="fuentes">
+  <h2>Fuentes</h2>
+  <ul>
+    <li><strong>[PCC]</strong> Matthes, E. (2023). <em>Python Crash Course</em>, 3.ª ed. Caps. 2 y 5.</li>
+    <li><strong>[BOU]</strong> Bouna, P. (2022). <em>Fundamentals of Programming Using Flowchart and Pseudocode</em>. Cap. 2.</li>
+    <li>Python Software Foundation. <a href="https://docs.python.org/es/3/tutorial/" target="_blank" rel="noopener">Tutorial de Python</a> (en español), secciones 3 y 4.1.</li>
+    <li><a href="https://peps.python.org/pep-0008/" target="_blank" rel="noopener">PEP 8 — Style Guide for Python Code</a>.</li>
+  </ul>
+  <p style="font-size:.9rem;color:var(--ink-3)">Los valores de impuestos del E2 son ficticios y con fines didácticos.</p>
+  <nav class="nav-semanas" aria-label="Navegación entre semanas">
+    <a href="semana-01.html">← Semana 1</a>
+    <a href="semana-03.html">Semana 3: bucles →</a>
+  </nav>
+</section>
+
+<footer class="pie">Guía de estudio · Introducción al Desarrollo de Software · ESEN · Ciclo III/2026. Material de apoyo no oficial; el programa y Moodle mandan.</footer>
+</main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+<script src="../assets/guia.js"></script>
+</body>
+</html>

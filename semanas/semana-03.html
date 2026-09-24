@@ -1,0 +1,805 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Semana 3 · Bucles y patrones de control</title>
+<meta name="description" content="Guía de estudio, semana 3: while, for, range, acumuladores, contadores, banderas, break/continue, input() y trazas de ejecución.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/guia.css">
+<script>try{var t=localStorage.getItem("ids-guia-v1-tema");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+</head>
+<body data-semana="s3">
+
+<header class="topbar">
+  <a class="brand" href="../index.html">IDS <span>·</span> <small>Guía de estudio</small></a>
+  <nav aria-label="Semanas">
+    <a href="semana-01.html">S1</a>
+    <a href="semana-02.html">S2</a>
+    <a href="semana-03.html" aria-current="page">S3</a>
+    <a href="semana-04.html">S4</a>
+    <a href="semana-05.html">S5</a>
+  </nav>
+  <button class="theme-btn" type="button" aria-label="Cambiar tema claro/oscuro">◐</button>
+</header>
+
+<div class="layout with-toc">
+<aside class="toc" aria-label="Contenido de la semana">
+  <p>Semana 3</p>
+  <ol>
+    <li><a href="#uso">Cómo usar la guía</a></li>
+    <li><a href="#mapa">Qué puedes usar</a></li>
+    <li><a href="#lecturas">Lecturas</a></li>
+    <li><a href="#checkpoint">Reading checkpoint</a></li>
+    <li><a href="#while">while e input()</a></li>
+    <li><a href="#for">for y range()</a></li>
+    <li><a href="#patrones">Patrones de bucle</a></li>
+    <li><a href="#aproximacion">Aproximación numérica</a></li>
+    <li><a href="#trazas">Tablas de traza</a></li>
+    <li><a href="#ejercicios">Ejercicios</a></li>
+    <li><a href="#proyecto">Proyecto: Fase 2</a></li>
+    <li><a href="#evaluacion">Rumbo al Control 2</a></li>
+    <li><a href="#fuentes">Fuentes</a></li>
+  </ol>
+</aside>
+
+<main>
+<section class="hero">
+  <p class="eyebrow">Semana 3 · Módulo 4</p>
+  <h1>Estructuras repetitivas y patrones de control</h1>
+  <p class="lead">Un negocio no procesa una venta: procesa cientos. Esta semana el programa aprende a <strong>repetir</strong>: leer datos hasta que el usuario diga “fin”, recorrer una serie de montos, acumular totales y detenerse cuando una aproximación es suficientemente buena.</p>
+  <div class="pregunta"><small>Pregunta orientadora</small>¿Cómo proceso cientos de transacciones sin escribir cientos de líneas, y cómo garantizo que el proceso termina?</div>
+  <ul class="chips">
+    <li class="chip lect">Lecturas: PCC 7 · PCC 4 (inicio) · BOU 3</li>
+    <li class="chip proy">Proyecto: Fase 2 (esta semana)</li>
+    <li class="chip eval">Control 2: semana 5</li>
+  </ul>
+  <div class="progress" data-progreso-pagina>
+    <div class="progress-bar"><span></span></div>
+    <div class="progress-label"></div>
+  </div>
+</section>
+
+<section id="uso">
+  <h2>Cómo usar esta guía</h2>
+  <div class="momentos">
+    <div><strong>Antes de clase</strong>PCC 7, el inicio de PCC 4 y BOU 3. Luego el <a href="#checkpoint">checkpoint</a>.</div>
+    <div><strong>Durante el laboratorio</strong>La práctica es de <em>trazas sin depurador</em>: usa las <a href="#trazas">tablas</a> como modelo de cómo anotar.</div>
+    <div><strong>Después de clase</strong>Los <a href="#ejercicios">ejercicios</a> usan <code>input()</code>: ejecútalos y prueba entradas raras.</div>
+    <div><strong>Proyecto</strong>Entrega de la <a href="#proyecto">Fase 2</a>: diagrama + matriz de casos borde.</div>
+  </div>
+  <ul class="ciclo-leyenda" aria-label="Ciclo de trabajo">
+    <li>Pregunta</li><li class="sep">→</li><li>Exploración</li><li class="sep">→</li><li>Implementación</li><li class="sep">→</li><li>Resultado</li><li class="sep">→</li><li>Interpretación</li><li class="sep">→</li><li class="v">Verificación</li>
+  </ul>
+</section>
+
+<section id="mapa">
+  <h2>Qué puedes usar esta semana</h2>
+  <div class="permisos">
+    <div class="si">
+      <h4>Sí, desde ahora</h4>
+      <ul>
+        <li>Todo lo de las semanas 1 y 2</li>
+        <li><code>input()</code> (siempre devuelve <code>str</code>) y <code>int()</code>/<code>float()</code> para convertir</li>
+        <li><code>while</code>, banderas (<code>activo = True</code>), <code>break</code>, <code>continue</code></li>
+        <li><code>for</code> sobre texto, sobre <code>range()</code> y sobre una lista escrita directamente: <code>for monto in [120, 45, 300]:</code></li>
+        <li>Acumuladores, contadores, máximo/mínimo, bucles anidados</li>
+        <li><code>abs()</code>, <code>len()</code> de un texto</li>
+      </ul>
+    </div>
+    <div class="no">
+      <h4>Todavía no</h4>
+      <ul>
+        <li>Índices <code>lista[0]</code>, <code>append()</code> y demás métodos de listas → semana 5. Esta semana una lista solo se <em>recorre</em>.</li>
+        <li>Funciones propias <code>def</code> → semana 4</li>
+        <li><code>try</code>/<code>except</code> → semana 7 (la validación sigue siendo con <code>if</code>)</li>
+        <li>Diccionarios → semana 7 (PCC 7 termina con <code>while</code> sobre listas y diccionarios: déjalo para después)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="lecturas">
+  <h2>Lecturas de preparación</h2>
+  <ul class="check">
+    <li><input type="checkbox" id="s3-l1" data-track="s3-l1"><label for="s3-l1"><span class="ref">[PCC] Cap. 7</span> “User Input and while Loops”. Enfócate en: cómo funciona <code>input()</code>, convertir con <code>int()</code>, el operador <code>%</code>, bucles con bandera, <code>break</code>, <code>continue</code> y cómo salir de un bucle infinito.</label></li>
+    <li><input type="checkbox" id="s3-l2" data-track="s3-l2"><label for="s3-l2"><span class="ref">[PCC] Cap. 4, sección inicial</span> “Looping Through an Entire List”, <code>range()</code> e indentación. Enfócate en: qué va dentro y qué va fuera del bucle, y los errores de indentación típicos.</label></li>
+    <li><input type="checkbox" id="s3-l3" data-track="s3-l3"><label for="s3-l3"><span class="ref">[BOU] Cap. 3</span> “Looping and Iteration Constructs”. Enfócate en: bucles con condición al inicio, bucles con contador, cómo se dibuja un bucle en un diagrama de flujo.</label></li>
+  </ul>
+  <div class="box nota">
+    <span class="box-title">Complementos gratuitos</span>
+    <ul>
+      <li><a href="https://docs.python.org/es/3/tutorial/controlflow.html" target="_blank" rel="noopener">Tutorial oficial — Más herramientas para control de flujo</a>: secciones 4.2 (<code>for</code>), 4.3 (<code>range</code>) y 4.4 (<code>break</code> y <code>continue</code>).</li>
+      <li><a href="https://docs.python.org/es/3/tutorial/introduction.html" target="_blank" rel="noopener">Tutorial oficial — Una introducción informal</a>: el final (“Primeros pasos hacia la programación”) muestra un <code>while</code>.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="checkpoint">
+  <h2>Reading checkpoint</h2>
+  <div class="quiz">
+    <div class="qq" data-q="s3-q1">
+      <p>El usuario escribe <code>25</code> cuando el programa ejecuta <code>cantidad = input("Cantidad: ")</code>. ¿Qué es <code>cantidad</code>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>El texto <code>"25"</code> (tipo <code>str</code>)</button>
+        <button class="quiz-opt">El entero <code>25</code></button>
+        <button class="quiz-opt">El flotante <code>25.0</code></button>
+        <button class="quiz-opt">Depende de lo que escriba el usuario</button>
+      </div>
+      <p class="why"><code>input()</code> <strong>siempre</strong> devuelve texto. Para operar hay que convertir: <code>int(cantidad)</code>. Por eso <code>cantidad * 2</code> daría <code>"2525"</code>.</p>
+    </div>
+    <div class="qq" data-q="s3-q2">
+      <p>¿Cuántas veces se ejecuta el cuerpo de <code>for mes in range(1, 12):</code>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>11 veces (de 1 a 11)</button>
+        <button class="quiz-opt">12 veces (de 1 a 12)</button>
+        <button class="quiz-opt">12 veces (de 0 a 11)</button>
+        <button class="quiz-opt">10 veces</button>
+      </div>
+      <p class="why"><code>range(inicio, fin)</code> <strong>no incluye</strong> <code>fin</code>. Para los 12 meses: <code>range(1, 13)</code>. Este “uno de menos” (off-by-one) es de los errores más frecuentes.</p>
+    </div>
+    <div class="qq" data-q="s3-q3">
+      <p>¿Qué hace <code>continue</code> dentro de un bucle?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Salta el resto del cuerpo y pasa a la siguiente vuelta.</button>
+        <button class="quiz-opt">Termina el bucle por completo.</button>
+        <button class="quiz-opt">Repite la vuelta actual.</button>
+        <button class="quiz-opt">Pausa el programa hasta que el usuario presione Enter.</button>
+      </div>
+      <p class="why"><code>continue</code> = “esta vuelta no me interesa, sigue con la próxima” (por ejemplo, ignorar una devolución). <code>break</code> = “ya terminé, sal del bucle”.</p>
+    </div>
+    <div class="qq" data-q="s3-q4">
+      <p>¿Por qué este bucle nunca termina?</p>
+<pre data-norun><code class="language-python">saldo = 500
+while saldo > 0:
+    print(f"Saldo pendiente: {saldo}")</code></pre>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Porque nada dentro del bucle modifica <code>saldo</code>, así que la condición siempre es verdadera.</button>
+        <button class="quiz-opt">Porque falta un <code>else</code>.</button>
+        <button class="quiz-opt">Porque <code>while</code> necesita un <code>range()</code>.</button>
+        <button class="quiz-opt">Porque <code>print</code> no puede ir dentro de un <code>while</code>.</button>
+      </div>
+      <p class="why">Todo <code>while</code> necesita que algo en su cuerpo acerque la condición a ser falsa. Si te pasa en la terminal, detén el programa con <kbd>Ctrl</kbd>+<kbd>C</kbd>.</p>
+    </div>
+    <div class="qq" data-q="s3-q5">
+      <p>¿Cuándo es más natural usar <code>while</code> en lugar de <code>for</code>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Cuando no sabes de antemano cuántas vueltas habrá (p. ej. “hasta que el saldo llegue a 0”).</button>
+        <button class="quiz-opt">Cuando recorres todos los elementos de una serie.</button>
+        <button class="quiz-opt">Cuando el bucle tiene un <code>if</code> adentro.</button>
+        <button class="quiz-opt">Nunca: <code>for</code> siempre es mejor.</button>
+      </div>
+      <p class="why"><code>for</code>: “para cada elemento” o “exactamente N veces”. <code>while</code>: “mientras se cumpla una condición”, con un número de vueltas desconocido.</p>
+    </div>
+    <div class="qq" data-q="s3-q6">
+      <p>¿Qué imprime este código?</p>
+<pre data-norun><code class="language-python">total = 0
+for monto in [10, 20, 30]:
+    total = total + monto
+    print(total)</code></pre>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>10</code>, <code>30</code> y <code>60</code>, en tres líneas</button>
+        <button class="quiz-opt">Solo <code>60</code></button>
+        <button class="quiz-opt"><code>10</code>, <code>20</code> y <code>30</code></button>
+        <button class="quiz-opt"><code>0</code>, <code>10</code> y <code>30</code></button>
+      </div>
+      <p class="why">El <code>print</code> está <strong>indentado</strong>, así que está dentro del bucle y se ejecuta en cada vuelta mostrando el acumulado. Si lo quisieras una sola vez, iría sin sangría, después del bucle.</p>
+    </div>
+    <div class="qq" data-q="s3-q7">
+      <p>Una <strong>bandera</strong> en un bucle es…</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>una variable booleana que indica si el programa debe seguir (o si algo ocurrió).</button>
+        <button class="quiz-opt">un comentario que marca dónde empieza el bucle.</button>
+        <button class="quiz-opt">el número de vueltas que lleva el bucle.</button>
+        <button class="quiz-opt">un error que detiene el programa.</button>
+      </div>
+      <p class="why">Ejemplo: <code>activo = True</code> y <code>while activo:</code>; cualquier parte del cuerpo puede poner <code>activo = False</code>. También sirve para registrar hallazgos: <code>encontrado = True</code>.</p>
+    </div>
+    <div class="qq" data-q="s3-q8">
+      <p>¿Cuántas líneas imprime este bucle anidado?</p>
+<pre data-norun><code class="language-python">for sucursal in range(3):
+    for dia in range(5):
+        print(sucursal, dia)</code></pre>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>15</button>
+        <button class="quiz-opt">8</button>
+        <button class="quiz-opt">5</button>
+        <button class="quiz-opt">3</button>
+      </div>
+      <p class="why">Por cada una de las 3 vueltas externas, el bucle interno da 5 vueltas completas: 3 × 5 = 15.</p>
+    </div>
+    <div class="quiz-score"><span data-score></span><button class="btn sec" type="button" data-reset>Reiniciar quiz</button></div>
+  </div>
+  <ul class="check">
+    <li><input type="checkbox" id="s3-cp" data-track="s3-cp"><label for="s3-cp">Respondí el checkpoint y entiendo mis errores.</label></li>
+  </ul>
+</section>
+
+<section id="while">
+  <h2><code>while</code> e <code>input()</code>: repetir hasta que algo pase</h2>
+  <div class="ciclo">
+    <h3>Caso: la caja registradora del día</h3>
+    <div class="paso"><div>
+      <span class="etq">Pregunta</span>
+      <p>El cajero digita los montos de las ventas una por una; al cerrar escribe <code>fin</code>. El sistema debe reportar el total, cuántas ventas hubo, el promedio y la venta más alta. Montos inválidos se rechazan sin detener la caja.</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Exploración</span>
+      <ul>
+        <li>No sabemos cuántas ventas habrá → <code>while</code>.</li>
+        <li><code>fin</code> es un <strong>centinela</strong>: un valor especial que significa “ya no hay más datos”.</li>
+        <li>Necesitamos un <strong>acumulador</strong> (total), un <strong>contador</strong> (cantidad) y un <strong>máximo</strong>. Los tres se inicializan <em>antes</em> del bucle.</li>
+        <li>Caso borde: si el cajero escribe <code>fin</code> de inmediato, el promedio sería una división entre cero.</li>
+      </ul>
+      <figure class="diagrama">
+        <svg class="fc" viewBox="0 0 520 430" width="520" role="img" aria-labelledby="fc3-t">
+          <title id="fc3-t">Diagrama de flujo de un bucle con centinela</title>
+          <defs><marker id="fc3-m" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="punta" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+          <rect class="proc" x="150" y="10" width="220" height="40"/><text class="mono" x="260" y="35" text-anchor="middle">total ← 0, cantidad ← 0</text>
+          <path class="flecha" d="M260 50 V72" marker-end="url(#fc3-m)"/>
+          <polygon class="io" points="190,74 350,74 330,114 170,114"/><text x="260" y="99" text-anchor="middle">Leer entrada</text>
+          <path class="flecha" d="M260 114 V136" marker-end="url(#fc3-m)"/>
+          <polygon class="dec" points="260,138 345,176 260,214 175,176"/><text x="260" y="181" text-anchor="middle">¿entrada = fin?</text>
+          <path class="flecha" d="M345 176 H440 V356" marker-end="url(#fc3-m)"/><text class="rot" x="360" y="168">Sí</text>
+          <path class="flecha" d="M260 214 V236" marker-end="url(#fc3-m)"/><text class="rot" x="268" y="230">No</text>
+          <rect class="proc" x="150" y="238" width="220" height="50"/>
+          <text class="mono" x="260" y="259" text-anchor="middle">total ← total + monto</text>
+          <text class="mono" x="260" y="277" text-anchor="middle">cantidad ← cantidad + 1</text>
+          <path class="flecha" d="M150 263 H70 V94 H176" marker-end="url(#fc3-m)"/>
+          <text class="rot" x="18" y="180">repetir</text>
+          <polygon class="io" points="385,358 505,358 490,398 370,398"/><text x="437" y="383" text-anchor="middle">Mostrar reporte</text>
+        </svg>
+        <figcaption>Un bucle en un diagrama es una flecha que <em>regresa</em> a un punto anterior. La decisión es la condición de salida.</figcaption>
+      </figure>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Implementación</span>
+<pre data-file="caja.py" data-stdin="25.50\n100\ndiez\n0\n74.50\nfin\n"><code class="language-python">total = 0.0
+cantidad = 0
+venta_mayor = 0.0
+registrando = True          # bandera
+
+print("Caja abierta. Escriba 'fin' para cerrar.")
+while registrando:
+    entrada = input("Monto: ").strip().lower()
+
+    if entrada == "fin":
+        registrando = False
+    elif not entrada.replace(".", "", 1).isdigit():
+        print("  Monto inválido, no se registró.")
+    elif float(entrada) == 0:
+        print("  Un monto de $0 no es una venta, no se registró.")
+    else:
+        monto = float(entrada)
+        total = total + monto
+        cantidad = cantidad + 1
+        if monto > venta_mayor:
+            venta_mayor = monto
+
+print("--- Cierre de caja ---")
+if cantidad > 0:
+    print(f"Ventas: {cantidad}")
+    print(f"Total: ${total:,.2f}")
+    print(f"Promedio: ${total / cantidad:,.2f}")
+    print(f"Venta mayor: ${venta_mayor:,.2f}")
+else:
+    print("No se registraron ventas.")</code></pre>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Resultado</span>
+      <p>Sesión en la terminal (lo que escribe el cajero va después de <code>Monto:</code>):</p>
+<pre class="salida" data-file="terminal" data-nocheck><code>Caja abierta. Escriba 'fin' para cerrar.
+Monto: 25.50
+Monto: 100
+Monto: diez
+  Monto inválido, no se registró.
+Monto: 0
+  Un monto de $0 no es una venta, no se registró.
+Monto: 74.50
+Monto: fin
+--- Cierre de caja ---
+Ventas: 3
+Total: $200.00
+Promedio: $66.67
+Venta mayor: $100.00</code></pre>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Interpretación</span>
+      <p>El bucle procesó 6 entradas pero registró solo 3 ventas: las inválidas se reportan y se ignoran sin detener la caja. La bandera <code>registrando</code> es la única forma de salir. Observa también que la validación con <code>isdigit()</code> va <strong>antes</strong> de <code>float(entrada)</code>: si el orden se invierte, <code>"diez"</code> detiene el programa.</p>
+      <p>Una alternativa equivalente que verás en PCC 7 es <code>while True:</code> con <code>break</code> cuando llega <code>fin</code>.</p>
+    </div></div>
+    <div class="paso verif"><div>
+      <span class="etq">Verificación</span>
+      <ul>
+        <li>25.50 + 100 + 74.50 = 200 ✔; 200 / 3 = 66.67 ✔.</li>
+        <li>Casos que <em>debes</em> probar: <code>fin</code> como primera entrada (¿evita dividir entre 0?), <code>FIN</code> en mayúsculas, un texto vacío (solo Enter), <code>-5</code>, <code>12.5.3</code>.</li>
+      </ul>
+    </div></div>
+  </div>
+</section>
+
+<section id="for">
+  <h2><code>for</code> y <code>range()</code>: repetir un número conocido de veces</h2>
+  <div class="ciclo">
+    <h3>Caso: ¿cuánto crece un ahorro a plazo?</h3>
+    <div class="paso"><div>
+      <span class="etq">Pregunta</span>
+      <p>Un cliente deposita $1,000 a una tasa anual del 8 % con capitalización anual. ¿Cuánto tendrá al final de cada uno de los próximos 5 años?</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Exploración</span>
+      <p>Sabemos exactamente cuántas vueltas: 5 → <code>for</code> con <code>range(1, 6)</code> (el 6 no se incluye). Cada año el saldo se multiplica por 1.08: el saldo es un acumulador que crece multiplicando.</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Implementación</span>
+<pre data-file="plazo.py"><code class="language-python">capital = 1000.00
+TASA = 0.08
+ANIOS = 5
+
+saldo = capital
+print("Año   Interés      Saldo")
+for anio in range(1, ANIOS + 1):
+    interes = saldo * TASA
+    saldo = saldo + interes
+    print(f"{anio:>3}  {interes:>8.2f}  {saldo:>9.2f}")
+
+print(f"Ganancia total: ${saldo - capital:,.2f}")</code></pre>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Resultado</span>
+<pre class="salida" data-file="salida"><code>Año   Interés      Saldo
+  1     80.00    1080.00
+  2     86.40    1166.40
+  3     93.31    1259.71
+  4    100.78    1360.49
+  5    108.84    1469.33
+Ganancia total: $469.33</code></pre>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Interpretación</span>
+      <p>El interés crece cada año porque se calcula sobre un saldo mayor: eso es el interés compuesto. En 5 años la ganancia ($469.33) supera el 5 × 8 % = 40 % que daría el interés simple ($400). Los formatos <code>:&gt;8.2f</code> alinean los números a la derecha en columnas de ancho fijo.</p>
+    </div></div>
+    <div class="paso verif"><div>
+      <span class="etq">Verificación</span>
+      <p>La fórmula cerrada es <code>capital * (1 + TASA) ** ANIOS</code> = 1000 × 1.08⁵ = 1469.33. Si el bucle y la fórmula coinciden, ambos están bien. Comprobar un resultado con un método independiente es una técnica que vas a usar todo el curso.</p>
+    </div></div>
+  </div>
+
+  <h3>Recorrer una serie de valores</h3>
+  <p>Un <code>for</code> también recorre directamente los elementos de una lista escrita en el código. Esta semana solo la recorremos; crearla, modificarla y usar índices es tema de la semana 5.</p>
+<pre data-file="recorrer.py"><code class="language-python">for monto in [120, 45, 300, 80]:
+    print(f"Procesando venta de ${monto}")
+print("Listo.")          # sin sangría: se ejecuta UNA vez, al final</code></pre>
+<pre class="salida" data-file="salida"><code>Procesando venta de $120
+Procesando venta de $45
+Procesando venta de $300
+Procesando venta de $80
+Listo.</code></pre>
+  <div class="box error">
+    <span class="box-title">Errores de indentación (PCC 4)</span>
+    <ul>
+      <li>Olvidar sangrar el cuerpo → <code>IndentationError: expected an indented block</code>.</li>
+      <li>Sangrar algo que debía ir después del bucle → se repite N veces (error <em>lógico</em>: no hay mensaje, solo un resultado equivocado).</li>
+      <li>Olvidar los dos puntos <code>:</code> al final del <code>for</code> → <code>SyntaxError</code>.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="patrones">
+  <h2>Patrones de bucle que se repiten en todo problema de negocio</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Patrón</th><th>Antes del bucle</th><th>Dentro del bucle</th><th>Responde…</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Acumulador</strong></td><td><code>total = 0</code></td><td><code>total = total + monto</code></td><td>¿cuánto se vendió?</td></tr>
+      <tr><td><strong>Contador</strong></td><td><code>n = 0</code></td><td><code>n = n + 1</code> (a veces dentro de un <code>if</code>)</td><td>¿cuántas ventas superan $100?</td></tr>
+      <tr><td><strong>Máximo / mínimo</strong></td><td><code>mayor = primer valor</code> (o un valor seguro)</td><td><code>if x &gt; mayor: mayor = x</code></td><td>¿cuál fue la mejor venta?</td></tr>
+      <tr><td><strong>Bandera</strong></td><td><code>hubo_devolucion = False</code></td><td><code>if monto &lt; 0: hubo_devolucion = True</code></td><td>¿ocurrió algo al menos una vez?</td></tr>
+      <tr><td><strong>Promedio</strong></td><td>acumulador + contador</td><td>ambos</td><td>después del bucle: <code>total / n</code> <em>si</em> <code>n &gt; 0</code></td></tr>
+    </tbody>
+  </table></div>
+  <p><code>break</code> y <code>continue</code> en un mismo ejemplo: revisar las transacciones del día, ignorar las devoluciones (negativas) y detenerse si aparece un monto sospechoso.</p>
+<pre data-file="revision.py"><code class="language-python">LIMITE_SOSPECHOSO = 5000
+total = 0
+revisadas = 0
+
+for monto in [120, -30, 450, 7200, 80]:
+    if monto < 0:
+        continue                      # devolución: se salta
+    if monto > LIMITE_SOSPECHOSO:
+        print(f"Alerta: ${monto} requiere autorización. Revisión detenida.")
+        break                         # deja de revisar
+    total = total + monto
+    revisadas = revisadas + 1
+
+print(f"Revisadas: {revisadas}, total: ${total}")</code></pre>
+<pre class="salida" data-file="salida"><code>Alerta: $7200 requiere autorización. Revisión detenida.
+Revisadas: 2, total: $570</code></pre>
+  <p>El 80 nunca se procesó: <code>break</code> termina el bucle completo. El −30 se saltó sin contarse.</p>
+
+  <h3>Bucles anidados</h3>
+<pre data-file="anidado.py"><code class="language-python"># Valor futuro de $1,000 para distintas tasas y plazos
+for tasa in [0.05, 0.10]:
+    print(f"Tasa {tasa:.0%}:", end=" ")
+    for anios in range(1, 4):
+        valor = 1000 * (1 + tasa) ** anios
+        print(f"{anios}a=${valor:,.2f}", end="  ")
+    print()   # salto de línea al terminar cada tasa</code></pre>
+<pre class="salida" data-file="salida"><code>Tasa 5%: 1a=$1,050.00  2a=$1,102.50  3a=$1,157.63
+Tasa 10%: 1a=$1,100.00  2a=$1,210.00  3a=$1,331.00</code></pre>
+  <p>El bucle interno completa todas sus vueltas por cada vuelta del externo. <code>end=" "</code> hace que <code>print</code> no salte de línea.</p>
+</section>
+
+<section id="aproximacion">
+  <h2>Aproximación numérica: repetir hasta que sea “suficientemente bueno”</h2>
+  <div class="ciclo">
+    <h3>Caso: la tasa de crecimiento anual promedio</h3>
+    <div class="paso"><div>
+      <span class="etq">Pregunta</span>
+      <p>Las ventas pasaron de $100 mil a $121 mil en 2 años. ¿Cuál fue la tasa de crecimiento anual promedio? Matemáticamente es <code>√1.21 − 1</code>, pero queremos calcular la raíz <em>sin</em> una función de raíz, para entender cómo lo hace una computadora.</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Exploración</span>
+      <p>El método de Herón: si <code>x</code> es una estimación de √v, entonces <code>(x + v / x) / 2</code> es una estimación mejor. Se repite hasta que la mejora sea menor que una <strong>tolerancia</strong>. No sabemos cuántas vueltas harán falta → <code>while</code>.</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Implementación</span>
+<pre data-file="heron.py"><code class="language-python">valor = 1.21           # 121 / 100: factor de crecimiento en 2 años
+TOLERANCIA = 0.0001
+
+x = valor              # primera estimación (cualquier positivo sirve)
+iteracion = 0
+seguir = True
+while seguir:
+    nueva_x = (x + valor / x) / 2
+    iteracion = iteracion + 1
+    cambio = abs(nueva_x - x)
+    print(f"Iteración {iteracion}: x = {nueva_x:.6f}  (cambio {cambio:.6f})")
+    if cambio < TOLERANCIA:
+        seguir = False
+    x = nueva_x
+
+print(f"Crecimiento anual promedio: {x - 1:.2%}")</code></pre>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Resultado</span>
+<pre class="salida" data-file="salida"><code>Iteración 1: x = 1.105000  (cambio 0.105000)
+Iteración 2: x = 1.100011  (cambio 0.004989)
+Iteración 3: x = 1.100000  (cambio 0.000011)
+Crecimiento anual promedio: 10.00%</code></pre>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Interpretación</span>
+      <p>En 3 iteraciones el método llegó a 1.1: las ventas crecieron 10 % anual en promedio. Ojo: <em>no</em> es 21 % / 2 = 10.5 %. Con crecimiento compuesto, promediar tasas simples sobreestima.</p>
+    </div></div>
+    <div class="paso verif"><div>
+      <span class="etq">Verificación</span>
+      <p>Comprueba al revés: 100 × 1.10 × 1.10 = 121 ✔. Y garantiza que el bucle termina: cada iteración reduce el cambio, así que eventualmente baja de la tolerancia. ¿Qué pasaría con <code>valor = 0</code> o negativo? (Pista: <code>valor / x</code> con <code>x = 0</code>.) Eso se valida antes del bucle.</p>
+    </div></div>
+  </div>
+</section>
+
+<section id="trazas">
+  <h2>Tablas de traza (sin depurador)</h2>
+  <p>En el laboratorio de esta semana se trazan programas a mano, anotando el estado de las variables en cada vuelta. Una fila = una vuelta del bucle, con los valores <strong>al final</strong> de esa vuelta.</p>
+
+  <h3>Traza 1 · Acumulador y contador</h3>
+<pre data-file="traza1.py"><code class="language-python">total = 0
+grandes = 0
+for monto in [120, 45, 300, 80]:
+    total = total + monto
+    if monto >= 100:
+        grandes = grandes + 1
+print(total, grandes)</code></pre>
+<pre class="salida" data-file="salida"><code>545 2</code></pre>
+  <div class="traza">
+    <div class="table-wrap"><table>
+      <thead><tr><th>Vuelta</th><th>monto</th><th>total</th><th>grandes</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><input data-a="120"></td><td><input data-a="120"></td><td><input data-a="1"></td></tr>
+        <tr><td>2</td><td><input data-a="45"></td><td><input data-a="165"></td><td><input data-a="1"></td></tr>
+        <tr><td>3</td><td><input data-a="300"></td><td><input data-a="465"></td><td><input data-a="2"></td></tr>
+        <tr><td>4</td><td><input data-a="80"></td><td><input data-a="545"></td><td><input data-a="2"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="acciones"><button class="btn" type="button" data-comprobar>Comprobar</button><button class="btn sec" type="button" data-solucion>Ver solución</button><button class="btn sec" type="button" data-limpiar>Limpiar</button><span class="resultado" aria-live="polite"></span></div>
+  </div>
+
+  <h3>Traza 2 · Pago de una deuda</h3>
+  <p>Deuda de $1,000 con interés del 2 % mensual y pagos de $300. El último pago es solo lo que falta.</p>
+<pre data-file="deuda.py"><code class="language-python">saldo = 1000.00
+TASA_MENSUAL = 0.02
+CUOTA = 300.00
+mes = 0
+
+while saldo > 0:
+    mes = mes + 1
+    interes = round(saldo * TASA_MENSUAL, 2)
+    saldo = saldo + interes
+    if saldo < CUOTA:
+        pago = saldo
+    else:
+        pago = CUOTA
+    saldo = round(saldo - pago, 2)
+    print(f"Mes {mes}: interés {interes:.2f}, pago {pago:.2f}, saldo {saldo:.2f}")</code></pre>
+  <div class="traza">
+    <div class="table-wrap"><table>
+      <thead><tr><th>mes</th><th>interes</th><th>pago</th><th>saldo al final</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><input data-a="20"></td><td><input data-a="300"></td><td><input data-a="720"></td></tr>
+        <tr><td>2</td><td><input data-a="14.40"></td><td><input data-a="300"></td><td><input data-a="434.40"></td></tr>
+        <tr><td>3</td><td><input data-a="8.69"></td><td><input data-a="300"></td><td><input data-a="143.09"></td></tr>
+        <tr><td>4</td><td><input data-a="2.86"></td><td><input data-a="145.95"></td><td><input data-a="0"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="acciones"><button class="btn" type="button" data-comprobar>Comprobar</button><button class="btn sec" type="button" data-solucion>Ver solución</button><button class="btn sec" type="button" data-limpiar>Limpiar</button><span class="resultado" aria-live="polite"></span></div>
+  </div>
+  <details class="defensa"><summary>Preguntas sobre la traza 2</summary><div>
+    <p><strong>¿Cuánto pagó en total?</strong> 300 × 3 + 145.95 = $1,045.95, es decir $45.95 de intereses.</p>
+    <p><strong>¿Qué pasa si la cuota fuera $15?</strong> El primer mes el interés es $20: el saldo <em>crece</em> y el <code>while</code> nunca termina. Un programa defensivo verifica antes del bucle que <code>CUOTA &gt; saldo * TASA_MENSUAL</code>.</p>
+  </div></details>
+
+  <h3>Traza 3 · Método de Herón (√1.21)</h3>
+  <p>Usa <a href="#aproximacion">heron.py</a>. Redondea a 6 decimales; en “¿para?” escribe <em>sí</em> o <em>no</em>.</p>
+  <div class="traza">
+    <div class="table-wrap"><table>
+      <thead><tr><th>iteración</th><th>x antes</th><th>nueva_x</th><th>cambio</th><th>¿para?</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td class="dado">1.21</td><td><input data-a="1.105"></td><td><input data-a="0.105"></td><td><input data-a="no"></td></tr>
+        <tr><td>2</td><td><input data-a="1.105"></td><td><input data-a="1.100011"></td><td><input data-a="0.004989"></td><td><input data-a="no"></td></tr>
+        <tr><td>3</td><td><input data-a="1.100011"></td><td><input data-a="1.1|1.100000"></td><td><input data-a="0.000011"></td><td><input data-a="sí|si"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="acciones"><button class="btn" type="button" data-comprobar>Comprobar</button><button class="btn sec" type="button" data-solucion>Ver solución</button><button class="btn sec" type="button" data-limpiar>Limpiar</button><span class="resultado" aria-live="polite"></span></div>
+  </div>
+  <ul class="check">
+    <li><input type="checkbox" id="s3-t1" data-track="s3-t1"><label for="s3-t1">Traza 1 completa.</label></li>
+    <li><input type="checkbox" id="s3-t2" data-track="s3-t2"><label for="s3-t2">Traza 2 completa y respondí sus preguntas.</label></li>
+    <li><input type="checkbox" id="s3-t3" data-track="s3-t3"><label for="s3-t3">Traza 3 completa.</label></li>
+  </ul>
+</section>
+
+<section id="ejercicios">
+  <h2>Ejercicios</h2>
+
+  <article class="ejercicio">
+    <header><h3>E1 · ¿En cuántos meses pago mi deuda?</h3><span class="nivel">while + validación · ★★</span></header>
+    <div class="cuerpo">
+      <p>Pide con <code>input()</code> el monto de la deuda, la tasa de interés mensual (en %, p. ej. <code>2</code>) y la cuota. Muestra en cuántos meses se paga y cuánto se pagó de intereses. Si la cuota no alcanza a cubrir el interés del primer mes, avisa y no entres al bucle.</p>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p>Reutiliza la traza 2. Convierte la tasa: <code>tasa = float(texto) / 100</code>. Acumula el interés en <code>intereses_totales</code>.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="meses_deuda.py" data-stdin="1000\n2\n300\n"><code class="language-python">saldo = float(input("Deuda: $"))
+tasa = float(input("Interés mensual (%): ")) / 100
+cuota = float(input("Cuota: $"))
+
+if saldo <= 0 or cuota <= 0 or tasa < 0:
+    print("Los datos deben ser positivos.")
+elif cuota <= saldo * tasa:
+    print("La cuota no cubre ni el interés: la deuda nunca se pagaría.")
+else:
+    meses = 0
+    intereses_totales = 0.0
+    while saldo > 0:
+        meses = meses + 1
+        interes = round(saldo * tasa, 2)
+        intereses_totales = intereses_totales + interes
+        saldo = saldo + interes
+        if saldo < cuota:
+            saldo = 0
+        else:
+            saldo = round(saldo - cuota, 2)
+    print(f"Se paga en {meses} meses; intereses: ${intereses_totales:,.2f}")</code></pre>
+<pre class="salida" data-file="salida (con 1000, 2, 300)" data-nocheck><code>Deuda: $1000
+Interés mensual (%): 2
+Cuota: $300
+Se paga en 4 meses; intereses: $45.95</code></pre>
+      <p><strong>Verificación:</strong> coincide con la traza 2 ($45.95). Prueba la cuota de $15 (debe avisar sin colgarse) y la de $20 exacta (la cuota iguala el interés: también debe avisar, por eso la condición es <code>&lt;=</code>). Aquí <code>float(input())</code> todavía se detiene si escriben letras; para evitarlo, valida con la técnica de la semana 2 o espera a <code>try</code> en la semana 7.</p>
+    </div></details>
+    <ul class="check" style="padding:0 1.2rem .6rem"><li><input type="checkbox" id="s3-e1" data-track="s3-e1"><label for="s3-e1">Resuelto</label></li></ul>
+  </article>
+
+  <article class="ejercicio">
+    <header><h3>E2 · ¿Cuándo se duplica mi inversión?</h3><span class="nivel">while vs. for · ★</span></header>
+    <div class="cuerpo">
+      <p>Con $1,000 al 8 % anual compuesto, ¿cuántos años hacen falta para <strong>al menos</strong> duplicar el capital? Compáralo con la “regla del 72” (72 / tasa en % ≈ años para duplicar).</p>
+    </div>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="duplicar.py"><code class="language-python">capital = 1000.00
+TASA = 0.08
+
+saldo = capital
+anios = 0
+while saldo < 2 * capital:
+    saldo = saldo * (1 + TASA)
+    anios = anios + 1
+
+print(f"Se duplica en {anios} años (saldo: ${saldo:,.2f})")
+print(f"Regla del 72: {72 / (TASA * 100):.1f} años")</code></pre>
+<pre class="salida" data-file="salida"><code>Se duplica en 10 años (saldo: $2,158.92)
+Regla del 72: 9.0 años</code></pre>
+      <p><strong>Interpretación:</strong> en el año 9 el saldo es $1,999.00, a un dólar de duplicarse; por eso hacen falta 10 años completos. La regla del 72 es una aproximación mental, y el programa la confirma. Aquí <code>while</code> es natural: no sabíamos cuántos años.</p>
+    </div></details>
+    <ul class="check" style="padding:0 1.2rem .6rem"><li><input type="checkbox" id="s3-e2" data-track="s3-e2"><label for="s3-e2">Resuelto</label></li></ul>
+  </article>
+
+  <article class="ejercicio">
+    <header><h3>E3 · PIN con tres intentos</h3><span class="nivel">for + break + bandera · ★★</span></header>
+    <div class="cuerpo">
+      <p>Un cajero automático da 3 intentos para ingresar el PIN (<code>"4821"</code>). Si acierta, muestra “Bienvenido” y deja de pedir. Si falla los 3, muestra “Tarjeta retenida”. En cada fallo indica cuántos intentos quedan.</p>
+    </div>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="pin.py" data-stdin="1111\n4821\n"><code class="language-python">PIN_CORRECTO = "4821"
+MAX_INTENTOS = 3
+acceso = False
+
+for intento in range(1, MAX_INTENTOS + 1):
+    pin = input("PIN: ").strip()
+    if pin == PIN_CORRECTO:
+        acceso = True
+        break
+    restantes = MAX_INTENTOS - intento
+    print(f"PIN incorrecto. Intentos restantes: {restantes}")
+
+if acceso:
+    print("Bienvenido.")
+else:
+    print("Tarjeta retenida. Contacte a su banco.")</code></pre>
+<pre class="salida" data-file="salida (falla una vez y acierta)" data-nocheck><code>PIN: 1111
+PIN incorrecto. Intentos restantes: 2
+PIN: 4821
+Bienvenido.</code></pre>
+      <p><strong>Por qué la bandera:</strong> al salir del bucle hay dos historias posibles (acertó o se acabaron los intentos). <code>acceso</code> recuerda cuál fue. El PIN se compara como texto: <code>"04821"</code> no es lo mismo que <code>"4821"</code>, y así debe ser.</p>
+      <p><strong>Verificación:</strong> acertar al primer intento, al tercero, y fallar los tres.</p>
+    </div></details>
+    <ul class="check" style="padding:0 1.2rem .6rem"><li><input type="checkbox" id="s3-e3" data-track="s3-e3"><label for="s3-e3">Resuelto</label></li></ul>
+  </article>
+
+  <article class="ejercicio">
+    <header><h3>E4 · Resumen de ventas de la semana</h3><span class="nivel">patrones combinados · ★★</span></header>
+    <div class="cuerpo">
+      <p>Ventas de lunes a domingo: <code>[340, 410, 0, 520, 610, 890, 450]</code>. Sin índices ni métodos de lista, calcula: total, promedio diario, mejor día (número del 1 al 7) y cuántos días estuvieron <strong>por encima del promedio</strong>.</p>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p>Para saber qué número de día es, lleva un contador <code>dia</code> que aumente en cada vuelta. Para “por encima del promedio” necesitas conocer el promedio primero… ¿cuántas pasadas hacen falta?</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="resumen_semana.py"><code class="language-python">total = 0
+dias = 0
+mejor_venta = 0
+mejor_dia = 0
+
+for venta in [340, 410, 0, 520, 610, 890, 450]:
+    dias = dias + 1
+    total = total + venta
+    if venta > mejor_venta:
+        mejor_venta = venta
+        mejor_dia = dias
+
+promedio = total / dias
+
+sobre_promedio = 0
+for venta in [340, 410, 0, 520, 610, 890, 450]:   # segunda pasada
+    if venta > promedio:
+        sobre_promedio = sobre_promedio + 1
+
+print(f"Total: ${total}  Promedio: ${promedio:.2f}")
+print(f"Mejor día: {mejor_dia} (${mejor_venta})")
+print(f"Días sobre el promedio: {sobre_promedio}")</code></pre>
+<pre class="salida" data-file="salida"><code>Total: $3220  Promedio: $460.00
+Mejor día: 6 ($890)
+Días sobre el promedio: 3</code></pre>
+      <p><strong>Interpretación:</strong> hacen falta dos pasadas porque el promedio no se conoce hasta terminar la primera. Repetir la lista escrita dos veces es incómodo (y peligroso si cambias una y no la otra); en la semana 5 la guardarás en una variable.</p>
+      <p><strong>Verificación:</strong> 340+410+0+520+610+890+450 = 3220; 3220/7 = 460; sobre 460: 520, 610, 890 → 3 ✔.</p>
+    </div></details>
+    <ul class="check" style="padding:0 1.2rem .6rem"><li><input type="checkbox" id="s3-e4" data-track="s3-e4"><label for="s3-e4">Resuelto</label></li></ul>
+  </article>
+
+  <article class="ejercicio">
+    <header><h3>E5 · Auditoría: el reporte que no suma</h3><span class="nivel">auditoría · ★★★</span></header>
+    <div class="cuerpo">
+      <p>Este código debería reportar total, promedio y días sin venta de <code>[200, 150, 0, 350]</code>. Corre sin errores, pero imprime <code>Total: 350, promedio: 87.5, días sin venta: 0</code>. Traza y encuentra los tres fallos.</p>
+<pre data-file="reporte_auditar.py"><code class="language-python">dias_sin_venta = 0
+for monto in [200, 150, 0, 350]:
+    total = 0
+    total = total + monto
+    if monto == 0:
+        dias_sin_venta + 1
+promedio = total / 4
+print(f"Total: {total}, promedio: {promedio}, días sin venta: {dias_sin_venta}")</code></pre>
+<pre class="salida" data-file="salida"><code>Total: 350, promedio: 87.5, días sin venta: 0</code></pre>
+      <p>Y en este otro, ¿por qué el programa se queda “colgado”? (no lo ejecutes sin saber cómo detenerlo: <kbd>Ctrl</kbd>+<kbd>C</kbd>)</p>
+<pre data-file="dias_auditar.py" data-norun><code class="language-python">dia = 1
+while dia <= 7:
+    print(f"Registrando ventas del día {dia}")</code></pre>
+    </div>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+      <ol>
+        <li><strong>Acumulador reiniciado dentro del bucle:</strong> <code>total = 0</code> se ejecuta en cada vuelta, así que solo queda el último monto (350). Va <em>antes</em> del <code>for</code>.</li>
+        <li><strong>Expresión sin asignar:</strong> <code>dias_sin_venta + 1</code> calcula un valor y lo tira. Debe ser <code>dias_sin_venta = dias_sin_venta + 1</code>.</li>
+        <li><strong>Divisor fijo:</strong> <code>/ 4</code> funciona hoy, pero falla en silencio si mañana hay 5 días. Usa un contador.</li>
+        <li><strong>Segundo programa:</strong> <code>dia</code> nunca cambia; falta <code>dia = dia + 1</code> dentro del bucle.</li>
+      </ol>
+<pre data-file="reporte_corregido.py"><code class="language-python">total = 0
+dias = 0
+dias_sin_venta = 0
+for monto in [200, 150, 0, 350]:
+    total = total + monto
+    dias = dias + 1
+    if monto == 0:
+        dias_sin_venta = dias_sin_venta + 1
+promedio = total / dias
+print(f"Total: {total}, promedio: {promedio}, días sin venta: {dias_sin_venta}")</code></pre>
+<pre class="salida" data-file="salida"><code>Total: 700, promedio: 175.0, días sin venta: 1</code></pre>
+      <p><strong>Lección:</strong> ninguno de estos fallos produce un mensaje de error. Solo los detecta alguien que traza el código o que compara el resultado con un cálculo independiente (200+150+0+350 = 700). Es el tipo de error que se esconde en código generado por IA que “se ve bien”.</p>
+    </div></details>
+    <ul class="check" style="padding:0 1.2rem .6rem"><li><input type="checkbox" id="s3-e5" data-track="s3-e5"><label for="s3-e5">Resuelto</label></li></ul>
+  </article>
+</section>
+
+<section id="proyecto">
+  <h2>Proyecto integrador · Fase 2</h2>
+  <p><strong>Semana 3 · Lógica algorítmica y casos de prueba.</strong></p>
+  <div class="card">
+    <h3>Entregables de esta fase</h3>
+    <ul class="check">
+      <li><input type="checkbox" id="s3-p1" data-track="s3-p1"><label for="s3-p1"><strong>Diagrama de flujo detallado</strong> (draw.io) del proceso central del negocio: cálculo de recargos, cobro, validación de stock, etc. Con decisiones <em>y</em> bucles.</label></li>
+      <li><input type="checkbox" id="s3-p2" data-track="s3-p2"><label for="s3-p2"><strong>Matriz de casos de prueba</strong> con al menos <strong>5 casos de borde</strong> identificados en papel.</label></li>
+      <li><input type="checkbox" id="s3-p3" data-track="s3-p3"><label for="s3-p3">Ambos archivos subidos al repositorio con commits de distintos integrantes.</label></li>
+    </ul>
+  </div>
+  <p>Plantilla de matriz (ejemplo para un sistema de inventario):</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>ID</th><th>Regla que prueba</th><th>Entrada</th><th>Resultado esperado</th><th>¿Por qué es borde?</th></tr></thead>
+    <tbody>
+      <tr><td>CB-01</td><td>No vender más que el stock</td><td>stock 10, pedido 10</td><td>Venta aceptada; stock 0</td><td>Igual al límite</td></tr>
+      <tr><td>CB-02</td><td>No vender más que el stock</td><td>stock 10, pedido 11</td><td>Rechazada, stock sigue en 10</td><td>Uno por encima del límite</td></tr>
+      <tr><td>CB-03</td><td>Cantidad válida</td><td>pedido 0</td><td>Rechazada: “cantidad debe ser &gt; 0”</td><td>Valor nulo</td></tr>
+      <tr><td>CB-04</td><td>Cantidad válida</td><td>pedido <code>"diez"</code></td><td>Rechazada sin detener el programa</td><td>Tipo incorrecto</td></tr>
+      <tr><td>CB-05</td><td>Alerta de reorden</td><td>stock queda en 5 (mínimo 5)</td><td>Se genera alerta</td><td>Frontera <code>&lt;=</code> vs <code>&lt;</code></td></tr>
+    </tbody>
+  </table></div>
+  <p>Deja una columna vacía de “resultado obtenido”: en la Fase 5 estos casos se convierten en pruebas automáticas.</p>
+  <h3>Preguntas de defensa</h3>
+  <details class="defensa"><summary>¿Cómo garantizan que cada bucle de su sistema termina?</summary><div><p>Para cada <code>while</code>, señala qué variable cambia en cada vuelta y por qué eso acerca la condición a ser falsa. Si depende del usuario (un centinela), explica qué pasa con entradas inválidas.</p></div></details>
+  <details class="defensa"><summary>¿Por qué eligieron <code>for</code> o <code>while</code> en tal parte?</summary><div><p><code>for</code> cuando se conoce la cantidad o se recorren todos los elementos; <code>while</code> cuando se repite hasta que ocurra algo (centinela, saldo en cero, tolerancia).</p></div></details>
+  <details class="defensa"><summary>¿Qué caso borde encontraron que no esperaban?</summary><div><p>Ten uno preparado con su historia: cómo lo encontraron (traza, prueba), qué fallaba y cómo lo resolvieron. Es de las preguntas que mejor muestran dominio del trabajo.</p></div></details>
+  <details class="defensa"><summary>¿Qué pasa si el usuario escribe texto donde va un número?</summary><div><p>Hoy: se valida con métodos de texto antes de convertir. Desde la Fase 4 (semana 7): <code>try/except ValueError</code>. En ambos casos, el programa no debe cerrarse.</p></div></details>
+  <details class="defensa"><summary>Expliquen el diagrama de flujo: ¿dónde está la decisión más importante?</summary><div><p>Cada integrante debe poder recorrer el diagrama con un caso concreto de la matriz y decir por qué rama pasa.</p></div></details>
+</section>
+
+<section id="evaluacion">
+  <h2>Rumbo al Control 2</h2>
+  <p>El <strong>Control 2 es en la semana 5</strong> (confirma el temario en Moodle). De esta semana, asegúrate de poder:</p>
+  <ul class="check">
+    <li><input type="checkbox" id="s3-v1" data-track="s3-v1"><label for="s3-v1">Trazar un bucle a mano, vuelta por vuelta, sin ejecutar.</label></li>
+    <li><input type="checkbox" id="s3-v2" data-track="s3-v2"><label for="s3-v2">Decir cuántas veces se ejecuta un <code>for</code> con <code>range(a, b, paso)</code>.</label></li>
+    <li><input type="checkbox" id="s3-v3" data-track="s3-v3"><label for="s3-v3">Escribir un bucle con centinela que valide la entrada.</label></li>
+    <li><input type="checkbox" id="s3-v4" data-track="s3-v4"><label for="s3-v4">Usar acumulador, contador, máximo y bandera correctamente (y saber dónde se inicializa cada uno).</label></li>
+    <li><input type="checkbox" id="s3-v5" data-track="s3-v5"><label for="s3-v5">Explicar la diferencia entre <code>break</code> y <code>continue</code> con un ejemplo.</label></li>
+    <li><input type="checkbox" id="s3-v6" data-track="s3-v6"><label for="s3-v6">Detectar bucles infinitos y acumuladores reiniciados.</label></li>
+  </ul>
+</section>
+
+<section id="fuentes">
+  <h2>Fuentes</h2>
+  <ul>
+    <li><strong>[PCC]</strong> Matthes, E. (2023). <em>Python Crash Course</em>, 3.ª ed. Cap. 7 y sección inicial del cap. 4.</li>
+    <li><strong>[BOU]</strong> Bouna, P. (2022). <em>Fundamentals of Programming Using Flowchart and Pseudocode</em>. Cap. 3.</li>
+    <li>Python Software Foundation. <a href="https://docs.python.org/es/3/tutorial/controlflow.html" target="_blank" rel="noopener">Tutorial — Más herramientas para control de flujo</a>.</li>
+  </ul>
+  <nav class="nav-semanas" aria-label="Navegación entre semanas">
+    <a href="semana-02.html">← Semana 2</a>
+    <a href="semana-04.html">Semana 4: funciones →</a>
+  </nav>
+</section>
+
+<footer class="pie">Guía de estudio · Introducción al Desarrollo de Software · ESEN · Ciclo III/2026. Material de apoyo no oficial; el programa y Moodle mandan.</footer>
+</main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+<script src="../assets/guia.js"></script>
+</body>
+</html>

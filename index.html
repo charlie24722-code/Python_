@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guía de estudio IDS</title>
+<meta name="description" content="Guía de estudio interactiva de Introducción al Desarrollo de Software (ESEN, ciclo III/2026), semanas 1 a 5: Python, algoritmos y Git.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/guia.css">
+<script>try{var t=localStorage.getItem("ids-guia-v1-tema");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="index.html">IDS <span>·</span> <small>Guía de estudio</small></a>
+  <nav aria-label="Semanas">
+    <a href="semanas/semana-01.html">S1</a>
+    <a href="semanas/semana-02.html">S2</a>
+    <a href="semanas/semana-03.html">S3</a>
+    <a href="semanas/semana-04.html">S4</a>
+    <a href="semanas/semana-05.html">S5</a>
+  </nav>
+  <button class="theme-btn" type="button" aria-label="Cambiar tema claro/oscuro">◐</button>
+</header>
+
+<div class="layout">
+<main>
+<section class="hero">
+  <p class="eyebrow">ESEN · Ciclo III/2026 · Secciones 1 y 2</p>
+  <h1>Introducción al Desarrollo de Software</h1>
+  <p class="lead">Guía de estudio interactiva para las semanas 1 a 5: pensamiento algorítmico, Python y Git. Cada semana sigue el mismo formato: qué leer, un control de lectura, los conceptos resueltos como casos de negocio, trazas para llenar a mano, ejercicios con solución, y lo que toca del proyecto integrador.</p>
+  <p style="color:var(--ink-3);font-size:.92rem">Catedrático: Alvin Javier Portillo Tiliano · Modalidad: aula invertida + laboratorio · Plataforma oficial: <a href="https://moodle.esen.edu.sv/" target="_blank" rel="noopener">Moodle ESEN</a></p>
+</section>
+
+<section id="semanas">
+  <h2>Semanas</h2>
+  <div class="grid">
+    <a class="card semana-card" href="semanas/semana-01.html">
+      <span class="eyebrow">Semana 1</span>
+      <h3>Pensamiento computacional, entorno y Git</h3>
+      <p>Algoritmos, diagramas de flujo, terminal, primer programa, commits y ramas.</p>
+      <ul class="chips"><li class="chip proy">Fase 1</li></ul>
+      <div class="progress" data-progreso-semana="s1"><div class="progress-bar"><span></span></div><div class="progress-label"></div></div>
+    </a>
+    <a class="card semana-card" href="semanas/semana-02.html">
+      <span class="eyebrow">Semana 2</span>
+      <h3>Variables, tipos y condicionales</h3>
+      <p>Aritmética del dinero, <code>if/elif/else</code>, casos borde y validación defensiva.</p>
+      <ul class="chips"><li class="chip eval">Control 1</li></ul>
+      <div class="progress" data-progreso-semana="s2"><div class="progress-bar"><span></span></div><div class="progress-label"></div></div>
+    </a>
+    <a class="card semana-card" href="semanas/semana-03.html">
+      <span class="eyebrow">Semana 3</span>
+      <h3>Bucles y patrones de control</h3>
+      <p><code>while</code>, <code>for</code>, acumuladores, banderas, <code>input()</code> y aproximación numérica.</p>
+      <ul class="chips"><li class="chip proy">Fase 2</li></ul>
+      <div class="progress" data-progreso-semana="s3"><div class="progress-bar"><span></span></div><div class="progress-label"></div></div>
+    </a>
+    <a class="card semana-card" href="semanas/semana-04.html">
+      <span class="eyebrow">Semana 4</span>
+      <h3>Funciones, ámbito y pruebas</h3>
+      <p>Refactorización, parámetros, recursividad, módulos, <code>assert</code> y pytest.</p>
+      <ul class="chips"><li class="chip lect">Prepara Fase 3</li></ul>
+      <div class="progress" data-progreso-semana="s4"><div class="progress-bar"><span></span></div><div class="progress-label"></div></div>
+    </a>
+    <a class="card semana-card" href="semanas/semana-05.html">
+      <span class="eyebrow">Semana 5</span>
+      <h3>Listas, búsqueda y ordenamiento</h3>
+      <p>Listas, tuplas, slicing, Bubble e Insertion Sort, desempeño. Repaso para el Parcial.</p>
+      <ul class="chips"><li class="chip eval">Control 2</li><li class="chip proy">Fase 3</li></ul>
+      <div class="progress" data-progreso-semana="s5"><div class="progress-bar"><span></span></div><div class="progress-label"></div></div>
+    </a>
+  </div>
+  <h3>Lo que viene (aún sin guía)</h3>
+  <div class="grid">
+    <div class="card semana-card futura"><span class="eyebrow">Semana 6</span><h3>Examen Parcial</h3><p>Teórico-práctico, individual, en laboratorio.</p></div>
+    <div class="card semana-card futura"><span class="eyebrow">Semana 7</span><h3>Diccionarios, conjuntos y archivos</h3><p>JSON, CSV y excepciones. Fase 4.</p></div>
+    <div class="card semana-card futura"><span class="eyebrow">Semana 8</span><h3>POO: clases y encapsulamiento</h3><p>Control 3.</p></div>
+    <div class="card semana-card futura"><span class="eyebrow">Semana 9</span><h3>Herencia, composición y modularidad</h3><p>Fase 5.</p></div>
+    <div class="card semana-card futura"><span class="eyebrow">Semanas 10–11</span><h3>Transición a C# y .NET</h3><p>Tipado estático, POO en C#. Control 4, defensa del proyecto.</p></div>
+    <div class="card semana-card futura"><span class="eyebrow">Semana 12</span><h3>Examen Final</h3><p>Lógica en Python y fundamentos de C#.</p></div>
+  </div>
+</section>
+
+<section id="uso">
+  <h2>Cómo estudiar con esta guía</h2>
+  <p>El curso es <strong>aula invertida</strong>: el libro es la primera fuente y la clase es laboratorio. Antes de cada sesión hay un control de lectura en Moodle, y la clase arranca con preguntas de alta complejidad. Esta guía está hecha para cuatro momentos:</p>
+  <div class="momentos">
+    <div><strong>Antes de clase</strong>Lecturas asignadas + <em>reading checkpoint</em> de la semana.</div>
+    <div><strong>Durante el laboratorio</strong>Referencia rápida junto a VS Code: comandos, patrones, sintaxis.</div>
+    <div><strong>Después de clase</strong>Trazas a mano y ejercicios; abre la solución solo después de intentarlo.</div>
+    <div><strong>Antes de evaluar</strong>Listas “puedo…”, auditorías y preguntas de defensa del proyecto.</div>
+  </div>
+  <h3>El ciclo de cada tema</h3>
+  <p>Todos los conceptos se presentan con el mismo ciclo. Es la forma de resolver un problema real y la forma de defenderlo:</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Paso</th><th>La pregunta que te haces</th></tr></thead>
+    <tbody>
+      <tr><td>1. Pregunta</td><td>¿Qué necesita el negocio? ¿Qué decisión depende de esto?</td></tr>
+      <tr><td>2. Exploración</td><td>¿Cuáles son las entradas, las salidas, las reglas y las fronteras?</td></tr>
+      <tr><td>3. Implementación</td><td>¿Cómo se escribe (pseudocódigo, diagrama, código)?</td></tr>
+      <tr><td>4. Resultado</td><td>¿Qué produce exactamente?</td></tr>
+      <tr><td>5. Interpretación</td><td>¿Qué significa ese número para quien decide?</td></tr>
+      <tr><td>6. Verificación</td><td><strong>¿Cómo sé que es correcto?</strong> Traza, cálculo independiente, casos borde, pruebas.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="box nota">
+    <span class="box-title">Regla de progresión</span>
+    Ninguna semana usa algo que el curso enseña en una semana posterior. Cada página empieza con un cuadro de “qué puedes usar / todavía no”. Si aparece algo de más adelante, está marcado como <em>adelanto opcional</em> y no es necesario para evaluar.
+  </div>
+</section>
+
+<section id="calendario">
+  <h2>Calendario de evaluaciones y proyecto</h2>
+  <ul class="timeline">
+    <li><span class="sem">Semana 1</span><br>Proyecto <strong>Fase 1</strong>: ficha técnica, repositorio, <code>.gitignore</code>, README.</li>
+    <li><span class="sem">Semana 2</span><br><strong>Control 1</strong>.</li>
+    <li><span class="sem">Semana 3</span><br>Proyecto <strong>Fase 2</strong>: diagrama de flujo + matriz de ≥ 5 casos de borde.</li>
+    <li><span class="sem">Semana 5</span><br><strong>Control 2</strong> · Proyecto <strong>Fase 3</strong>: prototipo en funciones + listas/tuplas.</li>
+    <li><span class="sem">Semana 6</span><br><strong>Examen Parcial</strong> (teórico-práctico, individual, en laboratorio).</li>
+    <li><span class="sem">Semana 7</span><br>Proyecto <strong>Fase 4</strong>: persistencia JSON/CSV y manejo de excepciones.</li>
+    <li><span class="sem">Semana 8</span><br><strong>Control 3</strong>.</li>
+    <li><span class="sem">Semana 9</span><br>Proyecto <strong>Fase 5</strong>: arquitectura POO (≥ 3 clases) y ≥ 5 pruebas unitarias.</li>
+    <li><span class="sem">Semana 10</span><br>Proyecto <strong>Fase 6</strong>: README definitivo y bitácora de transparencia técnica (uso de IA).</li>
+    <li><span class="sem">Semana 11</span><br><strong>Control 4</strong> · Proyecto <strong>Fase 7</strong>: release v1.0 y defensa oral (8 min demo + 7 min preguntas individuales).</li>
+    <li><span class="sem">Semana 12</span><br><strong>Examen Final</strong> integral (Python + fundamentos de C#).</li>
+  </ul>
+</section>
+
+<section id="evaluacion">
+  <h2>Evaluación</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Ponderación</h3>
+      <div class="table-wrap"><table>
+        <tbody>
+          <tr><td>Examen Parcial</td><td class="num">25 %</td></tr>
+          <tr><td>Examen Final</td><td class="num">25 %</td></tr>
+          <tr><td>Controles</td><td class="num">20 %</td></tr>
+          <tr><td>Proyecto integrador</td><td class="num">30 %</td></tr>
+        </tbody>
+      </table></div>
+      <p style="font-size:.9rem">La nota del proyecto <strong>solo se suma</strong> si alcanzas la nota mínima en las evaluaciones individuales (controles y exámenes). Un buen proyecto no compensa un rendimiento individual insuficiente.</p>
+    </div>
+    <div class="card">
+      <h3>Rúbrica del proyecto</h3>
+      <div class="table-wrap"><table>
+        <tbody>
+          <tr><td>Arquitectura de software y POO</td><td class="num">25 %</td></tr>
+          <tr><td>Lógica algorítmica, robustez y persistencia</td><td class="num">25 %</td></tr>
+          <tr><td>Pruebas automatizadas y buenas prácticas (Git, PEP 8)</td><td class="num">25 %</td></tr>
+          <tr><td>Defensa oral individual y criterio de negocio</td><td class="num">25 %</td></tr>
+        </tbody>
+      </table></div>
+      <p style="font-size:.9rem">Cada integrante debe poder explicar y modificar en vivo <em>cualquier</em> parte del código. Por eso cada semana trae preguntas de defensa.</p>
+    </div>
+  </div>
+  <div class="box ojo">
+    <span class="box-title">Reglas que conviene no olvidar</span>
+    <ul>
+      <li><strong>IA:</strong> prohibida en controles y exámenes. En tareas y proyecto, todo uso se declara en el README y debes poder defender cada línea; no poder explicar una solución anula la entrega.</li>
+      <li><strong>Asistencia:</strong> mínimo 80 % para tener derecho al proyecto final y al examen.</li>
+      <li><strong>Puntualidad:</strong> pasados 10 minutos no se permite el ingreso.</li>
+      <li><strong>Plagio:</strong> código no atribuido o copiado se remite al Comité Disciplinario.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="bibliografia">
+  <h2>Bibliografía</h2>
+  <p>Los textos base están en O’Reilly Learning Platform sin costo para el alumnado. Esta guía los resume por tema y los complementa con fuentes libres; no reproduce su contenido ni cita páginas.</p>
+  <ul>
+    <li><strong>[PCC]</strong> Matthes, E. (2023). <em>Python Crash Course</em>, 3.ª ed. No Starch Press. Texto base de Python.</li>
+    <li><strong>[BOU]</strong> Bouna, P. (2022). <em>Fundamentals of Programming Using Flowchart and Pseudocode</em>. Packt. Lógica algorítmica.</li>
+    <li><strong>[TRO]</strong> Troelsen, A. y Japikse, P. (2022). <em>Pro C# 10 with .NET 6</em>, 11.ª ed. Apress. Transición a C# (semanas 8 a 11).</li>
+    <li><strong>[GIT]</strong> Chacon, S. y Straub, B. (2014). <em>Pro Git</em>, 2.ª ed. Libre en español: <a href="https://git-scm.com/book/es/v2" target="_blank" rel="noopener">git-scm.com/book/es/v2</a>.</li>
+    <li><strong>[MSDN]</strong> Microsoft Learn. Documentación oficial de C# y .NET.</li>
+  </ul>
+  <div class="box nota">
+    <span class="box-title">Fuentes libres usadas en la guía</span>
+    <a href="https://docs.python.org/es/3/tutorial/" target="_blank" rel="noopener">Tutorial oficial de Python (español)</a> ·
+    <a href="https://peps.python.org/pep-0008/" target="_blank" rel="noopener">PEP 8</a> ·
+    <a href="https://peps.python.org/pep-0257/" target="_blank" rel="noopener">PEP 257</a> ·
+    <a href="https://docs.pytest.org/en/stable/getting-started.html" target="_blank" rel="noopener">pytest</a> ·
+    <a href="https://docs.github.com/es/authentication/connecting-to-github-with-ssh" target="_blank" rel="noopener">GitHub Docs</a>
+  </div>
+</section>
+
+<section id="progreso">
+  <h2>Tu progreso</h2>
+  <p>Las casillas, respuestas de quiz y el tema claro/oscuro se guardan <strong>solo en este navegador</strong>. Si cambias de computadora o borras los datos del sitio, empiezas de cero. Nada se envía a ningún servidor.</p>
+  <button class="btn sec" type="button" data-borrar-progreso>Borrar mi progreso</button>
+</section>
+
+<footer class="pie">Guía de estudio · Introducción al Desarrollo de Software · ESEN · Ciclo III/2026. Material de apoyo no oficial: ante cualquier diferencia, mandan el programa del curso y Moodle.</footer>
+</main>
+</div>
+
+<script src="assets/guia.js"></script>
+</body>
+</html>

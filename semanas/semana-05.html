@@ -1,0 +1,1018 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Semana 5 · Listas, búsqueda y ordenamiento</title>
+<meta name="description" content="Guía de estudio, semana 5: listas, tuplas, slicing, búsqueda lineal, Bubble Sort, Insertion Sort y comparación de desempeño. Preparación para el Control 2 y el Parcial.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/guia.css">
+<script>try{var t=localStorage.getItem("ids-guia-v1-tema");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+</head>
+<body data-semana="s5">
+
+<header class="topbar">
+  <a class="brand" href="../index.html">IDS <span>·</span> <small>Guía de estudio</small></a>
+  <nav aria-label="Semanas">
+    <a href="semana-01.html">S1</a>
+    <a href="semana-02.html">S2</a>
+    <a href="semana-03.html">S3</a>
+    <a href="semana-04.html">S4</a>
+    <a href="semana-05.html" aria-current="page">S5</a>
+  </nav>
+  <button class="theme-btn" type="button" aria-label="Cambiar tema claro/oscuro">◐</button>
+</header>
+
+<div class="layout with-toc">
+<aside class="toc" aria-label="Contenido de la semana">
+  <p>Semana 5</p>
+  <ol>
+    <li><a href="#uso">Cómo usar la guía</a></li>
+    <li><a href="#mapa">Qué puedes usar</a></li>
+    <li><a href="#lecturas">Lecturas</a></li>
+    <li><a href="#checkpoint">Reading checkpoint</a></li>
+    <li><a href="#listas">Listas y slicing</a></li>
+    <li><a href="#tuplas">Tuplas</a></li>
+    <li><a href="#busqueda">Búsqueda lineal</a></li>
+    <li><a href="#ordenamiento">Bubble e Insertion Sort</a></li>
+    <li><a href="#desempeno">Laboratorio de desempeño</a></li>
+    <li><a href="#trazas">Tablas de traza</a></li>
+    <li><a href="#ejercicios">Ejercicios</a></li>
+    <li><a href="#proyecto">Proyecto: Fase 3</a></li>
+    <li><a href="#evaluacion">Control 2 y Parcial</a></li>
+    <li><a href="#fuentes">Fuentes</a></li>
+  </ol>
+</aside>
+
+<main>
+<section class="hero">
+  <p class="eyebrow">Semana 5 · Módulo 6</p>
+  <h1>Estructuras de datos lineales y algoritmos de ordenamiento</h1>
+  <p class="lead">En la semana 3 tuviste que escribir dos veces la misma lista de ventas. Esta semana los datos se <strong>guardan</strong> en listas y tuplas, se <strong>buscan</strong> y se <strong>ordenan</strong>, y mides cuánto trabajo le cuesta a la computadora hacerlo.</p>
+  <div class="pregunta"><small>Pregunta orientadora</small>¿Cómo guardo, busco y ordeno cientos de registros en memoria, y cuánto cuesta hacerlo cuando los datos crecen?</div>
+  <ul class="chips">
+    <li class="chip lect">Lecturas: PCC 3 · PCC 4 · BOU 4</li>
+    <li class="chip proy">Proyecto: Fase 3 (esta semana)</li>
+    <li class="chip eval">Control 2 (esta semana) · Parcial (semana 6)</li>
+  </ul>
+  <div class="progress" data-progreso-pagina>
+    <div class="progress-bar"><span></span></div>
+    <div class="progress-label"></div>
+  </div>
+</section>
+
+<section id="uso">
+  <h2>Cómo usar esta guía</h2>
+  <div class="momentos">
+    <div><strong>Antes de clase</strong>PCC 3 y 4 completos, BOU 4. Luego el <a href="#checkpoint">checkpoint</a>.</div>
+    <div><strong>Durante el laboratorio</strong>Implementas Bubble e Insertion Sort <em>sin</em> <code>sorted()</code>: sigue el <a href="#ordenamiento">paso a paso</a> y el <a href="#desempeno">laboratorio de desempeño</a>.</div>
+    <div><strong>Después de clase</strong>Trazas de ordenamiento a mano y <a href="#ejercicios">ejercicios</a>.</div>
+    <div><strong>Evaluaciones</strong>Control 2 esta semana y el <a href="#evaluacion">repaso integrador</a> para el Parcial.</div>
+  </div>
+  <ul class="ciclo-leyenda" aria-label="Ciclo de trabajo">
+    <li>Pregunta</li><li class="sep">→</li><li>Exploración</li><li class="sep">→</li><li>Implementación</li><li class="sep">→</li><li>Resultado</li><li class="sep">→</li><li>Interpretación</li><li class="sep">→</li><li class="v">Verificación</li>
+  </ul>
+</section>
+
+<section id="mapa">
+  <h2>Qué puedes usar esta semana</h2>
+  <div class="permisos">
+    <div class="si">
+      <h4>Sí, desde ahora</h4>
+      <ul>
+        <li>Todo lo de las semanas 1 a 4</li>
+        <li>Listas: índices (también negativos), <code>append</code>, <code>insert</code>, <code>pop</code>, <code>remove</code>, <code>del</code>, <code>len</code>, <code>in</code></li>
+        <li><code>sum</code>, <code>min</code>, <code>max</code>; <code>sort()</code> y <code>sorted()</code> <em>como herramienta</em> (no en el laboratorio de algoritmos)</li>
+        <li>Slicing <code>[inicio:fin:paso]</code> y copia con <code>[:]</code></li>
+        <li><code>list(range(...))</code> y listas por comprensión</li>
+        <li>Tuplas, inmutabilidad, desempaquetado</li>
+        <li>Pasar listas a funciones (retoma esa parte de PCC 8)</li>
+        <li><code>x += 1</code> como abreviatura de <code>x = x + 1</code></li>
+      </ul>
+    </div>
+    <div class="no">
+      <h4>Todavía no</h4>
+      <ul>
+        <li>Diccionarios y conjuntos → semana 7</li>
+        <li>Archivos CSV/JSON y <code>try</code>/<code>except</code> → semana 7</li>
+        <li>Clases → semana 8</li>
+      </ul>
+      <p style="margin-top:.5rem;font-size:.9rem"><strong>Herramientas del laboratorio:</strong> <code>random</code> (generar datos de prueba) y <code>time.perf_counter()</code> (medir tiempo) se usan tal cual, sin profundizar.</p>
+    </div>
+  </div>
+</section>
+
+<section id="lecturas">
+  <h2>Lecturas de preparación</h2>
+  <ul class="check">
+    <li><input type="checkbox" id="s5-l1" data-track="s5-l1"><label for="s5-l1"><span class="ref">[PCC] Cap. 3</span> “Introducing Lists”. Enfócate en: acceder por índice, índices negativos, modificar, agregar y eliminar elementos (<code>append</code>, <code>insert</code>, <code>del</code>, <code>pop</code>, <code>remove</code>), ordenar y el <code>IndexError</code>.</label></li>
+    <li><input type="checkbox" id="s5-l2" data-track="s5-l2"><label for="s5-l2"><span class="ref">[PCC] Cap. 4</span> “Working with Lists”. Enfócate en: listas numéricas con <code>range</code>, estadísticas simples, comprensiones, slicing, copiar listas, tuplas y el estilo PEP 8.</label></li>
+    <li><input type="checkbox" id="s5-l3" data-track="s5-l3"><label for="s5-l3"><span class="ref">[BOU] Cap. 4</span> “Basic Sorting and Searching Algorithms”. Enfócate en: la lógica de búsqueda lineal, de Bubble Sort y de Insertion Sort en pseudocódigo, y cómo se cuenta el trabajo que hacen.</label></li>
+  </ul>
+  <div class="box nota">
+    <span class="box-title">Complementos gratuitos</span>
+    <ul>
+      <li><a href="https://docs.python.org/es/3/tutorial/datastructures.html" target="_blank" rel="noopener">Tutorial oficial — Estructuras de datos</a> (5.1 listas, 5.3 tuplas)</li>
+      <li><a href="https://docs.python.org/es/3/howto/sorting.html" target="_blank" rel="noopener">HOWTO — Ordenar</a>: cómo ordena Python en la vida real (para contrastar con tus algoritmos)</li>
+      <li><a href="https://docs.python.org/es/3/library/time.html#time.perf_counter" target="_blank" rel="noopener"><code>time.perf_counter</code></a></li>
+      <li><a href="https://peps.python.org/pep-0008/" target="_blank" rel="noopener">PEP 8</a>: “Indentation” y “Maximum Line Length”</li>
+    </ul>
+  </div>
+</section>
+
+<section id="checkpoint">
+  <h2>Reading checkpoint</h2>
+  <div class="quiz">
+    <div class="qq" data-q="s5-q1">
+      <p>Con <code>ventas = [120, 45, 300, 80]</code>, ¿qué es <code>ventas[-1]</code>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>80</code></button>
+        <button class="quiz-opt"><code>120</code></button>
+        <button class="quiz-opt"><code>300</code></button>
+        <button class="quiz-opt"><code>IndexError</code></button>
+      </div>
+      <p class="why">Los índices negativos cuentan desde el final: <code>-1</code> es el último. Los positivos empiezan en <code>0</code>, así que <code>ventas[4]</code> sí da <code>IndexError</code>.</p>
+    </div>
+    <div class="qq" data-q="s5-q2">
+      <p>Con la misma lista, ¿qué devuelve <code>ventas[1:3]</code>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>[45, 300]</code></button>
+        <button class="quiz-opt"><code>[120, 45, 300]</code></button>
+        <button class="quiz-opt"><code>[45, 300, 80]</code></button>
+        <button class="quiz-opt"><code>[120, 45]</code></button>
+      </div>
+      <p class="why">Igual que <code>range</code>: incluye el inicio (1) y excluye el fin (3). Se toman los índices 1 y 2.</p>
+    </div>
+    <div class="qq" data-q="s5-q3">
+      <p>¿Qué imprime este código?</p>
+<pre data-norun><code class="language-python">precios = [10, 20]
+respaldo = precios
+respaldo.append(30)
+print(precios)</code></pre>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>[10, 20, 30]</code></button>
+        <button class="quiz-opt"><code>[10, 20]</code></button>
+        <button class="quiz-opt"><code>[30]</code></button>
+        <button class="quiz-opt">Error</button>
+      </div>
+      <p class="why"><code>respaldo = precios</code> no copia: crea un <strong>alias</strong>, un segundo nombre para la <em>misma</em> lista. Para copiar: <code>respaldo = precios[:]</code>. Este error ha arruinado más de un “respaldo” en la vida real.</p>
+    </div>
+    <div class="qq" data-q="s5-q4">
+      <p>¿Qué pasa al ejecutar <code>producto = ("A01", "Aceite", 12.50)</code> y luego <code>producto[2] = 13.00</code>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>TypeError</code>: las tuplas no se pueden modificar.</button>
+        <button class="quiz-opt">El precio cambia a 13.00.</button>
+        <button class="quiz-opt">Se crea una tupla nueva automáticamente.</button>
+        <button class="quiz-opt"><code>IndexError</code>.</button>
+      </div>
+      <p class="why">Las tuplas son <strong>inmutables</strong>. Para “cambiar” el precio hay que crear una tupla nueva: <code>producto = ("A01", "Aceite", 13.00)</code>. Útil para registros que no deben alterarse por accidente.</p>
+    </div>
+    <div class="qq" data-q="s5-q5">
+      <p>¿Cuál es la diferencia entre <code>ventas.sort()</code> y <code>sorted(ventas)</code>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>sort()</code> modifica la lista y devuelve <code>None</code>; <code>sorted()</code> devuelve una lista nueva y deja la original intacta.</button>
+        <button class="quiz-opt">Son idénticos.</button>
+        <button class="quiz-opt"><code>sorted()</code> modifica la lista original.</button>
+        <button class="quiz-opt"><code>sort()</code> solo funciona con texto.</button>
+      </div>
+      <p class="why">Error típico: <code>ordenadas = ventas.sort()</code> deja <code>ordenadas</code> en <code>None</code>.</p>
+    </div>
+    <div class="qq" data-q="s5-q6">
+      <p>Buscas un código en una lista desordenada de 1,000 productos con búsqueda lineal. En el <strong>peor caso</strong>, ¿cuántas comparaciones haces?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>1,000</button>
+        <button class="quiz-opt">1</button>
+        <button class="quiz-opt">500</button>
+        <button class="quiz-opt">10</button>
+      </div>
+      <p class="why">Peor caso: el producto está al final o no existe, y hay que revisar todos. El trabajo crece en proporción a <em>n</em>.</p>
+    </div>
+    <div class="qq" data-q="s5-q7">
+      <p>Después de la <strong>primera pasada</strong> de Bubble Sort (ascendente), ¿qué se puede garantizar?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>El mayor elemento quedó en la última posición.</button>
+        <button class="quiz-opt">El menor elemento quedó en la primera posición.</button>
+        <button class="quiz-opt">La lista ya está ordenada.</button>
+        <button class="quiz-opt">La mitad de la lista está ordenada.</button>
+      </div>
+      <p class="why">Al comparar vecinos e intercambiar, el mayor “burbujea” hasta el final. Por eso cada pasada puede revisar un elemento menos.</p>
+    </div>
+    <div class="qq" data-q="s5-q8">
+      <p>¿Con qué datos Insertion Sort hace <strong>menos</strong> comparaciones?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Con una lista que ya está (casi) ordenada.</button>
+        <button class="quiz-opt">Con una lista en orden inverso.</button>
+        <button class="quiz-opt">Con una lista aleatoria.</button>
+        <button class="quiz-opt">Siempre hace las mismas.</button>
+      </div>
+      <p class="why">Si ya está ordenada, cada elemento se compara una vez con su vecino y se queda donde está: n − 1 comparaciones. En orden inverso hace el máximo: n(n − 1)/2.</p>
+    </div>
+    <div class="qq" data-q="s5-q9">
+      <p>Con <code>pedidos = ["A", "B", "C"]</code>, ¿qué hace <code>x = pedidos.pop()</code>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Quita <code>"C"</code> de la lista y lo guarda en <code>x</code>.</button>
+        <button class="quiz-opt">Quita <code>"A"</code> y lo guarda en <code>x</code>.</button>
+        <button class="quiz-opt">Quita <code>"C"</code> y <code>x</code> queda en <code>None</code>.</button>
+        <button class="quiz-opt">Vacía la lista.</button>
+      </div>
+      <p class="why"><code>pop()</code> sin argumento quita y <em>devuelve</em> el último; <code>pop(0)</code>, el primero. <code>remove("B")</code> quita por valor (la primera aparición) y no devuelve nada; <code>del pedidos[1]</code> quita por posición.</p>
+    </div>
+    <div class="quiz-score"><span data-score></span><button class="btn sec" type="button" data-reset>Reiniciar quiz</button></div>
+  </div>
+  <ul class="check">
+    <li><input type="checkbox" id="s5-cp" data-track="s5-cp"><label for="s5-cp">Respondí el checkpoint y entiendo mis errores.</label></li>
+  </ul>
+</section>
+
+<section id="listas">
+  <h2>Listas y slicing</h2>
+  <div class="ciclo">
+    <h3>Caso: el registro de ventas de la semana</h3>
+    <div class="paso"><div>
+      <span class="etq">Pregunta</span>
+      <p>La Ceiba registra la venta de cada día. Se necesita: agregar el día nuevo, corregir un error de digitación, conocer total/promedio/mejor día y ver los últimos días, sin volver a escribir los datos.</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Exploración</span>
+      <p>Una lista es una secuencia <strong>ordenada y modificable</strong>. Cada elemento tiene una posición (índice) que empieza en 0. Es el “rango de celdas” de Python.</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Implementación</span>
+<pre data-file="ventas_semana.py"><code class="language-python">ventas = [340, 410, 0, 520, 610, 890]   # lunes a sábado
+
+ventas.append(450)          # llega el domingo
+ventas[2] = 380             # el miércoles se digitó 0 por error
+print(f"Ventas: {ventas}")
+print(f"Días: {len(ventas)}  Total: {sum(ventas)}  Promedio: {sum(ventas) / len(ventas):.2f}")
+
+mejor = max(ventas)
+dia_mejor = ventas.index(mejor) + 1     # +1 porque los índices empiezan en 0
+print(f"Mejor día: {dia_mejor} (${mejor})")
+
+print(f"Fin de semana: {ventas[-2:]}")
+print(f"Primeros 3 días: {ventas[:3]}")
+print(f"Días impares (1, 3, 5, 7): {ventas[::2]}")
+
+sobre_500 = [v for v in ventas if v > 500]    # comprensión de lista
+print(f"Días sobre $500: {sobre_500}")</code></pre>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Resultado</span>
+<pre class="salida" data-file="salida"><code>Ventas: [340, 410, 380, 520, 610, 890, 450]
+Días: 7  Total: 3600  Promedio: 514.29
+Mejor día: 6 ($890)
+Fin de semana: [890, 450]
+Primeros 3 días: [340, 410, 380]
+Días impares (1, 3, 5, 7): [340, 380, 610, 450]
+Días sobre $500: [520, 610, 890]</code></pre>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Interpretación</span>
+      <p>Compara con el E4 de la semana 3: aquello que requería contadores manuales y dos listas escritas ahora son funciones de una palabra. El dato corregido (miércoles) sube el promedio de $460 a $514.29: un error de digitación en un solo día cambiaba el diagnóstico de la semana.</p>
+      <p>Slicing, en resumen: <code>lista[inicio:fin:paso]</code>, incluye <code>inicio</code>, excluye <code>fin</code>; cualquiera se puede omitir. <code>[:]</code> es una copia completa.</p>
+    </div></div>
+    <div class="paso verif"><div>
+      <span class="etq">Verificación</span>
+      <p>340 + 410 + 380 + 520 + 610 + 890 + 450 = 3600 ✔; 3600 / 7 = 514.29 ✔. Y un caso borde que debes conocer: <code>max([])</code> y <code>sum([]) / len([])</code> fallan con una lista vacía. Valida <code>if ventas:</code> (una lista vacía es “falsa”) antes de calcular.</p>
+    </div></div>
+  </div>
+
+  <h3>Alias vs. copia</h3>
+<pre data-file="alias.py"><code class="language-python">precios = [10, 20]
+alias = precios          # MISMA lista, otro nombre
+copia = precios[:]       # lista NUEVA con los mismos valores
+alias.append(30)
+copia.append(99)
+print(precios, alias, copia)</code></pre>
+<pre class="salida" data-file="salida"><code>[10, 20, 30] [10, 20, 30] [10, 20, 99]</code></pre>
+  <div class="box ojo">
+    <span class="box-title">Listas dentro de funciones</span>
+    <p>Cuando pasas una lista a una función, la función recibe la <em>misma</em> lista (no una copia). Si la modifica, el cambio se ve afuera. Si una función solo debe <em>leer</em> o devolver un resultado nuevo, trabaja sobre <code>lista[:]</code>. PCC 8 lo explica en “Passing a List” y “Preventing a Function from Modifying a List”.</p>
+  </div>
+</section>
+
+<section id="tuplas">
+  <h2>Tuplas: registros que no deben cambiar</h2>
+  <p>Una tupla es como una lista, pero <strong>inmutable</strong> y se escribe con paréntesis. Úsala para registros de campos fijos: un producto (código, nombre, precio), una coordenada, un par (base, IVA).</p>
+<pre data-file="catalogo.py"><code class="language-python">catalogo = [
+    ("A01", "Aceite 1 L", 12.50),
+    ("B07", "Arroz 5 lb", 4.25),
+    ("C12", "Azúcar 5 lb", 3.90),
+]
+
+for codigo, nombre, precio in catalogo:        # desempaquetado en el for
+    print(f"{codigo}  {nombre:<12} ${precio:>6.2f}")
+
+codigo, nombre, precio = catalogo[1]           # desempaquetado directo
+print(f"El segundo producto es {nombre}")</code></pre>
+<pre class="salida" data-file="salida"><code>A01  Aceite 1 L   $ 12.50
+B07  Arroz 5 lb   $  4.25
+C12  Azúcar 5 lb  $  3.90
+El segundo producto es Arroz 5 lb</code></pre>
+  <div class="table-wrap"><table>
+    <thead><tr><th></th><th>Lista <code>[ ]</code></th><th>Tupla <code>( )</code></th></tr></thead>
+    <tbody>
+      <tr><td>¿Se puede modificar?</td><td>Sí</td><td>No</td></tr>
+      <tr><td>Uso típico</td><td>una colección que crece o cambia (ventas del mes)</td><td>un registro con campos fijos (un producto)</td></tr>
+      <tr><td>Métodos</td><td><code>append</code>, <code>remove</code>, <code>sort</code>…</td><td>solo <code>count</code> e <code>index</code></td></tr>
+      <tr><td>Recuerda</td><td></td><td>la tupla de un elemento lleva coma: <code>("A01",)</code></td></tr>
+    </tbody>
+  </table></div>
+  <p>Ahora sabes qué devolvía <code>desglosar_total</code> en la semana 4: <code>return base, iva</code> construye la tupla <code>(base, iva)</code>, y <code>base, iva = ...</code> la desempaqueta.</p>
+</section>
+
+<section id="busqueda">
+  <h2>Búsqueda lineal</h2>
+  <div class="ciclo">
+    <h3>Caso: buscar un producto por código</h3>
+    <div class="paso"><div>
+      <span class="etq">Pregunta</span>
+      <p>El cajero escanea un código. ¿Está en el catálogo? ¿En qué posición? ¿Cuánto trabajo cuesta averiguarlo?</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Exploración</span>
+      <p>Sin ningún orden en los datos, la única estrategia es revisar uno por uno desde el principio hasta encontrarlo o acabar. Devolvemos la posición, o <code>-1</code> si no está (una convención común). Contamos comparaciones para medir el trabajo.</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Implementación</span>
+<pre data-file="busqueda.py"><code class="language-python">def buscar_producto(catalogo, codigo_buscado):
+    """Búsqueda lineal por código.
+
+    Returns:
+        (posicion, comparaciones); posicion es -1 si no se encontró.
+    """
+    comparaciones = 0
+    for i in range(len(catalogo)):
+        comparaciones += 1
+        codigo = catalogo[i][0]           # primer campo de la tupla
+        if codigo == codigo_buscado:
+            return i, comparaciones       # se detiene al encontrarlo
+    return -1, comparaciones
+
+
+catalogo = [("A01", "Aceite", 12.50), ("B07", "Arroz", 4.25),
+            ("C12", "Azúcar", 3.90), ("D03", "Café", 6.75)]
+
+for codigo in ["A01", "D03", "Z99"]:
+    posicion, comps = buscar_producto(catalogo, codigo)
+    print(f"{codigo}: posición {posicion}, {comps} comparaciones")</code></pre>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Resultado</span>
+<pre class="salida" data-file="salida"><code>A01: posición 0, 1 comparaciones
+D03: posición 3, 4 comparaciones
+Z99: posición -1, 4 comparaciones</code></pre>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Interpretación</span>
+      <p><strong>Mejor caso</strong> (primero de la lista): 1 comparación. <strong>Peor caso</strong> (último o inexistente): <em>n</em> comparaciones. Con 4 productos no importa; con 50,000 productos y 2,000 ventas al día, sí. Por eso importa ordenar: con datos ordenados existen búsquedas mucho más rápidas (búsqueda binaria), que verás en Estructuras de Datos.</p>
+    </div></div>
+    <div class="paso verif"><div>
+      <span class="etq">Verificación</span>
+      <p>Prueba: el primero, el último, uno del medio, uno que no existe y una lista vacía (debe devolver <code>(-1, 0)</code> sin error). Compara con <code>codigo in [p[0] for p in catalogo]</code>, la forma corta de Python, que por dentro también es búsqueda lineal.</p>
+    </div></div>
+  </div>
+</section>
+
+<section id="ordenamiento">
+  <h2>Algoritmos de ordenamiento: Bubble Sort e Insertion Sort</h2>
+  <p>En el laboratorio se implementan <strong>sin</strong> <code>sort()</code> ni <code>sorted()</code>. El objetivo no es reemplazarlos (Python ordena mucho más rápido), sino entender qué hace un algoritmo y cuánto trabajo le cuesta.</p>
+
+  <div class="ciclo">
+    <h3>Bubble Sort: comparar vecinos e intercambiar</h3>
+    <div class="paso"><div>
+      <span class="etq">Pregunta</span>
+      <p>¿Cómo ordenar de menor a mayor los montos <code>[42, 17, 58, 23, 9]</code> usando solo comparaciones entre dos elementos vecinos?</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Exploración (pseudocódigo)</span>
+<pre data-file="burbuja.pseudo"><code class="language-none">REPETIR para cada pasada, mientras haya habido intercambios:
+    PARA cada par de vecinos (j, j+1) en la parte aún no ordenada:
+        SI datos[j] > datos[j+1] ENTONCES intercambiarlos
+    (al final de la pasada, el mayor restante quedó en su lugar)</code></pre>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Implementación</span>
+<pre data-file="ordenamiento.py" data-module><code class="language-python">"""Algoritmos de ordenamiento elementales con conteo de trabajo."""
+
+
+def burbuja(lista):
+    """Bubble Sort ascendente.
+
+    Returns:
+        (lista_ordenada, comparaciones, intercambios). No modifica la original.
+    """
+    datos = lista[:]                     # copia
+    n = len(datos)
+    comparaciones = 0
+    intercambios = 0
+    for pasada in range(n - 1):
+        hubo_intercambio = False
+        for j in range(n - 1 - pasada):  # los últimos 'pasada' ya están en su lugar
+            comparaciones += 1
+            if datos[j] > datos[j + 1]:
+                datos[j], datos[j + 1] = datos[j + 1], datos[j]   # intercambio
+                intercambios += 1
+                hubo_intercambio = True
+        if not hubo_intercambio:         # nada se movió: ya está ordenada
+            break
+    return datos, comparaciones, intercambios
+
+
+def insercion(lista):
+    """Insertion Sort ascendente.
+
+    Returns:
+        (lista_ordenada, comparaciones). No modifica la original.
+    """
+    datos = lista[:]
+    comparaciones = 0
+    for i in range(1, len(datos)):
+        actual = datos[i]
+        j = i - 1
+        while j >= 0:
+            comparaciones += 1
+            if datos[j] > actual:
+                datos[j + 1] = datos[j]  # desplaza el mayor una posición a la derecha
+                j -= 1
+            else:
+                break
+        datos[j + 1] = actual            # inserta en el hueco
+    return datos, comparaciones</code></pre>
+<pre data-file="probar_ordenamiento.py"><code class="language-python">from ordenamiento import burbuja, insercion
+
+montos = [42, 17, 58, 23, 9]
+print(burbuja(montos))
+print(insercion(montos))
+print(montos)                      # la original sigue igual</code></pre>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Resultado</span>
+<pre class="salida" data-file="salida"><code>([9, 17, 23, 42, 58], 10, 7)
+([9, 17, 23, 42, 58], 9)
+[42, 17, 58, 23, 9]</code></pre>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Interpretación</span>
+      <p><strong>Bubble Sort</strong> hizo 4 pasadas con 4 + 3 + 2 + 1 = 10 comparaciones y 7 intercambios. La línea <code>datos[j], datos[j + 1] = datos[j + 1], datos[j]</code> intercambia dos valores gracias a las tuplas (sin variable temporal).</p>
+      <p><strong>Insertion Sort</strong> funciona como ordenar facturas en la mano: tomas la siguiente y la deslizas hacia la izquierda hasta su lugar. Aquí hizo 9 comparaciones.</p>
+      <p>La bandera <code>hubo_intercambio</code> es una optimización: si una pasada no mueve nada, la lista ya está ordenada y se sale con <code>break</code>.</p>
+    </div></div>
+    <div class="paso verif"><div>
+      <span class="etq">Verificación</span>
+      <ul>
+        <li>El resultado debe ser igual a <code>sorted(montos)</code>: úsalo como “oráculo” en tus pruebas (aunque no en el algoritmo).</li>
+        <li>Casos borde: lista vacía, un elemento, dos elementos, todos iguales, valores repetidos, ya ordenada, en orden inverso.</li>
+        <li>La lista original no debe cambiar (por la copia <code>lista[:]</code>).</li>
+      </ul>
+    </div></div>
+  </div>
+</section>
+
+<section id="desempeno">
+  <h2>Laboratorio de desempeño algorítmico</h2>
+  <div class="ciclo">
+    <h3>Caso: ¿qué algoritmo conviene cuando los datos crecen?</h3>
+    <div class="paso"><div>
+      <span class="etq">Pregunta</span>
+      <p>Para 5 montos da igual. ¿Y para 100, 1,000 o 10,000 transacciones? ¿Y si los datos ya vienen casi ordenados (como un registro por fecha)?</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Exploración</span>
+      <p>Dos formas de medir: <strong>contar comparaciones</strong> (no depende de la computadora, se puede razonar) y <strong>medir tiempo</strong> (depende de la máquina y varía entre ejecuciones). La primera es la que se defiende en un examen; la segunda confirma en la práctica.</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Implementación: tres escenarios de 100 datos</span>
+<pre data-file="escenarios.py"><code class="language-python">import random
+
+from ordenamiento import burbuja, insercion
+
+N = 100
+random.seed(2026)                                   # misma "aleatoriedad" en cada ejecución
+ordenada = list(range(1, N + 1))
+inversa = ordenada[::-1]
+aleatoria = [random.randint(1, 1000) for _ in range(N)]
+
+print(f"{'Escenario':<10} {'Bubble comp':>12} {'Bubble inter':>13} {'Insertion comp':>15}")
+for nombre, datos in [("ordenada", ordenada), ("inversa", inversa), ("aleatoria", aleatoria)]:
+    _, comp_b, inter_b = burbuja(datos)
+    _, comp_i = insercion(datos)
+    print(f"{nombre:<10} {comp_b:>12} {inter_b:>13} {comp_i:>15}")</code></pre>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Resultado</span>
+<pre class="salida" data-file="salida"><code>Escenario   Bubble comp  Bubble inter  Insertion comp
+ordenada             99             0              99
+inversa            4950          4950            4950
+aleatoria          4779          2515            2612</code></pre>
+      <p>Y midiendo tiempo con listas aleatorias de distinto tamaño:</p>
+<pre data-file="tiempos.py"><code class="language-python">import random
+import time
+
+from ordenamiento import burbuja, insercion
+
+for n in [100, 1000, 3000]:
+    datos = [random.randint(1, 100000) for _ in range(n)]
+    inicio = time.perf_counter()
+    burbuja(datos)
+    t_burbuja = time.perf_counter() - inicio
+    inicio = time.perf_counter()
+    insercion(datos)
+    t_insercion = time.perf_counter() - inicio
+    print(f"n={n:>5}: burbuja {t_burbuja:.4f} s, inserción {t_insercion:.4f} s")</code></pre>
+<pre class="salida" data-file="salida (tus tiempos serán distintos)" data-nocheck><code>n=  100: burbuja 0.0004 s, inserción 0.0001 s
+n= 1000: burbuja 0.0370 s, inserción 0.0149 s
+n= 3000: burbuja 0.3805 s, inserción 0.1473 s</code></pre>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Interpretación</span>
+      <ul>
+        <li><strong>Peor caso (inversa):</strong> ambos hacen n(n − 1)/2 = 4,950 comparaciones. Duplicar <em>n</em> cuadruplica el trabajo: crecimiento <strong>cuadrático</strong> (se escribe O(n²)). Por eso de 1,000 a 3,000 datos el tiempo se multiplica por ~9, no por 3.</li>
+        <li><strong>Datos ya ordenados:</strong> gracias a la bandera, Bubble Sort para tras una pasada (99 comparaciones); Insertion Sort también hace 99. Ambos se vuelven lineales.</li>
+        <li><strong>Datos aleatorios:</strong> Insertion Sort hace aproximadamente la mitad de comparaciones que Bubble Sort, y muchos menos movimientos.</li>
+        <li><strong>Decisión de negocio:</strong> para registros que llegan casi ordenados (por fecha), Insertion Sort es razonable. Para volúmenes grandes, ninguno de los dos: <code>sorted()</code> usa un algoritmo mucho más eficiente.</li>
+      </ul>
+    </div></div>
+    <div class="paso verif"><div>
+      <span class="etq">Verificación</span>
+      <p>Los conteos del peor caso se pueden predecir sin ejecutar: (n − 1) + (n − 2) + … + 1 = n(n − 1)/2. Si tu contador da otra cosa en la lista inversa, tu implementación tiene un error. Esa es una prueba excelente para pytest.</p>
+    </div></div>
+  </div>
+</section>
+
+<section id="trazas">
+  <h2>Tablas de traza</h2>
+
+  <h3>Traza 1 · Índices y slicing</h3>
+  <p><code>ventas = [340, 410, 0, 520, 610, 890, 450]</code>. Escribe las listas con corchetes: <code>[1, 2]</code>.</p>
+  <div class="traza">
+    <div class="table-wrap"><table>
+      <thead><tr><th>Expresión</th><th>Resultado</th></tr></thead>
+      <tbody>
+        <tr><td class="dado"><code>ventas[0]</code></td><td><input data-a="340"></td></tr>
+        <tr><td class="dado"><code>ventas[-1]</code></td><td><input data-a="450"></td></tr>
+        <tr><td class="dado"><code>ventas[2:5]</code></td><td><input data-a="[0, 520, 610]"></td></tr>
+        <tr><td class="dado"><code>ventas[:3]</code></td><td><input data-a="[340, 410, 0]"></td></tr>
+        <tr><td class="dado"><code>ventas[-2:]</code></td><td><input data-a="[890, 450]"></td></tr>
+        <tr><td class="dado"><code>ventas[1:-1]</code></td><td><input data-a="[410, 0, 520, 610, 890]"></td></tr>
+        <tr><td class="dado"><code>len(ventas[::2])</code></td><td><input data-a="4"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="acciones"><button class="btn" type="button" data-comprobar>Comprobar</button><button class="btn sec" type="button" data-solucion>Ver solución</button><button class="btn sec" type="button" data-limpiar>Limpiar</button><span class="resultado" aria-live="polite"></span></div>
+  </div>
+
+  <h3>Traza 2 · Bubble Sort pasada por pasada</h3>
+  <p>Lista inicial <code>[42, 17, 58, 23, 9]</code>. Escribe el estado de la lista al <strong>final</strong> de cada pasada y cuántos intercambios hubo en ella.</p>
+  <div class="traza">
+    <div class="table-wrap"><table>
+      <thead><tr><th>Pasada</th><th>Comparaciones</th><th>Lista al final</th><th>Intercambios</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><input data-a="4"></td><td><input data-a="[17, 42, 23, 9, 58]"></td><td><input data-a="3"></td></tr>
+        <tr><td>2</td><td><input data-a="3"></td><td><input data-a="[17, 23, 9, 42, 58]"></td><td><input data-a="2"></td></tr>
+        <tr><td>3</td><td><input data-a="2"></td><td><input data-a="[17, 9, 23, 42, 58]"></td><td><input data-a="1"></td></tr>
+        <tr><td>4</td><td><input data-a="1"></td><td><input data-a="[9, 17, 23, 42, 58]"></td><td><input data-a="1"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="acciones"><button class="btn" type="button" data-comprobar>Comprobar</button><button class="btn sec" type="button" data-solucion>Ver solución</button><button class="btn sec" type="button" data-limpiar>Limpiar</button><span class="resultado" aria-live="polite"></span></div>
+  </div>
+
+  <h3>Traza 3 · Insertion Sort elemento por elemento</h3>
+  <p>Misma lista inicial. En cada fila se inserta el elemento indicado en la parte izquierda ya ordenada.</p>
+  <div class="traza">
+    <div class="table-wrap"><table>
+      <thead><tr><th>i</th><th>Se inserta</th><th>Comparaciones</th><th>Lista después</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><input data-a="17"></td><td><input data-a="1"></td><td><input data-a="[17, 42, 58, 23, 9]"></td></tr>
+        <tr><td>2</td><td><input data-a="58"></td><td><input data-a="1"></td><td><input data-a="[17, 42, 58, 23, 9]"></td></tr>
+        <tr><td>3</td><td><input data-a="23"></td><td><input data-a="3"></td><td><input data-a="[17, 23, 42, 58, 9]"></td></tr>
+        <tr><td>4</td><td><input data-a="9"></td><td><input data-a="4"></td><td><input data-a="[9, 17, 23, 42, 58]"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="acciones"><button class="btn" type="button" data-comprobar>Comprobar</button><button class="btn sec" type="button" data-solucion>Ver solución</button><button class="btn sec" type="button" data-limpiar>Limpiar</button><span class="resultado" aria-live="polite"></span></div>
+  </div>
+  <details class="defensa"><summary>¿Por qué insertar el 23 cuesta 3 comparaciones y el 58 solo 1?</summary><div><p>El 58 se compara con 42, ve que 42 no es mayor y se queda. El 23 se compara con 58 (mayor, lo desplaza), con 42 (mayor, lo desplaza) y con 17 (no es mayor, se detiene): 3 comparaciones. Cuanto más lejos tiene que viajar un elemento, más cuesta.</p></div></details>
+  <ul class="check">
+    <li><input type="checkbox" id="s5-t1" data-track="s5-t1"><label for="s5-t1">Traza 1 completa.</label></li>
+    <li><input type="checkbox" id="s5-t2" data-track="s5-t2"><label for="s5-t2">Traza 2 completa.</label></li>
+    <li><input type="checkbox" id="s5-t3" data-track="s5-t3"><label for="s5-t3">Traza 3 completa.</label></li>
+  </ul>
+</section>
+
+<section id="ejercicios">
+  <h2>Ejercicios</h2>
+
+  <article class="ejercicio">
+    <header><h3>E1 · Cola de pedidos</h3><span class="nivel">métodos de listas · ★</span></header>
+    <div class="cuerpo">
+      <p>Los pedidos llegan en orden y se despachan del más antiguo al más nuevo. Empieza con <code>["P-101", "P-102", "P-103"]</code>. Simula: llega P-104; se despacha uno; llega P-105 marcado como urgente (debe ir <em>al frente</em>); el cliente de P-103 cancela; se despachan dos. Muestra la cola después de cada operación y la lista de despachados.</p>
+    </div>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="cola.py"><code class="language-python">cola = ["P-101", "P-102", "P-103"]
+despachados = []
+
+cola.append("P-104")
+print("Llega P-104:        ", cola)
+
+despachados.append(cola.pop(0))          # el más antiguo está al inicio
+print("Despacho:           ", cola)
+
+cola.insert(0, "P-105")                  # urgente: al frente
+print("Urgente P-105:      ", cola)
+
+cola.remove("P-103")                     # cancelación por valor
+print("Cancela P-103:      ", cola)
+
+for _ in range(2):
+    despachados.append(cola.pop(0))
+print("Despacho x2:        ", cola)
+print("Despachados:        ", despachados)</code></pre>
+<pre class="salida" data-file="salida"><code>Llega P-104:         ['P-101', 'P-102', 'P-103', 'P-104']
+Despacho:            ['P-102', 'P-103', 'P-104']
+Urgente P-105:       ['P-105', 'P-102', 'P-103', 'P-104']
+Cancela P-103:       ['P-105', 'P-102', 'P-104']
+Despacho x2:         ['P-104']
+Despachados:         ['P-101', 'P-105', 'P-102']</code></pre>
+      <p><strong>Casos borde:</strong> <code>cola.pop(0)</code> con la cola vacía lanza <code>IndexError</code>; <code>remove</code> de un pedido que no existe lanza <code>ValueError</code>. Valida con <code>if cola:</code> e <code>if "P-103" in cola:</code>. El <code>_</code> en el <code>for</code> indica “no me importa el número de vuelta”.</p>
+    </div></details>
+    <ul class="check" style="padding:0 1.2rem .6rem"><li><input type="checkbox" id="s5-e1" data-track="s5-e1"><label for="s5-e1">Resuelto</label></li></ul>
+  </article>
+
+  <article class="ejercicio">
+    <header><h3>E2 · Consultas al catálogo</h3><span class="nivel">tuplas + búsqueda · ★★</span></header>
+    <div class="cuerpo">
+      <p>Con el catálogo de tuplas <code>(codigo, nombre, precio, stock)</code> de abajo, escribe funciones para: (a) buscar un producto por código y devolver la tupla completa o <code>None</code>; (b) devolver una lista con los productos cuyo stock está por debajo de un mínimo (para reordenar); (c) calcular el valor total del inventario (precio × stock).</p>
+<pre data-norun><code class="language-python">catalogo = [
+    ("A01", "Aceite 1 L", 12.50, 40),
+    ("B07", "Arroz 5 lb", 4.25, 8),
+    ("C12", "Azúcar 5 lb", 3.90, 0),
+    ("D03", "Café 400 g", 6.75, 15),
+]</code></pre>
+    </div>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="inventario.py"><code class="language-python">catalogo = [
+    ("A01", "Aceite 1 L", 12.50, 40),
+    ("B07", "Arroz 5 lb", 4.25, 8),
+    ("C12", "Azúcar 5 lb", 3.90, 0),
+    ("D03", "Café 400 g", 6.75, 15),
+]
+
+
+def buscar(catalogo, codigo_buscado):
+    """Devuelve la tupla del producto o None si no existe."""
+    for producto in catalogo:
+        if producto[0] == codigo_buscado:
+            return producto
+    return None
+
+
+def por_reordenar(catalogo, minimo):
+    """Lista de productos con stock menor que el mínimo."""
+    return [p for p in catalogo if p[3] < minimo]
+
+
+def valor_inventario(catalogo):
+    """Suma de precio x stock de todos los productos."""
+    total = 0
+    for codigo, nombre, precio, stock in catalogo:
+        total += precio * stock
+    return round(total, 2)
+
+
+print(buscar(catalogo, "D03"))
+print(buscar(catalogo, "Z99"))
+print([p[1] for p in por_reordenar(catalogo, 10)])
+print(valor_inventario(catalogo))</code></pre>
+<pre class="salida" data-file="salida"><code>('D03', 'Café 400 g', 6.75, 15)
+None
+['Arroz 5 lb', 'Azúcar 5 lb']
+635.25</code></pre>
+      <p><strong>Verificación:</strong> 12.50×40 + 4.25×8 + 3.90×0 + 6.75×15 = 500 + 34 + 0 + 101.25 = 635.25 ✔. ¿El stock mínimo es “menor que” o “menor o igual”? Es una regla de negocio: decídela y pruébala en la frontera (stock = 10).</p>
+      <p><strong>Nota de diseño:</strong> <code>p[3]</code> no dice qué es. En la semana 7 (diccionarios) y la 8 (clases) podrás escribir <code>p["stock"]</code> o <code>p.stock</code>. Ese es uno de los motivos de esas herramientas.</p>
+    </div></details>
+    <ul class="check" style="padding:0 1.2rem .6rem"><li><input type="checkbox" id="s5-e2" data-track="s5-e2"><label for="s5-e2">Resuelto</label></li></ul>
+  </article>
+
+  <article class="ejercicio">
+    <header><h3>E3 · Ranking de vendedores (descendente)</h3><span class="nivel">ordenamiento propio · ★★</span></header>
+    <div class="cuerpo">
+      <p>Adapta Insertion Sort para ordenar una lista de tuplas <code>(vendedor, ventas)</code> de <strong>mayor a menor</strong> por ventas, sin <code>sort</code> ni <code>sorted</code>. Muestra el top 3 con slicing. Datos: <code>[("Ana", 3200), ("Luis", 4100), ("Marta", 2750), ("José", 4100), ("Eva", 3900)]</code>.</p>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p>Solo cambian dos cosas: comparas el campo <code>[1]</code> de cada tupla, y la condición para desplazar es “el de la izquierda es <em>menor</em>”. ¿Qué pasa con Luis y José, que empatan?</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="ranking.py"><code class="language-python">def ordenar_por_ventas_desc(registros):
+    """Insertion Sort descendente por el segundo campo de cada tupla."""
+    datos = registros[:]
+    for i in range(1, len(datos)):
+        actual = datos[i]
+        j = i - 1
+        while j >= 0 and datos[j][1] < actual[1]:
+            datos[j + 1] = datos[j]
+            j -= 1
+        datos[j + 1] = actual
+    return datos
+
+
+vendedores = [("Ana", 3200), ("Luis", 4100), ("Marta", 2750), ("José", 4100), ("Eva", 3900)]
+ranking = ordenar_por_ventas_desc(vendedores)
+top = ranking[:3]
+for i in range(len(top)):
+    nombre, ventas = top[i]
+    print(f"{i + 1}. {nombre}: ${ventas:,}")
+
+assert ranking == sorted(vendedores, key=lambda r: r[1], reverse=True)   # oráculo</code></pre>
+<pre class="salida" data-file="salida"><code>1. Luis: $4,100
+2. José: $4,100
+3. Eva: $3,900</code></pre>
+      <p><strong>Empates:</strong> Luis queda antes que José porque ya estaba antes en la lista original y la condición usa <code>&lt;</code> estricto (no desplaza iguales). Un algoritmo que respeta el orden original de los empates se llama <strong>estable</strong>. Si usaras <code>&lt;=</code>, José pasaría delante. En un ranking comercial, ¿qué criterio de desempate es justo? Es una regla de negocio.</p>
+      <p><strong>Verificación:</strong> la última línea compara con <code>sorted</code> usando <code>key=lambda r: r[1]</code> (“ordena por el segundo campo”). No necesitas dominar <code>lambda</code> todavía: aquí solo sirve de oráculo para comprobar tu algoritmo.</p>
+    </div></details>
+    <ul class="check" style="padding:0 1.2rem .6rem"><li><input type="checkbox" id="s5-e3" data-track="s5-e3"><label for="s5-e3">Resuelto</label></li></ul>
+  </article>
+
+  <article class="ejercicio">
+    <header><h3>E4 · Pruebas para tus algoritmos</h3><span class="nivel">pytest · ★★</span></header>
+    <div class="cuerpo">
+      <p>Escribe <code>test_ordenamiento.py</code> con pruebas para <code>burbuja</code> e <code>insercion</code> que cubran: lista vacía, un elemento, repetidos, ya ordenada (y cuántas comparaciones hace), orden inverso (debe hacer n(n − 1)/2 comparaciones), y que la lista original no se modifica.</p>
+    </div>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="test_ordenamiento.py" data-norun><code class="language-python">from ordenamiento import burbuja, insercion
+
+
+def test_lista_vacia():
+    assert burbuja([])[0] == []
+    assert insercion([])[0] == []
+
+
+def test_un_elemento():
+    assert burbuja([7])[0] == [7]
+
+
+def test_repetidos():
+    assert insercion([3, 1, 3, 2])[0] == [1, 2, 3, 3]
+
+
+def test_ya_ordenada_una_sola_pasada():
+    datos = list(range(10))
+    assert burbuja(datos)[1] == 9          # n - 1 comparaciones
+    assert insercion(datos)[1] == 9
+
+
+def test_inversa_peor_caso():
+    n = 20
+    datos = list(range(n, 0, -1))
+    assert burbuja(datos)[1] == n * (n - 1) // 2
+    assert insercion(datos)[1] == n * (n - 1) // 2
+
+
+def test_no_modifica_la_original():
+    original = [5, 2, 9]
+    burbuja(original)
+    insercion(original)
+    assert original == [5, 2, 9]
+
+
+def test_coincide_con_sorted():
+    datos = [42, 17, 58, 23, 9, 17]
+    assert burbuja(datos)[0] == sorted(datos)
+    assert insercion(datos)[0] == sorted(datos)</code></pre>
+      <p><strong>Sabotaje sugerido:</strong> quita <code>- pasada</code> del rango interno de <code>burbuja</code>: la lista sigue ordenándose bien, pero <code>test_inversa_peor_caso</code> falla porque hace comparaciones de más. Las pruebas de conteo vigilan la <em>eficiencia</em>, no solo el resultado.</p>
+    </div></details>
+    <ul class="check" style="padding:0 1.2rem .6rem"><li><input type="checkbox" id="s5-e4" data-track="s5-e4"><label for="s5-e4">Resuelto y ejecutado</label></li></ul>
+  </article>
+
+  <article class="ejercicio">
+    <header><h3>E5 · Auditoría: tres errores con listas</h3><span class="nivel">auditoría · ★★★</span></header>
+    <div class="cuerpo">
+      <p>Cada función tiene un error distinto. Para cada una: escribe una llamada que lo revele, explica la causa y corrígela.</p>
+<pre data-file="listas_auditar.py"><code class="language-python">def quitar_devoluciones(montos):
+    """Devuelve la lista sin montos negativos."""
+    for m in montos:
+        if m < 0:
+            montos.remove(m)
+    return montos
+
+
+def top_tres(ventas):
+    """Devuelve las 3 ventas más altas sin alterar la lista original."""
+    ordenadas = ventas
+    ordenadas.sort(reverse=True)
+    return ordenadas[:3]
+
+
+def ordenar(lista):
+    """Bubble Sort ascendente."""
+    n = len(lista)
+    for i in range(n):
+        for j in range(n):
+            if lista[j] > lista[j + 1]:
+                lista[j], lista[j + 1] = lista[j + 1], lista[j]
+    return lista</code></pre>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p>Prueba <code>quitar_devoluciones([100, -20, -5, 300])</code>; llama <code>top_tres</code> y luego imprime la lista que le pasaste; y <code>ordenar([3, 1, 2])</code>.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+      <ol>
+        <li><strong><code>quitar_devoluciones([100, -20, -5, 300])</code> devuelve <code>[100, -5, 300]</code>.</strong> Al borrar −20 mientras se recorre, los elementos se corren una posición y el bucle se “salta” el −5. Nunca modifiques una lista mientras la recorres; construye una nueva.</li>
+        <li><strong><code>top_tres</code> desordena la lista original</strong>: <code>ordenadas = ventas</code> es un alias, así que <code>sort()</code> reordena la lista del que llamó, contradiciendo el docstring.</li>
+        <li><strong><code>ordenar([3, 1, 2])</code> lanza <code>IndexError</code></strong>: cuando <code>j = n - 1</code>, <code>lista[j + 1]</code> se sale. El rango interno debe ser <code>range(n - 1 - i)</code>. Además modifica la lista recibida.</li>
+      </ol>
+<pre data-file="listas_corregido.py"><code class="language-python">def quitar_devoluciones(montos):
+    """Devuelve una lista nueva sin montos negativos."""
+    return [m for m in montos if m >= 0]
+
+
+def top_tres(ventas):
+    """Devuelve las 3 ventas más altas sin alterar la lista original."""
+    return sorted(ventas, reverse=True)[:3]
+
+
+def ordenar(lista):
+    """Bubble Sort ascendente; devuelve una lista nueva."""
+    datos = lista[:]
+    n = len(datos)
+    for i in range(n - 1):
+        for j in range(n - 1 - i):
+            if datos[j] > datos[j + 1]:
+                datos[j], datos[j + 1] = datos[j + 1], datos[j]
+    return datos
+
+
+ventas = [340, 890, 120, 610]
+assert quitar_devoluciones([100, -20, -5, 300]) == [100, 300]
+assert top_tres(ventas) == [890, 610, 340]
+assert ventas == [340, 890, 120, 610]       # la original quedó intacta
+assert ordenar([3, 1, 2]) == [1, 2, 3]
+print("Auditoría superada")</code></pre>
+<pre class="salida" data-file="salida"><code>Auditoría superada</code></pre>
+      <p><strong>Lección:</strong> el error 1 no produce ningún mensaje y parece funcionar con <code>[100, -20, 300]</code>. Solo aparece con dos negativos seguidos: un caso borde que hay que <em>buscar</em>.</p>
+    </div></details>
+    <ul class="check" style="padding:0 1.2rem .6rem"><li><input type="checkbox" id="s5-e5" data-track="s5-e5"><label for="s5-e5">Resuelto</label></li></ul>
+  </article>
+</section>
+
+<section id="proyecto">
+  <h2>Proyecto integrador · Fase 3</h2>
+  <p><strong>Semana 5 · Prototipo funcional y colecciones.</strong></p>
+  <div class="card">
+    <h3>Entregables de esta fase</h3>
+    <ul class="check">
+      <li><input type="checkbox" id="s5-p1" data-track="s5-p1"><label for="s5-p1"><strong>Código funcional preliminar organizado en funciones</strong> con parámetros, retornos y docstrings.</label></li>
+      <li><input type="checkbox" id="s5-p2" data-track="s5-p2"><label for="s5-p2"><strong>Colecciones (listas y tuplas)</strong> para guardar datos temporales en memoria durante la ejecución (p. ej. lista de tuplas de productos, lista de ventas del día).</label></li>
+      <li><input type="checkbox" id="s5-p3" data-track="s5-p3"><label for="s5-p3">Al menos una búsqueda y una ordenación con significado de negocio (buscar cliente, ranking, reporte ordenado).</label></li>
+      <li><input type="checkbox" id="s5-p4" data-track="s5-p4"><label for="s5-p4">Los <code>assert</code> de la Fase 2 siguen pasando.</label></li>
+    </ul>
+  </div>
+  <div class="box nota">
+    <span class="box-title">Qué viene</span>
+    Fase 4 (semana 7): persistencia en archivos JSON/CSV y manejo de excepciones. Fase 5 (semana 9): refactorización a clases y 5 pruebas automáticas. Diseñen las funciones de hoy pensando en que mañana los datos vendrán de un archivo.
+  </div>
+  <h3>Preguntas de defensa</h3>
+  <details class="defensa"><summary>¿Por qué usan una lista aquí y una tupla allá?</summary><div><p>Lista para colecciones que cambian (se agregan ventas); tupla para registros de campos fijos que no deben modificarse por accidente (un producto con código, nombre y precio).</p></div></details>
+  <details class="defensa"><summary>¿Qué algoritmo de ordenamiento usaron y cuántas comparaciones hace en el peor caso?</summary><div><p>Nombra el algoritmo, da la fórmula n(n − 1)/2 para el peor caso de Bubble/Insertion, y explica cuándo conviene (datos casi ordenados) y cuándo no (volúmenes grandes: <code>sorted()</code>).</p></div></details>
+  <details class="defensa"><summary>¿Qué pasa si su búsqueda no encuentra el elemento?</summary><div><p>Debe devolver una señal clara (<code>None</code> o <code>-1</code>), y quien la llama debe manejarla antes de usar el resultado. Muestra el caso de prueba que lo comprueba.</p></div></details>
+  <details class="defensa"><summary>¿Alguna función modifica la lista que recibe? ¿Es intencional?</summary><div><p>Explica si trabaja sobre una copia (<code>[:]</code>) o sobre la original, y por qué. Un efecto secundario no documentado es un error aunque “funcione”.</p></div></details>
+  <details class="defensa"><summary>¿Cómo crece el tiempo de su sistema si los datos se multiplican por 10?</summary><div><p>Si hay una búsqueda lineal dentro de un bucle sobre los mismos datos, el trabajo crece como n²: 10× datos = ~100× trabajo. Identifica esos puntos en tu código.</p></div></details>
+</section>
+
+<section id="evaluacion">
+  <h2>Control 2 y Examen Parcial</h2>
+  <p><strong>Control 2 esta semana</strong> y <strong>Examen Parcial teórico-práctico en la semana 6</strong> (individual, presencial en laboratorio, sin IA). El temario exacto lo confirma el docente en Moodle; lo razonable es que el Parcial integre las semanas 1 a 5.</p>
+  <h3>De esta semana, asegúrate de poder:</h3>
+  <ul class="check">
+    <li><input type="checkbox" id="s5-v1" data-track="s5-v1"><label for="s5-v1">Predecir el resultado de índices negativos y slicing.</label></li>
+    <li><input type="checkbox" id="s5-v2" data-track="s5-v2"><label for="s5-v2">Explicar alias vs. copia y detectarlo en código.</label></li>
+    <li><input type="checkbox" id="s5-v3" data-track="s5-v3"><label for="s5-v3">Implementar búsqueda lineal y decir su mejor y peor caso.</label></li>
+    <li><input type="checkbox" id="s5-v4" data-track="s5-v4"><label for="s5-v4">Escribir Bubble Sort e Insertion Sort de memoria y trazarlos a mano.</label></li>
+    <li><input type="checkbox" id="s5-v5" data-track="s5-v5"><label for="s5-v5">Calcular n(n − 1)/2 y explicar qué significa crecimiento cuadrático.</label></li>
+  </ul>
+
+  <h3>Repaso integrador para el Parcial (semanas 1–5)</h3>
+  <p>Preguntas que mezclan temas, como en un examen. Si fallas una, vuelve a la semana indicada.</p>
+  <div class="quiz">
+    <div class="qq" data-q="s5-r1">
+      <p>¿Qué imprime? <em>(S2 + S3)</em></p>
+<pre data-norun><code class="language-python">total = 0
+for n in range(1, 10, 3):
+    if n % 2 == 0:
+        continue
+    total += n
+print(total)</code></pre>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>8</code></button>
+        <button class="quiz-opt"><code>12</code></button>
+        <button class="quiz-opt"><code>4</code></button>
+        <button class="quiz-opt"><code>15</code></button>
+      </div>
+      <p class="why"><code>range(1, 10, 3)</code> → 1, 4, 7. El 4 es par y se salta. 1 + 7 = 8.</p>
+    </div>
+    <div class="qq" data-q="s5-r2">
+      <p>¿Qué devuelve <code>f([5, 3, 8])</code>? <em>(S4 + S5)</em></p>
+<pre data-norun><code class="language-python">def f(datos):
+    mayor = datos[0]
+    for d in datos[1:]:
+        if d > mayor:
+            mayor = d
+    print(mayor)</code></pre>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>None</code> (imprime 8, pero no lo devuelve)</button>
+        <button class="quiz-opt"><code>8</code></button>
+        <button class="quiz-opt"><code>5</code></button>
+        <button class="quiz-opt"><code>[8]</code></button>
+      </div>
+      <p class="why">Pregunta trampa típica: “¿qué <em>devuelve</em>?” vs “¿qué <em>imprime</em>?”. Sin <code>return</code>, devuelve <code>None</code>.</p>
+    </div>
+    <div class="qq" data-q="s5-r3">
+      <p>Con <code>precio = 50</code>, ¿qué rama se ejecuta? <em>(S2)</em></p>
+<pre data-norun><code class="language-python">if precio > 50:
+    categoria = "alta"
+elif precio >= 20:
+    categoria = "media"
+else:
+    categoria = "baja"</code></pre>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>"media"</code></button>
+        <button class="quiz-opt"><code>"alta"</code></button>
+        <button class="quiz-opt"><code>"baja"</code></button>
+        <button class="quiz-opt">Ninguna</button>
+      </div>
+      <p class="why">50 &gt; 50 es falso; 50 &gt;= 20 es verdadero. Las fronteras son el lugar favorito de los exámenes.</p>
+    </div>
+    <div class="qq" data-q="s5-r4">
+      <p>¿Cuál es el error de este bucle? <em>(S3)</em></p>
+<pre data-norun><code class="language-python">saldo = 1000
+while saldo > 0:
+    pago = 200
+saldo = saldo - pago</code></pre>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>La resta está fuera del bucle (sin sangría): el bucle es infinito.</button>
+        <button class="quiz-opt">Falta un <code>break</code>.</button>
+        <button class="quiz-opt"><code>while</code> no acepta comparaciones con 0.</button>
+        <button class="quiz-opt">No hay error.</button>
+      </div>
+      <p class="why">La indentación define qué está dentro del bucle. Dentro solo se asigna <code>pago</code>, así que <code>saldo</code> nunca cambia.</p>
+    </div>
+    <div class="qq" data-q="s5-r5">
+      <p>¿Qué muestra <code>git status</code> justo después de <code>git add informe.py</code> (archivo nuevo)? <em>(S1)</em></p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>informe.py</code> en “Changes to be committed” (preparado)</button>
+        <button class="quiz-opt"><code>informe.py</code> como “Untracked”</button>
+        <button class="quiz-opt">“nothing to commit”</button>
+        <button class="quiz-opt">Que ya fue subido a GitHub</button>
+      </div>
+      <p class="why"><code>add</code> lo pasa al área de preparación. Solo después de <code>commit</code> queda en el historial, y solo después de <code>push</code> en GitHub.</p>
+    </div>
+    <div class="qq" data-q="s5-r6">
+      <p>¿Cuántas comparaciones hace Bubble Sort (con la bandera de salida temprana) sobre <code>[1, 2, 3, 4, 5, 6]</code>? <em>(S5)</em></p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>5</button>
+        <button class="quiz-opt">15</button>
+        <button class="quiz-opt">6</button>
+        <button class="quiz-opt">0</button>
+      </div>
+      <p class="why">Una pasada completa (n − 1 = 5 comparaciones) sin intercambios, y la bandera termina el algoritmo. Sin la bandera haría 15.</p>
+    </div>
+    <div class="qq" data-q="s5-r7">
+      <p>¿Qué vale <code>x</code>? <em>(S4 + S5)</em></p>
+<pre data-norun><code class="language-python">def agregar_iva(precios):
+    for i in range(len(precios)):
+        precios[i] = round(precios[i] * 1.13, 2)
+
+x = [10, 20]
+agregar_iva(x)</code></pre>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>[11.3, 22.6]</code></button>
+        <button class="quiz-opt"><code>[10, 20]</code></button>
+        <button class="quiz-opt"><code>None</code></button>
+        <button class="quiz-opt">Error: la función no tiene <code>return</code></button>
+      </div>
+      <p class="why">La función recibe la <em>misma</em> lista y la modifica en su lugar. A diferencia de reasignar una variable numérica (semana 4), mutar una lista sí se ve afuera.</p>
+    </div>
+    <div class="quiz-score"><span data-score></span><button class="btn sec" type="button" data-reset>Reiniciar repaso</button></div>
+  </div>
+  <p>Repasa también las listas “puedo…” de las semanas <a href="semana-01.html#evaluacion">1</a>, <a href="semana-02.html#evaluacion">2</a>, <a href="semana-03.html#evaluacion">3</a> y <a href="semana-04.html#evaluacion">4</a>.</p>
+</section>
+
+<section id="fuentes">
+  <h2>Fuentes</h2>
+  <ul>
+    <li><strong>[PCC]</strong> Matthes, E. (2023). <em>Python Crash Course</em>, 3.ª ed. Caps. 3 y 4 (y cap. 8, secciones sobre listas).</li>
+    <li><strong>[BOU]</strong> Bouna, P. (2022). <em>Fundamentals of Programming Using Flowchart and Pseudocode</em>. Cap. 4.</li>
+    <li>Python Software Foundation. <a href="https://docs.python.org/es/3/tutorial/datastructures.html" target="_blank" rel="noopener">Tutorial — Estructuras de datos</a> · <a href="https://docs.python.org/es/3/howto/sorting.html" target="_blank" rel="noopener">HOWTO — Ordenar</a>.</li>
+  </ul>
+  <nav class="nav-semanas" aria-label="Navegación entre semanas">
+    <a href="semana-04.html">← Semana 4</a>
+    <a href="../index.html">Inicio →</a>
+  </nav>
+</section>
+
+<footer class="pie">Guía de estudio · Introducción al Desarrollo de Software · ESEN · Ciclo III/2026. Material de apoyo no oficial; el programa y Moodle mandan.</footer>
+</main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+<script src="../assets/guia.js"></script>
+</body>
+</html>

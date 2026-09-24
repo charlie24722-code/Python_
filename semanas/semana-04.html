@@ -1,0 +1,967 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Semana 4 · Funciones y pruebas</title>
+<meta name="description" content="Guía de estudio, semana 4: funciones, parámetros, retorno, ámbito, recursividad, módulos, docstrings y pruebas con assert y pytest.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/guia.css">
+<script>try{var t=localStorage.getItem("ids-guia-v1-tema");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+</head>
+<body data-semana="s4">
+
+<header class="topbar">
+  <a class="brand" href="../index.html">IDS <span>·</span> <small>Guía de estudio</small></a>
+  <nav aria-label="Semanas">
+    <a href="semana-01.html">S1</a>
+    <a href="semana-02.html">S2</a>
+    <a href="semana-03.html">S3</a>
+    <a href="semana-04.html" aria-current="page">S4</a>
+    <a href="semana-05.html">S5</a>
+  </nav>
+  <button class="theme-btn" type="button" aria-label="Cambiar tema claro/oscuro">◐</button>
+</header>
+
+<div class="layout with-toc">
+<aside class="toc" aria-label="Contenido de la semana">
+  <p>Semana 4</p>
+  <ol>
+    <li><a href="#uso">Cómo usar la guía</a></li>
+    <li><a href="#mapa">Qué puedes usar</a></li>
+    <li><a href="#lecturas">Lecturas</a></li>
+    <li><a href="#checkpoint">Reading checkpoint</a></li>
+    <li><a href="#refactor">De script plano a funciones</a></li>
+    <li><a href="#parametros">Parámetros y retorno</a></li>
+    <li><a href="#ambito">Ámbito</a></li>
+    <li><a href="#recursion">Recursividad</a></li>
+    <li><a href="#modulos">Módulos</a></li>
+    <li><a href="#pruebas">Pruebas: assert y pytest</a></li>
+    <li><a href="#trazas">Tablas de traza</a></li>
+    <li><a href="#ejercicios">Ejercicios</a></li>
+    <li><a href="#proyecto">Proyecto</a></li>
+    <li><a href="#evaluacion">Rumbo al Control 2</a></li>
+    <li><a href="#fuentes">Fuentes</a></li>
+  </ol>
+</aside>
+
+<main>
+<section class="hero">
+  <p class="eyebrow">Semana 4 · Módulo 5</p>
+  <h1>Modularización, funciones y ámbito</h1>
+  <p class="lead">Hasta ahora cada programa era una sola secuencia. Esta semana lo partes en <strong>funciones</strong>: piezas con nombre, que reciben datos, devuelven un resultado y se pueden <strong>probar por separado</strong>. Es el paso que convierte un script en software mantenible.</p>
+  <div class="pregunta"><small>Pregunta orientadora</small>¿Cómo convierto un script de 200 líneas en piezas que puedo reutilizar, probar y explicar una por una?</div>
+  <ul class="chips">
+    <li class="chip lect">Lecturas: PCC 8 · PCC 11.1</li>
+    <li class="chip proy">Proyecto: preparar Fase 3</li>
+    <li class="chip eval">Control 2: la próxima semana</li>
+  </ul>
+  <div class="progress" data-progreso-pagina>
+    <div class="progress-bar"><span></span></div>
+    <div class="progress-label"></div>
+  </div>
+</section>
+
+<section id="uso">
+  <h2>Cómo usar esta guía</h2>
+  <div class="momentos">
+    <div><strong>Antes de clase</strong>PCC 8 completo y la sección 11.1. Luego el <a href="#checkpoint">checkpoint</a>.</div>
+    <div><strong>Durante el laboratorio</strong>El taller es de <em>refactorización</em>: usa el <a href="#refactor">caso guiado</a> como modelo.</div>
+    <div><strong>Después de clase</strong>Instala pytest y ejecuta de verdad las <a href="#pruebas">pruebas</a>. Luego los <a href="#ejercicios">ejercicios</a>.</div>
+    <div><strong>Evaluaciones</strong>Control 2 la próxima semana y Parcial en la semana 6.</div>
+  </div>
+  <ul class="ciclo-leyenda" aria-label="Ciclo de trabajo">
+    <li>Pregunta</li><li class="sep">→</li><li>Exploración</li><li class="sep">→</li><li>Implementación</li><li class="sep">→</li><li>Resultado</li><li class="sep">→</li><li>Interpretación</li><li class="sep">→</li><li class="v">Verificación</li>
+  </ul>
+</section>
+
+<section id="mapa">
+  <h2>Qué puedes usar esta semana</h2>
+  <div class="permisos">
+    <div class="si">
+      <h4>Sí, desde ahora</h4>
+      <ul>
+        <li>Todo lo de las semanas 1 a 3</li>
+        <li><code>def</code>, <code>return</code>, <code>None</code></li>
+        <li>Argumentos posicionales, nombrados y valores por defecto</li>
+        <li>Retornar varios valores: <code>return base, iva</code> y desempacar <code>base, iva = f()</code></li>
+        <li>Docstrings <code>"""..."""</code></li>
+        <li>Variables locales y globales (y por qué evitar las globales)</li>
+        <li>Recursividad elemental</li>
+        <li><code>import</code>, <code>from ... import ...</code>, <code>as</code></li>
+        <li><code>assert</code> y <code>pytest</code></li>
+      </ul>
+    </div>
+    <div class="no">
+      <h4>Todavía no</h4>
+      <ul>
+        <li>Pasar listas a funciones y modificarlas → semana 5 (PCC 8 tiene esas secciones: léelas, pero se practican en S5)</li>
+        <li><code>*args</code> y <code>**kwargs</code> (PCC 8): lectura opcional; usan tuplas y diccionarios</li>
+        <li><code>try</code>/<code>except</code> → semana 7</li>
+        <li>Clases → semana 8</li>
+      </ul>
+      <p style="margin-top:.5rem;font-size:.9rem">Retornar varios valores produce en realidad una <em>tupla</em>; las tuplas se estudian en la semana 5. Por ahora basta con desempacar.</p>
+    </div>
+  </div>
+</section>
+
+<section id="lecturas">
+  <h2>Lecturas de preparación</h2>
+  <ul class="check">
+    <li><input type="checkbox" id="s4-l1" data-track="s4-l1"><label for="s4-l1"><span class="ref">[PCC] Cap. 8</span> “Functions”. Enfócate en: definir funciones, parámetros vs. argumentos, argumentos posicionales y nombrados, valores por defecto, <code>return</code>, argumentos opcionales, y guardar funciones en módulos (todas las formas de <code>import</code>).</label></li>
+    <li><input type="checkbox" id="s4-l2" data-track="s4-l2"><label for="s4-l2"><span class="ref">[PCC] Cap. 11, sección 11.1</span> “Testing a Function with pytest”. Enfócate en: instalar pytest, qué es una prueba unitaria, cómo se nombran los archivos y funciones de prueba, cómo leer una prueba que falla.</label></li>
+  </ul>
+  <div class="box nota">
+    <span class="box-title">Complementos gratuitos</span>
+    <ul>
+      <li><a href="https://docs.python.org/es/3/tutorial/controlflow.html#defining-functions" target="_blank" rel="noopener">Tutorial oficial — Definiendo funciones</a> (4.8 y 4.9)</li>
+      <li><a href="https://docs.python.org/es/3/tutorial/modules.html" target="_blank" rel="noopener">Tutorial oficial — Módulos</a></li>
+      <li><a href="https://docs.pytest.org/en/stable/getting-started.html" target="_blank" rel="noopener">pytest — Get Started</a> (en inglés)</li>
+      <li><a href="https://peps.python.org/pep-0257/" target="_blank" rel="noopener">PEP 257 — Convenciones de docstrings</a></li>
+    </ul>
+  </div>
+</section>
+
+<section id="checkpoint">
+  <h2>Reading checkpoint</h2>
+  <div class="quiz">
+    <div class="qq" data-q="s4-q1">
+      <p>¿Qué vale <code>resultado</code>?</p>
+<pre data-norun><code class="language-python">def calcular_iva(monto):
+    print(monto * 0.13)
+
+resultado = calcular_iva(100)</code></pre>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>None</code> (la función imprime, pero no devuelve nada)</button>
+        <button class="quiz-opt"><code>13.0</code></button>
+        <button class="quiz-opt"><code>"13.0"</code></button>
+        <button class="quiz-opt">Error de sintaxis</button>
+      </div>
+      <p class="why">Imprimir no es devolver. Sin <code>return</code>, toda función devuelve <code>None</code>. Si luego haces <code>resultado + 100</code>, obtienes <code>TypeError</code>. Regla: las funciones de cálculo <em>devuelven</em>; imprimir es trabajo de otra parte del programa.</p>
+    </div>
+    <div class="qq" data-q="s4-q2">
+      <p>¿Cuál definición es <strong>inválida</strong>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>def cuota(meses=12, monto):</code></button>
+        <button class="quiz-opt"><code>def cuota(monto, meses=12):</code></button>
+        <button class="quiz-opt"><code>def cuota(monto, tasa, meses=12):</code></button>
+        <button class="quiz-opt"><code>def cuota(monto=0, meses=12):</code></button>
+      </div>
+      <p class="why">Los parámetros con valor por defecto van <strong>después</strong> de los obligatorios; si no, <code>SyntaxError</code>.</p>
+    </div>
+    <div class="qq" data-q="s4-q3">
+      <p>Con <code>def cuota(monto, tasa, meses=12)</code>, ¿cuál llamada es válida y hace lo esperado?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>cuota(meses=24, monto=5000, tasa=0.12)</code></button>
+        <button class="quiz-opt"><code>cuota(meses=24, 5000, 0.12)</code></button>
+        <button class="quiz-opt"><code>cuota(5000)</code></button>
+        <button class="quiz-opt"><code>cuota(5000, 0.12, 24, 1)</code></button>
+      </div>
+      <p class="why">Con argumentos nombrados el orden no importa. Pero un posicional no puede ir después de un nombrado (<code>SyntaxError</code>), faltar un obligatorio o sobrar uno da <code>TypeError</code>.</p>
+    </div>
+    <div class="qq" data-q="s4-q4">
+      <p>¿Qué imprime este código?</p>
+<pre data-norun><code class="language-python">iva = 0.13
+
+def cambiar_iva():
+    iva = 0.15
+
+cambiar_iva()
+print(iva)</code></pre>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>0.13</code></button>
+        <button class="quiz-opt"><code>0.15</code></button>
+        <button class="quiz-opt"><code>None</code></button>
+        <button class="quiz-opt"><code>NameError</code></button>
+      </div>
+      <p class="why">Asignar dentro de una función crea una variable <strong>local</strong> nueva, aunque se llame igual. La global no cambia. Existe la palabra <code>global</code> para forzarlo, pero en código profesional casi nunca se usa: se pasan parámetros y se devuelven resultados.</p>
+    </div>
+    <div class="qq" data-q="s4-q5">
+      <p>¿Qué le falta a una función recursiva que termina con <code>RecursionError</code>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Un caso base alcanzable que devuelva un valor sin volver a llamarse.</button>
+        <button class="quiz-opt">Un <code>print</code> en cada llamada.</button>
+        <button class="quiz-opt">Un bucle <code>while</code> adentro.</button>
+        <button class="quiz-opt">Un valor por defecto en sus parámetros.</button>
+      </div>
+      <p class="why">Cada llamada debe acercarse al caso base (p. ej. <code>anios - 1</code> hasta llegar a 0). Si nunca lo alcanza, Python se detiene tras unas 1000 llamadas anidadas.</p>
+    </div>
+    <div class="qq" data-q="s4-q6">
+      <p>¿Qué hace <code>assert calcular_total(10, 4) == 45.2</code> si la función es correcta?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Nada visible: continúa en silencio.</button>
+        <button class="quiz-opt">Imprime <code>True</code>.</button>
+        <button class="quiz-opt">Imprime <code>45.2</code>.</button>
+        <button class="quiz-opt">Lanza <code>AssertionError</code>.</button>
+      </div>
+      <p class="why"><code>assert</code> solo “habla” cuando la condición es falsa: entonces lanza <code>AssertionError</code>. Silencio = prueba superada.</p>
+    </div>
+    <div class="qq" data-q="s4-q7">
+      <p>¿Qué archivos y funciones ejecuta <code>pytest</code> automáticamente?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Archivos <code>test_*.py</code> (o <code>*_test.py</code>) y, dentro, funciones que empiezan con <code>test_</code>.</button>
+        <button class="quiz-opt">Todos los archivos <code>.py</code> de la carpeta.</button>
+        <button class="quiz-opt">Solo el archivo <code>main.py</code>.</button>
+        <button class="quiz-opt">Las funciones que tienen un <code>print</code>.</button>
+      </div>
+      <p class="why">Por convención de nombres. Si tu función se llama <code>prueba_total()</code>, pytest no la encuentra y dice “no tests ran”.</p>
+    </div>
+    <div class="qq" data-q="s4-q8">
+      <p>¿Cuál es una <strong>función pura</strong>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Una cuyo resultado depende solo de sus argumentos y no modifica nada fuera de ella.</button>
+        <button class="quiz-opt">Una que no tiene parámetros.</button>
+        <button class="quiz-opt">Una que imprime su resultado.</button>
+        <button class="quiz-opt">Una que usa variables globales para compartir datos.</button>
+      </div>
+      <p class="why">Mismos argumentos → mismo resultado, siempre, sin efectos secundarios. Son las más fáciles de probar: por eso el laboratorio pide “funciones puras con pruebas”.</p>
+    </div>
+    <div class="qq" data-q="s4-q9">
+      <p>Tienes <code>facturacion.py</code> con la función <code>calcular_total</code>. Desde <code>main.py</code> en la misma carpeta, ¿qué es correcto?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>from facturacion import calcular_total</code> y luego <code>calcular_total(10, 4)</code></button>
+        <button class="quiz-opt"><code>import facturacion.py</code></button>
+        <button class="quiz-opt"><code>from facturacion import calcular_total</code> y luego <code>facturacion.calcular_total(10, 4)</code></button>
+        <button class="quiz-opt"><code>include facturacion</code></button>
+      </div>
+      <p class="why">El módulo se importa sin <code>.py</code>. Con <code>import facturacion</code> se llama <code>facturacion.calcular_total(...)</code>; con <code>from facturacion import calcular_total</code>, directamente <code>calcular_total(...)</code>.</p>
+    </div>
+    <div class="quiz-score"><span data-score></span><button class="btn sec" type="button" data-reset>Reiniciar quiz</button></div>
+  </div>
+  <ul class="check">
+    <li><input type="checkbox" id="s4-cp" data-track="s4-cp"><label for="s4-cp">Respondí el checkpoint y entiendo mis errores.</label></li>
+  </ul>
+</section>
+
+<section id="refactor">
+  <h2>De script plano a funciones</h2>
+  <div class="ciclo">
+    <h3>Caso: tres clientes, tres copias del mismo cálculo</h3>
+    <div class="paso"><div>
+      <span class="etq">Pregunta</span>
+      <p>Alguien resolvió la facturación de tres clientes copiando y pegando el cálculo. Funciona… casi. ¿Qué tiene de malo y cómo se arregla?</p>
+<pre data-file="factura_plana.py"><code class="language-python"># factura_plana.py — el "código espagueti" en pequeño
+subtotal_1 = 12.50 * 3
+if subtotal_1 >= 50:
+    subtotal_1 = subtotal_1 * 0.9
+total_1 = subtotal_1 * 1.13
+print(f"Cliente Ana:   ${total_1:.2f}")
+
+subtotal_2 = 8.00 * 5
+if subtotal_2 >= 50:
+    subtotal_2 = subtotal_2 * 0.9
+total_2 = subtotal_2 * 1.13
+print(f"Cliente Luis:  ${total_2:.2f}")
+
+subtotal_3 = 6.25 * 8
+if subtotal_3 > 50:
+    subtotal_3 = subtotal_3 * 0.9
+total_3 = subtotal_3 * 1.13
+print(f"Cliente Marta: ${total_3:.2f}")</code></pre>
+<pre class="salida" data-file="salida"><code>Cliente Ana:   $42.37
+Cliente Luis:  $45.20
+Cliente Marta: $56.50</code></pre>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Exploración</span>
+      <ul>
+        <li><strong>Error escondido:</strong> en la tercera copia dice <code>&gt; 50</code> en lugar de <code>&gt;= 50</code>. Marta compró exactamente $50 y se quedó sin descuento: pagó $56.50 en vez de $50.85.</li>
+        <li><strong>Números mágicos:</strong> <code>0.9</code>, <code>1.13</code>, <code>50</code> repetidos. Si cambia el IVA, hay que encontrar y cambiar cada uno.</li>
+        <li><strong>No se puede probar</strong> el cálculo sin ejecutar todo el script y leer lo que imprime.</li>
+        <li>Receta de refactorización: (1) identifica lo que se repite, (2) nombra cada paso con un verbo, (3) conviértelo en función con parámetros, (4) reemplaza las copias por llamadas, (5) comprueba que el resultado no cambió (salvo el error que corriges).</li>
+      </ul>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Implementación</span>
+<pre data-file="factura_funciones.py"><code class="language-python">TASA_IVA = 0.13
+TASA_DESCUENTO = 0.10
+MINIMO_DESCUENTO = 50
+
+
+def calcular_subtotal(precio_unitario, cantidad):
+    """Devuelve el precio unitario multiplicado por la cantidad."""
+    return precio_unitario * cantidad
+
+
+def aplicar_descuento(subtotal):
+    """Aplica el descuento por volumen si el subtotal llega al mínimo."""
+    if subtotal >= MINIMO_DESCUENTO:
+        return subtotal * (1 - TASA_DESCUENTO)
+    return subtotal
+
+
+def calcular_total(precio_unitario, cantidad):
+    """Calcula el total a pagar con descuento por volumen e IVA.
+
+    Args:
+        precio_unitario: precio de una unidad, en dólares.
+        cantidad: número de unidades (entero no negativo).
+
+    Returns:
+        Total a pagar, redondeado a 2 decimales.
+    """
+    subtotal = calcular_subtotal(precio_unitario, cantidad)
+    base = aplicar_descuento(subtotal)
+    return round(base * (1 + TASA_IVA), 2)
+
+
+print(f"Cliente Ana:   ${calcular_total(12.50, 3):.2f}")
+print(f"Cliente Luis:  ${calcular_total(8.00, 5):.2f}")
+print(f"Cliente Marta: ${calcular_total(6.25, 8):.2f}")</code></pre>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Resultado</span>
+<pre class="salida" data-file="salida"><code>Cliente Ana:   $42.37
+Cliente Luis:  $45.20
+Cliente Marta: $50.85</code></pre>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Interpretación</span>
+      <p>Marta ahora recibe su descuento: la regla vive en <strong>un solo lugar</strong> y no puede quedar distinta entre clientes. Añadir un cuarto cliente es una línea. Cada función hace <em>una</em> cosa y su nombre lo dice.</p>
+      <p>Ana y Luis pagan lo mismo que antes: una refactorización <strong>no debe cambiar resultados</strong>, salvo el error que corriges a propósito. Por eso se guarda la salida del script original y se compara.</p>
+    </div></div>
+    <div class="paso verif"><div>
+      <span class="etq">Verificación</span>
+      <p>Cada función se puede probar sola: <code>aplicar_descuento(50)</code> debe dar 45, <code>aplicar_descuento(49.99)</code> debe dar 49.99. Eso es exactamente lo que harán las <a href="#pruebas">pruebas automáticas</a>.</p>
+    </div></div>
+  </div>
+  <div class="box ojo">
+    <span class="box-title">Anatomía de una función</span>
+<pre data-norun><code class="language-python">def nombre_en_verbo(parametro_1, parametro_2=valor_por_defecto):
+    """Una línea que dice QUÉ hace (no cómo)."""
+    # cuerpo: usa solo sus parámetros y constantes
+    return resultado</code></pre>
+    <p><strong>Parámetro</strong>: el nombre en la definición (<code>precio_unitario</code>). <strong>Argumento</strong>: el valor en la llamada (<code>12.50</code>). Nombres en verbo: <code>calcular_</code>, <code>aplicar_</code>, <code>validar_</code>, <code>es_</code>/<code>tiene_</code> para las que devuelven <code>bool</code>.</p>
+  </div>
+</section>
+
+<section id="parametros">
+  <h2>Parámetros, valores por defecto y retorno</h2>
+  <div class="ciclo">
+    <h3>Caso: la cuota mensual de un préstamo</h3>
+    <div class="paso"><div>
+      <span class="etq">Pregunta</span>
+      <p>Una cooperativa quiere calcular la cuota fija mensual de un préstamo (sistema francés). La mayoría de préstamos son a 12 meses, pero puede cambiar. También hay préstamos promocionales al 0 %.</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Exploración</span>
+      <ul>
+        <li>Fórmula: <code>cuota = monto × i / (1 − (1 + i)^−n)</code>, con <code>i</code> = tasa anual / 12 y <code>n</code> = meses.</li>
+        <li><code>meses</code> tiene un valor típico → <strong>valor por defecto</strong> <code>meses=12</code>.</li>
+        <li><strong>Caso borde:</strong> con tasa 0 la fórmula divide 0 entre 0. Se trata aparte: cuota = monto / meses.</li>
+      </ul>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Implementación</span>
+<pre data-file="cuota.py"><code class="language-python">def calcular_cuota(monto, tasa_anual, meses=12):
+    """Calcula la cuota mensual fija de un préstamo (sistema francés).
+
+    Args:
+        monto: capital prestado, en dólares.
+        tasa_anual: tasa nominal anual como fracción (0.12 = 12 %).
+        meses: plazo en meses; 12 por defecto.
+
+    Returns:
+        Cuota mensual redondeada a 2 decimales.
+    """
+    if tasa_anual == 0:
+        return round(monto / meses, 2)
+    i = tasa_anual / 12
+    cuota = monto * i / (1 - (1 + i) ** -meses)
+    return round(cuota, 2)
+
+
+def desglosar_total(total_con_iva, tasa=0.13):
+    """Separa un total con IVA en base imponible e IVA."""
+    base = round(total_con_iva / (1 + tasa), 2)
+    iva = round(total_con_iva - base, 2)
+    return base, iva
+
+
+print(calcular_cuota(5000, 0.12))                       # posicionales, meses por defecto
+print(calcular_cuota(5000, 0.12, 24))                   # meses explícito
+print(calcular_cuota(meses=36, monto=10000, tasa_anual=0.18))  # nombrados
+print(calcular_cuota(5000, 0))                          # caso borde: tasa 0
+
+base, iva = desglosar_total(113)
+print(f"Base: {base}, IVA: {iva}")</code></pre>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Resultado</span>
+<pre class="salida" data-file="salida"><code>444.24
+235.37
+361.52
+416.67
+Base: 100.0, IVA: 13.0</code></pre>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Interpretación</span>
+      <p>Alargar el plazo de 12 a 24 meses baja la cuota de $444.24 a $235.37, pero el total de intereses sube de $330.88 (444.24 × 12 − 5000) a $648.88. La función permite comparar escenarios con una línea cada uno: eso es valor para quien decide.</p>
+      <p><code>desglosar_total</code> devuelve <strong>dos valores</strong> separados por coma, y la llamada los recibe en dos variables. (Técnicamente devuelve una tupla; la estudias la próxima semana.)</p>
+    </div></div>
+    <div class="paso verif"><div>
+      <span class="etq">Verificación</span>
+      <ul>
+        <li>Con tasa 0, la cuota × meses debe ser exactamente el monto: 416.67 × 12 ≈ 5000.04 (el centavo sale del redondeo).</li>
+        <li>La cuota × meses siempre debe ser <strong>mayor</strong> que el monto si la tasa es positiva.</li>
+        <li>Compara con el simulador de un banco o con la función <code>PAGO</code> de Excel: <code>=PAGO(12%/12; 12; -5000)</code>.</li>
+      </ul>
+    </div></div>
+  </div>
+</section>
+
+<section id="ambito">
+  <h2>Ámbito: variables locales y globales</h2>
+  <p>Cada llamada a una función tiene su propio espacio de variables. Lo que se crea adentro <strong>muere</strong> al terminar la función y no choca con variables de afuera que se llamen igual.</p>
+<pre data-file="ambito.py"><code class="language-python">descuento = 0.05                 # global
+
+
+def precio_final(precio):
+    descuento = 0.10             # local: es OTRA variable
+    return precio * (1 - descuento)
+
+
+a = precio_final(200)
+b = 200 * (1 - descuento)       # aquí se usa la global
+print(a, b, descuento)</code></pre>
+<pre class="salida" data-file="salida"><code>180.0 190.0 0.05</code></pre>
+  <div class="box error">
+    <span class="box-title">El error de modificar una global</span>
+<pre data-file="global_error.py" data-error><code class="language-python">total_ventas = 0
+
+def registrar_venta(monto):
+    total_ventas = total_ventas + monto   # ¿cuál total_ventas?
+
+registrar_venta(100)</code></pre>
+<pre class="salida" data-file="salida"><code>UnboundLocalError: cannot access local variable 'total_ventas' where it is not associated with a value</code></pre>
+    <p>Como la función <em>asigna</em> <code>total_ventas</code>, Python la considera local en toda la función, y a la derecha del <code>=</code> todavía no tiene valor. La solución correcta no es <code>global</code>, sino recibir y devolver:</p>
+<pre data-file="global_bien.py"><code class="language-python">def registrar_venta(total_actual, monto):
+    """Devuelve el nuevo total después de registrar una venta."""
+    return total_actual + monto
+
+total_ventas = 0
+total_ventas = registrar_venta(total_ventas, 100)
+total_ventas = registrar_venta(total_ventas, 50)
+print(total_ventas)</code></pre>
+<pre class="salida" data-file="salida"><code>150</code></pre>
+  </div>
+</section>
+
+<section id="recursion">
+  <h2>Recursividad elemental</h2>
+  <div class="ciclo">
+    <h3>Caso: el valor futuro, definido en términos de sí mismo</h3>
+    <div class="paso"><div>
+      <span class="etq">Pregunta</span>
+      <p>El valor de una inversión dentro de <em>n</em> años es el valor dentro de <em>n − 1</em> años, multiplicado por (1 + tasa). Y dentro de 0 años es el capital. ¿Puede una función expresar eso literalmente?</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Exploración</span>
+      <p>Toda función recursiva tiene dos partes: el <strong>caso base</strong> (se responde sin llamarse otra vez: 0 años → el capital) y el <strong>caso recursivo</strong> (se llama con un problema más pequeño: <code>anios - 1</code>).</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Implementación</span>
+<pre data-file="valor_futuro.py"><code class="language-python">def valor_futuro(capital, tasa, anios):
+    """Valor futuro con interés compuesto anual, calculado recursivamente."""
+    if anios == 0:                                   # caso base
+        return capital
+    anterior = valor_futuro(capital, tasa, anios - 1)  # caso recursivo
+    return round(anterior * (1 + tasa), 2)
+
+
+print(valor_futuro(1000, 0.10, 3))</code></pre>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Resultado</span>
+<pre class="salida" data-file="salida"><code>1331.0</code></pre>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Interpretación</span>
+      <p>La llamada con 3 años “espera” a la de 2, que espera a la de 1, que espera a la de 0. La de 0 responde 1000 y las respuestas regresan multiplicándose: 1100 → 1210 → 1331. Esa pila de llamadas en espera es lo que trazas en la <a href="#trazas">traza 2</a>.</p>
+    </div></div>
+    <div class="paso verif"><div>
+      <span class="etq">Verificación</span>
+      <p>1000 × 1.1³ = 1331 ✔ (y coincide con el bucle de la semana 3). ¿Qué pasa con <code>anios = -1</code>? Nunca llega a 0 → <code>RecursionError</code>. Una versión defensiva valida <code>anios &gt;= 0</code> antes.</p>
+    </div></div>
+  </div>
+  <div class="box nota">
+    <span class="box-title">¿Recursión o bucle?</span>
+    Todo lo recursivo se puede escribir con un bucle. En Python, para cálculos repetitivos simples como este, el bucle suele ser más claro y eficiente. La recursión brilla con estructuras que se contienen a sí mismas (carpetas dentro de carpetas, categorías dentro de categorías). Aquí la estudias para entender la <em>pila de llamadas</em>.
+  </div>
+</section>
+
+<section id="modulos">
+  <h2>Módulos: separar el código en archivos</h2>
+  <p>Un módulo es un archivo <code>.py</code> cuyas funciones se pueden importar desde otro. Es el principio de la arquitectura que exige el proyecto (<code>modelos.py</code>, <code>servicios.py</code>, <code>main.py</code>…).</p>
+<pre data-file="facturacion.py" data-module><code class="language-python">"""Cálculos de facturación de la Distribuidora La Ceiba."""
+
+TASA_IVA = 0.13
+TASA_DESCUENTO = 0.10
+MINIMO_DESCUENTO = 50
+
+
+def calcular_subtotal(precio_unitario, cantidad):
+    """Devuelve el precio unitario multiplicado por la cantidad."""
+    return precio_unitario * cantidad
+
+
+def aplicar_descuento(subtotal):
+    """Aplica el descuento por volumen si el subtotal llega al mínimo."""
+    if subtotal >= MINIMO_DESCUENTO:
+        return subtotal * (1 - TASA_DESCUENTO)
+    return subtotal
+
+
+def calcular_total(precio_unitario, cantidad):
+    """Calcula el total a pagar con descuento por volumen e IVA."""
+    subtotal = calcular_subtotal(precio_unitario, cantidad)
+    base = aplicar_descuento(subtotal)
+    return round(base * (1 + TASA_IVA), 2)</code></pre>
+<pre data-file="main.py"><code class="language-python">from facturacion import calcular_total
+import facturacion as fac
+
+print(calcular_total(12.50, 4))
+print(fac.TASA_IVA)</code></pre>
+<pre class="salida" data-file="salida de python main.py"><code>50.85
+0.13</code></pre>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Forma</th><th>Cómo se llama después</th><th>Cuándo</th></tr></thead>
+    <tbody>
+      <tr><td><code>import facturacion</code></td><td><code>facturacion.calcular_total(...)</code></td><td>deja claro de dónde viene cada función</td></tr>
+      <tr><td><code>from facturacion import calcular_total</code></td><td><code>calcular_total(...)</code></td><td>usas pocas funciones del módulo</td></tr>
+      <tr><td><code>import facturacion as fac</code></td><td><code>fac.calcular_total(...)</code></td><td>nombres largos</td></tr>
+      <tr><td><code>from facturacion import *</code></td><td>todo sin prefijo</td><td>evítalo: no se sabe qué entró ni de dónde</td></tr>
+    </tbody>
+  </table></div>
+  <div class="box adelanto">
+    <span class="box-title">Adelanto opcional · <code>if __name__ == "__main__":</code></span>
+    <p>Si <code>facturacion.py</code> tuviera <code>print(...)</code> sueltos al final, se ejecutarían <em>también</em> al importarlo. El patrón <code>if __name__ == "__main__":</code> hace que ese bloque corra solo cuando ejecutas el archivo directamente. Lo verás en proyectos reales; no es necesario para el Control 2.</p>
+  </div>
+</section>
+
+<section id="pruebas">
+  <h2>Pruebas: <code>assert</code> y <code>pytest</code></h2>
+  <div class="ciclo">
+    <h3>Caso: que nadie vuelva a romper el descuento de Marta</h3>
+    <div class="paso"><div>
+      <span class="etq">Pregunta</span>
+      <p>Corregimos el error de <code>&gt;</code> vs <code>&gt;=</code>. ¿Cómo garantizamos que, si alguien lo vuelve a introducir dentro de tres semanas, lo sepamos en segundos?</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Exploración</span>
+      <p>Una <strong>prueba unitaria</strong> llama a una función con una entrada conocida y compara con el resultado esperado. Las mejores pruebas atacan los <strong>casos borde</strong> de la matriz: justo en la frontera, justo debajo, cero.</p>
+      <p>Paso 1: con <code>assert</code> (pruebas “artesanales”, sin instalar nada):</p>
+<pre data-file="pruebas_rapidas.py"><code class="language-python">from facturacion import aplicar_descuento, calcular_total
+
+assert aplicar_descuento(49.99) == 49.99, "debajo del mínimo no hay descuento"
+assert calcular_total(10, 4) == 45.2
+assert calcular_total(30, 2) == 61.02
+print("Todas las pruebas pasaron")</code></pre>
+<pre class="salida" data-file="salida"><code>Todas las pruebas pasaron</code></pre>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Implementación con pytest</span>
+      <p>Instálalo una vez con <code>python -m pip install pytest</code>. Crea el archivo de pruebas junto a <code>facturacion.py</code>:</p>
+<pre data-file="test_facturacion.py" data-norun><code class="language-python">import pytest
+
+from facturacion import aplicar_descuento, calcular_total
+
+
+def test_sin_descuento_bajo_el_minimo():
+    assert calcular_total(10, 4) == 45.2
+
+
+def test_descuento_en_la_frontera_exacta():
+    assert aplicar_descuento(50) == pytest.approx(45)
+
+
+def test_justo_debajo_de_la_frontera():
+    assert aplicar_descuento(49.99) == 49.99
+
+
+def test_descuento_sobre_el_minimo():
+    assert calcular_total(30, 2) == 61.02
+
+
+def test_cantidad_cero():
+    assert calcular_total(12.50, 0) == 0</code></pre>
+      <p>Y en la terminal, desde esa carpeta: <code>python -m pytest</code></p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Resultado</span>
+<pre class="salida" data-file="terminal (resumido)"><code>collected 5 items
+
+test_facturacion.py .....                                   [100%]
+
+============================== 5 passed in 0.01s ==============================</code></pre>
+      <p>Ahora sabotea a propósito: cambia <code>&gt;=</code> por <code>&gt;</code> en <code>aplicar_descuento</code> y vuelve a correr.</p>
+<pre class="salida" data-file="terminal (resumido)"><code>test_facturacion.py .F...                                   [100%]
+
+___________________ test_descuento_en_la_frontera_exacta ___________________
+
+    def test_descuento_en_la_frontera_exacta():
+&gt;       assert aplicar_descuento(50) == pytest.approx(45)
+E       assert 50 == 45 ± 4.5e-05
+
+FAILED test_facturacion.py::test_descuento_en_la_frontera_exacta
+1 failed, 4 passed in 0.02s</code></pre>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Interpretación</span>
+      <p>Cada punto es una prueba que pasó; la <code>F</code> es la que falló, y pytest dice cuál, en qué línea, y qué valor obtuvo (50) frente al esperado (45). La prueba de la frontera exacta detectó el error en segundos. Las otras cuatro pasaron, lo cual demuestra por qué <strong>probar solo casos “normales” no basta</strong>.</p>
+      <p><code>pytest.approx</code> compara flotantes con una tolerancia, porque <code>50 * 0.9</code> podría no ser exactamente <code>45</code> en binario.</p>
+    </div></div>
+    <div class="paso verif"><div>
+      <span class="etq">Verificación: ¿las pruebas prueban algo?</span>
+      <p>Una prueba que nunca falla no vale nada. La técnica del sabotaje (romper el código a propósito y ver que la prueba falla) es la forma de comprobar que tus pruebas sí vigilan la regla. Hazlo con cada prueba nueva.</p>
+    </div></div>
+  </div>
+</section>
+
+<section id="trazas">
+  <h2>Tablas de traza</h2>
+
+  <h3>Traza 1 · Llamadas con argumentos por defecto y nombrados</h3>
+<pre data-file="traza1.py"><code class="language-python">def calcular_total(subtotal, tasa_iva=0.13, descuento=0):
+    return round(subtotal * (1 - descuento) * (1 + tasa_iva), 2)</code></pre>
+  <div class="traza">
+    <div class="table-wrap"><table>
+      <thead><tr><th>Llamada</th><th>subtotal</th><th>tasa_iva</th><th>descuento</th><th>Devuelve</th></tr></thead>
+      <tbody>
+        <tr><td class="dado"><code>calcular_total(100)</code></td><td><input data-a="100"></td><td><input data-a="0.13"></td><td><input data-a="0"></td><td><input data-a="113.0|113"></td></tr>
+        <tr><td class="dado"><code>calcular_total(100, 0)</code></td><td><input data-a="100"></td><td><input data-a="0"></td><td><input data-a="0"></td><td><input data-a="100|100.0"></td></tr>
+        <tr><td class="dado"><code>calcular_total(100, descuento=0.1)</code></td><td><input data-a="100"></td><td><input data-a="0.13"></td><td><input data-a="0.1"></td><td><input data-a="101.7"></td></tr>
+        <tr><td class="dado"><code>calcular_total(descuento=0.5, subtotal=40)</code></td><td><input data-a="40"></td><td><input data-a="0.13"></td><td><input data-a="0.5"></td><td><input data-a="22.6"></td></tr>
+        <tr><td class="dado"><code>calcular_total(100, 0.13, 0.2)</code></td><td><input data-a="100"></td><td><input data-a="0.13"></td><td><input data-a="0.2"></td><td><input data-a="90.4"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="acciones"><button class="btn" type="button" data-comprobar>Comprobar</button><button class="btn sec" type="button" data-solucion>Ver solución</button><button class="btn sec" type="button" data-limpiar>Limpiar</button><span class="resultado" aria-live="polite"></span></div>
+  </div>
+
+  <h3>Traza 2 · La pila de llamadas recursivas</h3>
+  <p>Para <code>valor_futuro(1000, 0.10, 3)</code>. Las llamadas se abren de arriba hacia abajo y <em>devuelven</em> de abajo hacia arriba. En “¿caso base?” escribe <em>sí</em> o <em>no</em>.</p>
+  <div class="traza">
+    <div class="table-wrap"><table>
+      <thead><tr><th>Llamada</th><th>anios</th><th>¿caso base?</th><th>Devuelve</th></tr></thead>
+      <tbody>
+        <tr><td>1.ª</td><td class="dado">3</td><td><input data-a="no"></td><td><input data-a="1331.0|1331"></td></tr>
+        <tr><td>2.ª</td><td><input data-a="2"></td><td><input data-a="no"></td><td><input data-a="1210.0|1210"></td></tr>
+        <tr><td>3.ª</td><td><input data-a="1"></td><td><input data-a="no"></td><td><input data-a="1100.0|1100"></td></tr>
+        <tr><td>4.ª</td><td><input data-a="0"></td><td><input data-a="sí|si"></td><td><input data-a="1000"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="acciones"><button class="btn" type="button" data-comprobar>Comprobar</button><button class="btn sec" type="button" data-solucion>Ver solución</button><button class="btn sec" type="button" data-limpiar>Limpiar</button><span class="resultado" aria-live="polite"></span></div>
+  </div>
+  <details class="defensa"><summary>¿Qué llamada termina primero?</summary><div><p>La 4.ª (la última en abrirse) es la primera en terminar. Una pila funciona así: lo último que entra es lo primero que sale. La 1.ª llamada es la última en terminar y su resultado es el que recibe quien llamó.</p></div></details>
+
+  <h3>Traza 3 · Ámbito</h3>
+  <p>Usa <a href="#ambito">ambito.py</a>.</p>
+  <div class="traza">
+    <div class="table-wrap"><table>
+      <thead><tr><th>Pregunta</th><th>Valor</th></tr></thead>
+      <tbody>
+        <tr><td class="dado" style="text-align:left"><code>descuento</code> dentro de <code>precio_final</code></td><td><input data-a="0.1|0.10"></td></tr>
+        <tr><td class="dado" style="text-align:left"><code>a</code></td><td><input data-a="180.0|180"></td></tr>
+        <tr><td class="dado" style="text-align:left"><code>b</code></td><td><input data-a="190.0|190"></td></tr>
+        <tr><td class="dado" style="text-align:left"><code>descuento</code> global al final</td><td><input data-a="0.05"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="acciones"><button class="btn" type="button" data-comprobar>Comprobar</button><button class="btn sec" type="button" data-solucion>Ver solución</button><button class="btn sec" type="button" data-limpiar>Limpiar</button><span class="resultado" aria-live="polite"></span></div>
+  </div>
+  <ul class="check">
+    <li><input type="checkbox" id="s4-t1" data-track="s4-t1"><label for="s4-t1">Traza 1 completa.</label></li>
+    <li><input type="checkbox" id="s4-t2" data-track="s4-t2"><label for="s4-t2">Traza 2 completa y sé explicar la pila.</label></li>
+    <li><input type="checkbox" id="s4-t3" data-track="s4-t3"><label for="s4-t3">Traza 3 completa.</label></li>
+  </ul>
+</section>
+
+<section id="ejercicios">
+  <h2>Ejercicios</h2>
+
+  <article class="ejercicio">
+    <header><h3>E1 · Refactorizar una planilla</h3><span class="nivel">refactorización · ★★★</span></header>
+    <div class="cuerpo">
+      <p>Este script calcula el salario neto de dos empleados. Tasas <strong>simplificadas con fines didácticos</strong>: horas extra pagadas al doble de la tarifa por hora (salario / 240); cotización de salud 3 % del bruto con tope de $30; pensión 7.25 % del bruto.</p>
+<pre data-file="planilla_plana.py"><code class="language-python">salario_1 = 600
+horas_extra_1 = 10
+bruto_1 = salario_1 + (salario_1 / 240) * 2 * horas_extra_1
+salud_1 = bruto_1 * 0.03
+if salud_1 > 30:
+    salud_1 = 30
+neto_1 = bruto_1 - salud_1 - bruto_1 * 0.0725
+print(f"Empleado 1: neto ${neto_1:.2f}")
+
+salario_2 = 1500
+horas_extra_2 = 4
+bruto_2 = salario_2 + (salario_2 / 240) * 2 * horas_extra_2
+salud_2 = bruto_2 * 0.03
+if salud_2 > 30:
+    salud_2 = 30
+neto_2 = bruto_2 - salud_2 - bruto_2 * 0.0725
+print(f"Empleado 2: neto ${neto_2:.2f}")</code></pre>
+      <p>Refactorízalo en funciones puras con docstrings (al menos: pago de horas extra, cotización de salud, pensión y salario neto con <code>horas_extra=0</code> por defecto). Los resultados no deben cambiar, y si cambian, debes poder explicar por qué.</p>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p>Primero anota la salida del script original: es tu “prueba de regresión”. Después de refactorizar, la salida debe ser idéntica. Para el tope, <code>min(a, b)</code> devuelve el menor de dos valores.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="planilla.py"><code class="language-python">HORAS_MES = 240
+RECARGO_EXTRA = 2          # horas extra al doble
+TASA_SALUD = 0.03
+TOPE_SALUD = 30.00
+TASA_PENSION = 0.0725
+
+
+def pago_horas_extra(salario, horas_extra):
+    """Pago por horas extra: tarifa por hora x recargo x horas."""
+    return round(salario / HORAS_MES * RECARGO_EXTRA * horas_extra, 2)
+
+
+def cotizacion_salud(bruto):
+    """Cotización de salud: porcentaje del bruto con un tope máximo."""
+    return min(round(bruto * TASA_SALUD, 2), TOPE_SALUD)
+
+
+def cotizacion_pension(bruto):
+    """Cotización de pensión: porcentaje fijo del bruto."""
+    return round(bruto * TASA_PENSION, 2)
+
+
+def salario_neto(salario, horas_extra=0):
+    """Salario neto mensual después de horas extra y cotizaciones."""
+    bruto = salario + pago_horas_extra(salario, horas_extra)
+    return round(bruto - cotizacion_salud(bruto) - cotizacion_pension(bruto), 2)
+
+
+print(f"Empleado 1: neto ${salario_neto(600, 10):.2f}")
+print(f"Empleado 2: neto ${salario_neto(1500, 4):.2f}")</code></pre>
+<pre class="salida" data-file="salida"><code>Empleado 1: neto $583.38
+Empleado 2: neto $1407.63</code></pre>
+      <p><strong>Verificación:</strong> el script original imprime $583.38 y <strong>$1407.62</strong>; el refactorizado, $583.38 y <strong>$1407.63</strong>. ¿Error? No: la pensión del empleado 2 es 1550 × 7.25 % = $112.375. El original resta ese valor con todos sus decimales; la versión nueva redondea cada rubro a centavos ($112.37) antes de restar, como en una boleta de pago real. Una refactorización puede cambiar un centavo si cambia <em>dónde</em> se redondea: decide la política, documéntala en el README y escribe una prueba que la fije.</p>
+    </div></details>
+    <ul class="check" style="padding:0 1.2rem .6rem"><li><input type="checkbox" id="s4-e1" data-track="s4-e1"><label for="s4-e1">Resuelto</label></li></ul>
+  </article>
+
+  <article class="ejercicio">
+    <header><h3>E2 · Cinco pruebas para la planilla</h3><span class="nivel">pytest · ★★</span></header>
+    <div class="cuerpo">
+      <p>Escribe <code>test_planilla.py</code> con al menos 5 pruebas para las funciones de E1. Deben incluir: el tope de salud (un salario que lo supera y uno que queda justo debajo), cero horas extra, y un caso con horas extra. Aplica el sabotaje: comprueba que al menos una prueba falla si quitas el tope.</p>
+    </div>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="test_planilla.py" data-norun><code class="language-python">from planilla import (cotizacion_pension, cotizacion_salud,
+                      pago_horas_extra, salario_neto)
+
+
+def test_salud_bajo_el_tope():
+    assert cotizacion_salud(600) == 18.00
+
+
+def test_salud_justo_en_el_tope():
+    assert cotizacion_salud(1000) == 30.00
+
+
+def test_salud_sobre_el_tope():
+    assert cotizacion_salud(1500) == 30.00
+
+
+def test_sin_horas_extra():
+    assert pago_horas_extra(600, 0) == 0
+
+
+def test_horas_extra_al_doble():
+    assert pago_horas_extra(600, 10) == 50.00
+
+
+def test_pension():
+    assert cotizacion_pension(1200) == 87.00
+
+
+def test_neto_con_horas_extra():
+    assert salario_neto(600, 10) == 583.38</code></pre>
+      <p><strong>Por qué estos casos:</strong> 1000 × 3 % = 30 es exactamente el tope (frontera); 1500 lo supera; 600 queda debajo. Si borras el <code>min(...)</code>, <code>test_salud_sobre_el_tope</code> falla (daría 45). Ese sabotaje demuestra que la prueba vigila la regla.</p>
+    </div></details>
+    <ul class="check" style="padding:0 1.2rem .6rem"><li><input type="checkbox" id="s4-e2" data-track="s4-e2"><label for="s4-e2">Resuelto y ejecutado con <code>python -m pytest</code></label></li></ul>
+  </article>
+
+  <article class="ejercicio">
+    <header><h3>E3 · Comparador de plazos</h3><span class="nivel">funciones + bucle · ★★</span></header>
+    <div class="cuerpo">
+      <p>Usando <code>calcular_cuota</code>, escribe una función <code>intereses_totales(monto, tasa_anual, meses=12)</code> que devuelva cuánto se paga de intereses. Luego, con un bucle, muestra una tabla para $5,000 al 12 % con plazos de 12, 24, 36 y 48 meses.</p>
+    </div>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="plazos.py"><code class="language-python">def calcular_cuota(monto, tasa_anual, meses=12):
+    """Cuota mensual fija (sistema francés), redondeada a centavos."""
+    if tasa_anual == 0:
+        return round(monto / meses, 2)
+    i = tasa_anual / 12
+    return round(monto * i / (1 - (1 + i) ** -meses), 2)
+
+
+def intereses_totales(monto, tasa_anual, meses=12):
+    """Total de intereses pagados durante todo el préstamo."""
+    return round(calcular_cuota(monto, tasa_anual, meses) * meses - monto, 2)
+
+
+print("Meses    Cuota   Intereses")
+for meses in range(12, 49, 12):
+    cuota = calcular_cuota(5000, 0.12, meses)
+    interes = intereses_totales(5000, 0.12, meses)
+    print(f"{meses:>5} {cuota:>8.2f} {interes:>10.2f}")</code></pre>
+<pre class="salida" data-file="salida"><code>Meses    Cuota   Intereses
+   12   444.24     330.88
+   24   235.37     648.88
+   36   166.07     978.52
+   48   131.67    1320.16</code></pre>
+      <p><strong>Interpretación:</strong> cuadruplicar el plazo reduce la cuota a menos de un tercio, pero multiplica los intereses por 4. La decisión depende de la liquidez mensual del cliente, y el programa hace visible el costo.</p>
+      <p><strong>Verificación:</strong> <code>range(12, 49, 12)</code> produce 12, 24, 36, 48 (el 49 no se incluye). Con tasa 0 los intereses deben ser ≈ 0.</p>
+    </div></details>
+    <ul class="check" style="padding:0 1.2rem .6rem"><li><input type="checkbox" id="s4-e3" data-track="s4-e3"><label for="s4-e3">Resuelto</label></li></ul>
+  </article>
+
+  <article class="ejercicio">
+    <header><h3>E4 · Meta de ahorro recursiva</h3><span class="nivel">recursividad · ★★</span></header>
+    <div class="cuerpo">
+      <p>Escribe <code>meses_para_meta(saldo, aporte, meta)</code> <strong>recursiva</strong> que diga cuántos aportes mensuales hacen falta para llegar a la meta (sin intereses). Ejemplos: (0, 150, 1000) → 7; (1000, 150, 1000) → 0; (900, 150, 1000) → 1. ¿Qué pasa si el aporte es 0?</p>
+    </div>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="meta.py"><code class="language-python">def meses_para_meta(saldo, aporte, meta):
+    """Número de aportes mensuales para que el saldo alcance la meta."""
+    if saldo >= meta:                  # caso base: ya llegó
+        return 0
+    return 1 + meses_para_meta(saldo + aporte, aporte, meta)
+
+
+assert meses_para_meta(0, 150, 1000) == 7
+assert meses_para_meta(1000, 150, 1000) == 0
+assert meses_para_meta(900, 150, 1000) == 1
+print("Pruebas superadas")</code></pre>
+<pre class="salida" data-file="salida"><code>Pruebas superadas</code></pre>
+      <p><strong>Caso borde:</strong> con aporte 0 (o negativo) el saldo nunca se acerca a la meta → <code>RecursionError</code>. Quien llama debe validar <code>aporte &gt; 0</code> antes, o la función debe devolver una señal de “imposible”. Esta es la versión recursiva del bucle infinito de la semana 3.</p>
+    </div></details>
+    <ul class="check" style="padding:0 1.2rem .6rem"><li><input type="checkbox" id="s4-e4" data-track="s4-e4"><label for="s4-e4">Resuelto</label></li></ul>
+  </article>
+
+  <article class="ejercicio">
+    <header><h3>E5 · Auditoría: funciones que “funcionan”</h3><span class="nivel">auditoría · ★★★</span></header>
+    <div class="cuerpo">
+      <p>Un asistente de IA generó este módulo. Ninguna línea tiene error de sintaxis. Encuentra al menos cuatro problemas y di con qué llamada concreta se manifiesta cada uno.</p>
+<pre data-file="ventas_auditar.py"><code class="language-python">TASA_IVA = 0.13
+total_general = 0
+
+
+def aplicar_iva(monto):
+    """Devuelve el monto con IVA."""
+    resultado = monto * TASA_IVA
+    print(resultado)
+
+
+def calcular_descuento(monto, porcentaje=10):
+    """Devuelve el descuento aplicable."""
+    if monto > 100:
+        return monto * porcentaje / 100
+
+
+def registrar_venta(monto):
+    """Suma la venta al total general."""
+    total_general = total_general + monto</code></pre>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p>Prueba: <code>aplicar_iva(100) + 5</code>, <code>calcular_descuento(50)</code>, <code>registrar_venta(10)</code>. Y compara el docstring de <code>aplicar_iva</code> con lo que calcula.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+      <ol>
+        <li><strong><code>aplicar_iva</code> imprime y no devuelve:</strong> <code>aplicar_iva(100) + 5</code> → <code>TypeError</code> (None + 5).</li>
+        <li><strong>Calcula otra cosa:</strong> el docstring dice “monto con IVA” pero calcula <em>solo</em> el IVA (13 en vez de 113). La documentación y el código se contradicen.</li>
+        <li><strong>Falta un camino de retorno:</strong> <code>calcular_descuento(50)</code> devuelve <code>None</code> en lugar de 0.</li>
+        <li><strong>Global modificada:</strong> <code>registrar_venta(10)</code> → <code>UnboundLocalError</code>.</li>
+        <li>(Extra) <code>porcentaje=10</code> es un número mágico; y “&gt; 100” ¿incluye el 100? Debe estar en la regla de negocio.</li>
+      </ol>
+<pre data-file="ventas_corregido.py"><code class="language-python">TASA_IVA = 0.13
+PORCENTAJE_DESCUENTO = 10
+MINIMO_DESCUENTO = 100
+
+
+def aplicar_iva(monto):
+    """Devuelve el monto con IVA incluido."""
+    return round(monto * (1 + TASA_IVA), 2)
+
+
+def calcular_descuento(monto, porcentaje=PORCENTAJE_DESCUENTO):
+    """Devuelve el descuento en dólares (0 si no aplica)."""
+    if monto > MINIMO_DESCUENTO:
+        return monto * porcentaje / 100
+    return 0
+
+
+def registrar_venta(total_actual, monto):
+    """Devuelve el nuevo total general tras sumar la venta."""
+    return total_actual + monto
+
+
+assert aplicar_iva(100) == 113
+assert calcular_descuento(50) == 0
+assert calcular_descuento(200) == 20
+assert registrar_venta(0, 10) == 10
+print("Módulo corregido: pruebas superadas")</code></pre>
+<pre class="salida" data-file="salida"><code>Módulo corregido: pruebas superadas</code></pre>
+      <p><strong>Método de auditoría:</strong> no se lee el código “a ver si se ve bien”; se <em>llama</em> cada función con casos elegidos (normal, frontera, fuera de rango) y se compara con lo que promete el docstring.</p>
+    </div></details>
+    <ul class="check" style="padding:0 1.2rem .6rem"><li><input type="checkbox" id="s4-e5" data-track="s4-e5"><label for="s4-e5">Resuelto</label></li></ul>
+  </article>
+</section>
+
+<section id="proyecto">
+  <h2>Proyecto integrador · Preparar la Fase 3</h2>
+  <p>La <strong>Fase 3 (semana 5)</strong> pide código funcional organizado en funciones con parámetros, retornos y docstrings, y colecciones en memoria. Esta semana construyen las funciones.</p>
+  <div class="card">
+    <h3>Tareas sugeridas para el equipo</h3>
+    <ul class="check">
+      <li><input type="checkbox" id="s4-p1" data-track="s4-p1"><label for="s4-p1">Convertir cada regla de negocio del diagrama de la Fase 2 en una <strong>función pura</strong> con docstring.</label></li>
+      <li><input type="checkbox" id="s4-p2" data-track="s4-p2"><label for="s4-p2">Separar cálculo (<code>return</code>) de presentación (<code>print</code>): ninguna función de cálculo imprime.</label></li>
+      <li><input type="checkbox" id="s4-p3" data-track="s4-p3"><label for="s4-p3">Convertir los 5 casos de la matriz de casos borde en <code>assert</code> o pruebas de pytest. (Adelantan trabajo de la Fase 5.)</label></li>
+      <li><input type="checkbox" id="s4-p4" data-track="s4-p4"><label for="s4-p4">Repartir funciones entre integrantes, cada una en su rama, con commits propios.</label></li>
+    </ul>
+  </div>
+  <h3>Preguntas de defensa</h3>
+  <details class="defensa"><summary>¿Por qué esta función devuelve su resultado en vez de imprimirlo?</summary><div><p>Para poder reutilizarla (otra función usa el resultado), probarla con <code>assert</code> y cambiar la presentación (consola, archivo, reporte) sin tocar el cálculo.</p></div></details>
+  <details class="defensa"><summary>¿Cuáles de sus funciones son puras y cuáles no? ¿Por qué?</summary><div><p>Puras: los cálculos (mismos argumentos → mismo resultado, sin efectos). No puras: las que leen del teclado, imprimen o (desde la semana 7) leen/escriben archivos. Diseñan el sistema para que la lógica de negocio sea pura y quede en el centro.</p></div></details>
+  <details class="defensa"><summary>¿Por qué no usan variables globales?</summary><div><p>Cualquier función podría modificarlas, lo que hace imposible saber quién cambió un valor y rompe las pruebas aisladas. Solo usamos constantes globales (en MAYÚSCULAS) que no cambian.</p></div></details>
+  <details class="defensa"><summary>¿Qué comprueba esta prueba y qué pasaría si la regla tuviera un error en la frontera?</summary><div><p>Señala la regla, el valor frontera y demuestra (sabotaje) que la prueba falla si se cambia <code>&gt;=</code> por <code>&gt;</code>.</p></div></details>
+  <details class="defensa"><summary>Modifiquen en vivo: agreguen un parámetro opcional a esta función.</summary><div><p>En la sustentación pueden pedirles cambios en vivo. Practica: añade un parámetro con valor por defecto para no romper las llamadas existentes, y corre las pruebas para demostrarlo.</p></div></details>
+</section>
+
+<section id="evaluacion">
+  <h2>Rumbo al Control 2 y al Parcial</h2>
+  <p>Control 2 en la <strong>semana 5</strong> y Examen Parcial en la <strong>semana 6</strong> (individuales, sin IA). De esta semana, asegúrate de poder:</p>
+  <ul class="check">
+    <li><input type="checkbox" id="s4-v1" data-track="s4-v1"><label for="s4-v1">Escribir una función con parámetros obligatorios, opcionales y docstring.</label></li>
+    <li><input type="checkbox" id="s4-v2" data-track="s4-v2"><label for="s4-v2">Predecir el resultado de llamadas con argumentos posicionales y nombrados.</label></li>
+    <li><input type="checkbox" id="s4-v3" data-track="s4-v3"><label for="s4-v3">Explicar la diferencia entre <code>print</code> y <code>return</code>, y reconocer un <code>None</code> inesperado.</label></li>
+    <li><input type="checkbox" id="s4-v4" data-track="s4-v4"><label for="s4-v4">Distinguir variable local y global y explicar <code>UnboundLocalError</code>.</label></li>
+    <li><input type="checkbox" id="s4-v5" data-track="s4-v5"><label for="s4-v5">Trazar una función recursiva y señalar su caso base.</label></li>
+    <li><input type="checkbox" id="s4-v6" data-track="s4-v6"><label for="s4-v6">Escribir pruebas con <code>assert</code> que ataquen las fronteras.</label></li>
+  </ul>
+</section>
+
+<section id="fuentes">
+  <h2>Fuentes</h2>
+  <ul>
+    <li><strong>[PCC]</strong> Matthes, E. (2023). <em>Python Crash Course</em>, 3.ª ed. Cap. 8 y sección 11.1.</li>
+    <li>Python Software Foundation. <a href="https://docs.python.org/es/3/tutorial/controlflow.html#defining-functions" target="_blank" rel="noopener">Tutorial — Definiendo funciones</a> · <a href="https://docs.python.org/es/3/tutorial/modules.html" target="_blank" rel="noopener">Módulos</a>.</li>
+    <li><a href="https://docs.pytest.org/en/stable/getting-started.html" target="_blank" rel="noopener">pytest — Get Started</a> · <a href="https://peps.python.org/pep-0257/" target="_blank" rel="noopener">PEP 257</a>.</li>
+  </ul>
+  <p style="font-size:.9rem;color:var(--ink-3)">Las tasas de la planilla (E1) son simplificadas y con fines didácticos; no constituyen asesoría legal ni reflejan necesariamente la normativa vigente.</p>
+  <nav class="nav-semanas" aria-label="Navegación entre semanas">
+    <a href="semana-03.html">← Semana 3</a>
+    <a href="semana-05.html">Semana 5: listas y ordenamiento →</a>
+  </nav>
+</section>
+
+<footer class="pie">Guía de estudio · Introducción al Desarrollo de Software · ESEN · Ciclo III/2026. Material de apoyo no oficial; el programa y Moodle mandan.</footer>
+</main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+<script src="../assets/guia.js"></script>
+</body>
+</html>
