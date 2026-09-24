@@ -7,7 +7,7 @@
 <meta name="description" content="Guía de estudio, semana 1: algoritmos, diagramas de flujo, entorno de Python y fundamentos de Git/GitHub.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/guia.css">
 <script>try{var t=localStorage.getItem("ids-guia-v1-tema");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 </head>
@@ -22,23 +22,48 @@
     <a href="semana-04.html">S4</a>
     <a href="semana-05.html">S5</a>
   </nav>
-  <button class="theme-btn" type="button" aria-label="Cambiar tema claro/oscuro">◐</button>
+  <button class="theme-btn" type="button" aria-label="Cambiar tema claro/oscuro"><span class="ico-tema" aria-hidden="true"></span></button>
+</header>
+
+<header class="hero-semana">
+  <div class="hero-in">
+    <p class="hero-num" aria-hidden="true">01</p>
+    <div class="hero-txt">
+      <p class="hero-mod"><span class="sr">Semana 1 · </span>Módulo 1</p>
+      <h1>Pensamiento computacional, entorno y control de versiones</h1>
+      <p class="lead">Antes de escribir código hay que saber <em>describir</em> un proceso sin ambigüedad. Esta semana aprendes a convertir una regla de negocio en un algoritmo, a dibujarla como diagrama de flujo, a ejecutar tu primer programa de Python y a guardar tu trabajo con Git.</p>
+    </div>
+    <p class="pregunta"><span class="pregunta-lbl">Pregunta orientadora</span><mark>¿Cómo le explico a una computadora un proceso de negocio de forma que no pueda malinterpretarlo, y cómo guardo cada versión de ese trabajo?</mark></p>
+    <dl class="hero-meta">
+      <div><dt>Lecturas</dt><dd>BOU 1 · PCC 1 + Apéndice D · GIT 1</dd></div>
+      <div><dt>Proyecto</dt><dd>Fase 1 (esta semana)</dd></div>
+      <div class="eval"><dt>Evaluación</dt><dd>Control 1: la próxima semana</dd></div>
+    </dl>
+    <div class="progress" data-progreso-pagina>
+      <div class="progress-bar"><span></span></div>
+      <div class="progress-label"></div>
+    </div>
+  </div>
 </header>
 
 <div class="layout with-toc">
 <aside class="toc" aria-label="Contenido de la semana">
   <p>Semana 1</p>
   <ol>
+    <li class="grupo" aria-hidden="true">Antes de clase</li>
     <li><a href="#uso">Cómo usar la guía</a></li>
     <li><a href="#mapa">Qué puedes usar</a></li>
     <li><a href="#lecturas">Lecturas</a></li>
     <li><a href="#checkpoint">Reading checkpoint</a></li>
+    <li class="grupo" aria-hidden="true">Aprender</li>
     <li><a href="#vida">Ciclo de vida</a></li>
     <li><a href="#algoritmos">Algoritmos y diagramas</a></li>
     <li><a href="#entorno">Entorno y terminal</a></li>
     <li><a href="#git">Git y GitHub</a></li>
+    <li class="grupo" aria-hidden="true">Practicar</li>
     <li><a href="#trazas">Tablas de traza</a></li>
     <li><a href="#ejercicios">Ejercicios</a></li>
+    <li class="grupo" aria-hidden="true">Entregar y evaluar</li>
     <li><a href="#proyecto">Proyecto: Fase 1</a></li>
     <li><a href="#evaluacion">Rumbo al Control 1</a></li>
     <li><a href="#fuentes">Fuentes</a></li>
@@ -46,21 +71,6 @@
 </aside>
 
 <main>
-<section class="hero">
-  <p class="eyebrow">Semana 1 · Módulo 1</p>
-  <h1>Pensamiento computacional, entorno y control de versiones</h1>
-  <p class="lead">Antes de escribir código hay que saber <em>describir</em> un proceso sin ambigüedad. Esta semana aprendes a convertir una regla de negocio en un algoritmo, a dibujarla como diagrama de flujo, a ejecutar tu primer programa de Python y a guardar tu trabajo con Git.</p>
-  <div class="pregunta"><small>Pregunta orientadora</small>¿Cómo le explico a una computadora un proceso de negocio de forma que no pueda malinterpretarlo, y cómo guardo cada versión de ese trabajo?</div>
-  <ul class="chips">
-    <li class="chip lect">Lecturas: BOU 1 · PCC 1 + Apéndice D · GIT 1</li>
-    <li class="chip proy">Proyecto: Fase 1 (esta semana)</li>
-    <li class="chip eval">Control 1: la próxima semana</li>
-  </ul>
-  <div class="progress" data-progreso-pagina>
-    <div class="progress-bar"><span></span></div>
-    <div class="progress-label"></div>
-  </div>
-</section>
 
 <section id="uso">
   <h2>Cómo usar esta guía</h2>
@@ -229,6 +239,8 @@
 <section id="vida">
   <h2>El ciclo de vida del software</h2>
   <p>Un programa no empieza en el teclado. Empieza en una necesidad del negocio y termina (si termina) cuando nadie lo usa. Las fases básicas:</p>
+<figure class="lamina "><div class="placa"><img src="../assets/img/s1-ciclo-vida.svg" alt="Ciclo de vida del software: requerimientos, diseño, implementación, pruebas, despliegue y mantenimiento; el mantenimiento vuelve a requerimientos." width="760" height="152" loading="lazy" decoding="async"></div><figcaption>Las pruebas están <strong>antes</strong> del despliegue: ahí es barato encontrar errores. El mantenimiento reinicia el ciclo.</figcaption></figure>
+
   <div class="table-wrap"><table>
     <thead><tr><th>Fase</th><th>Pregunta que responde</th><th>Ejemplo: sistema de facturación</th></tr></thead>
     <tbody>
@@ -254,6 +266,8 @@
     <li><strong>Finitud:</strong> termina siempre, para cualquier entrada válida.</li>
     <li><strong>Entradas y salidas definidas:</strong> sabes qué datos necesita y qué entrega.</li>
   </ol>
+<figure class="lamina "><div class="placa"><img src="../assets/img/s1-simbolos.svg" alt="Los cuatro símbolos del diagrama de flujo: óvalo para inicio o fin, paralelogramo para entrada o salida, rectángulo para proceso y rombo para decisión." width="720" height="172" loading="lazy" decoding="async"></div><figcaption>Los cuatro símbolos que necesitas para cualquier diagrama de flujo del curso.</figcaption></figure>
+
 
   <div class="ciclo">
     <h3>Caso: el total de una factura en la Distribuidora La Ceiba</h3>
@@ -287,34 +301,7 @@
   total ← base + iva
   MOSTRAR total
 FIN</code></pre>
-      <figure class="diagrama">
-        <svg class="fc" viewBox="0 0 540 592" width="540" role="img" aria-labelledby="fc1-t">
-          <title id="fc1-t">Diagrama de flujo del cálculo de una factura con descuento e IVA</title>
-          <defs><marker id="fc1-m" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="punta" d="M0,0 L10,5 L0,10 z"/></marker></defs>
-          <rect class="term" x="200" y="10" width="120" height="36" rx="18"/><text x="260" y="33" text-anchor="middle">Inicio</text>
-          <path class="flecha" d="M260 46 V68" marker-end="url(#fc1-m)"/>
-          <polygon class="io" points="185,70 360,70 335,110 160,110"/><text x="260" y="95" text-anchor="middle">Leer precio, cantidad</text>
-          <path class="flecha" d="M260 110 V132" marker-end="url(#fc1-m)"/>
-          <rect class="proc" x="150" y="134" width="220" height="40"/><text class="mono" x="260" y="159" text-anchor="middle">subtotal ← precio × cantidad</text>
-          <path class="flecha" d="M260 174 V196" marker-end="url(#fc1-m)"/>
-          <polygon class="dec" points="260,198 350,238 260,278 170,238"/><text x="260" y="243" text-anchor="middle">¿subtotal ≥ 50?</text>
-          <path class="flecha" d="M350 238 H430 V298" marker-end="url(#fc1-m)"/><text class="rot" x="372" y="230">Sí</text>
-          <path class="flecha" d="M170 238 H90 V298" marker-end="url(#fc1-m)"/><text class="rot" x="138" y="230">No</text>
-          <rect class="proc" x="332" y="300" width="196" height="40"/><text class="mono" x="430" y="325" text-anchor="middle">descuento ← subtotal×0.10</text>
-          <rect class="proc" x="15" y="300" width="150" height="40"/><text class="mono" x="90" y="325" text-anchor="middle">descuento ← 0</text>
-          <path class="flecha" d="M90 340 V370 H260"/>
-          <path class="flecha" d="M430 340 V370 H260 V390" marker-end="url(#fc1-m)"/>
-          <rect class="proc" x="145" y="392" width="230" height="66"/>
-          <text class="mono" x="260" y="413" text-anchor="middle">base ← subtotal − descuento</text>
-          <text class="mono" x="260" y="430" text-anchor="middle">iva ← base × 0.13</text>
-          <text class="mono" x="260" y="447" text-anchor="middle">total ← base + iva</text>
-          <path class="flecha" d="M260 458 V480" marker-end="url(#fc1-m)"/>
-          <polygon class="io" points="195,482 350,482 325,522 170,522"/><text x="260" y="507" text-anchor="middle">Mostrar total</text>
-          <path class="flecha" d="M260 522 V544" marker-end="url(#fc1-m)"/>
-          <rect class="term" x="200" y="546" width="120" height="36" rx="18"/><text x="260" y="569" text-anchor="middle">Fin</text>
-        </svg>
-        <figcaption>Símbolos: óvalo = inicio/fin · paralelogramo = entrada/salida · rectángulo = proceso · rombo = decisión.</figcaption>
-      </figure>
+      <figure class="lamina angosta"><div class="placa"><img src="../assets/img/s1-flujo-factura.svg" alt="Diagrama de flujo de la factura: leer precio y cantidad, calcular subtotal, decidir si el subtotal es mayor o igual a 50 para aplicar 10 % de descuento, calcular base, IVA y total, y mostrar el total." width="610" height="610" loading="lazy" decoding="async"></div><figcaption>El mismo algoritmo que el pseudocódigo. Fíjate en la frontera: con un subtotal de exactamente $50 se toma la rama <strong>Sí</strong>.</figcaption></figure>
     </div></div>
     <div class="paso"><div>
       <span class="etq">Resultado</span>
@@ -389,6 +376,8 @@ Sistema de facturación v0.1</code></pre>
         </tbody>
       </table></div>
       <p>Por eso un archivo puede estar: <strong>sin seguimiento</strong> (Git no lo conoce), <strong>modificado</strong>, <strong>preparado</strong> o <strong>confirmado</strong>.</p>
+<figure class="lamina "><div class="placa"><img src="../assets/img/s1-git-areas.svg" alt="Los lugares de Git: el directorio de trabajo pasa al área de preparación con git add, al repositorio local con git commit y a GitHub con git push; git pull trae los cambios del remoto." width="780" height="252" loading="lazy" decoding="async"></div><figcaption><code>add</code> prepara, <code>commit</code> guarda en tu historial local, <code>push</code> lo comparte en GitHub. Son tres pasos distintos.</figcaption></figure>
+
     </div></div>
     <div class="paso"><div>
       <span class="etq">Implementación: configuración inicial (una sola vez por computadora)</span>
@@ -412,6 +401,8 @@ git switch feature/ficha-tecnica   # cámbiate a ella (en versiones viejas: git 
 git switch main                    # vuelves a main
 git merge feature/ficha-tecnica    # integras el trabajo
 git branch -d feature/ficha-tecnica  # borra la rama ya integrada</code></pre>
+<figure class="lamina "><div class="placa"><img src="../assets/img/s1-git-ramas.svg" alt="Una rama feature sale del commit C2 de main, recibe los commits F1 y F2, y se integra de vuelta a main con un merge en el commit M." width="740" height="266" loading="lazy" decoding="async"></div><figcaption>Una rama por tarea. <code>git switch -c nombre</code> equivale a <code>git branch nombre</code> + <code>git switch nombre</code>.</figcaption></figure>
+
       <p><strong>GitHub (repositorio remoto):</strong></p>
 <pre data-file="terminal"><code class="language-bash">git remote add origin git@github.com:usuario/la-ceiba.git   # con SSH
 git push -u origin main            # la primera vez; después basta con: git push

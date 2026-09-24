@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 318" width="700" height="318" role="img" aria-label="Comparaciones de Bubble e Insertion Sort según n: en el peor caso crecen como n por n menos 1 entre 2, llegando a 4950 con 100 datos; con la lista ya ordenada solo 99.">
+<title>Comparaciones de Bubble e Insertion Sort según n: en el peor caso crecen como n por n menos 1 entre 2, llegando a 4950 con 100 datos; con la lista ya ordenada solo 99.</title>
+<style>
+  text { font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; fill: #1b2430; }
+  .m { font-family: 'JetBrains Mono', Menlo, Consolas, monospace; font-size: 13px; }
+  .s { font-size: 12px; fill: #465264; }
+  .t { font-size: 16px; font-weight: 700; }
+  .b { font-weight: 700; }
+  .mu { fill: #6b7380; }
+  .w { fill: #fff; }
+  .ln { stroke: #465264; stroke-width: 1.6; fill: none; }
+  .ln-s { stroke: #c5ced6; stroke-width: 1.2; fill: none; }
+</style>
+<defs><marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#465264"/></marker><marker id="pb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0a70a8"/></marker><marker id="pg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2e7d4f"/></marker></defs>
+<path d="M80 260.0 H660" stroke="#e9eef1"/>
+<text x="70" y="264.0" text-anchor="end" class="s">0</text>
+<path d="M80 216.0 H660" stroke="#e9eef1"/>
+<text x="70" y="220.0" text-anchor="end" class="s">1,000</text>
+<path d="M80 172.0 H660" stroke="#e9eef1"/>
+<text x="70" y="176.0" text-anchor="end" class="s">2,000</text>
+<path d="M80 128.0 H660" stroke="#e9eef1"/>
+<text x="70" y="132.0" text-anchor="end" class="s">3,000</text>
+<path d="M80 84.0 H660" stroke="#e9eef1"/>
+<text x="70" y="88.0" text-anchor="end" class="s">4,000</text>
+<path d="M80 40.0 H660" stroke="#e9eef1"/>
+<text x="70" y="44.0" text-anchor="end" class="s">5,000</text>
+<text x="80.0" y="280" text-anchor="middle" class="s">0</text>
+<text x="225.0" y="280" text-anchor="middle" class="s">25</text>
+<text x="370.0" y="280" text-anchor="middle" class="s">50</text>
+<text x="515.0" y="280" text-anchor="middle" class="s">75</text>
+<text x="660.0" y="280" text-anchor="middle" class="s">100</text>
+<text x="370.0" y="302" text-anchor="middle" class="s b">n (cantidad de datos)</text>
+<text x="20" y="24" text-anchor="start" class="s b">comparaciones</text>
+<polyline points="80.0,260.0 91.6,260.0 103.2,259.7 114.8,259.3 126.4,258.8 138.0,258.0 149.6,257.1 161.2,256.0 172.8,254.7 184.4,253.3 196.0,251.6 207.6,249.8 219.2,247.9 230.8,245.7 242.4,243.4 254.0,240.9 265.6,238.2 277.2,235.3 288.8,232.3 300.4,229.1 312.0,225.7 323.6,222.1 335.2,218.4 346.8,214.5 358.4,210.4 370.0,206.1 381.6,201.7 393.2,197.0 404.8,192.2 416.4,187.3 428.0,182.1 439.6,176.8 451.2,171.3 462.8,165.6 474.4,159.8 486.0,153.7 497.6,147.5 509.2,141.2 520.8,134.6 532.4,127.9 544.0,121.0 555.6,113.9 567.2,106.6 578.8,99.2 590.4,91.6 602.0,83.8 613.6,75.8 625.2,67.7 636.8,59.4 648.4,50.9 660.0,42.2" fill="none" stroke="#b07600" stroke-width="2.5" stroke-linejoin="round"/>
+<polyline points="80.0,260.0 91.6,260.0 103.2,259.9 114.8,259.8 126.4,259.7 138.0,259.6 149.6,259.5 161.2,259.4 172.8,259.3 184.4,259.3 196.0,259.2 207.6,259.1 219.2,259.0 230.8,258.9 242.4,258.8 254.0,258.7 265.6,258.6 277.2,258.5 288.8,258.5 300.4,258.4 312.0,258.3 323.6,258.2 335.2,258.1 346.8,258.0 358.4,257.9 370.0,257.8 381.6,257.8 393.2,257.7 404.8,257.6 416.4,257.5 428.0,257.4 439.6,257.3 451.2,257.2 462.8,257.1 474.4,257.1 486.0,257.0 497.6,256.9 509.2,256.8 520.8,256.7 532.4,256.6 544.0,256.5 555.6,256.4 567.2,256.3 578.8,256.3 590.4,256.2 602.0,256.1 613.6,256.0 625.2,255.9 636.8,255.8 648.4,255.7 660.0,255.6" fill="none" stroke="#0a70a8" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M80 260 H660" stroke="#465264" stroke-width="1.2"/>
+<circle cx="660.0" cy="42.19999999999999" r="5" fill="#b07600" stroke="#fff" stroke-width="2"/>
+<circle cx="660.0" cy="255.644" r="5" fill="#0a70a8" stroke="#fff" stroke-width="2"/>
+<text x="652.0" y="30.19999999999999" text-anchor="end" class="s b">peor caso: n(n−1)/2 = 4,950</text>
+<text x="652.0" y="243.644" text-anchor="end" class="s b">lista ya ordenada: n − 1 = 99</text>
+<rect x="96" y="44" width="14" height="3" rx="1" fill="#b07600" stroke="none" stroke-width="1.5"/>
+<text x="118" y="50" text-anchor="start" class="s">orden inverso (cuadrático)</text>
+<rect x="96" y="64" width="14" height="3" rx="1" fill="#0a70a8" stroke="none" stroke-width="1.5"/>
+<text x="118" y="70" text-anchor="start" class="s">ya ordenada, con bandera (lineal)</text>
+</svg>

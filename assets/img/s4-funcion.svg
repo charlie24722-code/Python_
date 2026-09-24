@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 294" width="760" height="294" role="img" aria-label="Una función recibe argumentos, los asigna a sus parámetros, calcula y con return devuelve 50.85 a la variable total; print solo muestra en pantalla.">
+<title>Una función recibe argumentos, los asigna a sus parámetros, calcula y con return devuelve 50.85 a la variable total; print solo muestra en pantalla.</title>
+<style>
+  text { font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; fill: #1b2430; }
+  .m { font-family: 'JetBrains Mono', Menlo, Consolas, monospace; font-size: 13px; }
+  .s { font-size: 12px; fill: #465264; }
+  .t { font-size: 16px; font-weight: 700; }
+  .b { font-weight: 700; }
+  .mu { fill: #6b7380; }
+  .w { fill: #fff; }
+  .ln { stroke: #465264; stroke-width: 1.6; fill: none; }
+  .ln-s { stroke: #c5ced6; stroke-width: 1.2; fill: none; }
+</style>
+<defs><marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#465264"/></marker><marker id="pb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0a70a8"/></marker><marker id="pg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2e7d4f"/></marker></defs>
+<rect x="20" y="60" width="150" height="90" rx="8" fill="#e2ecf1" stroke="#1d4f66" stroke-width="1.5"/>
+<text x="95" y="84" text-anchor="middle" class="b">Argumentos</text>
+<text x="95" y="110" text-anchor="middle" class="m">12.50</text>
+<text x="95" y="132" text-anchor="middle" class="m">4</text>
+<path class="ln" d="M172 105 H236" marker-end="url(#p)"/>
+<rect x="240" y="40" width="290" height="130" rx="8" fill="#e9eef1" stroke="#465264" stroke-width="1.5"/>
+<text x="385" y="66" text-anchor="middle" class="m b">def calcular_total(</text>
+<text x="385" y="86" text-anchor="middle" class="m b">precio_unitario, cantidad):</text>
+<path d="M256 100 H514" stroke="#c5ced6"/>
+<text x="385" y="124" text-anchor="middle" class="s">parámetros = nombres locales</text>
+<text x="385" y="148" text-anchor="middle" class="m">return round(base * 1.13, 2)</text>
+<path class="ln" d="M532 105 H596" marker-end="url(#pg)" stroke="#2e7d4f" stroke-width="2.5"/>
+<text x="564" y="95" text-anchor="middle" class="m s b">return</text>
+<rect x="600" y="70" width="140" height="70" rx="8" fill="#dcefe3" stroke="#2e7d4f" stroke-width="1.5"/>
+<text x="670" y="98" text-anchor="middle" class="m">total =</text>
+<text x="670" y="122" text-anchor="middle" class="m b">50.85</text>
+<path class="ln" d="M385 172 V214" marker-end="url(#p)" stroke-dasharray="4 4"/>
+<rect x="285" y="216" width="200" height="40" rx="6" fill="#f7e0dc" stroke="#b8402f" stroke-width="1.5"/>
+<text x="385" y="241" text-anchor="middle" class="s b">print(...) → solo pantalla</text>
+<text x="385" y="282" text-anchor="middle" class="s">return devuelve el valor a quien llamó; print solo lo muestra y la función devuelve None.</text>
+</svg>

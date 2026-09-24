@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 304" width="760" height="304" role="img" aria-label="El módulo facturacion.py contiene las funciones; main.py y test_facturacion.py las importan.">
+<title>El módulo facturacion.py contiene las funciones; main.py y test_facturacion.py las importan.</title>
+<style>
+  text { font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; fill: #1b2430; }
+  .m { font-family: 'JetBrains Mono', Menlo, Consolas, monospace; font-size: 13px; }
+  .s { font-size: 12px; fill: #465264; }
+  .t { font-size: 16px; font-weight: 700; }
+  .b { font-weight: 700; }
+  .mu { fill: #6b7380; }
+  .w { fill: #fff; }
+  .ln { stroke: #465264; stroke-width: 1.6; fill: none; }
+  .ln-s { stroke: #c5ced6; stroke-width: 1.2; fill: none; }
+</style>
+<defs><marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#465264"/></marker><marker id="pb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0a70a8"/></marker><marker id="pg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2e7d4f"/></marker></defs>
+<rect x="270" y="16" width="220" height="124" rx="8" fill="#e2ecf1" stroke="#1d4f66" stroke-width="1.5"/>
+<text x="380" y="40" text-anchor="middle" class="m b">facturacion.py</text>
+<text x="380" y="66" text-anchor="middle" class="m s">TASA_IVA = 0.13</text>
+<text x="380" y="84" text-anchor="middle" class="m s">calcular_subtotal()</text>
+<text x="380" y="102" text-anchor="middle" class="m s">aplicar_descuento()</text>
+<text x="380" y="120" text-anchor="middle" class="m s">calcular_total()</text>
+<rect x="20" y="190" width="320" height="74" rx="8" fill="#e9eef1" stroke="#465264" stroke-width="1.5"/>
+<text x="180" y="214" text-anchor="middle" class="m b">main.py</text>
+<text x="180" y="238" text-anchor="middle" class="m s">from facturacion import calcular_total</text>
+<text x="180" y="256" text-anchor="middle" class="s">usa las funciones</text>
+<rect x="420" y="190" width="320" height="74" rx="8" fill="#dcefe3" stroke="#2e7d4f" stroke-width="1.5"/>
+<text x="580" y="214" text-anchor="middle" class="m b">test_facturacion.py</text>
+<text x="580" y="238" text-anchor="middle" class="m s">from facturacion import calcular_total</text>
+<text x="580" y="256" text-anchor="middle" class="s">la prueba: python -m pytest</text>
+<path class="ln" d="M180 188 V78 H266" marker-end="url(#pb)" stroke="#0a70a8"/>
+<path class="ln" d="M580 188 V78 H494" marker-end="url(#pb)" stroke="#0a70a8"/>
+<text x="190" y="160" text-anchor="start" class="m s b" style="fill:#0a70a8">import</text>
+<text x="570" y="160" text-anchor="end" class="m s b" style="fill:#0a70a8">import</text>
+<text x="380" y="292" text-anchor="middle" class="s">La lógica vive en un solo archivo; los demás la importan. Cambias la regla en un lugar y las pruebas lo vigilan.</text>
+</svg>

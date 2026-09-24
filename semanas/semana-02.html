@@ -7,7 +7,7 @@
 <meta name="description" content="Guía de estudio, semana 2: variables, tipos simples, operadores, expresiones booleanas, if/elif/else y validación defensiva.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/guia.css">
 <script>try{var t=localStorage.getItem("ids-guia-v1-tema");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 </head>
@@ -22,22 +22,47 @@
     <a href="semana-04.html">S4</a>
     <a href="semana-05.html">S5</a>
   </nav>
-  <button class="theme-btn" type="button" aria-label="Cambiar tema claro/oscuro">◐</button>
+  <button class="theme-btn" type="button" aria-label="Cambiar tema claro/oscuro"><span class="ico-tema" aria-hidden="true"></span></button>
+</header>
+
+<header class="hero-semana">
+  <div class="hero-in">
+    <p class="hero-num" aria-hidden="true">02</p>
+    <div class="hero-txt">
+      <p class="hero-mod"><span class="sr">Semana 2 · </span>Módulos 2–3</p>
+      <h1>Variables, tipos simples y lógica condicional</h1>
+      <p class="lead">El ticket de la semana 1 solo servía para un caso. Esta semana los datos pasan a vivir en <strong>variables</strong>, el programa calcula con ellos y <strong>decide</strong> qué regla de negocio aplicar. También aprendes a desconfiar de los datos antes de usarlos.</p>
+    </div>
+    <p class="pregunta"><span class="pregunta-lbl">Pregunta orientadora</span><mark>¿Cómo decide un programa qué tarifa cobrar, y cómo evita cobrar mal cuando los datos vienen mal?</mark></p>
+    <dl class="hero-meta">
+      <div><dt>Lecturas</dt><dd>PCC 2 · PCC 5 · BOU 2</dd></div>
+      <div><dt>Proyecto</dt><dd>Preparar Fase 2</dd></div>
+      <div class="eval"><dt>Evaluación</dt><dd>Control 1 (esta semana)</dd></div>
+    </dl>
+    <div class="progress" data-progreso-pagina>
+      <div class="progress-bar"><span></span></div>
+      <div class="progress-label"></div>
+    </div>
+  </div>
 </header>
 
 <div class="layout with-toc">
 <aside class="toc" aria-label="Contenido de la semana">
   <p>Semana 2</p>
   <ol>
+    <li class="grupo" aria-hidden="true">Antes de clase</li>
     <li><a href="#uso">Cómo usar la guía</a></li>
     <li><a href="#mapa">Qué puedes usar</a></li>
     <li><a href="#lecturas">Lecturas</a></li>
     <li><a href="#checkpoint">Reading checkpoint</a></li>
+    <li class="grupo" aria-hidden="true">Aprender</li>
     <li><a href="#tipos">Variables y tipos</a></li>
     <li><a href="#condicionales">if / elif / else</a></li>
     <li><a href="#defensiva">Validación defensiva</a></li>
+    <li class="grupo" aria-hidden="true">Practicar</li>
     <li><a href="#trazas">Tablas de traza</a></li>
     <li><a href="#ejercicios">Ejercicios</a></li>
+    <li class="grupo" aria-hidden="true">Entregar y evaluar</li>
     <li><a href="#proyecto">Proyecto</a></li>
     <li><a href="#evaluacion">Control 1</a></li>
     <li><a href="#fuentes">Fuentes</a></li>
@@ -45,21 +70,6 @@
 </aside>
 
 <main>
-<section class="hero">
-  <p class="eyebrow">Semana 2 · Módulos 2–3</p>
-  <h1>Variables, tipos simples y lógica condicional</h1>
-  <p class="lead">El ticket de la semana 1 solo servía para un caso. Esta semana los datos pasan a vivir en <strong>variables</strong>, el programa calcula con ellos y <strong>decide</strong> qué regla de negocio aplicar. También aprendes a desconfiar de los datos antes de usarlos.</p>
-  <div class="pregunta"><small>Pregunta orientadora</small>¿Cómo decide un programa qué tarifa cobrar, y cómo evita cobrar mal cuando los datos vienen mal?</div>
-  <ul class="chips">
-    <li class="chip lect">Lecturas: PCC 2 · PCC 5 · BOU 2</li>
-    <li class="chip proy">Proyecto: preparar Fase 2</li>
-    <li class="chip eval">Evaluación: Control 1 (esta semana)</li>
-  </ul>
-  <div class="progress" data-progreso-pagina>
-    <div class="progress-bar"><span></span></div>
-    <div class="progress-label"></div>
-  </div>
-</section>
 
 <section id="uso">
   <h2>Cómo usar esta guía</h2>
@@ -307,6 +317,7 @@ Total:    $56.50
     </div></div>
   </div>
 
+<figure class="lamina "><div class="placa"><img src="../assets/img/s2-variables.svg" alt="Las variables son etiquetas que apuntan a valores. Al reasignar precio de 20 a 25, subtotal sigue valiendo 60 porque se calculó antes." width="760" height="292" loading="lazy" decoding="async"></div><figcaption>Esto es lo que ocurre en la <a href="#trazas">traza 1</a>: reasignar <code>precio</code> no cambia <code>subtotal</code>.</figcaption></figure>
   <div class="box ojo">
     <span class="box-title">Dinero y float</span>
     <p><code>print(0.1 + 0.2)</code> muestra <code>0.30000000000000004</code>, y <code>round(2.675, 2)</code> da <code>2.67</code>, no 2.68: el número guardado es en realidad un poco menor que 2.675. Para este curso basta con <strong>redondear al presentar</strong> y <strong>no comparar flotantes con <code>==</code></strong>. En sistemas contables reales se trabaja en centavos enteros (<code>5650</code> en vez de <code>56.50</code>) o con tipos decimales exactos.</p>
@@ -332,6 +343,8 @@ Total:    $56.50
         <li>Las fronteras son <code>1</code>, <code>5</code> y <code>20</code>. “Hasta 1 kg” incluye el 1 → <code>&lt;=</code>.</li>
         <li>Hay entradas que no tienen sentido: peso 0 o negativo. Se rechazan <em>antes</em> de calcular.</li>
       </ul>
+<figure class="lamina "><div class="placa"><img src="../assets/img/s2-tramos.svg" alt="Recta numérica de peso con los tramos de la tarifa: hasta 1 kg 3.50, de 1 a 5 kg 6.00, de 5 a 20 kg 12.00, más de 20 no se acepta; 0 o menos es error. Las fronteras 1, 5 y 20 pertenecen al tramo de la izquierda." width="760" height="248" loading="lazy" decoding="async"></div><figcaption>Los tramos como recta numérica. Las fronteras (1, 5 y 20 kg) son justo donde hay que probar.</figcaption></figure>
+
     </div></div>
     <div class="paso"><div>
       <span class="etq">Implementación</span>
@@ -371,6 +384,8 @@ else:
         <li><strong>Varios <code>if</code> independientes</strong> cuando las condiciones se <em>acumulan</em> (recargo rural, recargo por fragilidad, recargo por urgencia…).</li>
         <li><strong>Omitir el <code>else</code></strong> solo cuando “no hacer nada” es una respuesta válida.</li>
       </ul>
+<figure class="lamina "><div class="placa"><img src="../assets/img/s2-cadena-if.svg" alt="Con monto igual a 600, la primera condición monto mayor que 100 es verdadera, se ejecuta la rama A y las ramas siguientes nunca se evalúan." width="760" height="312" loading="lazy" decoding="async"></div><figcaption>Por qué importa el orden de los <code>elif</code> (pregunta 6 del checkpoint y ejercicio E5).</figcaption></figure>
+
     </div></div>
     <div class="paso verif"><div>
       <span class="etq">Verificación: matriz de casos borde</span>

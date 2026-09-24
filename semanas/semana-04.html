@@ -7,7 +7,7 @@
 <meta name="description" content="Guía de estudio, semana 4: funciones, parámetros, retorno, ámbito, recursividad, módulos, docstrings y pruebas con assert y pytest.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/guia.css">
 <script>try{var t=localStorage.getItem("ids-guia-v1-tema");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 </head>
@@ -22,25 +22,50 @@
     <a href="semana-04.html" aria-current="page">S4</a>
     <a href="semana-05.html">S5</a>
   </nav>
-  <button class="theme-btn" type="button" aria-label="Cambiar tema claro/oscuro">◐</button>
+  <button class="theme-btn" type="button" aria-label="Cambiar tema claro/oscuro"><span class="ico-tema" aria-hidden="true"></span></button>
+</header>
+
+<header class="hero-semana">
+  <div class="hero-in">
+    <p class="hero-num" aria-hidden="true">04</p>
+    <div class="hero-txt">
+      <p class="hero-mod"><span class="sr">Semana 4 · </span>Módulo 5</p>
+      <h1>Modularización, funciones y ámbito</h1>
+      <p class="lead">Hasta ahora cada programa era una sola secuencia. Esta semana lo partes en <strong>funciones</strong>: piezas con nombre, que reciben datos, devuelven un resultado y se pueden <strong>probar por separado</strong>. Es el paso que convierte un script en software mantenible.</p>
+    </div>
+    <p class="pregunta"><span class="pregunta-lbl">Pregunta orientadora</span><mark>¿Cómo convierto un script de 200 líneas en piezas que puedo reutilizar, probar y explicar una por una?</mark></p>
+    <dl class="hero-meta">
+      <div><dt>Lecturas</dt><dd>PCC 8 · PCC 11.1</dd></div>
+      <div><dt>Proyecto</dt><dd>Preparar Fase 3</dd></div>
+      <div class="eval"><dt>Evaluación</dt><dd>Control 2: la próxima semana</dd></div>
+    </dl>
+    <div class="progress" data-progreso-pagina>
+      <div class="progress-bar"><span></span></div>
+      <div class="progress-label"></div>
+    </div>
+  </div>
 </header>
 
 <div class="layout with-toc">
 <aside class="toc" aria-label="Contenido de la semana">
   <p>Semana 4</p>
   <ol>
+    <li class="grupo" aria-hidden="true">Antes de clase</li>
     <li><a href="#uso">Cómo usar la guía</a></li>
     <li><a href="#mapa">Qué puedes usar</a></li>
     <li><a href="#lecturas">Lecturas</a></li>
     <li><a href="#checkpoint">Reading checkpoint</a></li>
+    <li class="grupo" aria-hidden="true">Aprender</li>
     <li><a href="#refactor">De script plano a funciones</a></li>
     <li><a href="#parametros">Parámetros y retorno</a></li>
     <li><a href="#ambito">Ámbito</a></li>
     <li><a href="#recursion">Recursividad</a></li>
     <li><a href="#modulos">Módulos</a></li>
     <li><a href="#pruebas">Pruebas: assert y pytest</a></li>
+    <li class="grupo" aria-hidden="true">Practicar</li>
     <li><a href="#trazas">Tablas de traza</a></li>
     <li><a href="#ejercicios">Ejercicios</a></li>
+    <li class="grupo" aria-hidden="true">Entregar y evaluar</li>
     <li><a href="#proyecto">Proyecto</a></li>
     <li><a href="#evaluacion">Rumbo al Control 2</a></li>
     <li><a href="#fuentes">Fuentes</a></li>
@@ -48,21 +73,6 @@
 </aside>
 
 <main>
-<section class="hero">
-  <p class="eyebrow">Semana 4 · Módulo 5</p>
-  <h1>Modularización, funciones y ámbito</h1>
-  <p class="lead">Hasta ahora cada programa era una sola secuencia. Esta semana lo partes en <strong>funciones</strong>: piezas con nombre, que reciben datos, devuelven un resultado y se pueden <strong>probar por separado</strong>. Es el paso que convierte un script en software mantenible.</p>
-  <div class="pregunta"><small>Pregunta orientadora</small>¿Cómo convierto un script de 200 líneas en piezas que puedo reutilizar, probar y explicar una por una?</div>
-  <ul class="chips">
-    <li class="chip lect">Lecturas: PCC 8 · PCC 11.1</li>
-    <li class="chip proy">Proyecto: preparar Fase 3</li>
-    <li class="chip eval">Control 2: la próxima semana</li>
-  </ul>
-  <div class="progress" data-progreso-pagina>
-    <div class="progress-bar"><span></span></div>
-    <div class="progress-label"></div>
-  </div>
-</section>
 
 <section id="uso">
   <h2>Cómo usar esta guía</h2>
@@ -327,6 +337,7 @@ Cliente Marta: $50.85</code></pre>
       <p>Cada función se puede probar sola: <code>aplicar_descuento(50)</code> debe dar 45, <code>aplicar_descuento(49.99)</code> debe dar 49.99. Eso es exactamente lo que harán las <a href="#pruebas">pruebas automáticas</a>.</p>
     </div></div>
   </div>
+<figure class="lamina "><div class="placa"><img src="../assets/img/s4-funcion.svg" alt="Una función recibe argumentos, los asigna a sus parámetros, calcula y con return devuelve 50.85 a la variable total; print solo muestra en pantalla." width="760" height="294" loading="lazy" decoding="async"></div><figcaption>Los argumentos entran, el <code>return</code> devuelve el resultado a quien llamó. Un <code>print</code> solo lo muestra.</figcaption></figure>
   <div class="box ojo">
     <span class="box-title">Anatomía de una función</span>
 <pre data-norun><code class="language-python">def nombre_en_verbo(parametro_1, parametro_2=valor_por_defecto):
@@ -427,6 +438,8 @@ a = precio_final(200)
 b = 200 * (1 - descuento)       # aquí se usa la global
 print(a, b, descuento)</code></pre>
 <pre class="salida" data-file="salida"><code>180.0 190.0 0.05</code></pre>
+<figure class="lamina "><div class="placa"><img src="../assets/img/s4-ambito.svg" alt="El espacio global contiene descuento igual a 0.05; la llamada a precio_final tiene su propio espacio local con precio 200 y otro descuento de 0.10 que desaparece al terminar." width="760" height="274" loading="lazy" decoding="async"></div><figcaption>Cada llamada tiene su propio espacio de variables; se crea al llamar y desaparece al terminar.</figcaption></figure>
+
   <div class="box error">
     <span class="box-title">El error de modificar una global</span>
 <pre data-file="global_error.py" data-error><code class="language-python">total_ventas = 0
@@ -480,6 +493,8 @@ print(valor_futuro(1000, 0.10, 3))</code></pre>
     <div class="paso"><div>
       <span class="etq">Interpretación</span>
       <p>La llamada con 3 años “espera” a la de 2, que espera a la de 1, que espera a la de 0. La de 0 responde 1000 y las respuestas regresan multiplicándose: 1100 → 1210 → 1331. Esa pila de llamadas en espera es lo que trazas en la <a href="#trazas">traza 2</a>.</p>
+<figure class="lamina "><div class="placa"><img src="../assets/img/s4-pila.svg" alt="Pila de llamadas de valor_futuro: la llamada con 3 años llama a la de 2, 1 y 0; la de 0 es el caso base y devuelve 1000, y las respuestas regresan como 1100, 1210 y 1331." width="800" height="302" loading="lazy" decoding="async"></div><figcaption>La última llamada en abrirse (el caso base) es la primera en responder.</figcaption></figure>
+
     </div></div>
     <div class="paso verif"><div>
       <span class="etq">Verificación</span>
@@ -495,6 +510,8 @@ print(valor_futuro(1000, 0.10, 3))</code></pre>
 <section id="modulos">
   <h2>Módulos: separar el código en archivos</h2>
   <p>Un módulo es un archivo <code>.py</code> cuyas funciones se pueden importar desde otro. Es el principio de la arquitectura que exige el proyecto (<code>modelos.py</code>, <code>servicios.py</code>, <code>main.py</code>…).</p>
+<figure class="lamina "><div class="placa"><img src="../assets/img/s4-modulos.svg" alt="El módulo facturacion.py contiene las funciones; main.py y test_facturacion.py las importan." width="760" height="304" loading="lazy" decoding="async"></div><figcaption>Un módulo con la lógica; el programa principal y las pruebas lo importan.</figcaption></figure>
+
 <pre data-file="facturacion.py" data-module><code class="language-python">"""Cálculos de facturación de la Distribuidora La Ceiba."""
 
 TASA_IVA = 0.13

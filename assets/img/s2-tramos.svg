@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 248" width="760" height="248" role="img" aria-label="Recta numérica de peso con los tramos de la tarifa: hasta 1 kg 3.50, de 1 a 5 kg 6.00, de 5 a 20 kg 12.00, más de 20 no se acepta; 0 o menos es error. Las fronteras 1, 5 y 20 pertenecen al tramo de la izquierda.">
+<title>Recta numérica de peso con los tramos de la tarifa: hasta 1 kg 3.50, de 1 a 5 kg 6.00, de 5 a 20 kg 12.00, más de 20 no se acepta; 0 o menos es error. Las fronteras 1, 5 y 20 pertenecen al tramo de la izquierda.</title>
+<style>
+  text { font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; fill: #1b2430; }
+  .m { font-family: 'JetBrains Mono', Menlo, Consolas, monospace; font-size: 13px; }
+  .s { font-size: 12px; fill: #465264; }
+  .t { font-size: 16px; font-weight: 700; }
+  .b { font-weight: 700; }
+  .mu { fill: #6b7380; }
+  .w { fill: #fff; }
+  .ln { stroke: #465264; stroke-width: 1.6; fill: none; }
+  .ln-s { stroke: #c5ced6; stroke-width: 1.2; fill: none; }
+</style>
+<defs><marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#465264"/></marker><marker id="pb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0a70a8"/></marker><marker id="pg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2e7d4f"/></marker></defs>
+<path d="M40 110 H730" stroke="#465264" stroke-width="1.5"/>
+<rect x="60.0" y="98" width="130.0" height="24" fill="#1d4f66" rx="3"/>
+<text x="125.0" y="84" text-anchor="middle" class="b">$3.50</text>
+<text x="125.0" y="114" text-anchor="middle" class="s b w">hasta 1 kg</text>
+<rect x="190.0" y="98" width="190.0" height="24" fill="#0a70a8" rx="3"/>
+<text x="285.0" y="84" text-anchor="middle" class="b">$6.00</text>
+<text x="285.0" y="114" text-anchor="middle" class="s b w">1 a 5 kg</text>
+<rect x="380.0" y="98" width="230.0" height="24" fill="#1d4f66" rx="3"/>
+<text x="495.0" y="84" text-anchor="middle" class="b">$12.00</text>
+<text x="495.0" y="114" text-anchor="middle" class="s b w">más de 5 y hasta 20 kg</text>
+<rect x="610.0" y="98" width="90.0" height="24" fill="#b8402f" rx="3"/>
+<text x="655.0" y="84" text-anchor="middle" class="b">no se acepta</text>
+<text x="655.0" y="114" text-anchor="middle" class="s b w">&gt; 20</text>
+<path d="M60.0 124 V138" stroke="#465264" stroke-width="1.5"/>
+<text x="60.0" y="156" text-anchor="middle" class="m">0 kg</text>
+<path d="M190.0 124 V138" stroke="#465264" stroke-width="1.5"/>
+<text x="190.0" y="156" text-anchor="middle" class="m">1 kg</text>
+<path d="M380.0 124 V138" stroke="#465264" stroke-width="1.5"/>
+<text x="380.0" y="156" text-anchor="middle" class="m">5 kg</text>
+<path d="M610.0 124 V138" stroke="#465264" stroke-width="1.5"/>
+<text x="610.0" y="156" text-anchor="middle" class="m">20 kg</text>
+<circle cx="190.0" cy="110" r="6" fill="#f2dc4a" stroke="#1b2430" stroke-width="1.5"/>
+<circle cx="380.0" cy="110" r="6" fill="#f2dc4a" stroke="#1b2430" stroke-width="1.5"/>
+<circle cx="610.0" cy="110" r="6" fill="#f2dc4a" stroke="#1b2430" stroke-width="1.5"/>
+<circle cx="60.0" cy="110" r="6" fill="#fff" stroke="#b8402f" stroke-width="2"/>
+<text x="70.0" y="186" text-anchor="start" class="s">0 o menos → error</text>
+<text x="426.0" y="186" text-anchor="middle" class="s">cada frontera (●) pertenece al tramo de la izquierda: “hasta 5” usa &lt;=</text>
+<text x="380" y="60" text-anchor="middle" class="s mu">escala no proporcional</text>
+<rect x="210" y="205" width="340" height="30" rx="4" fill="#fbf1b8" stroke="none" stroke-width="1.5"/>
+<text x="380" y="225" text-anchor="middle" class="s b">Zona rural: + $2.50 sobre cualquier tramo (if independiente)</text>
+<text x="380" y="30" text-anchor="middle" class="t">Tarifa de envío según el peso</text>
+</svg>

@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 424" width="580" height="424" role="img" aria-label="Diagrama de un bucle con centinela: inicializar total y cantidad, leer entrada, si es fin se sale y se muestra el reporte; si no, se acumula y se vuelve a leer.">
+<title>Diagrama de un bucle con centinela: inicializar total y cantidad, leer entrada, si es fin se sale y se muestra el reporte; si no, se acumula y se vuelve a leer.</title>
+<style>
+  text { font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; fill: #1b2430; }
+  .m { font-family: 'JetBrains Mono', Menlo, Consolas, monospace; font-size: 13px; }
+  .s { font-size: 12px; fill: #465264; }
+  .t { font-size: 16px; font-weight: 700; }
+  .b { font-weight: 700; }
+  .mu { fill: #6b7380; }
+  .w { fill: #fff; }
+  .ln { stroke: #465264; stroke-width: 1.6; fill: none; }
+  .ln-s { stroke: #c5ced6; stroke-width: 1.2; fill: none; }
+</style>
+<defs><marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#465264"/></marker><marker id="pb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0a70a8"/></marker><marker id="pg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2e7d4f"/></marker></defs>
+<rect x="145" y="10" width="250" height="40" rx="2" fill="#e9eef1" stroke="#465264" stroke-width="1.5"/>
+<text x="270" y="35" text-anchor="middle" class="m">total ← 0 ; cantidad ← 0</text>
+<path class="ln" d="M270 50 V72" marker-end="url(#p)"/>
+<polygon points="195,74 360,74 345,114 180,114" fill="#dcefe3" stroke="#2e7d4f" stroke-width="1.5"/>
+<text x="270" y="99" text-anchor="middle">Leer entrada</text>
+<path class="ln" d="M270 114 V136" marker-end="url(#p)"/>
+<polygon points="270,138 365,178 270,218 175,178" fill="#fbf1b8" stroke="#b07600" stroke-width="1.5"/>
+<text x="270" y="183" text-anchor="middle" class="b">¿entrada = "fin"?</text>
+<path class="ln" d="M365 178 H470 V372" marker-end="url(#p)"/>
+<text x="395" y="166" text-anchor="middle" class="s b">Sí: sale del bucle</text>
+<path class="ln" d="M270 218 V246" marker-end="url(#p)"/>
+<text x="286" y="238" text-anchor="start" class="b">No</text>
+<rect x="145" y="248" width="250" height="56" rx="2" fill="#e9eef1" stroke="#465264" stroke-width="1.5"/>
+<text x="270" y="271" text-anchor="middle" class="m">total ← total + monto</text>
+<text x="270" y="290" text-anchor="middle" class="m">cantidad ← cantidad + 1</text>
+<path class="ln" d="M145 276 H70 V94 H186" marker-end="url(#pb)" stroke="#0a70a8" stroke-width="2"/>
+<text x="60" y="190" text-anchor="middle" class="b" style="fill:#0a70a8" transform="rotate(-90 60 190)">repetir</text>
+<polygon points="400,374 540,374 525,414 385,414" fill="#dcefe3" stroke="#2e7d4f" stroke-width="1.5"/>
+<text x="462" y="399" text-anchor="middle">Mostrar reporte</text>
+</svg>

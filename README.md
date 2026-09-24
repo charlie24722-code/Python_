@@ -25,6 +25,13 @@ Cada semana incluye:
 - **Lista de "puedo…"** para prepararte para los controles y el Parcial.
 - **Checklist de progreso** que se guarda solo en tu navegador (`localStorage`).
 
+## Diseño
+
+- Portada de cada semana en azul petróleo con la pregunta orientadora marcada con **resaltador amarillo**.
+- Tipografías: **Archivo** (títulos), **Atkinson Hyperlegible Next** (lectura, pensada para máxima legibilidad) y **JetBrains Mono** (código, sin ligaduras para que `<=` y `==` se vean tal cual).
+- **Láminas SVG independientes** en `assets/img/` (21 archivos): diagramas de flujo, Git, tramos, cadenas `if`, `range`, interés compuesto, funciones, ámbito, pila de llamadas, módulos, índices, alias, Bubble/Insertion Sort, crecimiento cuadrático y la ruta del ciclo. Se ven sobre fondo claro en ambos temas, como un apunte impreso.
+- Íconos SVG en `assets/icons/`. Modo claro y oscuro, adaptado a celular, respeta "reducir movimiento".
+
 Todo el código Python de la guía se ejecutó y se comparó con la salida que muestra la página, y las pruebas de pytest pasan.
 
 ## Publicar con GitHub Pages

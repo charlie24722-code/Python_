@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 286" width="720" height="286" role="img" aria-label="Barras apiladas del saldo de un depósito de 1000 dólares al 8 % anual: 1080, 1166.40, 1259.71, 1360.49 y 1469.33; la parte de interés crece cada año.">
+<title>Barras apiladas del saldo de un depósito de 1000 dólares al 8 % anual: 1080, 1166.40, 1259.71, 1360.49 y 1469.33; la parte de interés crece cada año.</title>
+<style>
+  text { font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; fill: #1b2430; }
+  .m { font-family: 'JetBrains Mono', Menlo, Consolas, monospace; font-size: 13px; }
+  .s { font-size: 12px; fill: #465264; }
+  .t { font-size: 16px; font-weight: 700; }
+  .b { font-weight: 700; }
+  .mu { fill: #6b7380; }
+  .w { fill: #fff; }
+  .ln { stroke: #465264; stroke-width: 1.6; fill: none; }
+  .ln-s { stroke: #c5ced6; stroke-width: 1.2; fill: none; }
+</style>
+<defs><marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#465264"/></marker><marker id="pb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0a70a8"/></marker><marker id="pg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2e7d4f"/></marker></defs>
+<path d="M80 250.0 H700" stroke="#e9eef1" stroke-width="1"/>
+<text x="74" y="254.0" text-anchor="end" class="s">$0</text>
+<path d="M80 200.0 H700" stroke="#e9eef1" stroke-width="1"/>
+<text x="74" y="204.0" text-anchor="end" class="s">$400</text>
+<path d="M80 150.0 H700" stroke="#e9eef1" stroke-width="1"/>
+<text x="74" y="154.0" text-anchor="end" class="s">$800</text>
+<path d="M80 100.0 H700" stroke="#e9eef1" stroke-width="1"/>
+<text x="74" y="104.0" text-anchor="end" class="s">$1,200</text>
+<path d="M80 50.0 H700" stroke="#e9eef1" stroke-width="1"/>
+<text x="74" y="54.0" text-anchor="end" class="s">$1,600</text>
+<path d="M120 250 V129.0 Q120 125.0 124 125.0 H172 Q176 125.0 176 129.0 V250 Z" fill="#0a70a8"/>
+<path d="M120 123.0 V119.0 Q120 115.0 124 115.0 H172 Q176 115.0 176 119.0 V123.0 Z" fill="#b07600"/>
+<text x="148.0" y="107.0" text-anchor="middle" class="s b">$1,080.00</text>
+<text x="148.0" y="270" text-anchor="middle" class="s">Año 1</text>
+<path d="M238 250 V129.0 Q238 125.0 242 125.0 H290 Q294 125.0 294 129.0 V250 Z" fill="#0a70a8"/>
+<path d="M238 123.0 V108.19999999999999 Q238 104.19999999999999 242 104.19999999999999 H290 Q294 104.19999999999999 294 108.19999999999999 V123.0 Z" fill="#b07600"/>
+<text x="266.0" y="96.19999999999999" text-anchor="middle" class="s b">$1,166.40</text>
+<text x="266.0" y="270" text-anchor="middle" class="s">Año 2</text>
+<path d="M356 250 V129.0 Q356 125.0 360 125.0 H408 Q412 125.0 412 129.0 V250 Z" fill="#0a70a8"/>
+<path d="M356 123.0 V96.53625 Q356 92.53625 360 92.53625 H408 Q412 92.53625 412 96.53625 V123.0 Z" fill="#b07600"/>
+<text x="384.0" y="84.53625" text-anchor="middle" class="s b">$1,259.71</text>
+<text x="384.0" y="270" text-anchor="middle" class="s">Año 3</text>
+<path d="M474 250 V129.0 Q474 125.0 478 125.0 H526 Q530 125.0 530 129.0 V250 Z" fill="#0a70a8"/>
+<path d="M474 123.0 V83.93875 Q474 79.93875 478 79.93875 H526 Q530 79.93875 530 83.93875 V123.0 Z" fill="#b07600"/>
+<text x="502.0" y="71.93875" text-anchor="middle" class="s b">$1,360.49</text>
+<text x="502.0" y="270" text-anchor="middle" class="s">Año 4</text>
+<path d="M592 250 V129.0 Q592 125.0 596 125.0 H644 Q648 125.0 648 129.0 V250 Z" fill="#0a70a8"/>
+<path d="M592 123.0 V70.33375000000001 Q592 66.33375000000001 596 66.33375000000001 H644 Q648 66.33375000000001 648 70.33375000000001 V123.0 Z" fill="#b07600"/>
+<text x="620.0" y="58.33375000000001" text-anchor="middle" class="s b">$1,469.33</text>
+<text x="620.0" y="270" text-anchor="middle" class="s">Año 5</text>
+<path d="M80 250 H700" stroke="#465264" stroke-width="1.2"/>
+<rect x="420" y="16" width="14" height="14" rx="3" fill="#0a70a8" stroke="none" stroke-width="1.5"/>
+<text x="440" y="28" text-anchor="start" class="s">Capital: $1,000</text>
+<rect x="560" y="16" width="14" height="14" rx="3" fill="#b07600" stroke="none" stroke-width="1.5"/>
+<text x="580" y="28" text-anchor="start" class="s">Interés acumulado</text>
+<text x="80" y="28" text-anchor="start" class="b">Saldo al final de cada año (8 % anual)</text>
+</svg>

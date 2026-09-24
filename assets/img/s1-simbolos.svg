@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 172" width="720" height="172" role="img" aria-label="Los cuatro símbolos del diagrama de flujo: óvalo para inicio o fin, paralelogramo para entrada o salida, rectángulo para proceso y rombo para decisión.">
+<title>Los cuatro símbolos del diagrama de flujo: óvalo para inicio o fin, paralelogramo para entrada o salida, rectángulo para proceso y rombo para decisión.</title>
+<style>
+  text { font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; fill: #1b2430; }
+  .m { font-family: 'JetBrains Mono', Menlo, Consolas, monospace; font-size: 13px; }
+  .s { font-size: 12px; fill: #465264; }
+  .t { font-size: 16px; font-weight: 700; }
+  .b { font-weight: 700; }
+  .mu { fill: #6b7380; }
+  .w { fill: #fff; }
+  .ln { stroke: #465264; stroke-width: 1.6; fill: none; }
+  .ln-s { stroke: #c5ced6; stroke-width: 1.2; fill: none; }
+</style>
+<defs><marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#465264"/></marker><marker id="pb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0a70a8"/></marker><marker id="pg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2e7d4f"/></marker></defs>
+<rect x="40" y="28" width="110" height="40" rx="20" fill="#e2ecf1" stroke="#1d4f66" stroke-width="1.5"/>
+<text x="95" y="53" text-anchor="middle" class="b">Inicio</text>
+<text x="95" y="108" text-anchor="middle" class="t">Inicio / fin</text>
+<text x="95" y="128" text-anchor="middle" class="s">óvalo</text>
+<polygon points="230,28 335,28 320,68 215,68" fill="#dcefe3" stroke="#2e7d4f" stroke-width="1.5"/>
+<text x="275" y="53" text-anchor="middle" class="b">Leer precio</text>
+<text x="275" y="108" text-anchor="middle" class="t">Entrada / salida</text>
+<text x="275" y="128" text-anchor="middle" class="s">paralelogramo</text>
+<rect x="395" y="28" width="120" height="40" rx="2" fill="#e9eef1" stroke="#465264" stroke-width="1.5"/>
+<text x="455" y="53" text-anchor="middle" class="m">total ← a + b</text>
+<text x="455" y="108" text-anchor="middle" class="t">Proceso</text>
+<text x="455" y="128" text-anchor="middle" class="s">rectángulo</text>
+<polygon points="635,18 697,48 635,78 573,48" fill="#fbf1b8" stroke="#b07600" stroke-width="1.5"/>
+<text x="635" y="53" text-anchor="middle" class="b">¿a ≥ 50?</text>
+<text x="635" y="108" text-anchor="middle" class="t">Decisión</text>
+<text x="635" y="128" text-anchor="middle" class="s">rombo</text>
+<text x="360" y="160" text-anchor="middle" class="s">Las flechas indican el orden. Un rombo siempre tiene dos salidas: Sí y No.</text>
+</svg>

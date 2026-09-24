@@ -7,7 +7,7 @@
 <meta name="description" content="Guía de estudio, semana 5: listas, tuplas, slicing, búsqueda lineal, Bubble Sort, Insertion Sort y comparación de desempeño. Preparación para el Control 2 y el Parcial.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/guia.css">
 <script>try{var t=localStorage.getItem("ids-guia-v1-tema");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 </head>
@@ -22,24 +22,49 @@
     <a href="semana-04.html">S4</a>
     <a href="semana-05.html" aria-current="page">S5</a>
   </nav>
-  <button class="theme-btn" type="button" aria-label="Cambiar tema claro/oscuro">◐</button>
+  <button class="theme-btn" type="button" aria-label="Cambiar tema claro/oscuro"><span class="ico-tema" aria-hidden="true"></span></button>
+</header>
+
+<header class="hero-semana">
+  <div class="hero-in">
+    <p class="hero-num" aria-hidden="true">05</p>
+    <div class="hero-txt">
+      <p class="hero-mod"><span class="sr">Semana 5 · </span>Módulo 6</p>
+      <h1>Estructuras de datos lineales y algoritmos de ordenamiento</h1>
+      <p class="lead">En la semana 3 tuviste que escribir dos veces la misma lista de ventas. Esta semana los datos se <strong>guardan</strong> en listas y tuplas, se <strong>buscan</strong> y se <strong>ordenan</strong>, y mides cuánto trabajo le cuesta a la computadora hacerlo.</p>
+    </div>
+    <p class="pregunta"><span class="pregunta-lbl">Pregunta orientadora</span><mark>¿Cómo guardo, busco y ordeno cientos de registros en memoria, y cuánto cuesta hacerlo cuando los datos crecen?</mark></p>
+    <dl class="hero-meta">
+      <div><dt>Lecturas</dt><dd>PCC 3 · PCC 4 · BOU 4</dd></div>
+      <div><dt>Proyecto</dt><dd>Fase 3 (esta semana)</dd></div>
+      <div class="eval"><dt>Evaluación</dt><dd>Control 2 (esta semana) · Parcial (semana 6)</dd></div>
+    </dl>
+    <div class="progress" data-progreso-pagina>
+      <div class="progress-bar"><span></span></div>
+      <div class="progress-label"></div>
+    </div>
+  </div>
 </header>
 
 <div class="layout with-toc">
 <aside class="toc" aria-label="Contenido de la semana">
   <p>Semana 5</p>
   <ol>
+    <li class="grupo" aria-hidden="true">Antes de clase</li>
     <li><a href="#uso">Cómo usar la guía</a></li>
     <li><a href="#mapa">Qué puedes usar</a></li>
     <li><a href="#lecturas">Lecturas</a></li>
     <li><a href="#checkpoint">Reading checkpoint</a></li>
+    <li class="grupo" aria-hidden="true">Aprender</li>
     <li><a href="#listas">Listas y slicing</a></li>
     <li><a href="#tuplas">Tuplas</a></li>
     <li><a href="#busqueda">Búsqueda lineal</a></li>
     <li><a href="#ordenamiento">Bubble e Insertion Sort</a></li>
     <li><a href="#desempeno">Laboratorio de desempeño</a></li>
+    <li class="grupo" aria-hidden="true">Practicar</li>
     <li><a href="#trazas">Tablas de traza</a></li>
     <li><a href="#ejercicios">Ejercicios</a></li>
+    <li class="grupo" aria-hidden="true">Entregar y evaluar</li>
     <li><a href="#proyecto">Proyecto: Fase 3</a></li>
     <li><a href="#evaluacion">Control 2 y Parcial</a></li>
     <li><a href="#fuentes">Fuentes</a></li>
@@ -47,21 +72,6 @@
 </aside>
 
 <main>
-<section class="hero">
-  <p class="eyebrow">Semana 5 · Módulo 6</p>
-  <h1>Estructuras de datos lineales y algoritmos de ordenamiento</h1>
-  <p class="lead">En la semana 3 tuviste que escribir dos veces la misma lista de ventas. Esta semana los datos se <strong>guardan</strong> en listas y tuplas, se <strong>buscan</strong> y se <strong>ordenan</strong>, y mides cuánto trabajo le cuesta a la computadora hacerlo.</p>
-  <div class="pregunta"><small>Pregunta orientadora</small>¿Cómo guardo, busco y ordeno cientos de registros en memoria, y cuánto cuesta hacerlo cuando los datos crecen?</div>
-  <ul class="chips">
-    <li class="chip lect">Lecturas: PCC 3 · PCC 4 · BOU 4</li>
-    <li class="chip proy">Proyecto: Fase 3 (esta semana)</li>
-    <li class="chip eval">Control 2 (esta semana) · Parcial (semana 6)</li>
-  </ul>
-  <div class="progress" data-progreso-pagina>
-    <div class="progress-bar"><span></span></div>
-    <div class="progress-label"></div>
-  </div>
-</section>
 
 <section id="uso">
   <h2>Cómo usar esta guía</h2>
@@ -272,6 +282,8 @@ Días sobre $500: [520, 610, 890]</code></pre>
       <span class="etq">Interpretación</span>
       <p>Compara con el E4 de la semana 3: aquello que requería contadores manuales y dos listas escritas ahora son funciones de una palabra. El dato corregido (miércoles) sube el promedio de $460 a $514.29: un error de digitación en un solo día cambiaba el diagnóstico de la semana.</p>
       <p>Slicing, en resumen: <code>lista[inicio:fin:paso]</code>, incluye <code>inicio</code>, excluye <code>fin</code>; cualquiera se puede omitir. <code>[:]</code> es una copia completa.</p>
+<figure class="lamina "><div class="placa"><img src="../assets/img/s5-indices.svg" alt="Lista de 7 ventas con índices positivos de 0 a 6 arriba y negativos de -7 a -1 abajo; el slice ventas[2:5] resaltado contiene 0, 520 y 610." width="760" height="214" loading="lazy" decoding="async"></div><figcaption>Índices positivos (desde 0) y negativos (desde −1 al final). El slice toma desde el inicio hasta antes del fin.</figcaption></figure>
+
     </div></div>
     <div class="paso verif"><div>
       <span class="etq">Verificación</span>
@@ -287,6 +299,8 @@ alias.append(30)
 copia.append(99)
 print(precios, alias, copia)</code></pre>
 <pre class="salida" data-file="salida"><code>[10, 20, 30] [10, 20, 30] [10, 20, 99]</code></pre>
+<figure class="lamina "><div class="placa"><img src="../assets/img/s5-alias.svg" alt="precios y alias apuntan a la misma lista 10, 20, 30; copia apunta a una lista distinta 10, 20, 99." width="760" height="250" loading="lazy" decoding="async"></div><figcaption><code>=</code> nunca copia una lista: le pone otro nombre. Para copiar, <code>[:]</code>.</figcaption></figure>
+
   <div class="box ojo">
     <span class="box-title">Listas dentro de funciones</span>
     <p>Cuando pasas una lista a una función, la función recibe la <em>misma</em> lista (no una copia). Si la modifica, el cambio se ve afuera. Si una función solo debe <em>leer</em> o devolver un resultado nuevo, trabaja sobre <code>lista[:]</code>. PCC 8 lo explica en “Passing a List” y “Preventing a Function from Modifying a List”.</p>
@@ -459,6 +473,9 @@ print(montos)                      # la original sigue igual</code></pre>
       <p><strong>Bubble Sort</strong> hizo 4 pasadas con 4 + 3 + 2 + 1 = 10 comparaciones y 7 intercambios. La línea <code>datos[j], datos[j + 1] = datos[j + 1], datos[j]</code> intercambia dos valores gracias a las tuplas (sin variable temporal).</p>
       <p><strong>Insertion Sort</strong> funciona como ordenar facturas en la mano: tomas la siguiente y la deslizas hacia la izquierda hasta su lugar. Aquí hizo 9 comparaciones.</p>
       <p>La bandera <code>hubo_intercambio</code> es una optimización: si una pasada no mueve nada, la lista ya está ordenada y se sale con <code>break</code>.</p>
+<figure class="lamina "><div class="placa"><img src="../assets/img/s5-burbuja.svg" alt="Bubble Sort sobre 42, 17, 58, 23, 9: después de cada pasada el mayor restante queda al final; tras 4 pasadas la lista queda 9, 17, 23, 42, 58." width="700" height="356" loading="lazy" decoding="async"></div><figcaption>Bubble Sort pasada por pasada (la misma lista de la <a href="#trazas">traza 2</a>).</figcaption></figure>
+<figure class="lamina "><div class="placa"><img src="../assets/img/s5-insercion.svg" alt="Insertion Sort sobre 42, 17, 58, 23, 9: la parte izquierda ordenada crece de uno en uno y cada elemento se desliza hasta su lugar." width="700" height="356" loading="lazy" decoding="async"></div><figcaption>Insertion Sort elemento por elemento (<a href="#trazas">traza 3</a>).</figcaption></figure>
+
     </div></div>
     <div class="paso verif"><div>
       <span class="etq">Verificación</span>
@@ -534,10 +551,13 @@ n= 3000: burbuja 0.3805 s, inserción 0.1473 s</code></pre>
         <li><strong>Datos aleatorios:</strong> Insertion Sort hace aproximadamente la mitad de comparaciones que Bubble Sort, y muchos menos movimientos.</li>
         <li><strong>Decisión de negocio:</strong> para registros que llegan casi ordenados (por fecha), Insertion Sort es razonable. Para volúmenes grandes, ninguno de los dos: <code>sorted()</code> usa un algoritmo mucho más eficiente.</li>
       </ul>
+<figure class="lamina "><div class="placa"><img src="../assets/img/s5-crecimiento.svg" alt="Comparaciones de Bubble e Insertion Sort según n: en el peor caso crecen como n por n menos 1 entre 2, llegando a 4950 con 100 datos; con la lista ya ordenada solo 99." width="700" height="318" loading="lazy" decoding="async"></div><figcaption>Mismo algoritmo, mismos 100 datos: el orden de entrada decide si hace 99 o 4,950 comparaciones.</figcaption></figure>
+
     </div></div>
     <div class="paso verif"><div>
       <span class="etq">Verificación</span>
-      <p>Los conteos del peor caso se pueden predecir sin ejecutar: (n − 1) + (n − 2) + … + 1 = n(n − 1)/2. Si tu contador da otra cosa en la lista inversa, tu implementación tiene un error. Esa es una prueba excelente para pytest.</p>
+      <p>Los conteos del peor caso se pueden predecir sin ejecutar: (n − 1) + (n − 2) + … + 1 = n(n − 1)/2.
+ Si tu contador da otra cosa en la lista inversa, tu implementación tiene un error. Esa es una prueba excelente para pytest.</p>
     </div></div>
   </div>
 </section>

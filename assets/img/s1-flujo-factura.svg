@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 610 610" width="610" height="610" role="img" aria-label="Diagrama de flujo de la factura: leer precio y cantidad, calcular subtotal, decidir si el subtotal es mayor o igual a 50 para aplicar 10 % de descuento, calcular base, IVA y total, y mostrar el total.">
+<title>Diagrama de flujo de la factura: leer precio y cantidad, calcular subtotal, decidir si el subtotal es mayor o igual a 50 para aplicar 10 % de descuento, calcular base, IVA y total, y mostrar el total.</title>
+<style>
+  text { font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; fill: #1b2430; }
+  .m { font-family: 'JetBrains Mono', Menlo, Consolas, monospace; font-size: 13px; }
+  .s { font-size: 12px; fill: #465264; }
+  .t { font-size: 16px; font-weight: 700; }
+  .b { font-weight: 700; }
+  .mu { fill: #6b7380; }
+  .w { fill: #fff; }
+  .ln { stroke: #465264; stroke-width: 1.6; fill: none; }
+  .ln-s { stroke: #c5ced6; stroke-width: 1.2; fill: none; }
+</style>
+<defs><marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#465264"/></marker><marker id="pb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0a70a8"/></marker><marker id="pg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2e7d4f"/></marker></defs>
+<rect x="220" y="10" width="120" height="38" rx="19" fill="#e2ecf1" stroke="#1d4f66" stroke-width="1.5"/>
+<text x="280" y="34" text-anchor="middle" class="b">Inicio</text>
+<path class="ln" d="M280 48 V70" marker-end="url(#p)"/>
+<polygon points="165,72 415,72 395,112 145,112" fill="#dcefe3" stroke="#2e7d4f" stroke-width="1.5"/>
+<text x="280" y="97" text-anchor="middle">Leer precio_unitario, cantidad</text>
+<path class="ln" d="M280 112 V134" marker-end="url(#p)"/>
+<rect x="155" y="136" width="250" height="40" rx="2" fill="#e9eef1" stroke="#465264" stroke-width="1.5"/>
+<text x="280" y="161" text-anchor="middle" class="m">subtotal ← precio × cantidad</text>
+<path class="ln" d="M280 176 V198" marker-end="url(#p)"/>
+<polygon points="280,200 380,242 280,284 180,242" fill="#fbf1b8" stroke="#b07600" stroke-width="1.5"/>
+<text x="280" y="247" text-anchor="middle" class="b">¿subtotal ≥ 50?</text>
+<path class="ln" d="M380 242 H470 V306" marker-end="url(#p)"/>
+<text x="398" y="233" text-anchor="middle" class="b">Sí</text>
+<path class="ln" d="M180 242 H105 V306" marker-end="url(#p)"/>
+<text x="162" y="233" text-anchor="middle" class="b">No</text>
+<rect x="345" y="308" width="250" height="42" rx="2" fill="#e9eef1" stroke="#465264" stroke-width="1.5"/>
+<text x="470" y="334" text-anchor="middle" class="m">descuento ← subtotal × 0.10</text>
+<rect x="20" y="308" width="170" height="42" rx="2" fill="#e9eef1" stroke="#465264" stroke-width="1.5"/>
+<text x="105" y="334" text-anchor="middle" class="m">descuento ← 0</text>
+<path class="ln" d="M105 350 V380 H280"/>
+<path class="ln" d="M470 350 V380 H280 V402" marker-end="url(#p)"/>
+<rect x="155" y="404" width="250" height="70" rx="2" fill="#e9eef1" stroke="#465264" stroke-width="1.5"/>
+<text x="280" y="427" text-anchor="middle" class="m">base ← subtotal − descuento</text>
+<text x="280" y="445" text-anchor="middle" class="m">iva ← base × 0.13</text>
+<text x="280" y="463" text-anchor="middle" class="m">total ← base + iva</text>
+<path class="ln" d="M280 474 V496" marker-end="url(#p)"/>
+<polygon points="215,498 360,498 345,538 200,538" fill="#dcefe3" stroke="#2e7d4f" stroke-width="1.5"/>
+<text x="280" y="523" text-anchor="middle">Mostrar total</text>
+<path class="ln" d="M280 538 V560" marker-end="url(#p)"/>
+<rect x="220" y="562" width="120" height="38" rx="19" fill="#e2ecf1" stroke="#1d4f66" stroke-width="1.5"/>
+<text x="280" y="586" text-anchor="middle" class="b">Fin</text>
+<rect x="482" y="258" width="118" height="28" rx="4" fill="#f2dc4a" stroke="none" stroke-width="1.5"/>
+<text x="541" y="277" text-anchor="middle" class="b s">50 exacto → Sí</text>
+</svg>

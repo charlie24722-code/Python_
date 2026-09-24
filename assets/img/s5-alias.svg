@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 250" width="760" height="250" role="img" aria-label="precios y alias apuntan a la misma lista 10, 20, 30; copia apunta a una lista distinta 10, 20, 99.">
+<title>precios y alias apuntan a la misma lista 10, 20, 30; copia apunta a una lista distinta 10, 20, 99.</title>
+<style>
+  text { font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; fill: #1b2430; }
+  .m { font-family: 'JetBrains Mono', Menlo, Consolas, monospace; font-size: 13px; }
+  .s { font-size: 12px; fill: #465264; }
+  .t { font-size: 16px; font-weight: 700; }
+  .b { font-weight: 700; }
+  .mu { fill: #6b7380; }
+  .w { fill: #fff; }
+  .ln { stroke: #465264; stroke-width: 1.6; fill: none; }
+  .ln-s { stroke: #c5ced6; stroke-width: 1.2; fill: none; }
+</style>
+<defs><marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#465264"/></marker><marker id="pb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0a70a8"/></marker><marker id="pg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2e7d4f"/></marker></defs>
+<rect x="30" y="40" width="110" height="32" rx="16" fill="#1d4f66" stroke="none" stroke-width="1.5"/>
+<text x="85" y="61" text-anchor="middle" class="m w b">precios</text>
+<rect x="30" y="100" width="110" height="32" rx="16" fill="#b07600" stroke="none" stroke-width="1.5"/>
+<text x="85" y="121" text-anchor="middle" class="m w b">alias</text>
+<rect x="30" y="190" width="110" height="32" rx="16" fill="#2e7d4f" stroke="none" stroke-width="1.5"/>
+<text x="85" y="211" text-anchor="middle" class="m w b">copia</text>
+<path class="ln" d="M142 56 C220 56 230 80 296 80" marker-end="url(#p)"/>
+<path class="ln" d="M142 116 C220 116 230 90 296 90" marker-end="url(#p)"/>
+<path class="ln" d="M142 206 H296" marker-end="url(#p)"/>
+<rect x="300" y="62" width="64" height="44" rx="4" fill="#fff" stroke="#1d4f66" stroke-width="2"/>
+<text x="332" y="90" text-anchor="middle" class="m b">10</text>
+<rect x="370" y="62" width="64" height="44" rx="4" fill="#fff" stroke="#1d4f66" stroke-width="2"/>
+<text x="402" y="90" text-anchor="middle" class="m b">20</text>
+<rect x="440" y="62" width="64" height="44" rx="4" fill="#fff" stroke="#1d4f66" stroke-width="2"/>
+<text x="472" y="90" text-anchor="middle" class="m b">30</text>
+<rect x="300" y="184" width="64" height="44" rx="4" fill="#fff" stroke="#2e7d4f" stroke-width="2"/>
+<text x="332" y="212" text-anchor="middle" class="m b">10</text>
+<rect x="370" y="184" width="64" height="44" rx="4" fill="#fff" stroke="#2e7d4f" stroke-width="2"/>
+<text x="402" y="212" text-anchor="middle" class="m b">20</text>
+<rect x="440" y="184" width="64" height="44" rx="4" fill="#fff" stroke="#2e7d4f" stroke-width="2"/>
+<text x="472" y="212" text-anchor="middle" class="m b">99</text>
+<text x="560" y="80" text-anchor="start" class="s b">UNA sola lista con dos nombres:</text>
+<text x="560" y="98" text-anchor="start" class="s">alias.append(30) también</text>
+<text x="560" y="114" text-anchor="start" class="s">cambia precios</text>
+<text x="560" y="202" text-anchor="start" class="s b">lista NUEVA (precios[:]):</text>
+<text x="560" y="220" text-anchor="start" class="s">sus cambios no afectan</text>
+</svg>

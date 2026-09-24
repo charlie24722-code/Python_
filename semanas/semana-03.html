@@ -7,7 +7,7 @@
 <meta name="description" content="Guía de estudio, semana 3: while, for, range, acumuladores, contadores, banderas, break/continue, input() y trazas de ejecución.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/guia.css">
 <script>try{var t=localStorage.getItem("ids-guia-v1-tema");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 </head>
@@ -22,23 +22,48 @@
     <a href="semana-04.html">S4</a>
     <a href="semana-05.html">S5</a>
   </nav>
-  <button class="theme-btn" type="button" aria-label="Cambiar tema claro/oscuro">◐</button>
+  <button class="theme-btn" type="button" aria-label="Cambiar tema claro/oscuro"><span class="ico-tema" aria-hidden="true"></span></button>
+</header>
+
+<header class="hero-semana">
+  <div class="hero-in">
+    <p class="hero-num" aria-hidden="true">03</p>
+    <div class="hero-txt">
+      <p class="hero-mod"><span class="sr">Semana 3 · </span>Módulo 4</p>
+      <h1>Estructuras repetitivas y patrones de control</h1>
+      <p class="lead">Un negocio no procesa una venta: procesa cientos. Esta semana el programa aprende a <strong>repetir</strong>: leer datos hasta que el usuario diga “fin”, recorrer una serie de montos, acumular totales y detenerse cuando una aproximación es suficientemente buena.</p>
+    </div>
+    <p class="pregunta"><span class="pregunta-lbl">Pregunta orientadora</span><mark>¿Cómo proceso cientos de transacciones sin escribir cientos de líneas, y cómo garantizo que el proceso termina?</mark></p>
+    <dl class="hero-meta">
+      <div><dt>Lecturas</dt><dd>PCC 7 · PCC 4 (inicio) · BOU 3</dd></div>
+      <div><dt>Proyecto</dt><dd>Fase 2 (esta semana)</dd></div>
+      <div class="eval"><dt>Evaluación</dt><dd>Control 2: semana 5</dd></div>
+    </dl>
+    <div class="progress" data-progreso-pagina>
+      <div class="progress-bar"><span></span></div>
+      <div class="progress-label"></div>
+    </div>
+  </div>
 </header>
 
 <div class="layout with-toc">
 <aside class="toc" aria-label="Contenido de la semana">
   <p>Semana 3</p>
   <ol>
+    <li class="grupo" aria-hidden="true">Antes de clase</li>
     <li><a href="#uso">Cómo usar la guía</a></li>
     <li><a href="#mapa">Qué puedes usar</a></li>
     <li><a href="#lecturas">Lecturas</a></li>
     <li><a href="#checkpoint">Reading checkpoint</a></li>
+    <li class="grupo" aria-hidden="true">Aprender</li>
     <li><a href="#while">while e input()</a></li>
     <li><a href="#for">for y range()</a></li>
     <li><a href="#patrones">Patrones de bucle</a></li>
     <li><a href="#aproximacion">Aproximación numérica</a></li>
+    <li class="grupo" aria-hidden="true">Practicar</li>
     <li><a href="#trazas">Tablas de traza</a></li>
     <li><a href="#ejercicios">Ejercicios</a></li>
+    <li class="grupo" aria-hidden="true">Entregar y evaluar</li>
     <li><a href="#proyecto">Proyecto: Fase 2</a></li>
     <li><a href="#evaluacion">Rumbo al Control 2</a></li>
     <li><a href="#fuentes">Fuentes</a></li>
@@ -46,21 +71,6 @@
 </aside>
 
 <main>
-<section class="hero">
-  <p class="eyebrow">Semana 3 · Módulo 4</p>
-  <h1>Estructuras repetitivas y patrones de control</h1>
-  <p class="lead">Un negocio no procesa una venta: procesa cientos. Esta semana el programa aprende a <strong>repetir</strong>: leer datos hasta que el usuario diga “fin”, recorrer una serie de montos, acumular totales y detenerse cuando una aproximación es suficientemente buena.</p>
-  <div class="pregunta"><small>Pregunta orientadora</small>¿Cómo proceso cientos de transacciones sin escribir cientos de líneas, y cómo garantizo que el proceso termina?</div>
-  <ul class="chips">
-    <li class="chip lect">Lecturas: PCC 7 · PCC 4 (inicio) · BOU 3</li>
-    <li class="chip proy">Proyecto: Fase 2 (esta semana)</li>
-    <li class="chip eval">Control 2: semana 5</li>
-  </ul>
-  <div class="progress" data-progreso-pagina>
-    <div class="progress-bar"><span></span></div>
-    <div class="progress-label"></div>
-  </div>
-</section>
 
 <section id="uso">
   <h2>Cómo usar esta guía</h2>
@@ -233,26 +243,7 @@ for monto in [10, 20, 30]:
         <li>Necesitamos un <strong>acumulador</strong> (total), un <strong>contador</strong> (cantidad) y un <strong>máximo</strong>. Los tres se inicializan <em>antes</em> del bucle.</li>
         <li>Caso borde: si el cajero escribe <code>fin</code> de inmediato, el promedio sería una división entre cero.</li>
       </ul>
-      <figure class="diagrama">
-        <svg class="fc" viewBox="0 0 520 430" width="520" role="img" aria-labelledby="fc3-t">
-          <title id="fc3-t">Diagrama de flujo de un bucle con centinela</title>
-          <defs><marker id="fc3-m" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="punta" d="M0,0 L10,5 L0,10 z"/></marker></defs>
-          <rect class="proc" x="150" y="10" width="220" height="40"/><text class="mono" x="260" y="35" text-anchor="middle">total ← 0, cantidad ← 0</text>
-          <path class="flecha" d="M260 50 V72" marker-end="url(#fc3-m)"/>
-          <polygon class="io" points="190,74 350,74 330,114 170,114"/><text x="260" y="99" text-anchor="middle">Leer entrada</text>
-          <path class="flecha" d="M260 114 V136" marker-end="url(#fc3-m)"/>
-          <polygon class="dec" points="260,138 345,176 260,214 175,176"/><text x="260" y="181" text-anchor="middle">¿entrada = fin?</text>
-          <path class="flecha" d="M345 176 H440 V356" marker-end="url(#fc3-m)"/><text class="rot" x="360" y="168">Sí</text>
-          <path class="flecha" d="M260 214 V236" marker-end="url(#fc3-m)"/><text class="rot" x="268" y="230">No</text>
-          <rect class="proc" x="150" y="238" width="220" height="50"/>
-          <text class="mono" x="260" y="259" text-anchor="middle">total ← total + monto</text>
-          <text class="mono" x="260" y="277" text-anchor="middle">cantidad ← cantidad + 1</text>
-          <path class="flecha" d="M150 263 H70 V94 H176" marker-end="url(#fc3-m)"/>
-          <text class="rot" x="18" y="180">repetir</text>
-          <polygon class="io" points="385,358 505,358 490,398 370,398"/><text x="437" y="383" text-anchor="middle">Mostrar reporte</text>
-        </svg>
-        <figcaption>Un bucle en un diagrama es una flecha que <em>regresa</em> a un punto anterior. La decisión es la condición de salida.</figcaption>
-      </figure>
+      <figure class="lamina angosta"><div class="placa"><img src="../assets/img/s3-centinela.svg" alt="Diagrama de un bucle con centinela: inicializar total y cantidad, leer entrada, si es fin se sale y se muestra el reporte; si no, se acumula y se vuelve a leer." width="580" height="424" loading="lazy" decoding="async"></div><figcaption>Un bucle en un diagrama es una flecha que <strong>regresa</strong> a un punto anterior. La decisión es la condición de salida.</figcaption></figure>
     </div></div>
     <div class="paso"><div>
       <span class="etq">Implementación</span>
@@ -331,6 +322,8 @@ Venta mayor: $100.00</code></pre>
     <div class="paso"><div>
       <span class="etq">Exploración</span>
       <p>Sabemos exactamente cuántas vueltas: 5 → <code>for</code> con <code>range(1, 6)</code> (el 6 no se incluye). Cada año el saldo se multiplica por 1.08: el saldo es un acumulador que crece multiplicando.</p>
+<figure class="lamina "><div class="placa"><img src="../assets/img/s3-range.svg" alt="range(1, 6) incluye los números del 1 al 5: el inicio se incluye y el fin no." width="760" height="172" loading="lazy" decoding="async"></div><figcaption>El “uno de menos” más famoso de Python: el fin de <code>range</code> nunca se incluye.</figcaption></figure>
+
     </div></div>
     <div class="paso"><div>
       <span class="etq">Implementación</span>
@@ -356,6 +349,8 @@ print(f"Ganancia total: ${saldo - capital:,.2f}")</code></pre>
   4    100.78    1360.49
   5    108.84    1469.33
 Ganancia total: $469.33</code></pre>
+<figure class="lamina "><div class="placa"><img src="../assets/img/s3-interes.svg" alt="Barras apiladas del saldo de un depósito de 1000 dólares al 8 % anual: 1080, 1166.40, 1259.71, 1360.49 y 1469.33; la parte de interés crece cada año." width="720" height="286" loading="lazy" decoding="async"></div><figcaption>El capital (azul) no cambia; la parte de interés (ocre) crece cada año porque se calcula sobre un saldo mayor. Valores exactos en la tabla de arriba.</figcaption></figure>
+
     </div></div>
     <div class="paso"><div>
       <span class="etq">Interpretación</span>

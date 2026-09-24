@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 152" width="760" height="152" role="img" aria-label="Ciclo de vida del software: requerimientos, diseño, implementación, pruebas, despliegue y mantenimiento; el mantenimiento vuelve a requerimientos.">
+<title>Ciclo de vida del software: requerimientos, diseño, implementación, pruebas, despliegue y mantenimiento; el mantenimiento vuelve a requerimientos.</title>
+<style>
+  text { font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; fill: #1b2430; }
+  .m { font-family: 'JetBrains Mono', Menlo, Consolas, monospace; font-size: 13px; }
+  .s { font-size: 12px; fill: #465264; }
+  .t { font-size: 16px; font-weight: 700; }
+  .b { font-weight: 700; }
+  .mu { fill: #6b7380; }
+  .w { fill: #fff; }
+  .ln { stroke: #465264; stroke-width: 1.6; fill: none; }
+  .ln-s { stroke: #c5ced6; stroke-width: 1.2; fill: none; }
+</style>
+<defs><marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#465264"/></marker><marker id="pb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0a70a8"/></marker><marker id="pg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2e7d4f"/></marker></defs>
+<rect x="16" y="40" width="112" height="52" rx="6" fill="#e2ecf1" stroke="#1d4f66" stroke-width="1.5"/>
+<text x="72.0" y="62" text-anchor="middle" class="b">1</text>
+<text x="72.0" y="80" text-anchor="middle" class="s b">Requerimientos</text>
+<path class="ln" d="M129 66 H137" marker-end="url(#p)"/>
+<rect x="138" y="40" width="112" height="52" rx="6" fill="#e2ecf1" stroke="#1d4f66" stroke-width="1.5"/>
+<text x="194.0" y="62" text-anchor="middle" class="b">2</text>
+<text x="194.0" y="80" text-anchor="middle" class="s b">Diseño</text>
+<path class="ln" d="M251 66 H259" marker-end="url(#p)"/>
+<rect x="260" y="40" width="112" height="52" rx="6" fill="#e2ecf1" stroke="#1d4f66" stroke-width="1.5"/>
+<text x="316.0" y="62" text-anchor="middle" class="b">3</text>
+<text x="316.0" y="80" text-anchor="middle" class="s b">Implementación</text>
+<path class="ln" d="M373 66 H381" marker-end="url(#p)"/>
+<rect x="382" y="40" width="112" height="52" rx="6" fill="#fbf1b8" stroke="#b07600" stroke-width="1.5"/>
+<text x="438.0" y="62" text-anchor="middle" class="b">4</text>
+<text x="438.0" y="80" text-anchor="middle" class="s b">Pruebas</text>
+<path class="ln" d="M495 66 H503" marker-end="url(#p)"/>
+<rect x="504" y="40" width="112" height="52" rx="6" fill="#e2ecf1" stroke="#1d4f66" stroke-width="1.5"/>
+<text x="560.0" y="62" text-anchor="middle" class="b">5</text>
+<text x="560.0" y="80" text-anchor="middle" class="s b">Despliegue</text>
+<path class="ln" d="M617 66 H625" marker-end="url(#p)"/>
+<rect x="626" y="40" width="112" height="52" rx="6" fill="#e2ecf1" stroke="#1d4f66" stroke-width="1.5"/>
+<text x="682.0" y="62" text-anchor="middle" class="b">6</text>
+<text x="682.0" y="80" text-anchor="middle" class="s b">Mantenimiento</text>
+<path class="ln" d="M688 92 V122 H72 V96" marker-end="url(#p)" stroke-dasharray="5 4"/>
+<text x="380" y="140" text-anchor="middle" class="s">un cambio en la regla de negocio (p. ej. la tasa del IVA) reinicia el ciclo</text>
+<text x="416" y="28" text-anchor="middle" class="s">aquí se detectan los errores antes de llegar al cliente</text>
+</svg>

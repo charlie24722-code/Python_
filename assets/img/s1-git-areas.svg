@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 252" width="780" height="252" role="img" aria-label="Los lugares de Git: el directorio de trabajo pasa al área de preparación con git add, al repositorio local con git commit y a GitHub con git push; git pull trae los cambios del remoto.">
+<title>Los lugares de Git: el directorio de trabajo pasa al área de preparación con git add, al repositorio local con git commit y a GitHub con git push; git pull trae los cambios del remoto.</title>
+<style>
+  text { font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; fill: #1b2430; }
+  .m { font-family: 'JetBrains Mono', Menlo, Consolas, monospace; font-size: 13px; }
+  .s { font-size: 12px; fill: #465264; }
+  .t { font-size: 16px; font-weight: 700; }
+  .b { font-weight: 700; }
+  .mu { fill: #6b7380; }
+  .w { fill: #fff; }
+  .ln { stroke: #465264; stroke-width: 1.6; fill: none; }
+  .ln-s { stroke: #c5ced6; stroke-width: 1.2; fill: none; }
+</style>
+<defs><marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#465264"/></marker><marker id="pb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0a70a8"/></marker><marker id="pg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2e7d4f"/></marker></defs>
+<rect x="20" y="40" width="170" height="150" rx="8" fill="#e9eef1" stroke="#465264" stroke-width="1.5"/>
+<text x="105" y="70" text-anchor="middle" class="b">Directorio de trabajo</text>
+<text x="105" y="90" text-anchor="middle" class="s">tus archivos al editarlos</text>
+<rect x="210" y="40" width="170" height="150" rx="8" fill="#fbf1b8" stroke="#b07600" stroke-width="1.5"/>
+<text x="295" y="70" text-anchor="middle" class="b">Área de preparación</text>
+<text x="295" y="90" text-anchor="middle" class="s">staging: lo que irá al commit</text>
+<rect x="400" y="40" width="170" height="150" rx="8" fill="#e2ecf1" stroke="#1d4f66" stroke-width="1.5"/>
+<text x="485" y="70" text-anchor="middle" class="b">Repositorio local</text>
+<text x="485" y="90" text-anchor="middle" class="s">carpeta .git: el historial</text>
+<rect x="590" y="40" width="170" height="150" rx="8" fill="#dcefe3" stroke="#2e7d4f" stroke-width="1.5"/>
+<text x="675" y="70" text-anchor="middle" class="b">GitHub</text>
+<text x="675" y="90" text-anchor="middle" class="s">repositorio remoto del equipo</text>
+<rect x="55" y="110" width="100" height="26" rx="3" fill="#fff" stroke="#465264" stroke-width="1.5"/>
+<text x="105" y="128" text-anchor="middle" class="m">README.md</text>
+<text x="105" y="158" text-anchor="middle" class="s">modificado</text>
+<rect x="245" y="110" width="100" height="26" rx="3" fill="#fff" stroke="#b07600" stroke-width="1.5"/>
+<text x="295" y="128" text-anchor="middle" class="m">README.md</text>
+<text x="295" y="158" text-anchor="middle" class="s">preparado</text>
+<circle cx="440" cy="125" r="11" fill="#1d4f66"/>
+<text x="440" y="129" text-anchor="middle" class="b w s">C1</text>
+<circle cx="485" cy="125" r="11" fill="#1d4f66"/>
+<path d="M451 125 H474" stroke="#1d4f66" stroke-width="2"/>
+<text x="485" y="129" text-anchor="middle" class="b w s">C2</text>
+<circle cx="530" cy="125" r="11" fill="#1d4f66"/>
+<path d="M496 125 H519" stroke="#1d4f66" stroke-width="2"/>
+<text x="530" y="129" text-anchor="middle" class="b w s">C3</text>
+<text x="485" y="158" text-anchor="middle" class="s">confirmado</text>
+<circle cx="630" cy="125" r="11" fill="#2e7d4f"/>
+<circle cx="675" cy="125" r="11" fill="#2e7d4f"/>
+<path d="M641 125 H664" stroke="#2e7d4f" stroke-width="2"/>
+<circle cx="720" cy="125" r="11" fill="#2e7d4f"/>
+<path d="M686 125 H709" stroke="#2e7d4f" stroke-width="2"/>
+<text x="675" y="158" text-anchor="middle" class="s">lo ve todo el equipo</text>
+<path class="ln" d="M182 24 H218" marker-end="url(#pb)" stroke="#0a70a8"/>
+<text x="200.0" y="16" text-anchor="middle" class="m b">git add</text>
+<path class="ln" d="M372 24 H408" marker-end="url(#pb)" stroke="#0a70a8"/>
+<text x="390.0" y="16" text-anchor="middle" class="m b">git commit</text>
+<path class="ln" d="M562 24 H598" marker-end="url(#pb)" stroke="#0a70a8"/>
+<text x="580.0" y="16" text-anchor="middle" class="m b">git push</text>
+<path class="ln" d="M675 204 V222 H105 V200" marker-end="url(#pb)" stroke="#0a70a8" stroke-dasharray="5 4"/>
+<text x="390" y="240" text-anchor="middle" class="m s">git pull / git clone: traer lo que subieron los demás</text>
+</svg>

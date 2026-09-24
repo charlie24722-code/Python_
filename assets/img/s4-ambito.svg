@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 274" width="760" height="274" role="img" aria-label="El espacio global contiene descuento igual a 0.05; la llamada a precio_final tiene su propio espacio local con precio 200 y otro descuento de 0.10 que desaparece al terminar.">
+<title>El espacio global contiene descuento igual a 0.05; la llamada a precio_final tiene su propio espacio local con precio 200 y otro descuento de 0.10 que desaparece al terminar.</title>
+<style>
+  text { font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; fill: #1b2430; }
+  .m { font-family: 'JetBrains Mono', Menlo, Consolas, monospace; font-size: 13px; }
+  .s { font-size: 12px; fill: #465264; }
+  .t { font-size: 16px; font-weight: 700; }
+  .b { font-weight: 700; }
+  .mu { fill: #6b7380; }
+  .w { fill: #fff; }
+  .ln { stroke: #465264; stroke-width: 1.6; fill: none; }
+  .ln-s { stroke: #c5ced6; stroke-width: 1.2; fill: none; }
+</style>
+<defs><marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#465264"/></marker><marker id="pb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0a70a8"/></marker><marker id="pg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2e7d4f"/></marker></defs>
+<rect x="20" y="20" width="720" height="220" rx="10" fill="#fff" stroke="#1d4f66" stroke-width="1.5"/>
+<text x="40" y="46" text-anchor="start" class="b">Espacio global (el archivo)</text>
+<rect x="40" y="64" width="180" height="34" rx="4" fill="#e2ecf1" stroke="none" stroke-width="1.5"/>
+<text x="130" y="86" text-anchor="middle" class="m">descuento = 0.05</text>
+<rect x="40" y="110" width="180" height="34" rx="4" fill="#e2ecf1" stroke="none" stroke-width="1.5"/>
+<text x="130" y="132" text-anchor="middle" class="m">a = 180.0</text>
+<rect x="40" y="156" width="180" height="34" rx="4" fill="#e2ecf1" stroke="none" stroke-width="1.5"/>
+<text x="130" y="178" text-anchor="middle" class="m">b = 190.0</text>
+<rect x="290" y="60" width="420" height="160" rx="8" fill="#fbf1b8" stroke="#b07600" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="310" y="86" text-anchor="start" class="b">Llamada a precio_final(200): espacio local</text>
+<rect x="310" y="102" width="180" height="34" rx="4" fill="#fff" stroke="#b07600" stroke-width="1.5"/>
+<text x="400" y="124" text-anchor="middle" class="m">precio = 200</text>
+<rect x="310" y="148" width="180" height="34" rx="4" fill="#fff" stroke="#b07600" stroke-width="1.5"/>
+<text x="400" y="170" text-anchor="middle" class="m">descuento = 0.10</text>
+<text x="600" y="124" text-anchor="middle" class="s">otra variable,</text>
+<text x="600" y="142" text-anchor="middle" class="s">mismo nombre</text>
+<text x="500" y="206" text-anchor="middle" class="s">se destruye al terminar la función</text>
+<text x="380" y="262" text-anchor="middle" class="s">Asignar dentro de una función crea una variable local; la global no cambia.</text>
+</svg>

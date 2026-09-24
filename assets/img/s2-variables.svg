@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 292" width="760" height="292" role="img" aria-label="Las variables son etiquetas que apuntan a valores. Al reasignar precio de 20 a 25, subtotal sigue valiendo 60 porque se calculó antes.">
+<title>Las variables son etiquetas que apuntan a valores. Al reasignar precio de 20 a 25, subtotal sigue valiendo 60 porque se calculó antes.</title>
+<style>
+  text { font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; fill: #1b2430; }
+  .m { font-family: 'JetBrains Mono', Menlo, Consolas, monospace; font-size: 13px; }
+  .s { font-size: 12px; fill: #465264; }
+  .t { font-size: 16px; font-weight: 700; }
+  .b { font-weight: 700; }
+  .mu { fill: #6b7380; }
+  .w { fill: #fff; }
+  .ln { stroke: #465264; stroke-width: 1.6; fill: none; }
+  .ln-s { stroke: #c5ced6; stroke-width: 1.2; fill: none; }
+</style>
+<defs><marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#465264"/></marker><marker id="pb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0a70a8"/></marker><marker id="pg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2e7d4f"/></marker></defs>
+<text x="190" y="26" text-anchor="middle" class="t">Después de la línea 3</text>
+<text x="570" y="26" text-anchor="middle" class="t">Después de la línea 4: precio = 25</text>
+<rect x="20" y="50" width="104" height="30" rx="15" fill="#1d4f66" stroke="none" stroke-width="1.5"/>
+<text x="72" y="70" text-anchor="middle" class="m w b">precio</text>
+<path class="ln" d="M126 65 H172" marker-end="url(#p)"/>
+<rect x="174" y="46" width="86" height="38" rx="3" fill="#fff" stroke="#465264" stroke-width="1.5"/>
+<text x="217" y="71" text-anchor="middle" class="m b">20</text>
+<text x="290" y="70" text-anchor="start" class="s">int</text>
+<rect x="20" y="112" width="104" height="30" rx="15" fill="#1d4f66" stroke="none" stroke-width="1.5"/>
+<text x="72" y="132" text-anchor="middle" class="m w b">cantidad</text>
+<path class="ln" d="M126 127 H172" marker-end="url(#p)"/>
+<rect x="174" y="108" width="86" height="38" rx="3" fill="#fff" stroke="#465264" stroke-width="1.5"/>
+<text x="217" y="133" text-anchor="middle" class="m b">3</text>
+<text x="290" y="132" text-anchor="start" class="s">int</text>
+<rect x="20" y="174" width="104" height="30" rx="15" fill="#1d4f66" stroke="none" stroke-width="1.5"/>
+<text x="72" y="194" text-anchor="middle" class="m w b">subtotal</text>
+<path class="ln" d="M126 189 H172" marker-end="url(#p)"/>
+<rect x="174" y="170" width="86" height="38" rx="3" fill="#fff" stroke="#465264" stroke-width="1.5"/>
+<text x="217" y="195" text-anchor="middle" class="m b">60</text>
+<text x="290" y="194" text-anchor="start" class="s">int</text>
+<rect x="400" y="50" width="104" height="30" rx="15" fill="#1d4f66" stroke="none" stroke-width="1.5"/>
+<text x="452" y="70" text-anchor="middle" class="m w b">precio</text>
+<path class="ln" d="M506 65 H552" marker-end="url(#p)"/>
+<rect x="554" y="46" width="86" height="38" rx="3" fill="#fff" stroke="#465264" stroke-width="1.5"/>
+<text x="597" y="71" text-anchor="middle" class="m b">25</text>
+<text x="670" y="70" text-anchor="start" class="s">int</text>
+<rect x="554" y="90" width="86" height="26" rx="3" fill="#e9eef1" stroke="#c5ced6" stroke-width="1.5"/>
+<text x="597" y="108" text-anchor="middle" class="m mu">20</text>
+<path d="M560 103 H634" stroke="#b8402f" stroke-width="2"/>
+<rect x="400" y="142" width="104" height="30" rx="15" fill="#1d4f66" stroke="none" stroke-width="1.5"/>
+<text x="452" y="162" text-anchor="middle" class="m w b">cantidad</text>
+<path class="ln" d="M506 157 H552" marker-end="url(#p)"/>
+<rect x="554" y="138" width="86" height="38" rx="3" fill="#fff" stroke="#465264" stroke-width="1.5"/>
+<text x="597" y="163" text-anchor="middle" class="m b">3</text>
+<text x="670" y="162" text-anchor="start" class="s">int</text>
+<rect x="390" y="196" width="300" height="50" rx="6" fill="#fbf1b8" stroke="none" stroke-width="1.5"/>
+<rect x="400" y="204" width="104" height="30" rx="15" fill="#b07600" stroke="none" stroke-width="1.5"/>
+<text x="452" y="224" text-anchor="middle" class="m w b">subtotal</text>
+<path class="ln" d="M506 219 H552" marker-end="url(#p)"/>
+<rect x="554" y="200" width="86" height="38" rx="3" fill="#fff" stroke="#465264" stroke-width="1.5"/>
+<text x="597" y="225" text-anchor="middle" class="m b">60</text>
+<text x="670" y="224" text-anchor="start" class="s">¡sigue en 60!</text>
+<path d="M370 40 V250" stroke="#c5ced6" stroke-width="1.2"/>
+<text x="380" y="280" text-anchor="middle" class="s">Una variable es una etiqueta que apunta a un valor. Reasignar mueve la etiqueta; no recalcula lo que ya se calculó.</text>
+</svg>

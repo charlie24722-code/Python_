@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 312" width="760" height="312" role="img" aria-label="Con monto igual a 600, la primera condición monto mayor que 100 es verdadera, se ejecuta la rama A y las ramas siguientes nunca se evalúan.">
+<title>Con monto igual a 600, la primera condición monto mayor que 100 es verdadera, se ejecuta la rama A y las ramas siguientes nunca se evalúan.</title>
+<style>
+  text { font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; fill: #1b2430; }
+  .m { font-family: 'JetBrains Mono', Menlo, Consolas, monospace; font-size: 13px; }
+  .s { font-size: 12px; fill: #465264; }
+  .t { font-size: 16px; font-weight: 700; }
+  .b { font-weight: 700; }
+  .mu { fill: #6b7380; }
+  .w { fill: #fff; }
+  .ln { stroke: #465264; stroke-width: 1.6; fill: none; }
+  .ln-s { stroke: #c5ced6; stroke-width: 1.2; fill: none; }
+</style>
+<defs><marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#465264"/></marker><marker id="pb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0a70a8"/></marker><marker id="pg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2e7d4f"/></marker></defs>
+<rect x="270" y="12" width="220" height="34" rx="17" fill="#1d4f66" stroke="none" stroke-width="1.5"/>
+<text x="380" y="34" text-anchor="middle" class="m w b">monto = 600</text>
+<polygon points="380,70 470,96 380,122 290,96" fill="#fbf1b8" stroke="#b07600" stroke-width="1.5"/>
+<text x="380" y="101" text-anchor="middle" class="m">monto &gt; 100</text>
+<path class="ln" d="M380 122 V140" marker-end="url(#p)" stroke-dasharray="4 4" opacity="0.45"/>
+<path class="ln" d="M470 96 H556" marker-end="url(#pg)" stroke="#2e7d4f" stroke-width="2.5"/>
+<rect x="560" y="78" width="150" height="36" rx="4" fill="#dcefe3" stroke="#2e7d4f" stroke-width="1.5"/>
+<text x="635" y="101" text-anchor="middle" class="m b">print("A")  ✓</text>
+<text x="515" y="86" text-anchor="middle" class="m s b">True</text>
+<polygon points="380,142 470,168 380,194 290,168" fill="#e9eef1" stroke="#c5ced6" stroke-width="1.5"/>
+<text x="380" y="173" text-anchor="middle" class="m mu">monto &gt; 500</text>
+<path class="ln" d="M380 194 V212" marker-end="url(#p)" stroke-dasharray="4 4" opacity="0.45"/>
+<rect x="560" y="150" width="150" height="36" rx="4" fill="#e9eef1" stroke="#c5ced6" stroke-width="1.5"/>
+<text x="635" y="173" text-anchor="middle" class="m mu">print("B")</text>
+<rect x="320" y="222" width="120" height="36" rx="4" fill="#e9eef1" stroke="#c5ced6" stroke-width="1.5"/>
+<text x="380" y="245" text-anchor="middle" class="m mu">else</text>
+<rect x="560" y="222" width="150" height="36" rx="4" fill="#e9eef1" stroke="#c5ced6" stroke-width="1.5"/>
+<text x="635" y="245" text-anchor="middle" class="m mu">print("C")</text>
+<text x="200" y="173" text-anchor="end" class="s b" style="fill:#b8402f">nunca se evalúan</text>
+<path d="M208 168 H284" stroke="#b8402f" stroke-width="1.5" stroke-dasharray="3 3"/>
+<path d="M208 168 H230 V240 H314" stroke="#b8402f" stroke-width="1.5" stroke-dasharray="3 3" fill="none"/>
+<text x="380" y="300" text-anchor="middle" class="s">En una cadena if / elif / else solo se ejecuta la PRIMERA rama verdadera. Ordena los tramos del más exigente al menos exigente.</text>
+</svg>
