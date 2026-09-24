@@ -68,6 +68,7 @@
     <li class="grupo" aria-hidden="true">Practicar</li>
     <li><a href="#trazas">Tablas de traza</a></li>
     <li><a href="#ejercicios">Ejercicios</a></li>
+    <li><a href="#practica">Práctica intensiva</a></li>
     <li class="grupo" aria-hidden="true">Entregar y evaluar</li>
     <li><a href="#proyecto">Proyecto: Fase 3</a></li>
     <li><a href="#evaluacion">Control 2 y Parcial</a></li>
@@ -242,6 +243,9 @@ print(precios)</code></pre>
 
 <section id="listas">
   <h2>Listas y slicing</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p>Una lista es una <strong>fila de casilleros numerados</strong> desde el 0. <code>ventas[0]</code> es el primer casillero y <code>ventas[-1]</code> el último. Un slice <code>[2:5]</code> es cortar una rebanada: desde el casillero 2 hasta <em>antes</em> del 5.</p>
+  </div>
   <div class="ciclo">
     <h3>Caso: el registro de ventas de la semana</h3>
     <div class="paso"><div>
@@ -313,6 +317,9 @@ print(precios, alias, copia)</code></pre>
 
 <section id="tuplas">
   <h2>Tuplas: registros que no deben cambiar</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p>Una tupla es una lista <strong>sellada</strong>: se puede leer pero no cambiar. Sirve para registros que no deben alterarse por accidente, como un producto con su código, nombre y precio.</p>
+  </div>
   <p>Una tupla es como una lista, pero <strong>inmutable</strong> y se escribe con paréntesis. Úsala para registros de campos fijos: un producto (código, nombre, precio), una coordenada, un par (base, IVA).</p>
 <pre data-file="catalogo.py"><code class="language-python">catalogo = [
     ("A01", "Aceite 1 L", 12.50),
@@ -343,6 +350,9 @@ El segundo producto es Arroz 5 lb</code></pre>
 
 <section id="busqueda">
   <h2>Búsqueda lineal</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p>Buscar sin orden es como buscar tu llave en un llavero revolviendo una por una: puedes tener suerte a la primera o tener que revisarlas todas. Por eso ordenar los datos ahorra tiempo después.</p>
+  </div>
   <div class="ciclo">
     <h3>Caso: buscar un producto por código</h3>
     <div class="paso"><div>
@@ -396,6 +406,9 @@ Z99: posición -1, 4 comparaciones</code></pre>
 
 <section id="ordenamiento">
   <h2>Algoritmos de ordenamiento: Bubble Sort e Insertion Sort</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p><strong>Bubble Sort</strong>: comparas vecinos y los intercambias; en cada pasada el más grande “sube” al final como una burbuja. <strong>Insertion Sort</strong>: como ordenar cartas en la mano; tomas la siguiente y la deslizas a la izquierda hasta su lugar.</p>
+  </div>
   <p>En el laboratorio se implementan <strong>sin</strong> <code>sort()</code> ni <code>sorted()</code>. El objetivo no es reemplazarlos (Python ordena mucho más rápido), sino entender qué hace un algoritmo y cuánto trabajo le cuesta.</p>
 
   <div class="ciclo">
@@ -494,6 +507,9 @@ print(montos)                      # la original sigue igual</code></pre>
 
 <section id="desempeno">
   <h2>Laboratorio de desempeño algorítmico</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p>Si duplicas la cantidad de datos, estos algoritmos hacen <strong>cuatro veces</strong> el trabajo. Con 10 facturas no se nota; con 100,000, la diferencia es entre un segundo y varias horas.</p>
+  </div>
   <div class="ciclo">
     <h3>Caso: ¿qué algoritmo conviene cuando los datos crecen?</h3>
     <div class="paso"><div>
@@ -872,6 +888,174 @@ print("Auditoría superada")</code></pre>
       <p><strong>Lección:</strong> el error 1 no produce ningún mensaje y parece funcionar con <code>[100, -20, 300]</code>. Solo aparece con dos negativos seguidos: un caso borde que hay que <em>buscar</em>.</p>
     </div></details>
     <ul class="check" style="padding:0 1.2rem .6rem"><li><input type="checkbox" id="s5-e5" data-track="s5-e5"><label for="s5-e5">Resuelto</label></li></ul>
+  </article>
+</section>
+
+<section id="practica">
+  <h2>Práctica intensiva</h2>
+  <p>Primero ejercicios rápidos con listas (se corrigen solos), luego problemas tipo examen. Son buena preparación para la parte práctica del Parcial.</p>
+  <h3>Ejercicios rápidos · ¿Qué resulta?</h3>
+  <p>Con <code>v = [4, 8, 15, 16, 23, 42]</code> cuando aparezca. Escribe las listas con corchetes y comas: <code>[1, 2]</code>.</p>
+  <div class="traza taladro">
+    <div class="table-wrap"><table>
+      <thead><tr><th>Código</th><th>Tu respuesta</th></tr></thead>
+      <tbody>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">v[2]</code></pre></td><td><input data-a="15" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">v[-2]</code></pre></td><td><input data-a="23" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">v[1:4]</code></pre></td><td><input data-a="[8, 15, 16]" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">v[::3]</code></pre></td><td><input data-a="[4, 16]" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">len(v[2:])</code></pre></td><td><input data-a="4" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">a = [3, 1, 2]
+a.append(5)
+a.pop(0)</code></pre></td><td><input data-a="3" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">sorted([3, 1, 2], reverse=True)</code></pre></td><td><input data-a="[3, 2, 1]" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">[x * 2 for x in range(4)]</code></pre></td><td><input data-a="[0, 2, 4, 6]" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">max([12, 7, 30]) - min([12, 7, 30])</code></pre></td><td><input data-a="23" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">v.index(16)</code></pre></td><td><input data-a="3" aria-label="Respuesta"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="acciones"><button class="btn" type="button" data-comprobar>Comprobar</button><button class="btn sec" type="button" data-solucion>Ver solución</button><button class="btn sec" type="button" data-limpiar>Limpiar</button><span class="resultado" aria-live="polite"></span></div>
+  </div>
+  <ul class="check"><li><input type="checkbox" id="s5-px" data-track="s5-px"><label for="s5-px">Completé los ejercicios rápidos sin ejecutar el código.</label></li></ul>
+  <h3>Problemas tipo examen</h3>
+  <article class="ejercicio problema">
+    <header><h3>P1 · Totales y ranking por vendedor (sin diccionarios)</h3><span class="nivel">listas paralelas + ordenamiento propio · ★★★★</span></header>
+    <div class="cuerpo">
+      <p>Tienes las ventas del día como tuplas <code>(vendedor, monto)</code>, con vendedores repetidos. Calcula el total de cada uno usando <strong>dos listas paralelas</strong> (nombres y totales) y muestra un ranking descendente ordenado con tu propio Insertion Sort.</p>
+      <p><strong>Tu programa debe cumplir estos casos de prueba:</strong></p>
+      <div class="table-wrap"><table><thead><tr><th>Dato</th><th>Esperado</th></tr></thead><tbody><tr><td>Ana</td><td>$350 (120 + 200 + 30)</td></tr><tr><td>Eva</td><td>$150</td></tr><tr><td>Luis</td><td>$120 (80 + 40)</td></tr><tr><td>Total general</td><td>$620</td></tr></tbody></table></div>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p>Para cada venta: si el nombre ya está en <code>nombres</code>, busca su posición con <code>index</code> y suma en <code>totales</code> en esa misma posición; si no, agrégalo a ambas listas.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="ranking_vendedores.py"><code class="language-python">ventas = [(&quot;Ana&quot;, 120), (&quot;Luis&quot;, 80), (&quot;Ana&quot;, 200),
+          (&quot;Eva&quot;, 150), (&quot;Luis&quot;, 40), (&quot;Ana&quot;, 30)]
+
+nombres = []          # listas paralelas: nombres[k] va con totales[k]
+totales = []
+for nombre, monto in ventas:
+    if nombre in nombres:
+        k = nombres.index(nombre)
+        totales[k] += monto
+    else:
+        nombres.append(nombre)
+        totales.append(monto)
+
+# Ranking descendente con Insertion Sort sobre tuplas (nombre, total)
+ranking = []
+for k in range(len(nombres)):
+    ranking.append((nombres[k], totales[k]))
+for i in range(1, len(ranking)):
+    actual = ranking[i]
+    j = i - 1
+    while j &gt;= 0 and ranking[j][1] &lt; actual[1]:
+        ranking[j + 1] = ranking[j]
+        j -= 1
+    ranking[j + 1] = actual
+
+for puesto in range(len(ranking)):
+    nombre, total = ranking[puesto]
+    print(f&quot;{puesto + 1}. {nombre:&lt;5} ${total:&gt;4}&quot;)
+print(f&quot;Total general: ${sum(totales)}&quot;)</code></pre>
+<pre class="salida" data-file="salida"><code>1. Ana   $ 350
+2. Eva   $ 150
+3. Luis  $ 120
+Total general: $620</code></pre><p><strong>Por qué importa:</strong> mantener dos listas sincronizadas es frágil (si borras de una y no de la otra, todo se desalinea). En la semana 7 esto se resuelve en una línea con un diccionario. Entender el problema ahora te hará entender para qué sirve esa herramienta.</p>
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s5-pr1" data-track="s5-pr1"><label for="s5-pr1">Resuelto y probado con todos los casos</label></li></ul>
+  </article>
+  <article class="ejercicio problema">
+    <header><h3>P2 · Mediana y percentil 90 de los tickets</h3><span class="nivel">ordenamiento + estadística · ★★★</span></header>
+    <div class="cuerpo">
+      <p>El gerente quiere saber el ticket “típico” de la tienda. El promedio engaña si hay compras enormes. Calcula el <strong>promedio</strong>, la <strong>mediana</strong> (el valor del medio de los datos ordenados; si son pares, el promedio de los dos del medio) y el <strong>percentil 90</strong> (el valor por debajo del cual está el 90 % de los tickets), usando tu propio ordenamiento.</p>
+      <p><strong>Tu programa debe cumplir estos casos de prueba:</strong></p>
+      <div class="table-wrap"><table><thead><tr><th>Medida</th><th>Esperado</th></tr></thead><tbody><tr><td>Promedio</td><td>$32.89</td></tr><tr><td>Mediana</td><td>$22.40</td></tr><tr><td>Percentil 90</td><td>$64.30</td></tr><tr><td><code>mediana([4, 1, 3, 2])</code></td><td>2.5</td></tr></tbody></table></div>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p>Ordena primero. Con n impar, la mediana está en la posición <code>n // 2</code>. Para el percentil 90 usa la posición ⌈0.9 × n⌉ (contando desde 1).</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="estadistica_tickets.py"><code class="language-python">tickets = [12.5, 48.0, 7.25, 30.0, 19.9, 105.0, 22.4, 15.0, 64.3, 9.8, 27.6]
+
+
+def ordenar(datos):
+    &quot;&quot;&quot;Insertion Sort ascendente; devuelve una lista nueva.&quot;&quot;&quot;
+    d = datos[:]
+    for i in range(1, len(d)):
+        actual = d[i]
+        j = i - 1
+        while j &gt;= 0 and d[j] &gt; actual:
+            d[j + 1] = d[j]
+            j -= 1
+        d[j + 1] = actual
+    return d
+
+
+def mediana(datos):
+    d = ordenar(datos)
+    n = len(d)
+    if n % 2 == 1:
+        return d[n // 2]
+    return (d[n // 2 - 1] + d[n // 2]) / 2
+
+
+def percentil_90(datos):
+    &quot;&quot;&quot;Método del rango más cercano: posición ceil(0.9 * n).&quot;&quot;&quot;
+    d = ordenar(datos)
+    k = (9 * len(d) + 9) // 10          # ceil(9n / 10) sin importar math
+    return d[k - 1]
+
+
+print(f&quot;Promedio: ${sum(tickets) / len(tickets):.2f}&quot;)
+print(f&quot;Mediana:  ${mediana(tickets):.2f}&quot;)
+print(f&quot;P90:      ${percentil_90(tickets):.2f}&quot;)
+assert mediana([3, 1, 2]) == 2
+assert mediana([4, 1, 3, 2]) == 2.5
+assert mediana(tickets) == sorted(tickets)[5]</code></pre>
+<pre class="salida" data-file="salida"><code>Promedio: $32.89
+Mediana:  $22.40
+P90:      $64.30</code></pre><p><strong>Interpretación:</strong> el promedio ($32.89) es mayor que la mediana ($22.40) porque una compra de $105 lo arrastra hacia arriba. Para decidir promociones, la mediana describe mejor al cliente típico.</p>
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s5-pr2" data-track="s5-pr2"><label for="s5-pr2">Resuelto y probado con todos los casos</label></li></ul>
+  </article>
+  <article class="ejercicio problema">
+    <header><h3>P3 · Unir los cierres de dos cajas ya ordenados</h3><span class="nivel">algoritmo de intercalación · ★★★★</span></header>
+    <div class="cuerpo">
+      <p>Dos cajas entregan sus montos del día <strong>ya ordenados</strong>. Únelos en una sola lista ordenada recorriendo cada lista una sola vez (sin volver a ordenar todo). Cuenta las comparaciones.</p>
+      <p><strong>Tu programa debe cumplir estos casos de prueba:</strong></p>
+      <div class="table-wrap"><table><thead><tr><th>Qué comprobar</th><th>Esperado</th></tr></thead><tbody><tr><td>Resultado</td><td>[5.0, 8.5, 12.0, 12.0, 19.99, 22.0, 30.0, 41.25, 90.0]</td></tr><tr><td>Comparaciones</td><td>8 (menos que n)</td></tr><tr><td>Una lista vacía</td><td>devuelve la otra tal cual</td></tr></tbody></table></div>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p>Usa dos índices, uno por lista. En cada paso compara los dos “frentes” y pasa el menor al resultado. Cuando una lista se acaba, copia el resto de la otra.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="intercalar.py"><code class="language-python">caja_1 = [8.5, 12.0, 30.0, 41.25]          # montos ya ordenados
+caja_2 = [5.0, 12.0, 19.99, 22.0, 90.0]
+
+
+def intercalar(a, b):
+    &quot;&quot;&quot;Une dos listas ordenadas en una sola ordenada, recorriendo cada una una vez.&quot;&quot;&quot;
+    resultado = []
+    i = 0
+    j = 0
+    comparaciones = 0
+    while i &lt; len(a) and j &lt; len(b):
+        comparaciones += 1
+        if a[i] &lt;= b[j]:
+            resultado.append(a[i])
+            i += 1
+        else:
+            resultado.append(b[j])
+            j += 1
+    resultado.extend(a[i:])                   # lo que quede de a
+    resultado.extend(b[j:])                   # lo que quede de b
+    return resultado, comparaciones
+
+
+unidos, comps = intercalar(caja_1, caja_2)
+print(unidos)
+print(f&quot;{comps} comparaciones para {len(unidos)} montos&quot;)
+assert unidos == sorted(caja_1 + caja_2)
+assert intercalar([], [1, 2])[0] == [1, 2]</code></pre>
+<pre class="salida" data-file="salida"><code>[5.0, 8.5, 12.0, 12.0, 19.99, 22.0, 30.0, 41.25, 90.0]
+8 comparaciones para 9 montos</code></pre><p><strong>Por qué es fuerte:</strong> juntar y reordenar con Insertion Sort costaría hasta n(n − 1)/2 = 36 comparaciones; intercalar costó 8. Esta idea es el corazón de <em>Merge Sort</em>, uno de los algoritmos que verás en Estructuras de Datos.</p>
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s5-pr3" data-track="s5-pr3"><label for="s5-pr3">Resuelto y probado con todos los casos</label></li></ul>
   </article>
 </section>
 

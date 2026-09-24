@@ -69,6 +69,7 @@
     <li class="grupo" aria-hidden="true">Practicar</li>
     <li><a href="#trazas">Tablas de traza</a></li>
     <li><a href="#ejercicios">Ejercicios</a></li>
+    <li><a href="#practica">Práctica intensiva</a></li>
     <li class="grupo" aria-hidden="true">Entregar y evaluar</li>
     <li><a href="#proyecto">Proyecto</a></li>
     <li><a href="#evaluacion">Rumbo al Control 2</a></li>
@@ -251,6 +252,9 @@ print(iva)</code></pre>
 
 <section id="refactor">
   <h2>De script plano a funciones</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p>Una función es una <strong>receta con nombre</strong>. En vez de explicar cómo hacer café cada vez, dices “haz café” y listo. Refactorizar es tomar pasos repetidos y guardarlos en una receta: si la receta cambia, la cambias en un solo lugar.</p>
+  </div>
   <div class="ciclo">
     <h3>Caso: tres clientes, tres copias del mismo cálculo</h3>
     <div class="paso"><div>
@@ -354,6 +358,9 @@ Cliente Marta: $50.85</code></pre>
 
 <section id="parametros">
   <h2>Parámetros, valores por defecto y retorno</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p>Los parámetros son los <strong>ingredientes</strong> que recibe la receta. Un valor por defecto es “si no me dices, uso 12 meses”. <code>return</code> es <strong>entregarte el plato</strong>; <code>print</code> solo te enseña una foto del plato: no te lo puedes comer (no lo puedes usar después).</p>
+  </div>
   <div class="ciclo">
     <h3>Caso: la cuota mensual de un préstamo</h3>
     <div class="paso"><div>
@@ -429,6 +436,9 @@ Base: 100.0, IVA: 13.0</code></pre>
 
 <section id="ambito">
   <h2>Ámbito: variables locales y globales</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p>Lo que pasa en la cocina se queda en la cocina: las variables creadas dentro de una función son <strong>locales</strong> y desaparecen cuando la función termina, aunque se llamen igual que otra de afuera.</p>
+  </div>
   <p>Cada llamada a una función tiene su propio espacio de variables. Lo que se crea adentro <strong>muere</strong> al terminar la función y no choca con variables de afuera que se llamen igual.</p>
 <pre data-file="ambito.py"><code class="language-python">descuento = 0.05                 # global
 
@@ -468,6 +478,9 @@ print(total_ventas)</code></pre>
 
 <section id="recursion">
   <h2>Recursividad elemental</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p>La recursión es como las <strong>muñecas rusas</strong>: para abrir la grande, abres la siguiente, y así hasta la más pequeña, que ya no tiene nada adentro (el caso base). Luego vas cerrando de adentro hacia afuera.</p>
+  </div>
   <div class="ciclo">
     <h3>Caso: el valor futuro, definido en términos de sí mismo</h3>
     <div class="paso"><div>
@@ -513,6 +526,9 @@ print(valor_futuro(1000, 0.10, 3))</code></pre>
 
 <section id="modulos">
   <h2>Módulos: separar el código en archivos</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p>Un módulo es un <strong>archivo de recetas</strong>. Lo escribes una vez y cualquier otro archivo lo puede usar con <code>import</code>, igual que sacar un libro de la biblioteca.</p>
+  </div>
   <p>Un módulo es un archivo <code>.py</code> cuyas funciones se pueden importar desde otro. Es el principio de la arquitectura que exige el proyecto (<code>modelos.py</code>, <code>servicios.py</code>, <code>main.py</code>…).</p>
 <figure class="lamina "><div class="placa"><div class="placa-core"><img src="../assets/img/s4-modulos.svg" alt="El módulo facturacion.py contiene las funciones; main.py y test_facturacion.py las importan." width="760" height="304" loading="lazy" decoding="async"></div></div><figcaption>Un módulo con la lógica; el programa principal y las pruebas lo importan.</figcaption></figure>
 
@@ -564,6 +580,9 @@ print(fac.TASA_IVA)</code></pre>
 
 <section id="pruebas">
   <h2>Pruebas: <code>assert</code> y <code>pytest</code></h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p>Una prueba es una <strong>pregunta con respuesta conocida</strong> que le haces a tu función: “si te doy 50, ¿me devuelves 45?”. Si algún día responde otra cosa, la prueba grita. Es un detector de humo para tu código.</p>
+  </div>
   <div class="ciclo">
     <h3>Caso: que nadie vuelva a romper el descuento de Marta</h3>
     <div class="paso"><div>
@@ -926,6 +945,177 @@ print("Módulo corregido: pruebas superadas")</code></pre>
       <p><strong>Método de auditoría:</strong> no se lee el código “a ver si se ve bien”; se <em>llama</em> cada función con casos elegidos (normal, frontera, fuera de rango) y se compara con lo que promete el docstring.</p>
     </div></details>
     <ul class="check" style="padding:0 1.2rem .6rem"><li><input type="checkbox" id="s4-e5" data-track="s4-e5"><label for="s4-e5">Resuelto</label></li></ul>
+  </article>
+</section>
+
+<section id="practica">
+  <h2>Práctica intensiva</h2>
+  <p>Primero ejercicios rápidos sobre llamadas a funciones (se corrigen solos), luego problemas tipo examen. Todos incluyen pruebas: así se entrega en el proyecto.</p>
+  <h3>Ejercicios rápidos · ¿Qué devuelve?</h3>
+  <p>Escribe el valor que produce la última línea. Si no devuelve nada, escribe <code>None</code>.</p>
+  <div class="traza taladro">
+    <div class="table-wrap"><table>
+      <thead><tr><th>Código</th><th>Tu respuesta</th></tr></thead>
+      <tbody>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">def f(x, y=2):
+    return x ** y
+f(3)</code></pre></td><td><input data-a="9" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">def f(x, y=2):
+    return x ** y
+f(2, 3)</code></pre></td><td><input data-a="8" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">def f(x, y=2):
+    return x ** y
+f(y=1, x=5)</code></pre></td><td><input data-a="5" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">def g(n):
+    if n &lt;= 1:
+        return 1
+    return n * g(n - 1)
+g(4)</code></pre></td><td><input data-a="24" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">def h(a):
+    a = a + 1
+    return a
+x = 5
+h(x)
+x</code></pre></td><td><input data-a="5" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">def p():
+    print(&quot;hola&quot;)
+r = p()
+r</code></pre></td><td><input data-a="None" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">def dos():
+    return 3, 4
+a, b = dos()
+a + b</code></pre></td><td><input data-a="7" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">def c(n):
+    if n == 0:
+        return 0
+    return 1 + c(n // 10)
+c(4821)</code></pre></td><td><input data-a="4" aria-label="Respuesta"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="acciones"><button class="btn" type="button" data-comprobar>Comprobar</button><button class="btn sec" type="button" data-solucion>Ver solución</button><button class="btn sec" type="button" data-limpiar>Limpiar</button><span class="resultado" aria-live="polite"></span></div>
+  </div>
+  <ul class="check"><li><input type="checkbox" id="s4-px" data-track="s4-px"><label for="s4-px">Completé los ejercicios rápidos sin ejecutar el código.</label></li></ul>
+  <h3>Problemas tipo examen</h3>
+  <article class="ejercicio problema">
+    <header><h3>P1 · Precio de lista: margen, IVA y redondeo comercial</h3><span class="nivel">composición de funciones + pruebas · ★★★</span></header>
+    <div class="cuerpo">
+      <p>Una tienda fija precios así: parte del costo, aplica un <strong>margen sobre el precio</strong> (30 % por defecto: el 30 % de lo que paga el cliente es ganancia), suma IVA y sube al siguiente precio terminado en <strong>.99</strong>. Escribe una función para cada paso y una que las combine. Incluye pruebas con <code>assert</code>.</p>
+      <p><strong>Tu programa debe cumplir estos casos de prueba:</strong></p>
+      <div class="table-wrap"><table><thead><tr><th>Llamada</th><th>Esperado</th></tr></thead><tbody><tr><td><code>precio_con_margen(70, 0.30)</code></td><td>100.00 (no 91: el margen es sobre el precio)</td></tr><tr><td><code>redondear_99(12.40)</code></td><td>12.99</td></tr><tr><td><code>redondear_99(12.995)</code></td><td>13.99</td></tr><tr><td><code>precio_de_lista(70)</code></td><td>113.99</td></tr><tr><td><code>precio_de_lista(70, margen=0.40)</code></td><td>131.99</td></tr></tbody></table></div>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p><strong>Margen vs. recargo:</strong> recargo del 30 % sobre el costo da 70 × 1.30 = 91; margen del 30 % sobre el precio es 70 / (1 − 0.30) = 100. Son distintos y es un error frecuente en negocios. Para el redondeo, <code>int(12.4)</code> da 12.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="precios.py"><code class="language-python">def precio_con_margen(costo, margen):
+    &quot;&quot;&quot;Precio para que el margen sea una fracción del PRECIO (no del costo).&quot;&quot;&quot;
+    return costo / (1 - margen)
+
+
+def agregar_iva(precio, tasa=0.13):
+    &quot;&quot;&quot;Precio con IVA incluido.&quot;&quot;&quot;
+    return precio * (1 + tasa)
+
+
+def redondear_99(precio):
+    &quot;&quot;&quot;Sube al siguiente precio terminado en .99 (12.40 -&gt; 12.99, 12.995 -&gt; 13.99).&quot;&quot;&quot;
+    entero = int(precio)
+    if precio &lt;= entero + 0.99:
+        return entero + 0.99
+    return entero + 1.99
+
+
+def precio_de_lista(costo, margen=0.30):
+    &quot;&quot;&quot;Costo -&gt; margen -&gt; IVA -&gt; redondeo comercial.&quot;&quot;&quot;
+    return round(redondear_99(agregar_iva(precio_con_margen(costo, margen))), 2)
+
+
+assert round(precio_con_margen(70, 0.30), 2) == 100.00
+assert redondear_99(12.40) == 12.99
+assert redondear_99(12.995) == 13.99
+assert redondear_99(12.0) == 12.99
+assert precio_de_lista(70) == 113.99
+print(&quot;Precio de lista de un producto de $70:&quot;, precio_de_lista(70))
+print(&quot;Con margen de 40 %:&quot;, precio_de_lista(70, margen=0.40))</code></pre>
+<pre class="salida" data-file="salida"><code>Precio de lista de un producto de $70: 113.99
+Con margen de 40 %: 131.99</code></pre><p><strong>Diseño:</strong> cada función hace una sola cosa y se prueba sola. Si mañana el IVA cambia, solo cambia el valor por defecto de <code>agregar_iva</code>.</p>
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s4-pr1" data-track="s4-pr1"><label for="s4-pr1">Resuelto y probado con todos los casos</label></li></ul>
+  </article>
+  <article class="ejercicio problema">
+    <header><h3>P2 · Dígito verificador de un código de cliente</h3><span class="nivel">recursividad + aritmética · ★★★</span></header>
+    <div class="cuerpo">
+      <p>Para detectar errores de digitación, cada código de cliente termina en un dígito verificador: el que hace que la suma de todos los dígitos sea múltiplo de 10. Escribe <code>suma_digitos(n)</code> <strong>recursiva</strong> (con <code>%</code> y <code>//</code>), <code>digito_verificador(base)</code> y <code>es_codigo_valido(codigo)</code>.</p>
+      <p><strong>Tu programa debe cumplir estos casos de prueba:</strong></p>
+      <div class="table-wrap"><table><thead><tr><th>Llamada</th><th>Esperado</th></tr></thead><tbody><tr><td><code>suma_digitos(4821)</code></td><td>15</td></tr><tr><td><code>digito_verificador(4821)</code></td><td>5 → código 48215</td></tr><tr><td><code>es_codigo_valido(48215)</code></td><td>True</td></tr><tr><td><code>es_codigo_valido(48216)</code></td><td>False (error de digitación)</td></tr><tr><td><code>digito_verificador(55)</code></td><td>0</td></tr></tbody></table></div>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p><code>n % 10</code> es el último dígito y <code>n // 10</code> es el número sin su último dígito. Caso base: un número menor que 10 es su propia suma.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="verificador.py"><code class="language-python">def suma_digitos(n):
+    &quot;&quot;&quot;Suma los dígitos de un entero no negativo (recursiva).&quot;&quot;&quot;
+    if n &lt; 10:                          # caso base: un solo dígito
+        return n
+    return n % 10 + suma_digitos(n // 10)
+
+
+def digito_verificador(base):
+    &quot;&quot;&quot;Dígito que hace que la suma total sea múltiplo de 10.&quot;&quot;&quot;
+    return (10 - suma_digitos(base) % 10) % 10
+
+
+def es_codigo_valido(codigo):
+    &quot;&quot;&quot;El último dígito debe ser el verificador del resto.&quot;&quot;&quot;
+    return digito_verificador(codigo // 10) == codigo % 10
+
+
+assert suma_digitos(4821) == 15
+assert digito_verificador(4821) == 5          # código completo: 48215
+assert es_codigo_valido(48215)
+assert not es_codigo_valido(48216)            # error de digitación en el último dígito
+assert not es_codigo_valido(49215)            # error de digitación en otro dígito
+assert es_codigo_valido(42815)                # ¡intercambio de dígitos NO detectado!
+assert digito_verificador(55) == 0            # 5 + 5 = 10, ya es múltiplo
+print(&quot;Código para el cliente 4821:&quot;, 4821 * 10 + digito_verificador(4821))</code></pre>
+<pre class="salida" data-file="salida"><code>Código para el cliente 4821: 48215</code></pre><p><strong>Lección de auditoría:</strong> la prueba con 42815 muestra una debilidad real. Sumar dígitos detecta un dígito mal escrito, pero <em>no</em> dos dígitos intercambiados (la suma no cambia). Por eso los sistemas reales, como las tarjetas de crédito, usan algoritmos que ponderan la posición de cada dígito. Una prueba que documenta un límite también es valiosa.</p>
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s4-pr2" data-track="s4-pr2"><label for="s4-pr2">Resuelto y probado con todos los casos</label></li></ul>
+  </article>
+  <article class="ejercicio problema">
+    <header><h3>P3 · La tarifa de envío como función probada</h3><span class="nivel">refactorización + casos borde · ★★</span></header>
+    <div class="cuerpo">
+      <p>Convierte el <code>envio.py</code> de la semana 2 en una función <code>tarifa_envio(peso_kg, zona="urbana")</code> que <strong>devuelva</strong> la tarifa o <code>None</code> si el paquete no se puede enviar. Escribe 6 pruebas de frontera.</p>
+      <p><strong>Tu programa debe cumplir estos casos de prueba:</strong></p>
+      <div class="table-wrap"><table><thead><tr><th>Llamada</th><th>Esperado</th></tr></thead><tbody><tr><td><code>tarifa_envio(1)</code></td><td>3.5</td></tr><tr><td><code>tarifa_envio(1.01, "rural")</code></td><td>8.5</td></tr><tr><td><code>tarifa_envio(5, zona="rural")</code></td><td>8.5</td></tr><tr><td><code>tarifa_envio(20)</code></td><td>12.0</td></tr><tr><td><code>tarifa_envio(20.01)</code></td><td>None</td></tr><tr><td><code>tarifa_envio(0)</code></td><td>None</td></tr></tbody></table></div>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p>Usa una <strong>cláusula de guarda</strong>: lo primero que hace la función es descartar los pesos imposibles con <code>return None</code>. Compara con <code>is None</code>.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="envio_funcion.py"><code class="language-python">RECARGO_RURAL = 2.50
+
+
+def tarifa_envio(peso_kg, zona=&quot;urbana&quot;):
+    &quot;&quot;&quot;Tarifa de envío; devuelve None si el paquete no se puede enviar.&quot;&quot;&quot;
+    if peso_kg &lt;= 0 or peso_kg &gt; 20:
+        return None                      # cláusula de guarda
+    if peso_kg &lt;= 1:
+        tarifa = 3.50
+    elif peso_kg &lt;= 5:
+        tarifa = 6.00
+    else:
+        tarifa = 12.00
+    if zona == &quot;rural&quot;:
+        tarifa += RECARGO_RURAL
+    return tarifa
+
+
+# Pruebas de frontera (las mismas de la traza 2 de la semana 2)
+assert tarifa_envio(1) == 3.50
+assert tarifa_envio(1.01, &quot;rural&quot;) == 8.50
+assert tarifa_envio(5, zona=&quot;rural&quot;) == 8.50
+assert tarifa_envio(20) == 12.00
+assert tarifa_envio(20.01) is None
+assert tarifa_envio(0) is None
+print(&quot;6 pruebas superadas&quot;)</code></pre>
+<pre class="salida" data-file="salida"><code>6 pruebas superadas</code></pre><p><strong>¿Por qué <code>None</code> y no un mensaje?</strong> Porque quien llama decide qué mostrar (consola, archivo, web). La función solo calcula. En la semana 7 verás otra opción: lanzar una excepción.</p>
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s4-pr3" data-track="s4-pr3"><label for="s4-pr3">Resuelto y probado con todos los casos</label></li></ul>
   </article>
 </section>
 

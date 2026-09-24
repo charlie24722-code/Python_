@@ -67,6 +67,7 @@
     <li class="grupo" aria-hidden="true">Practicar</li>
     <li><a href="#trazas">Tablas de traza</a></li>
     <li><a href="#ejercicios">Ejercicios</a></li>
+    <li><a href="#practica">Práctica intensiva</a></li>
     <li class="grupo" aria-hidden="true">Entregar y evaluar</li>
     <li><a href="#proyecto">Proyecto: Fase 1</a></li>
     <li><a href="#evaluacion">Rumbo al Control 1</a></li>
@@ -242,6 +243,9 @@
 
 <section id="vida">
   <h2>El ciclo de vida del software</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p>Hacer software se parece a construir una casa: primero preguntas qué necesita la familia (requerimientos), dibujas los planos (diseño), construyes (implementación), inspeccionas antes de entregar (pruebas), entregas las llaves (despliegue) y luego haces reparaciones (mantenimiento). Arreglar un plano es barato; tumbar una pared ya construida, no.</p>
+  </div>
   <p>Un programa no empieza en el teclado. Empieza en una necesidad del negocio y termina (si termina) cuando nadie lo usa. Las fases básicas:</p>
 <figure class="lamina "><div class="placa"><div class="placa-core"><img src="../assets/img/s1-ciclo-vida.svg" alt="Ciclo de vida del software: requerimientos, diseño, implementación, pruebas, despliegue y mantenimiento; el mantenimiento vuelve a requerimientos." width="760" height="152" loading="lazy" decoding="async"></div></div><figcaption>Las pruebas están <strong>antes</strong> del despliegue: ahí es barato encontrar errores. El mantenimiento reinicia el ciclo.</figcaption></figure>
 
@@ -264,6 +268,9 @@
 
 <section id="algoritmos">
   <h2>Algoritmos y diagramas de flujo</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p>Un algoritmo es una <strong>receta</strong> tan clara que cualquiera la sigue igual. “Agrega sal al gusto” no sirve para una computadora; “agrega 5 gramos de sal” sí. Un diagrama de flujo es esa misma receta dibujada con flechas.</p>
+  </div>
   <p>Un <strong>algoritmo</strong> es una secuencia finita de pasos precisos que transforma unas entradas en unas salidas. Tres pruebas rápidas para saber si lo que escribiste es un algoritmo:</p>
   <ol>
     <li><strong>Precisión:</strong> dos personas distintas que lo sigan obtienen lo mismo.</li>
@@ -328,6 +335,9 @@ FIN</code></pre>
 
 <section id="entorno">
   <h2>Entorno y terminal</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p>La terminal es hablarle a la computadora por escrito en lugar de hacer clic. <code>cd</code> es “entra a esta carpeta” y <code>python archivo.py</code> es “lee este archivo y haz lo que dice, de arriba hacia abajo”.</p>
+  </div>
   <p>La terminal es una forma de darle órdenes a la computadora escribiendo. Vas a usarla para ejecutar Python y para Git. Los comandos mínimos:</p>
   <div class="table-wrap"><table>
     <thead><tr><th>Quiero…</th><th>Windows (PowerShell)</th><th>macOS / Linux</th></tr></thead>
@@ -363,6 +373,9 @@ Sistema de facturación v0.1</code></pre>
 
 <section id="git">
   <h2>Git y GitHub</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p>Git es el botón de <strong>“guardar partida”</strong> de un videojuego, pero para tu código. <code>git add</code> es meter cosas al carrito; <code>git commit</code> es pagar y quedarte con el recibo (queda registrado con fecha y autor); <code>git push</code> es enviar una copia del recibo al equipo. Una rama es un borrador paralelo donde puedes probar sin arruinar la versión buena.</p>
+  </div>
   <div class="ciclo">
     <h3>Caso: cuatro personas, un mismo sistema</h3>
     <div class="paso"><div>
@@ -655,6 +668,110 @@ MOSTRAR comision</code></pre>
       <p><strong>Verificación:</strong> traza 500, 1000, 1001, 5000 y 5001. Las fronteras son donde viven los errores. Esta es la estructura <code>if/elif/else</code> de la semana 2.</p>
     </div></details>
     <ul class="check" style="padding:0 1.2rem .6rem"><li><input type="checkbox" id="s1-e5" data-track="s1-e5"><label for="s1-e5">Resuelto</label></li></ul>
+  </article>
+</section>
+
+<section id="practica">
+  <h2>Práctica intensiva</h2>
+  <p>Más práctica para asegurar lo básico: primero ejercicios rápidos que se corrigen solos, luego problemas tipo examen con casos de prueba. Resuélvelos en papel antes de abrir la solución.</p>
+  <h3>Ejercicios rápidos · ¿Qué comando uso?</h3>
+  <p>Escribe solo el comando (sin URL, sin mensaje, sin nombre de archivo, salvo que se pida). Se corrige solo.</p>
+  <div class="traza taladro">
+    <div class="table-wrap"><table>
+      <thead><tr><th>Código</th><th>Tu respuesta</th></tr></thead>
+      <tbody>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python"># Quiero ver qué archivos cambiaron y en qué estado están</code></pre></td><td><input data-a="git status" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python"># Quiero preparar TODOS los cambios de la carpeta</code></pre></td><td><input data-a="git add .|git add -a|git add --all" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python"># Quiero ver el historial, una línea por commit</code></pre></td><td><input data-a="git log --oneline" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python"># Quiero crear un repositorio en la carpeta actual</code></pre></td><td><input data-a="git init" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python"># Quiero subir mis commits a GitHub</code></pre></td><td><input data-a="git push|git push origin main" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python"># Quiero traer lo que subieron mis compañeros</code></pre></td><td><input data-a="git pull|git pull origin main" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python"># Quiero cambiarme a la rama main</code></pre></td><td><input data-a="git switch main|git checkout main" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python"># Quiero crear la rama &quot;reportes&quot; y cambiarme a ella en un solo comando</code></pre></td><td><input data-a="git switch -c reportes|git checkout -b reportes" aria-label="Respuesta"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="acciones"><button class="btn" type="button" data-comprobar>Comprobar</button><button class="btn sec" type="button" data-solucion>Ver solución</button><button class="btn sec" type="button" data-limpiar>Limpiar</button><span class="resultado" aria-live="polite"></span></div>
+  </div>
+  <ul class="check"><li><input type="checkbox" id="s1-px" data-track="s1-px"><label for="s1-px">Completé los ejercicios rápidos sin ejecutar el código.</label></li></ul>
+  <h3>Problemas tipo examen</h3>
+  <article class="ejercicio problema">
+    <header><h3>P1 · Planilla semanal con horas extra</h3><span class="nivel">pseudocódigo + diagrama · ★★★</span></header>
+    <div class="cuerpo">
+      <p>Una bodega paga por hora. Hasta 40 horas semanales se pagan a la tarifa normal; de la hora 41 a la 48, al <strong>150 %</strong>; desde la hora 49, al <strong>200 %</strong>. Si alguien reporta <strong>más de 60 horas</strong> o un número negativo, el sistema no calcula: marca “revisar”. Escribe el pseudocódigo y dibuja el diagrama.</p>
+      <p><strong>Tu programa debe cumplir estos casos de prueba:</strong></p>
+      <div class="table-wrap"><table><thead><tr><th>Horas</th><th>Tarifa</th><th>Resultado esperado</th></tr></thead><tbody><tr><td>40</td><td>$5.00</td><td>$200.00</td></tr><tr><td>45</td><td>$5.00</td><td>$237.50</td></tr><tr><td>50</td><td>$5.00</td><td>$280.00</td></tr><tr><td>48</td><td>$5.00</td><td>$260.00</td></tr><tr><td>61</td><td>$5.00</td><td>revisar</td></tr><tr><td>0</td><td>$5.00</td><td>$0.00</td></tr></tbody></table></div>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p>Parte las horas en tres “bolsas”: normales (máximo 40), extra al 150 % (máximo 8) y extra al 200 % (lo que sobre). Cada bolsa se paga distinto y al final se suman.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="planilla.pseudo"><code class="language-none">INICIO
+  LEER horas, tarifa
+  SI horas &lt; 0 O horas &gt; 60 ENTONCES
+      MOSTRAR &quot;revisar&quot;
+  SINO
+      SI horas &lt;= 40 ENTONCES
+          pago &lt;- horas * tarifa
+      SINO SI horas &lt;= 48 ENTONCES
+          pago &lt;- 40 * tarifa + (horas - 40) * tarifa * 1.5
+      SINO
+          pago &lt;- 40 * tarifa + 8 * tarifa * 1.5 + (horas - 48) * tarifa * 2
+      FIN SI
+      MOSTRAR pago
+  FIN SI
+FIN</code></pre><p><strong>Verificación (50 h):</strong> 40 × 5 = 200; 8 × 7.50 = 60; 2 × 10 = 20; total 280 ✔. Las fronteras que deben estar en tu tabla son 40, 41, 48, 49 y 60.</p>
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s1-pr1" data-track="s1-pr1"><label for="s1-pr1">Resuelto y probado con todos los casos</label></li></ul>
+  </article>
+  <article class="ejercicio problema">
+    <header><h3>P2 · Semáforo de crédito</h3><span class="nivel">decisiones en cadena · ★★★</span></header>
+    <div class="cuerpo">
+      <p>Una cooperativa clasifica solicitudes de crédito. Regla: si el cliente tuvo <strong>más de 2 atrasos</strong> en 12 meses → <strong>ROJO</strong>. Si no, se calcula la carga = (deudas actuales + cuota nueva) / ingreso mensual: si la carga es <strong>mayor que 0.40</strong> → ROJO; si es mayor que 0.30 → <strong>AMARILLO</strong> (revisión manual); si no → <strong>VERDE</strong>. Escribe el algoritmo y explica por qué el orden de las preguntas importa.</p>
+      <p><strong>Tu programa debe cumplir estos casos de prueba:</strong></p>
+      <div class="table-wrap"><table><thead><tr><th>Ingreso</th><th>Cuota</th><th>Deudas</th><th>Atrasos</th><th>Esperado</th></tr></thead><tbody><tr><td>$1,000</td><td>$150</td><td>$100</td><td>0</td><td>VERDE (0.25)</td></tr><tr><td>$1,000</td><td>$150</td><td>$200</td><td>0</td><td>AMARILLO (0.35)</td></tr><tr><td>$800</td><td>$200</td><td>$150</td><td>1</td><td>ROJO (0.44)</td></tr><tr><td>$2,000</td><td>$100</td><td>$0</td><td>3</td><td>ROJO (atrasos)</td></tr><tr><td>$1,000</td><td>$300</td><td>$100</td><td>0</td><td>AMARILLO (0.40 exacto)</td></tr></tbody></table></div>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p>Pregunta primero lo que descarta de inmediato (atrasos): así no calculas nada innecesario. Luego los tramos de carga del más exigente al menos exigente. Ojo con el último caso: 0.40 no es “mayor que” 0.40.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="semaforo.pseudo"><code class="language-none">INICIO
+  LEER ingreso, cuota, deudas, atrasos
+  SI atrasos &gt; 2 ENTONCES
+      MOSTRAR &quot;ROJO&quot;
+  SINO
+      carga &lt;- (deudas + cuota) / ingreso
+      SI carga &gt; 0.40 ENTONCES
+          MOSTRAR &quot;ROJO&quot;
+      SINO SI carga &gt; 0.30 ENTONCES
+          MOSTRAR &quot;AMARILLO&quot;
+      SINO
+          MOSTRAR &quot;VERDE&quot;
+      FIN SI
+  FIN SI
+FIN</code></pre><p><strong>¿Y si el ingreso es 0?</strong> La división falla. Un algoritmo completo lo valida antes: <code>SI ingreso &lt;= 0 ENTONCES MOSTRAR "datos inválidos"</code>. Encontrar ese caso es exactamente lo que te piden en la matriz de casos borde del proyecto.</p>
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s1-pr2" data-track="s1-pr2"><label for="s1-pr2">Resuelto y probado con todos los casos</label></li></ul>
+  </article>
+  <article class="ejercicio problema">
+    <header><h3>P3 · Resolver un conflicto de Git</h3><span class="nivel">Git en equipo · ★★</span></header>
+    <div class="cuerpo">
+      <p>Tú y un compañero modificaron la misma línea de <code>config.py</code> en ramas distintas. Al hacer <code>git merge feature/impuestos</code>, Git se detiene y el archivo queda así:</p>
+<pre data-file="config.py" data-norun><code class="language-none">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+TASA_IVA = 0.13
+=======
+TASA_IVA = 0.15
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature/impuestos</code></pre>
+<p>Explica qué significa cada parte, decide qué conservar (en El Salvador el IVA es 13 %) y escribe los comandos para terminar el merge.</p>
+      <p><strong>Tu programa debe cumplir estos casos de prueba:</strong></p>
+      <div class="table-wrap"><table><thead><tr><th>Pregunta</th><th>Lo que debes poder responder</th></tr></thead><tbody><tr><td>¿Qué hay entre <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code> y <code>=======</code>?</td><td>La versión de tu rama actual (HEAD)</td></tr><tr><td>¿Y entre <code>=======</code> y <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>?</td><td>La versión de la rama que integras</td></tr><tr><td>¿Quién decide?</td><td>Una persona, con la regla de negocio: Git no sabe cuál es correcta</td></tr></tbody></table></div>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p>Después de editar el archivo, Git necesita que le digas “ya lo resolví”: eso se hace preparando el archivo y confirmando.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="terminal"><code class="language-none"># 1. Editar config.py: dejar solo la línea correcta y borrar los marcadores
+TASA_IVA = 0.13
+
+# 2. Marcar el conflicto como resuelto y cerrar el merge
+git add config.py
+git commit -m &quot;Resuelve conflicto: IVA vigente de 13 %&quot;
+git log --oneline      # verificación: aparece el commit de merge</code></pre><p><strong>Prevención:</strong> ramas pequeñas, <code>git pull</code> antes de empezar a trabajar y acordar quién toca cada archivo. En la defensa del proyecto es común que pregunten cómo resolvieron un conflicto.</p>
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s1-pr3" data-track="s1-pr3"><label for="s1-pr3">Resuelto y probado con todos los casos</label></li></ul>
   </article>
 </section>
 

@@ -20,13 +20,16 @@ Cada semana incluye:
 - **Reading checkpoint**: un quiz que se corrige solo y explica cada respuesta.
 - **Conceptos resueltos con el ciclo** pregunta → exploración → implementación → resultado → interpretación → verificación, siempre con casos de negocio (facturación, IVA, préstamos, inventario).
 - **Tablas de traza** para llenar a mano, con botón para comprobar.
+- **En palabras simples**: una analogía cotidiana al inicio de cada tema (recetas, cajas con etiqueta, filas de ventanillas, muñecas rusas…).
 - **Ejercicios** con pista y solución desplegables; el último de cada semana es una auditoría de código.
+- **Práctica intensiva**: ejercicios rápidos de “¿qué imprime / qué devuelve?” que se corrigen solos, y 3 problemas tipo examen por semana con tabla de casos de prueba y solución verificada (comisiones, tarifa eléctrica por bloques, amortización, tasa implícita por bisección, dígito verificador, mediana y percentil, intercalación de listas…).
 - **Proyecto integrador**: la fase de esa semana y preguntas para practicar la defensa.
 - **Lista de "puedo…"** para prepararte para los controles y el Parcial.
 - **Checklist de progreso** que se guarda solo en tu navegador (`localStorage`).
 
 ## Diseño
 
+- **Liquid glass**: paneles translúcidos con desenfoque y brillo en el borde sobre un campo de color suave; el código se mantiene sólido para leerlo bien. Si el navegador no soporta el efecto o el sistema pide “reducir transparencia”, los paneles pasan a ser sólidos.
 - Portada de cada semana en azul petróleo con la pregunta orientadora marcada con **resaltador amarillo**.
 - Tipografías: **Archivo** (títulos), **Atkinson Hyperlegible Next** (lectura, pensada para máxima legibilidad) y **JetBrains Mono** (código, sin ligaduras para que `<=` y `==` se vean tal cual).
 - **Láminas SVG independientes** en `assets/img/` (21 archivos): diagramas de flujo, Git, tramos, cadenas `if`, `range`, interés compuesto, funciones, ámbito, pila de llamadas, módulos, índices, alias, Bubble/Insertion Sort, crecimiento cuadrático y la ruta del ciclo. Se ven sobre fondo claro en ambos temas, como un apunte impreso.

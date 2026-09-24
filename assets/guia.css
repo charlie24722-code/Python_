@@ -676,8 +676,8 @@ figure.lamina figcaption strong { color: var(--ink-2); }
 }
 
 /* ---------- Revelado al hacer scroll ---------- */
-.revela .rv { opacity: 0; transform: translateY(28px); filter: blur(6px); }
-.revela .rv.visto { opacity: 1; transform: none; filter: none; transition: opacity .9s var(--ease-masa), transform .9s var(--ease-masa), filter .9s var(--ease-masa); transition-delay: calc(var(--i, 0) * 70ms); }
+.revela .rv { opacity: 0; transform: translateY(28px); }
+.revela .rv.visto { opacity: 1; transform: none; transition: opacity .9s var(--ease-masa), transform .9s var(--ease-masa); transition-delay: calc(var(--i, 0) * 70ms); }
 
 @media (prefers-reduced-motion: reduce) {
   .revela .rv { opacity: 1; transform: none; filter: none; }
@@ -689,4 +689,212 @@ figure.lamina figcaption strong { color: var(--ink-2); }
   body { background: #fff; color: #000; }
   .hero-semana, .portada { background: #fff; color: #000; }
   details > * { display: block !important; }
+}
+
+/* =====================================================================
+   LIQUID GLASS
+   Fondo con campos de color fijos + paneles translúcidos con desenfoque,
+   brillo especular (capa radial) y borde de luz. Degrada a paneles sólidos
+   si el navegador no soporta backdrop-filter o se pide menos transparencia.
+   ===================================================================== */
+:root {
+  --lg-fill: linear-gradient(145deg, oklch(1 0 0 / .72), oklch(1 0 0 / .46));
+  --lg-sheen: radial-gradient(120% 70% at 0% 0%, oklch(1 0 0 / .65), oklch(1 0 0 / 0) 55%);
+  --lg-edge: oklch(1 0 0 / .75);
+  --lg-edge-bottom: oklch(0.3 0.04 240 / .08);
+  --lg-drop: 0 10px 30px -12px oklch(0.25 0.06 240 / .22), 0 2px 6px -2px oklch(0.25 0.06 240 / .10);
+  --lg-blur: blur(22px) saturate(175%);
+  --lg-radius: 20px;
+  --campo-base: oklch(0.965 0.012 225);
+  --campo-1: oklch(0.80 0.09 215 / .55);
+  --campo-2: oklch(0.93 0.13 100 / .50);
+  --campo-3: oklch(0.84 0.08 175 / .45);
+  --campo-4: oklch(0.82 0.07 255 / .45);
+}
+:root[data-theme="dark"] {
+  --lg-fill: linear-gradient(145deg, oklch(0.34 0.035 235 / .62), oklch(0.26 0.03 235 / .42));
+  --lg-sheen: radial-gradient(120% 70% at 0% 0%, oklch(1 0 0 / .10), oklch(1 0 0 / 0) 55%);
+  --lg-edge: oklch(1 0 0 / .16);
+  --lg-edge-bottom: oklch(0 0 0 / .25);
+  --lg-drop: 0 14px 34px -14px oklch(0 0 0 / .6);
+  --campo-base: oklch(0.16 0.03 240);
+  --campo-1: oklch(0.38 0.10 215 / .55);
+  --campo-2: oklch(0.42 0.09 95 / .22);
+  --campo-3: oklch(0.34 0.08 175 / .45);
+  --campo-4: oklch(0.32 0.09 265 / .45);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --lg-fill: linear-gradient(145deg, oklch(0.34 0.035 235 / .62), oklch(0.26 0.03 235 / .42));
+    --lg-sheen: radial-gradient(120% 70% at 0% 0%, oklch(1 0 0 / .10), oklch(1 0 0 / 0) 55%);
+    --lg-edge: oklch(1 0 0 / .16);
+    --lg-edge-bottom: oklch(0 0 0 / .25);
+    --lg-drop: 0 14px 34px -14px oklch(0 0 0 / .6);
+    --campo-base: oklch(0.16 0.03 240);
+    --campo-1: oklch(0.38 0.10 215 / .55);
+    --campo-2: oklch(0.42 0.09 95 / .22);
+    --campo-3: oklch(0.34 0.08 175 / .45);
+    --campo-4: oklch(0.32 0.09 265 / .45);
+  }
+}
+
+/* Campo de color fijo detrás de todo (lo que el vidrio refracta) */
+html { background: var(--campo-base); }
+body { background: transparent; }
+body::before {
+  content: ""; position: fixed; inset: -10vmax; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(38vmax 38vmax at 12% 18%, var(--campo-1), transparent 70%),
+    radial-gradient(30vmax 30vmax at 88% 12%, var(--campo-2), transparent 70%),
+    radial-gradient(42vmax 42vmax at 80% 78%, var(--campo-3), transparent 70%),
+    radial-gradient(34vmax 34vmax at 18% 88%, var(--campo-4), transparent 70%);
+  animation: deriva 40s var(--ease-masa) infinite alternate;
+}
+@keyframes deriva { to { transform: translate3d(3vmax, -2vmax, 0) scale(1.06); } }
+
+/* Paneles de vidrio */
+.ciclo, .table-wrap, .ejercicio, .box, .permisos > div, .quiz-score, .nav-semanas a,
+figure.lamina .placa, .card, .qq, .momentos div, details.defensa, .toc > ol, .temario li,
+.barra-peso, .pesos > div {
+  background: var(--lg-sheen), var(--lg-fill);
+  -webkit-backdrop-filter: var(--lg-blur); backdrop-filter: var(--lg-blur);
+  border: 0;
+  box-shadow: inset 0 1px 0 var(--lg-edge), inset 0 0 0 1px color-mix(in oklch, var(--lg-edge) 55%, transparent),
+              inset 0 -1px 0 var(--lg-edge-bottom), var(--lg-drop);
+}
+.ciclo, .ejercicio, .box, .permisos > div, figure.lamina .placa, .card, .qq, .pesos > div { border-radius: var(--lg-radius); }
+.table-wrap, .traza .table-wrap { border-radius: 16px; margin-left: 0; margin-right: 0; }
+.ciclo { margin: 2rem 0 3rem; }
+.ciclo > h3 { background: transparent; border-bottom: 1px solid color-mix(in oklch, var(--lg-edge) 60%, transparent); }
+th { background: color-mix(in oklch, var(--surface-2) 55%, transparent); }
+.traza th { background: color-mix(in oklch, var(--brand) 88%, transparent); }
+.traza tbody tr:nth-child(even) td { background: oklch(1 0 0 / .18); }
+figure.lamina .placa { padding: 7px; }
+.placa-core { border-radius: 14px; }
+
+/* Cajas semánticas: vidrio teñido */
+.box.nota { background: var(--lg-sheen), linear-gradient(145deg, color-mix(in oklch, var(--accent-soft) 80%, transparent), color-mix(in oklch, var(--accent-soft) 45%, transparent)); }
+.box.ojo, .box.negocio { background: var(--lg-sheen), linear-gradient(145deg, color-mix(in oklch, var(--warn-soft) 82%, transparent), color-mix(in oklch, var(--warn-soft) 48%, transparent)); }
+.box.ok { background: var(--lg-sheen), linear-gradient(145deg, color-mix(in oklch, var(--ok-soft) 82%, transparent), color-mix(in oklch, var(--ok-soft) 48%, transparent)); }
+.box.error { background: var(--lg-sheen), linear-gradient(145deg, color-mix(in oklch, var(--bad-soft) 82%, transparent), color-mix(in oklch, var(--bad-soft) 48%, transparent)); }
+.box.adelanto { background: var(--lg-sheen), var(--lg-fill); outline: 1px dashed var(--line-strong); outline-offset: -6px; }
+.box.simple { --ico: url("icons/idea.svg"); background: var(--lg-sheen), linear-gradient(145deg, color-mix(in oklch, var(--mark) 34%, transparent), color-mix(in oklch, var(--mark) 14%, transparent)); }
+.box.simple::before { color: var(--warn); }
+.box.simple p { font-size: 1.04rem; }
+.permisos .si { background: var(--lg-sheen), linear-gradient(145deg, color-mix(in oklch, var(--ok-soft) 85%, transparent), color-mix(in oklch, var(--ok-soft) 50%, transparent)); }
+
+/* Quiz: cada pregunta es una pieza de vidrio; las opciones, gotas dentro */
+.quiz { display: grid; gap: 1rem; grid-template-columns: minmax(0, 1fr); }
+.quiz > * { min-width: 0; }
+.qq { padding: 1.3rem 1.4rem 1.4rem; border-top: 0; }
+.qq:first-child { padding-top: 1.3rem; }
+.quiz-opt {
+  border: 0; border-radius: 14px;
+  background: linear-gradient(145deg, oklch(1 0 0 / .55), oklch(1 0 0 / .25));
+  box-shadow: inset 0 1px 0 var(--lg-edge), inset 0 0 0 1px color-mix(in oklch, var(--lg-edge) 45%, transparent), 0 1px 2px oklch(0.25 0.05 240 / .08);
+  transition: transform .4s var(--ease-masa), background-color .3s var(--ease-masa), box-shadow .3s var(--ease-masa);
+}
+:root[data-theme="dark"] .quiz-opt { background: linear-gradient(145deg, oklch(1 0 0 / .08), oklch(1 0 0 / .03)); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .quiz-opt { background: linear-gradient(145deg, oklch(1 0 0 / .08), oklch(1 0 0 / .03)); } }
+.quiz-opt:hover:not([disabled]) { transform: translateY(-1px); box-shadow: inset 0 1px 0 var(--lg-edge), inset 0 0 0 1.5px var(--brand), 0 6px 14px -6px oklch(0.25 0.06 240 / .25); }
+.quiz-opt.correcta { background: linear-gradient(145deg, color-mix(in oklch, var(--ok-soft) 95%, transparent), color-mix(in oklch, var(--ok-soft) 60%, transparent)); box-shadow: inset 0 0 0 1.5px var(--ok); }
+.quiz-opt.incorrecta { background: linear-gradient(145deg, color-mix(in oklch, var(--bad-soft) 95%, transparent), color-mix(in oklch, var(--bad-soft) 60%, transparent)); box-shadow: inset 0 0 0 1.5px var(--bad); }
+.qq .why { background: oklch(1 0 0 / .35); border-radius: 12px; }
+:root[data-theme="dark"] .qq .why { background: oklch(1 0 0 / .06); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .qq .why { background: oklch(1 0 0 / .06); } }
+
+/* Ejercicios y problemas como piezas de vidrio */
+.ejercicio { padding: 1.4rem 1.5rem 1.2rem; border-top: 0; }
+.ejercicio + .ejercicio { margin-top: 1.1rem; }
+.ejercicio details > summary { border: 0; background: oklch(1 0 0 / .45); box-shadow: inset 0 1px 0 var(--lg-edge), inset 0 0 0 1px color-mix(in oklch, var(--ink) 14%, transparent); }
+:root[data-theme="dark"] .ejercicio details > summary { background: oklch(1 0 0 / .07); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .ejercicio details > summary { background: oklch(1 0 0 / .07); } }
+.ejercicio details.solucion > summary { box-shadow: inset 0 1px 0 var(--lg-edge), inset 0 0 0 1.5px var(--ok); }
+.problema { position: relative; }
+.problema > header h3::after { content: " · tipo examen"; font-family: var(--font); font-weight: 400; font-size: .85rem; color: var(--ink-3); }
+.problema .table-wrap { background: oklch(1 0 0 / .3); box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--ink) 10%, transparent); -webkit-backdrop-filter: none; backdrop-filter: none; }
+
+/* Ejercicios rápidos: código en miniatura dentro de la tabla */
+.taladro td.codigo { text-align: left; width: 62%; padding: .45rem .6rem; }
+.taladro pre.mini { margin: 0; padding: .55rem .75rem; font-size: .8rem; border-radius: 10px; box-shadow: inset 0 1px 0 oklch(1 0 0 / .08); }
+.taladro pre.mini .copy-btn { display: none; }
+.taladro pre.mini code { white-space: pre; }
+.taladro td.codigo { white-space: normal; }
+.taladro input { min-width: 7rem; }
+
+/* Código: sólido para leer bien, con borde de luz */
+pre { box-shadow: inset 0 1px 0 oklch(1 0 0 / .10), 0 10px 26px -14px oklch(0.15 0.04 240 / .45); border-radius: 16px; }
+pre.salida { background: linear-gradient(145deg, oklch(1 0 0 / .55), oklch(1 0 0 / .3)); -webkit-backdrop-filter: var(--lg-blur); backdrop-filter: var(--lg-blur); box-shadow: inset 0 1px 0 var(--lg-edge), inset 0 0 0 1px color-mix(in oklch, var(--lg-edge) 50%, transparent); }
+:root[data-theme="dark"] pre.salida { background: linear-gradient(145deg, oklch(1 0 0 / .07), oklch(1 0 0 / .03)); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) pre.salida { background: linear-gradient(145deg, oklch(1 0 0 / .07), oklch(1 0 0 / .03)); } }
+
+/* Índice lateral como panel de vidrio */
+.toc > ol { padding: .6rem; border-radius: 18px; }
+.toc a.active { background: oklch(1 0 0 / .55); box-shadow: inset 0 1px 0 var(--lg-edge), inset 0 0 0 1px color-mix(in oklch, var(--accent) 35%, transparent); }
+:root[data-theme="dark"] .toc a.active { background: oklch(1 0 0 / .08); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .toc a.active { background: oklch(1 0 0 / .08); } }
+
+/* Otros */
+.momentos div { border-radius: 16px; padding: 3rem 1.1rem 1.1rem; margin: 0 .4rem .8rem 0; }
+.momentos div::before { top: 1rem; left: 1rem; }
+.momentos div::after { display: none; }
+@media (max-width: 700px) { .momentos div { padding: 1rem 1rem 1rem 3.4rem; margin: 0 0 .7rem; } .momentos div::before { top: 1rem; left: .9rem; } }
+details.defensa { border-radius: 14px; margin: .5rem 0; border: 0; }
+details.defensa:last-of-type { border-bottom: 0; }
+details.defensa > summary { padding: .85rem 1rem; }
+details.defensa > div { padding: 0 1rem 1rem 3.1rem; }
+.temario li { border: 0; border-radius: 18px; margin: 0 0 .7rem; }
+.temario li:last-child { border-bottom: 0; }
+.temario a:hover { background: oklch(1 0 0 / .25); border-radius: 18px; }
+.pesos > div { padding: 1.3rem 1.5rem; }
+.barra-peso { background: none; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
+.quiz-score { margin: .6rem 0 0; }
+.nav-semanas a { margin: 0; }
+
+/* Portadas: petróleo con luz líquida y vidrio encima */
+.hero-semana, .portada {
+  background:
+    radial-gradient(60% 80% at 88% 8%, oklch(0.55 0.12 200 / .65), transparent 60%),
+    radial-gradient(55% 70% at 5% 100%, oklch(0.48 0.11 255 / .6), transparent 60%),
+    radial-gradient(40% 50% at 55% 55%, oklch(0.62 0.12 95 / .18), transparent 70%),
+    var(--brand);
+}
+.hero-meta {
+  border-top: 0; padding: .9rem 1.2rem; border-radius: 18px;
+  background: linear-gradient(145deg, oklch(1 0 0 / .14), oklch(1 0 0 / .05));
+  -webkit-backdrop-filter: blur(18px) saturate(160%); backdrop-filter: blur(18px) saturate(160%);
+  box-shadow: inset 0 1px 0 oklch(1 0 0 / .25), inset 0 0 0 1px oklch(1 0 0 / .12);
+}
+.portada .ruta { background: linear-gradient(145deg, oklch(1 0 0 / .20), oklch(1 0 0 / .06)); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); box-shadow: inset 0 1px 0 oklch(1 0 0 / .35), inset 0 0 0 1px oklch(1 0 0 / .16), 0 20px 40px -20px oklch(0.1 0.05 240 / .6); padding: 8px; border-radius: 22px; }
+.portada .ruta .placa-core { border-radius: 15px; }
+
+/* Isla y menú: vidrio más claro, con brillo */
+.isla {
+  background: var(--lg-sheen), linear-gradient(145deg, color-mix(in oklch, var(--brand-2) 70%, transparent), color-mix(in oklch, var(--brand-2) 50%, transparent));
+  -webkit-backdrop-filter: blur(20px) saturate(180%); backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: inset 0 1px 0 oklch(1 0 0 / .35), inset 0 0 0 1px oklch(1 0 0 / .16), 0 10px 30px -10px oklch(0.15 0.05 240 / .45);
+}
+.menu-completo { background: linear-gradient(160deg, color-mix(in oklch, var(--brand-2) 78%, transparent), color-mix(in oklch, var(--brand) 64%, transparent)); -webkit-backdrop-filter: blur(30px) saturate(180%); backdrop-filter: blur(30px) saturate(180%); }
+
+/* Rendimiento y accesibilidad */
+@media (max-width: 700px) {
+  :root { --lg-blur: blur(12px) saturate(160%); }
+  .qq, .temario li, details.defensa, .momentos div { -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .ciclo, .table-wrap, .ejercicio, .box, .permisos > div, .quiz-score, .nav-semanas a, figure.lamina .placa, .card, .qq,
+  .momentos div, details.defensa, .toc > ol, .temario li, .pesos > div { background: var(--surface); }
+}
+@media (prefers-reduced-transparency: reduce) {
+  body::before { display: none; }
+  .ciclo, .table-wrap, .ejercicio, .box, .permisos > div, .quiz-score, .nav-semanas a, figure.lamina .placa, .card, .qq,
+  .momentos div, details.defensa, .toc > ol, .temario li, .pesos > div, .isla, .menu-completo, .hero-meta {
+    background: var(--surface); -webkit-backdrop-filter: none; backdrop-filter: none;
+  }
+  .isla, .menu-completo { background: var(--brand-2); }
+}
+@media (prefers-reduced-motion: reduce) { body::before { animation: none; } }
+@media print {
+  body::before { display: none; }
+  .ciclo, .table-wrap, .ejercicio, .box, .qq { background: #fff !important; box-shadow: none !important; backdrop-filter: none !important; }
 }

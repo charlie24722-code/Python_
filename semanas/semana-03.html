@@ -67,6 +67,7 @@
     <li class="grupo" aria-hidden="true">Practicar</li>
     <li><a href="#trazas">Tablas de traza</a></li>
     <li><a href="#ejercicios">Ejercicios</a></li>
+    <li><a href="#practica">Práctica intensiva</a></li>
     <li class="grupo" aria-hidden="true">Entregar y evaluar</li>
     <li><a href="#proyecto">Proyecto: Fase 2</a></li>
     <li><a href="#evaluacion">Rumbo al Control 2</a></li>
@@ -233,6 +234,9 @@ for monto in [10, 20, 30]:
 
 <section id="while">
   <h2><code>while</code> e <code>input()</code>: repetir hasta que algo pase</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p><code>while</code> es “<strong>mientras</strong> haya clientes en la fila, sigue atendiendo”. No sabes cuántos vendrán; solo sabes cuándo parar. Si nada en el bucle acerca el final (nadie sale de la fila), el programa atiende para siempre: eso es un bucle infinito.</p>
+  </div>
   <div class="ciclo">
     <h3>Caso: la caja registradora del día</h3>
     <div class="paso"><div>
@@ -317,6 +321,9 @@ Venta mayor: $100.00</code></pre>
 
 <section id="for">
   <h2><code>for</code> y <code>range()</code>: repetir un número conocido de veces</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p><code>for</code> es “<strong>para cada</strong> factura del fajo, haz esto”. Sabes de antemano cuántas son. <code>range(1, 6)</code> es un fajo numerado del 1 al 5: el 6 marca dónde termina, pero no entra.</p>
+  </div>
   <div class="ciclo">
     <h3>Caso: ¿cuánto crece un ahorro a plazo?</h3>
     <div class="paso"><div>
@@ -388,6 +395,9 @@ Listo.</code></pre>
 
 <section id="patrones">
   <h2>Patrones de bucle que se repiten en todo problema de negocio</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p>Un <strong>acumulador</strong> es la caja registradora que va sumando; un <strong>contador</strong> es el clicker del portero; una <strong>bandera</strong> es un banderín que levantas si pasó algo. Los tres se preparan <em>antes</em> de empezar a atender, nunca adentro del bucle.</p>
+  </div>
   <div class="table-wrap"><table>
     <thead><tr><th>Patrón</th><th>Antes del bucle</th><th>Dentro del bucle</th><th>Responde…</th></tr></thead>
     <tbody>
@@ -432,6 +442,9 @@ Tasa 10%: 1a=$1,100.00  2a=$1,210.00  3a=$1,331.00</code></pre>
 
 <section id="aproximacion">
   <h2>Aproximación numérica: repetir hasta que sea “suficientemente bueno”</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p>Aproximar es como adivinar un número con “más alto / más bajo”: cada intento te acerca y paras cuando estás lo bastante cerca. La computadora hace eso miles de veces por segundo.</p>
+  </div>
   <div class="ciclo">
     <h3>Caso: la tasa de crecimiento anual promedio</h3>
     <div class="paso"><div>
@@ -732,6 +745,180 @@ print(f"Total: {total}, promedio: {promedio}, días sin venta: {dias_sin_venta}"
       <p><strong>Lección:</strong> ninguno de estos fallos produce un mensaje de error. Solo los detecta alguien que traza el código o que compara el resultado con un cálculo independiente (200+150+0+350 = 700). Es el tipo de error que se esconde en código generado por IA que “se ve bien”.</p>
     </div></details>
     <ul class="check" style="padding:0 1.2rem .6rem"><li><input type="checkbox" id="s3-e5" data-track="s3-e5"><label for="s3-e5">Resuelto</label></li></ul>
+  </article>
+</section>
+
+<section id="practica">
+  <h2>Práctica intensiva</h2>
+  <p>Primero ejercicios rápidos de lectura de bucles (se corrigen solos), luego problemas tipo laboratorio. El P3 es el tipo de “aproximación numérica” que menciona el programa del curso.</p>
+  <h3>Ejercicios rápidos · ¿Qué imprime?</h3>
+  <p>Escribe todo lo que imprime, separado por espacios (por ejemplo <code>0 1 2</code>).</p>
+  <div class="traza taladro">
+    <div class="table-wrap"><table>
+      <thead><tr><th>Código</th><th>Tu respuesta</th></tr></thead>
+      <tbody>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">for i in range(3):
+    print(i)</code></pre></td><td><input data-a="0 1 2" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">for i in range(2, 11, 3):
+    print(i)</code></pre></td><td><input data-a="2 5 8" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">for i in range(5, 0, -2):
+    print(i)</code></pre></td><td><input data-a="5 3 1" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">n = 10
+v = 0
+while n &gt; 0:
+    n -= 3
+    v += 1
+print(v, n)</code></pre></td><td><input data-a="4 -2" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">total = 0
+for x in range(1, 5):
+    total += x * x
+print(total)</code></pre></td><td><input data-a="30" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">for n in range(1, 10):
+    if n * n &gt; 20:
+        break
+print(n)</code></pre></td><td><input data-a="5" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">s = 0
+for n in range(6):
+    if n % 2 == 0:
+        continue
+    s += n
+print(s)</code></pre></td><td><input data-a="9" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">c = 0
+for a in range(3):
+    for b in range(a):
+        c += 1
+print(c)</code></pre></td><td><input data-a="3" aria-label="Respuesta"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="acciones"><button class="btn" type="button" data-comprobar>Comprobar</button><button class="btn sec" type="button" data-solucion>Ver solución</button><button class="btn sec" type="button" data-limpiar>Limpiar</button><span class="resultado" aria-live="polite"></span></div>
+  </div>
+  <ul class="check"><li><input type="checkbox" id="s3-px" data-track="s3-px"><label for="s3-px">Completé los ejercicios rápidos sin ejecutar el código.</label></li></ul>
+  <h3>Problemas tipo examen</h3>
+  <article class="ejercicio problema">
+    <header><h3>P1 · Tabla de amortización completa</h3><span class="nivel">for + acumulador + ajuste final · ★★★</span></header>
+    <div class="cuerpo">
+      <p>Un préstamo de $1,200 al 1.5 % mensual en 6 cuotas fijas. Imprime, mes a mes, la cuota, el interés, el abono a capital y el saldo. La última cuota debe dejar el saldo <strong>exactamente</strong> en $0.00 (ajusta los centavos). Al final, muestra el total de intereses.</p>
+      <p><strong>Tu programa debe cumplir estos casos de prueba:</strong></p>
+      <div class="table-wrap"><table><thead><tr><th>Qué comprobar</th><th>Valor esperado</th></tr></thead><tbody><tr><td>Cuota fija</td><td>$210.63</td></tr><tr><td>Interés del mes 1</td><td>$18.00 (1,200 × 1.5 %)</td></tr><tr><td>Saldo después del mes 6</td><td>$0.00</td></tr><tr><td>Suma de abonos a capital</td><td>$1,200.00</td></tr><tr><td>Intereses totales</td><td>$63.78</td></tr></tbody></table></div>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p>La cuota se calcula una vez con la fórmula de la semana 4 (aquí escrita directamente). En cada mes: interés = saldo × tasa; capital = cuota − interés; saldo = saldo − capital. En el último mes, el capital es todo lo que queda.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="amortizacion.py"><code class="language-python">monto = 1200.00
+i = 0.015                 # 1.5 % mensual
+n = 6
+
+cuota = round(monto * i / (1 - (1 + i) ** -n), 2)
+saldo = monto
+total_intereses = 0
+
+print(&quot;Mes   Cuota   Interés   Capital     Saldo&quot;)
+for mes in range(1, n + 1):
+    interes = round(saldo * i, 2)
+    if mes == n:
+        capital = saldo              # la última cuota ajusta los centavos
+    else:
+        capital = round(cuota - interes, 2)
+    saldo = round(saldo - capital, 2)
+    total_intereses += interes
+    print(f&quot;{mes:&gt;3} {interes + capital:&gt;7.2f} {interes:&gt;9.2f} {capital:&gt;9.2f} {saldo:&gt;9.2f}&quot;)
+
+print(f&quot;Intereses totales: ${total_intereses:.2f}&quot;)</code></pre>
+<pre class="salida" data-file="salida"><code>Mes   Cuota   Interés   Capital     Saldo
+  1  210.63     18.00    192.63   1007.37
+  2  210.63     15.11    195.52    811.85
+  3  210.63     12.18    198.45    613.40
+  4  210.63      9.20    201.43    411.97
+  5  210.63      6.18    204.45    207.52
+  6  210.63      3.11    207.52      0.00
+Intereses totales: $63.78</code></pre><p><strong>Interpretación:</strong> al principio casi un 9 % de la cuota es interés; al final, apenas un 1.5 %. Por eso adelantar pagos al inicio de un préstamo ahorra más.</p>
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s3-pr1" data-track="s3-pr1"><label for="s3-pr1">Resuelto y probado con todos los casos</label></li></ul>
+  </article>
+  <article class="ejercicio problema">
+    <header><h3>P2 · Movimientos de inventario</h3><span class="nivel">while + input + validación · ★★★</span></header>
+    <div class="cuerpo">
+      <p>El bodeguero registra movimientos: <code>+N</code> es una entrada y <code>-N</code> una salida. Con <code>fin</code> termina. El stock empieza en 20. Una salida mayor que el stock se rechaza; un texto inválido también. Al final: stock, total de entradas, total de salidas y número de rechazos. El programa <strong>nunca</strong> debe detenerse por un dato raro.</p>
+      <p><strong>Tu programa debe cumplir estos casos de prueba:</strong></p>
+      <div class="table-wrap"><table><thead><tr><th>Entradas que digita</th><th>Resultado esperado</th></tr></thead><tbody><tr><td>+5, -30, -10, diez, +3, fin</td><td>Stock final 18 · entradas 8 · salidas 10 · rechazos 2</td></tr><tr><td>fin</td><td>Stock final 20 · todo en 0</td></tr><tr><td>-20, -1, fin</td><td>Stock final 0 · salidas 20 · rechazos 1</td></tr></tbody></table></div>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p>Usa <code>startswith("+")</code> para saber el tipo de movimiento y <code>replace("+", "", 1).isdigit()</code> para validar el número antes de convertirlo.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="inventario.py" data-stdin="+5\n-30\n-10\ndiez\n+3\nfin\n"><code class="language-python">stock = 20
+entradas = 0
+salidas = 0
+rechazos = 0
+
+print(&quot;Movimientos: +N para entrada, -N para salida, &#x27;fin&#x27; para terminar.&quot;)
+seguir = True
+while seguir:
+    mov = input(&quot;&gt; &quot;).strip().lower()
+    if mov == &quot;fin&quot;:
+        seguir = False
+    elif mov.startswith(&quot;+&quot;) and mov.replace(&quot;+&quot;, &quot;&quot;, 1).isdigit():
+        cantidad = int(mov.replace(&quot;+&quot;, &quot;&quot;, 1))
+        stock += cantidad
+        entradas += cantidad
+    elif mov.startswith(&quot;-&quot;) and mov.replace(&quot;-&quot;, &quot;&quot;, 1).isdigit():
+        cantidad = int(mov.replace(&quot;-&quot;, &quot;&quot;, 1))
+        if cantidad &gt; stock:
+            print(f&quot;  Rechazado: solo hay {stock} unidades.&quot;)
+            rechazos += 1
+        else:
+            stock -= cantidad
+            salidas += cantidad
+    else:
+        print(&quot;  Formato inválido.&quot;)
+        rechazos += 1
+
+print(f&quot;Stock final: {stock} | entradas: {entradas} | salidas: {salidas} | rechazos: {rechazos}&quot;)</code></pre>
+<pre class="salida" data-file="salida" data-nocheck><code>Movimientos: +N para entrada, -N para salida, &#x27;fin&#x27; para terminar.
+&gt; +5
+&gt; -30
+  Rechazado: solo hay 25 unidades.
+&gt; -10
+&gt; diez
+  Formato inválido.
+&gt; +3
+&gt; fin
+Stock final: 18 | entradas: 8 | salidas: 10 | rechazos: 2</code></pre><p><strong>Verificación:</strong> 20 + 5 = 25; −30 se rechaza; 25 − 10 = 15; “diez” se rechaza; 15 + 3 = 18 ✔.</p>
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s3-pr2" data-track="s3-pr2"><label for="s3-pr2">Resuelto y probado con todos los casos</label></li></ul>
+  </article>
+  <article class="ejercicio problema">
+    <header><h3>P3 · ¿Qué tasa esconde esta cuota?</h3><span class="nivel">aproximación numérica (bisección) · ★★★★</span></header>
+    <div class="cuerpo">
+      <p>Un anuncio dice: “Llévate $1,000 y paga solo $94.56 al mes durante 12 meses”. No dice la tasa. Encuéntrala con el método de <strong>bisección</strong>: prueba la tasa del medio entre un mínimo y un máximo; si la cuota que da es muy alta, la tasa real está en la mitad de abajo; si es muy baja, en la de arriba. Repite hasta que la cuota calculada esté a menos de $0.001 de la del anuncio.</p>
+      <p><strong>Tu programa debe cumplir estos casos de prueba:</strong></p>
+      <div class="table-wrap"><table><thead><tr><th>Qué comprobar</th><th>Valor esperado</th></tr></thead><tbody><tr><td>Tasa mensual</td><td>≈ 2.00 %</td></tr><tr><td>Tasa anual nominal</td><td>≈ 24 %</td></tr><tr><td>Iteraciones</td><td>pocas (menos de 20)</td></tr><tr><td>Garantía de que termina</td><td>límite de 100 iteraciones</td></tr></tbody></table></div>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p>Es el mismo “más alto / más bajo” de adivinar un número. Guarda dos variables, <code>bajo</code> y <code>alto</code>, y en cada vuelta reemplaza una de las dos por <code>medio</code>.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="biseccion.py"><code class="language-python">monto = 1000.00
+n = 12
+cuota_banco = 94.56          # lo único que dice el anuncio
+
+bajo = 0.0001                # tasa mensual mínima que probamos
+alto = 0.10                  # tasa mensual máxima que probamos
+iteraciones = 0
+encontrada = False
+
+while not encontrada and iteraciones &lt; 100:
+    medio = (bajo + alto) / 2
+    cuota = monto * medio / (1 - (1 + medio) ** -n)
+    iteraciones += 1
+    if abs(cuota - cuota_banco) &lt; 0.001:
+        encontrada = True
+    elif cuota &gt; cuota_banco:
+        alto = medio         # la tasa es demasiado alta
+    else:
+        bajo = medio         # la tasa es demasiado baja
+
+print(f&quot;Tasa mensual: {medio:.4%} en {iteraciones} iteraciones&quot;)
+print(f&quot;Tasa anual nominal: {medio * 12:.2%}&quot;)</code></pre>
+<pre class="salida" data-file="salida"><code>Tasa mensual: 2.0002% en 8 iteraciones
+Tasa anual nominal: 24.00%</code></pre><p><strong>Interpretación:</strong> 2 % mensual suena poco, pero son 24 % anuales. Así se calcula la tasa implícita de cualquier crédito cuando solo conoces la cuota. <strong>Verificación:</strong> sustituye 0.02 en la fórmula de la cuota y debe dar $94.56.</p>
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s3-pr3" data-track="s3-pr3"><label for="s3-pr3">Resuelto y probado con todos los casos</label></li></ul>
   </article>
 </section>
 

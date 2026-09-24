@@ -66,6 +66,7 @@
     <li class="grupo" aria-hidden="true">Practicar</li>
     <li><a href="#trazas">Tablas de traza</a></li>
     <li><a href="#ejercicios">Ejercicios</a></li>
+    <li><a href="#practica">Práctica intensiva</a></li>
     <li class="grupo" aria-hidden="true">Entregar y evaluar</li>
     <li><a href="#proyecto">Proyecto</a></li>
     <li><a href="#evaluacion">Control 1</a></li>
@@ -254,6 +255,9 @@ else:
 
 <section id="tipos">
   <h2>Variables, tipos y aritmética del dinero</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p>Una variable es una <strong>caja con etiqueta</strong>: la etiqueta es el nombre (<code>precio</code>) y adentro va el valor (<code>12.50</code>). El tipo dice qué clase de cosa hay en la caja: <code>int</code> para contar unidades, <code>float</code> para dinero y medidas, <code>str</code> para texto y <code>bool</code> para sí o no.</p>
+  </div>
   <div class="ciclo">
     <h3>Caso: el ticket que se recalcula solo</h3>
     <div class="paso"><div>
@@ -334,6 +338,9 @@ Total:    $56.50
 
 <section id="condicionales">
   <h2>Decisiones: <code>if</code> / <code>elif</code> / <code>else</code></h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p>Un <code>if</code> es un <strong>portero</strong>: si cumples la condición, pasas. Una cadena <code>if / elif / else</code> es una fila de ventanillas: te atiende la <em>primera</em> que te acepta y las demás ni te ven. Por eso el orden importa.</p>
+  </div>
   <div class="ciclo">
     <h3>Caso: tarifa de envío por tramos</h3>
     <div class="paso"><div>
@@ -416,6 +423,9 @@ else:
 
 <section id="defensiva">
   <h2>Validación defensiva</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p>Programar a la defensiva es como el cajero que revisa el billete antes de dar el vuelto: <strong>primero verifica</strong> que el dato tenga sentido (no negativo, no vacío, del tipo correcto) y solo después calcula.</p>
+  </div>
   <p>Programar a la defensiva es asumir que los datos <strong>pueden venir mal</strong> y decidir qué hacer antes de que causen un cobro erróneo o un error. Esta semana la herramienta es el <code>if</code> (el manejo de excepciones con <code>try</code> llega en la semana 7).</p>
 
   <div class="ciclo">
@@ -751,6 +761,149 @@ print(f"Descuento: {descuento:.0%}")</code></pre>
       <p><strong>Lección:</strong> el código original pasa si solo lo pruebas con 500 “a ojo”. Las fallas aparecen únicamente con casos elegidos a propósito: por debajo, en y por encima de cada frontera, más cada condición especial. Esto es la “auditoría inversa” que se practica en clase con código generado por IA.</p>
     </div></details>
     <ul class="check" style="padding:0 1.2rem .6rem"><li><input type="checkbox" id="s2-e5" data-track="s2-e5"><label for="s2-e5">Resuelto</label></li></ul>
+  </article>
+</section>
+
+<section id="practica">
+  <h2>Práctica intensiva</h2>
+  <p>Primero ejercicios rápidos que se corrigen solos, luego problemas tipo examen. Cada problema trae su tabla de casos: tu programa está bien solo si los pasa todos.</p>
+  <h3>Ejercicios rápidos · ¿Cuánto vale?</h3>
+  <p>Escribe el resultado exacto de cada expresión (texto sin comillas, booleanos como <code>True</code> o <code>False</code>). Sin ejecutar.</p>
+  <div class="traza taladro">
+    <div class="table-wrap"><table>
+      <thead><tr><th>Código</th><th>Tu respuesta</th></tr></thead>
+      <tbody>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">15 % 4</code></pre></td><td><input data-a="3" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">2 + 3 * 4</code></pre></td><td><input data-a="14" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">(2 + 3) * 4</code></pre></td><td><input data-a="20" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">10 // 3 * 3</code></pre></td><td><input data-a="9" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">&quot;ab&quot; * 2</code></pre></td><td><input data-a="abab" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">int(&quot;7&quot;) + 3</code></pre></td><td><input data-a="10" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">str(7) + &quot;3&quot;</code></pre></td><td><input data-a="73" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">5 &gt; 3 and 2 &gt; 4</code></pre></td><td><input data-a="False" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">not 0 == 0</code></pre></td><td><input data-a="False" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">round(3.14159, 2)</code></pre></td><td><input data-a="3.14" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">len(&quot;Ceiba&quot;)</code></pre></td><td><input data-a="5" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">3 == 3.0</code></pre></td><td><input data-a="True" aria-label="Respuesta"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="acciones"><button class="btn" type="button" data-comprobar>Comprobar</button><button class="btn sec" type="button" data-solucion>Ver solución</button><button class="btn sec" type="button" data-limpiar>Limpiar</button><span class="resultado" aria-live="polite"></span></div>
+  </div>
+  <ul class="check"><li><input type="checkbox" id="s2-px" data-track="s2-px"><label for="s2-px">Completé los ejercicios rápidos sin ejecutar el código.</label></li></ul>
+  <h3>Problemas tipo examen</h3>
+  <article class="ejercicio problema">
+    <header><h3>P1 · Comisión con bono por meta</h3><span class="nivel">tramos + condición compuesta · ★★★</span></header>
+    <div class="cuerpo">
+      <p>Comisión sobre las ventas del mes: menos de $2,000 → 2 %; desde $2,000 hasta antes de $5,000 → 4 %; desde $5,000 → 6 %. Además, un bono de $50 si el vendedor <strong>superó su meta</strong> y sus devoluciones <strong>no pasan del 5 %</strong> de sus ventas. Ventas en cero o negativas son un error.</p>
+      <p><strong>Tu programa debe cumplir estos casos de prueba:</strong></p>
+      <div class="table-wrap"><table><thead><tr><th>Ventas</th><th>Meta</th><th>Devoluciones</th><th>Comisión</th><th>Bono</th><th>Total</th></tr></thead><tbody><tr><td>$5,200</td><td>$5,000</td><td>$150</td><td>$312.00</td><td>$50</td><td>$362.00</td></tr><tr><td>$5,200</td><td>$5,000</td><td>$300</td><td>$312.00</td><td>$0</td><td>$312.00</td></tr><tr><td>$1,999.99</td><td>$1,500</td><td>$0</td><td>$40.00</td><td>$50</td><td>$90.00</td></tr><tr><td>$2,000</td><td>$2,500</td><td>$0</td><td>$80.00</td><td>$0</td><td>$80.00</td></tr><tr><td>$0</td><td>$100</td><td>$0</td><td>—</td><td>—</td><td>error</td></tr></tbody></table></div>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p>Dos decisiones independientes: una cadena <code>if/elif/else</code> para la tasa y un <code>if</code> aparte para el bono, con <code>and</code>. ¿Por qué $300 de devoluciones quita el bono? 5 % de 5,200 es 260.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="comision.py"><code class="language-python">ventas = 5200.00
+meta = 5000.00
+devoluciones = 150.00
+
+if ventas &lt;= 0:
+    print(&quot;Error: las ventas deben ser positivas.&quot;)
+else:
+    if ventas &gt;= 5000:
+        tasa = 0.06
+    elif ventas &gt;= 2000:
+        tasa = 0.04
+    else:
+        tasa = 0.02
+    comision = ventas * tasa
+
+    if ventas &gt; meta and devoluciones &lt;= ventas * 0.05:
+        bono = 50
+    else:
+        bono = 0
+
+    print(f&quot;Comisión: ${comision:,.2f}&quot;)
+    print(f&quot;Bono: ${bono:,.2f}&quot;)
+    print(f&quot;Total a pagar: ${comision + bono:,.2f}&quot;)</code></pre>
+<pre class="salida" data-file="salida"><code>Comisión: $312.00
+Bono: $50.00
+Total a pagar: $362.00</code></pre><p><strong>Verificación:</strong> cambia las tres variables por cada fila de la tabla y compara. Fíjate en $1,999.99: queda en el tramo del 2 % por un centavo.</p>
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s2-pr1" data-track="s2-pr1"><label for="s2-pr1">Resuelto y probado con todos los casos</label></li></ul>
+  </article>
+  <article class="ejercicio problema">
+    <header><h3>P2 · Factura de energía por bloques</h3><span class="nivel">tramos acumulativos · ★★★</span></header>
+    <div class="cuerpo">
+      <p>Tarifa ficticia: cargo fijo $3.00; los primeros 100 kWh a $0.20; del 101 al 200 a $0.25; lo que pase de 200 a $0.32. Los hogares que consumen <strong>99 kWh o menos</strong> reciben un subsidio del 50 % sobre la energía (no sobre el cargo fijo). Calcula el total.</p>
+      <p><strong>Tu programa debe cumplir estos casos de prueba:</strong></p>
+      <div class="table-wrap"><table><thead><tr><th>Consumo (kWh)</th><th>Energía</th><th>Total</th></tr></thead><tbody><tr><td>0</td><td>$0.00</td><td>$3.00</td></tr><tr><td>99</td><td>$9.90</td><td>$12.90</td></tr><tr><td>100</td><td>$20.00</td><td>$23.00</td></tr><tr><td>150</td><td>$32.50</td><td>$35.50</td></tr><tr><td>200</td><td>$45.00</td><td>$48.00</td></tr><tr><td>250</td><td>$61.00</td><td>$64.00</td></tr><tr><td>−5</td><td>—</td><td>error</td></tr></tbody></table></div>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p>“Por bloques” significa que cada tramo se cobra a su propio precio: con 150 kWh, los primeros 100 van a $0.20 y solo los 50 restantes a $0.25.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="energia.py"><code class="language-python">CARGO_FIJO = 3.00
+consumo = 150            # kWh del mes
+
+if consumo &lt; 0:
+    print(&quot;Error: el consumo no puede ser negativo.&quot;)
+else:
+    if consumo &lt;= 100:
+        energia = consumo * 0.20
+    elif consumo &lt;= 200:
+        energia = 100 * 0.20 + (consumo - 100) * 0.25
+    else:
+        energia = 100 * 0.20 + 100 * 0.25 + (consumo - 200) * 0.32
+
+    if consumo &lt;= 99:                 # subsidio: 50 % de la energía
+        energia = energia * 0.5
+
+    total = CARGO_FIJO + energia
+    print(f&quot;Energía: ${energia:.2f}  Total de la factura: ${total:.2f}&quot;)</code></pre>
+<pre class="salida" data-file="salida"><code>Energía: $32.50  Total de la factura: $35.50</code></pre><p><strong>Interpretación económica:</strong> consumir 100 kWh cuesta $23.00, pero 99 kWh cuesta $12.90. Un solo kWh más duplica la factura: es un “efecto escalón” del subsidio. Un analista lo detecta con los casos de frontera y se lo reporta al negocio.</p>
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s2-pr2" data-track="s2-pr2"><label for="s2-pr2">Resuelto y probado con todos los casos</label></li></ul>
+  </article>
+  <article class="ejercicio problema">
+    <header><h3>P3 · Cupón o descuento VIP (no acumulables)</h3><span class="nivel">texto + decisiones anidadas · ★★★</span></header>
+    <div class="cuerpo">
+      <p>El cliente escribe un cupón (puede venir con espacios o minúsculas). <code>CEIBA10</code> da 10 % si la compra es de al menos $30; <code>ENVIO</code> descuenta $4.50; un cupón vacío no hace nada; cualquier otro es inválido. Los clientes VIP tienen 5 % siempre. Cupón y VIP <strong>no se acumulan</strong>: se aplica el mayor.</p>
+      <p><strong>Tu programa debe cumplir estos casos de prueba:</strong></p>
+      <div class="table-wrap"><table><thead><tr><th>Cupón</th><th>Subtotal</th><th>VIP</th><th>Descuento</th><th>Total</th></tr></thead><tbody><tr><td>" ceiba10 "</td><td>$50</td><td>no</td><td>$5.00</td><td>$45.00</td></tr><tr><td>CEIBA10</td><td>$25</td><td>no</td><td>$0.00 (+ aviso de mínimo)</td><td>$25.00</td></tr><tr><td>envio</td><td>$60</td><td>sí</td><td>$4.50</td><td>$55.50</td></tr><tr><td>CEIBA10</td><td>$200</td><td>sí</td><td>$20.00</td><td>$180.00</td></tr><tr><td>XYZ</td><td>$40</td><td>sí</td><td>$2.00 (+ aviso)</td><td>$38.00</td></tr></tbody></table></div>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p>Normaliza primero con <code>strip().upper()</code>. Calcula los dos descuentos por separado y al final elige el mayor con un <code>if</code>.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="cupon.py"><code class="language-python">codigo = &quot; ceiba10 &quot;
+subtotal = 50.00
+es_vip = False
+
+codigo = codigo.strip().upper()
+
+if es_vip:
+    descuento_vip = subtotal * 0.05
+else:
+    descuento_vip = 0
+
+if codigo == &quot;&quot;:
+    descuento_cupon = 0
+elif codigo == &quot;CEIBA10&quot;:
+    if subtotal &gt;= 30:
+        descuento_cupon = subtotal * 0.10
+    else:
+        descuento_cupon = 0
+        print(&quot;CEIBA10 requiere una compra mínima de $30.&quot;)
+elif codigo == &quot;ENVIO&quot;:
+    descuento_cupon = 4.50
+else:
+    descuento_cupon = 0
+    print(f&quot;El cupón &#x27;{codigo}&#x27; no existe.&quot;)
+
+# No son acumulables: se aplica el beneficio mayor
+if descuento_vip &gt; descuento_cupon:
+    descuento = descuento_vip
+else:
+    descuento = descuento_cupon
+
+print(f&quot;Descuento aplicado: ${descuento:.2f}  Total: ${subtotal - descuento:.2f}&quot;)</code></pre>
+<pre class="salida" data-file="salida"><code>Descuento aplicado: $5.00  Total: $45.00</code></pre><p><strong>Verificación:</strong> con $200 y VIP, el cupón da $20 y el VIP $10: gana el cupón. Con $60 y VIP, el VIP da $3 y ENVIO $4.50: gana ENVIO. Cada fila prueba una rama distinta.</p>
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s2-pr3" data-track="s2-pr3"><label for="s2-pr3">Resuelto y probado con todos los casos</label></li></ul>
   </article>
 </section>
 
