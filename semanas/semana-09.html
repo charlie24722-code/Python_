@@ -1,0 +1,820 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Semana 9 · Herencia, composición y modularidad</title>
+<meta name="description" content="Guía de estudio, semana 9: herencia, super(), polimorfismo, composición y arquitectura modular en Python. Proyecto: Fase 5.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/guia.css">
+<script>try{var t=localStorage.getItem("ids-guia-v1-tema");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+</head>
+<body data-semana="s9">
+
+<header class="isla-wrap">
+  <div class="isla">
+    <a class="brand" href="../index.html">IDS <small>Guía de estudio</small></a>
+    <nav class="isla-semanas" aria-label="Semanas">
+    <a href="semana-01.html">S1</a>
+    <a href="semana-02.html">S2</a>
+    <a href="semana-03.html">S3</a>
+    <a href="semana-04.html">S4</a>
+    <a href="semana-05.html">S5</a>
+    <a href="semana-06.html">S6</a>
+    <a href="semana-07.html">S7</a>
+    <a href="semana-08.html">S8</a>
+    <a href="semana-09.html" aria-current="page">S9</a>
+    <a href="semana-10.html">S10</a>
+    <a href="semana-11.html">S11</a>
+    <a href="semana-12.html">S12</a>
+  </nav>
+    <button class="theme-btn" type="button" aria-label="Cambiar tema claro/oscuro"><span class="ico-tema" aria-hidden="true"></span></button>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu-completo"><span class="hb" aria-hidden="true"></span><span class="hb" aria-hidden="true"></span><span class="sr">Menú</span></button>
+  </div>
+</header>
+<div class="menu-completo" id="menu-completo" hidden></div>
+
+<header class="hero-semana">
+  <div class="hero-in">
+    <p class="hero-num" aria-hidden="true">09</p>
+    <div class="hero-txt">
+      <p class="hero-mod"><span class="sr">Semana 9 · </span>Módulo 8 (continuación)</p>
+      <h1>POO avanzada: herencia, composición y modularidad</h1>
+      <p class="lead">Con una clase por cosa del negocio empieza a haber familias (tipos de empleado, formas de pago) y objetos hechos de otros objetos (facturas con líneas). Esta semana aprendes a <strong>reutilizar sin copiar</strong> y a organizar el sistema en piezas.</p>
+    </div>
+    <p class="pregunta"><span class="pregunta-lbl">Pregunta orientadora</span><mark>¿Cómo agrego un tipo nuevo al sistema (de pago, de cliente, de producto) sin reescribir lo que ya funciona?</mark></p>
+    <dl class="hero-meta">
+      <div><dt>Lecturas</dt><dd>PCC 9 (2.ª parte) · TRO 6</dd></div>
+      <div><dt>Proyecto</dt><dd>Fase 5 (esta semana)</dd></div>
+      <div class="eval"><dt>Evaluación</dt><dd>Control 4: semana 11</dd></div>
+    </dl>
+    <div class="progress" data-progreso-pagina>
+      <div class="progress-bar"><span></span></div>
+      <div class="progress-label"></div>
+    </div>
+  </div>
+</header>
+
+<div class="layout with-toc">
+<aside class="toc" aria-label="Contenido de la semana">
+  <p>Semana 9</p>
+  <ol>
+    <li class="grupo" aria-hidden="true">Antes de clase</li>
+    <li><a href="#uso">Cómo usar la guía</a></li>
+    <li><a href="#mapa">Qué puedes usar</a></li>
+    <li><a href="#lecturas">Lecturas</a></li>
+    <li><a href="#checkpoint">Reading checkpoint</a></li>
+    <li class="grupo" aria-hidden="true">Aprender</li>
+    <li><a href="#herencia">Herencia</a></li>
+    <li><a href="#polimorfismo">Polimorfismo</a></li>
+    <li><a href="#composicion">Composición y módulos</a></li>
+    <li class="grupo" aria-hidden="true">Practicar</li>
+    <li><a href="#trazas">Tabla de traza</a></li>
+    <li><a href="#ejercicios">Ejercicios</a></li>
+    <li><a href="#practica">Práctica intensiva</a></li>
+    <li class="grupo" aria-hidden="true">Entregar y evaluar</li>
+    <li><a href="#proyecto">Proyecto: Fase 5</a></li>
+    <li><a href="#evaluacion">Rumbo al Control 4</a></li>
+    <li><a href="#fuentes">Fuentes</a></li>
+  </ol>
+</aside>
+
+<main>
+<section id="uso">
+  <h2>Cómo usar esta guía</h2>
+  <div class="momentos">
+    <div><strong>Antes de clase</strong>La segunda parte de PCC 9 y la parte conceptual de TRO 6. Luego el <a href="#checkpoint">checkpoint</a>.</div>
+    <div><strong>Durante el laboratorio</strong>Taller de arquitectura modular: un simulador polimórfico (pagos o inventario). Modelo en <a href="#polimorfismo">polimorfismo</a>.</div>
+    <div><strong>Después de clase</strong>Ejercicios y <a href="#practica">práctica intensiva</a>. Todo se ejecuta aquí.</div>
+    <div><strong>Proyecto</strong>Esta semana es la <a href="#proyecto">Fase 5</a>: arquitectura con clases y 5 pruebas.</div>
+  </div>
+  <ul class="ciclo-leyenda" aria-label="Ciclo de trabajo">
+    <li>Pregunta</li><li class="sep">→</li><li>Exploración</li><li class="sep">→</li><li>Implementación</li><li class="sep">→</li><li>Resultado</li><li class="sep">→</li><li>Interpretación</li><li class="sep">→</li><li class="v">Verificación</li>
+  </ul>
+</section>
+
+<section id="mapa">
+  <h2>Qué puedes usar esta semana</h2>
+  <div class="permisos">
+    <div class="si">
+      <h4>Sí, desde ahora</h4>
+      <ul>
+        <li>Todo lo de las semanas 1 a 8</li>
+        <li>Herencia: <code>class Hija(Madre):</code> y <code>super().__init__(...)</code></li>
+        <li>Redefinir (sobrescribir) métodos de la clase madre</li>
+        <li>Polimorfismo: tratar objetos distintos con la misma llamada</li>
+        <li>Composición: objetos como atributos y listas de objetos</li>
+        <li><code>isinstance</code>, importar clases desde módulos (<code>from modelos import Factura</code>)</li>
+      </ul>
+    </div>
+    <div class="no">
+      <h4>Todavía no / fuera del curso</h4>
+      <ul>
+        <li>Clases abstractas formales (<code>abc</code>): mención opcional</li>
+        <li>Herencia múltiple: fuera del curso</li>
+        <li>Sintaxis de C# (<code>virtual</code>, <code>override</code>) → semana 11</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="lecturas">
+  <h2>Lecturas de preparación</h2>
+  <ul class="check">
+    <li><input type="checkbox" id="s9-l1" data-track="s9-l1"><label for="s9-l1"><span class="ref">[PCC] Cap. 9, segunda parte</span> “Inheritance”, “Overriding Methods from the Parent Class”, “Instances as Attributes” e “Importing Classes”. Enfócate en <code>super()</code> y en cuándo un objeto debe contener a otro.</label></li>
+    <li><input type="checkbox" id="s9-l2" data-track="s9-l2"><label for="s9-l2"><span class="ref">[TRO] Cap. 6, sección conceptual</span> “Understanding Inheritance and Polymorphism”: la relación “es un” (herencia) frente a “tiene un” (contención/composición) y por qué el polimorfismo simplifica el código que usa las clases.</label></li>
+  </ul>
+  <div class="box nota">
+    <span class="box-title">Complementos gratuitos</span>
+    <ul><li><a href="https://docs.python.org/es/3/tutorial/classes.html#inheritance" target="_blank" rel="noopener">Tutorial oficial — Herencia</a></li><li><a href="https://learn.microsoft.com/es-es/dotnet/csharp/fundamentals/object-oriented/inheritance" target="_blank" rel="noopener">Microsoft Learn — Herencia (conceptos)</a></li></ul>
+  </div>
+</section>
+
+<section id="checkpoint">
+  <h2>Reading checkpoint</h2>
+  <div class="quiz">
+    <div class="qq" data-q="s9-q1">
+      <p>¿Qué relación justifica usar herencia?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>“Es un”: un vendedor <em>es un</em> empleado</button>
+        <button class="quiz-opt">“Tiene un”: una factura <em>tiene un</em> cliente</button>
+        <button class="quiz-opt">“Usa un”: un reporte usa una fecha</button>
+        <button class="quiz-opt">Cualquier relación entre dos clases</button>
+      </div>
+      <p class="why">Herencia para “es un”; composición para “tiene un”. Una factura no <em>es</em> un cliente.</p>
+    </div>
+    <div class="qq" data-q="s9-q2">
+      <p>¿Para qué sirve <code>super().__init__(nombre, salario)</code> dentro de la clase hija?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Para ejecutar el <code>__init__</code> de la clase madre y no repetir su código</button>
+        <button class="quiz-opt">Para crear un segundo objeto</button>
+        <button class="quiz-opt">Para borrar los atributos de la madre</button>
+        <button class="quiz-opt">Es obligatorio en toda clase</button>
+      </div>
+      <p class="why">La hija reutiliza la inicialización de la madre y luego agrega lo suyo.</p>
+    </div>
+    <div class="qq" data-q="s9-q3">
+      <p>Si <code>Vendedor</code> hereda de <code>Empleado</code> y redefine <code>calcular_pago()</code>, ¿cuál se usa con <code>v.calcular_pago()</code> siendo <code>v</code> un Vendedor?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>La de <code>Vendedor</code></button>
+        <button class="quiz-opt">La de <code>Empleado</code></button>
+        <button class="quiz-opt">Las dos, en orden</button>
+        <button class="quiz-opt">Da error por estar repetida</button>
+      </div>
+      <p class="why">Python busca primero en la clase del objeto y luego sube hacia la madre.</p>
+    </div>
+    <div class="qq" data-q="s9-q4">
+      <p>¿Qué es polimorfismo?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Llamar al mismo método en objetos de clases distintas y que cada uno responda a su manera</button>
+        <button class="quiz-opt">Tener muchas variables</button>
+        <button class="quiz-opt">Copiar una clase</button>
+        <button class="quiz-opt">Usar varias ramas <code>if</code></button>
+      </div>
+      <p class="why"><code>for e in empleados: e.calcular_pago()</code> funciona sin preguntar el tipo de cada empleado.</p>
+    </div>
+    <div class="qq" data-q="s9-q5">
+      <p>¿Qué relación hay entre <code>Inventario</code> y <code>Producto</code> si el inventario guarda una lista de productos?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Composición: el inventario <em>tiene</em> productos</button>
+        <button class="quiz-opt">Herencia: el inventario <em>es un</em> producto</button>
+        <button class="quiz-opt">Ninguna</button>
+        <button class="quiz-opt">Polimorfismo</button>
+      </div>
+      <p class="why">Composición: un objeto contiene a otros y delega en ellos parte del trabajo.</p>
+    </div>
+    <div class="qq" data-q="s9-q6">
+      <p>¿Qué devuelve <code>isinstance(v, Empleado)</code> si <code>v</code> es un <code>Vendedor</code> (hija de Empleado)?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>True</code></button>
+        <button class="quiz-opt"><code>False</code></button>
+        <button class="quiz-opt">Error</button>
+        <button class="quiz-opt"><code>"Vendedor"</code></button>
+      </div>
+      <p class="why">Un vendedor <em>es un</em> empleado, así que <code>isinstance</code> lo reconoce como tal.</p>
+    </div>
+    <div class="qq" data-q="s9-q7">
+      <p>Tienes <code>if tipo == "tarjeta": ... elif tipo == "efectivo": ...</code> repetido en 5 lugares. ¿Qué lo mejora?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Una clase por forma de pago con el mismo método, y usar polimorfismo</button>
+        <button class="quiz-opt">Más <code>elif</code></button>
+        <button class="quiz-opt">Variables globales</button>
+        <button class="quiz-opt">Copiar el bloque a una función por cada lugar</button>
+      </div>
+      <p class="why">Agregar una forma de pago nueva sería crear una clase, sin tocar los 5 lugares.</p>
+    </div>
+    <div class="quiz-score"><span data-score></span><button class="btn sec" type="button" data-reset>Reiniciar quiz</button></div>
+  </div>
+</section>
+
+<section id="herencia">
+  <h2>Herencia: “es un”</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p>Heredar es como las <strong>recetas de una familia</strong>: la receta base de pupusas vale para todas, y cada variante (revueltas, de queso) cambia solo lo que la hace distinta. No se reescribe la receta completa.</p>
+  </div>
+<figure class="lamina "><div class="placa"><div class="placa-core"><img src="../assets/img/s9-herencia.svg" alt="Jerarquía de herencia: Asalariado, PorHora y Vendedor son un Empleado; heredan sus atributos y cada una redefine calcular_pago." width="760" height="306" loading="lazy" decoding="async"></div></div><figcaption>Las subclases reciben los atributos de <code>Empleado</code> y redefinen <code>calcular_pago()</code>.</figcaption></figure>
+  <div class="ciclo">
+    <h3>Caso: una planilla con tres tipos de empleado</h3>
+    <div class="paso"><div>
+      <span class="etq">Pregunta</span>
+<p>Hay empleados de salario fijo, por hora (con horas extra) y vendedores (base + comisión). ¿Cómo calculo la planilla sin un <code>if</code> por tipo en cada lugar?</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Exploración</span>
+<p>Los tres <em>son</em> empleados: tienen nombre y un pago. Lo que cambia es <em>cómo</em> se calcula el pago. Una clase madre con lo común y una hija por cada forma de pago.</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Implementación</span>
+<pre data-file="planilla.py"><code class="language-python">class Empleado:
+    def __init__(self, nombre, salario_base):
+        self.nombre = nombre
+        self.salario_base = salario_base
+
+    def calcular_pago(self):
+        return self.salario_base
+
+    def __str__(self):
+        return f&quot;{self.nombre:&lt;6} {type(self).__name__:&lt;11} ${self.calcular_pago():&gt;9,.2f}&quot;
+
+
+class PorHora(Empleado):
+    def __init__(self, nombre, tarifa, horas):
+        super().__init__(nombre, 0)
+        self.tarifa = tarifa
+        self.horas = horas
+
+    def calcular_pago(self):                       # redefine el de Empleado
+        extra = max(0, self.horas - 160) * self.tarifa * 0.5
+        return self.horas * self.tarifa + extra
+
+
+class Vendedor(Empleado):
+    def __init__(self, nombre, salario_base, ventas, comision=0.05):
+        super().__init__(nombre, salario_base)
+        self.ventas = ventas
+        self.comision = comision
+
+    def calcular_pago(self):
+        return super().calcular_pago() + self.ventas * self.comision
+
+
+planilla = [Empleado(&quot;Ana&quot;, 900), PorHora(&quot;Luis&quot;, 4.5, 170), Vendedor(&quot;Eva&quot;, 500, 12000)]
+for e in planilla:                                  # polimorfismo
+    print(e)
+print(f&quot;Total planilla: ${sum(e.calcular_pago() for e in planilla):,.2f}&quot;)</code></pre>
+<pre class="salida" data-file="salida"><code>Ana    Empleado    $   900.00
+Luis   PorHora     $   787.50
+Eva    Vendedor    $ 1,100.00
+Total planilla: $2,787.50</code></pre>
+
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Interpretación</span>
+<p><code>super().__init__</code> reutiliza la inicialización; <code>super().calcular_pago()</code> en <code>Vendedor</code> reutiliza el cálculo base y le suma la comisión. El bucle final no sabe ni le importa qué tipo es cada empleado: eso es <strong>polimorfismo</strong>.</p>
+    </div></div>
+    <div class="paso verif"><div>
+      <span class="etq">Verificación</span>
+<p>Luis: 170 × 4.5 = 765 + 10 horas extra × 4.5 × 0.5 = 22.50 → 787.50 ✔. Eva: 500 + 12,000 × 5 % = 1,100 ✔. Total 2,787.50 ✔.</p>
+    </div></div>
+  </div>
+  <div class="box ojo">
+    <span class="box-title">Cuándo NO heredar</span>
+    <p>Si solo quieres reutilizar un método, no hace falta herencia: una función o composición basta. Hereda solo si la frase “una <em>X</em> es un <em>Y</em>” es verdadera y siempre lo será.</p>
+  </div>
+</section>
+
+<section id="polimorfismo">
+  <h2>Polimorfismo: la misma pregunta, distintas respuestas</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p>Polimorfismo es decirle a todos los cajeros <strong>“cobra”</strong> y que cada uno sepa hacerlo con su máquina: efectivo, tarjeta o transferencia. Quien da la orden no necesita saber los detalles.</p>
+  </div>
+  <div class="ciclo">
+    <h3>Caso: un simulador de formas de pago</h3>
+    <div class="paso"><div>
+      <span class="etq">Pregunta</span>
+<p>La tienda acepta efectivo, tarjeta (3.5 % de comisión) y transferencia ($0.75 si el monto es menor a $100). ¿Cómo cobrar sin un <code>if</code> por forma de pago?</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Exploración</span>
+<p>El proceso de cobro es el mismo; lo que cambia es la comisión. La clase madre define <code>cobrar</code> usando <code>self.comision(...)</code>, y cada hija redefine solo <code>comision</code>.</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Implementación</span>
+<pre data-file="pagos.py"><code class="language-python">class MetodoPago:
+    nombre = &quot;genérico&quot;
+
+    def comision(self, monto):
+        return 0
+
+    def cobrar(self, monto):
+        total = round(monto + self.comision(monto), 2)
+        return f&quot;{self.nombre:&lt;13} cobra ${total:&gt;7.2f} (comisión ${self.comision(monto):.2f})&quot;
+
+
+class Efectivo(MetodoPago):
+    nombre = &quot;efectivo&quot;
+
+
+class Tarjeta(MetodoPago):
+    nombre = &quot;tarjeta&quot;
+
+    def comision(self, monto):
+        return round(monto * 0.035, 2)            # 3.5 % del banco
+
+
+class Transferencia(MetodoPago):
+    nombre = &quot;transferencia&quot;
+
+    def comision(self, monto):
+        return 0.75 if monto &lt; 100 else 0          # cargo fijo en montos pequeños
+
+
+for metodo in [Efectivo(), Tarjeta(), Transferencia()]:
+    print(metodo.cobrar(80))</code></pre>
+<pre class="salida" data-file="salida"><code>efectivo      cobra $  80.00 (comisión $0.00)
+tarjeta       cobra $  82.80 (comisión $2.80)
+transferencia cobra $  80.75 (comisión $0.75)</code></pre>
+
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Interpretación</span>
+<p><code>cobrar</code> está escrito una sola vez, en la madre. Al llamarlo, <code>self.comision</code> usa la versión de la hija correspondiente. Para agregar “billetera electrónica” basta una clase nueva de 4 líneas.</p>
+    </div></div>
+    <div class="paso verif"><div>
+      <span class="etq">Verificación</span>
+<p>Tarjeta: 80 × 3.5 % = 2.80 → 82.80 ✔. Transferencia de 80 (&lt; 100): 80.75 ✔. Prueba en el editor con 150: la transferencia ya no cobra comisión.</p>
+    </div></div>
+  </div>
+</section>
+
+<section id="composicion">
+  <h2>Composición: “tiene un”</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p>Composición es armar con piezas: un <strong>carro tiene</strong> motor, llantas y asientos; no <em>es</em> un motor. Cada pieza hace su trabajo y el carro las coordina.</p>
+  </div>
+<figure class="lamina "><div class="placa"><div class="placa-core"><img src="../assets/img/s9-composicion.svg" alt="Composición: una Factura tiene un Cliente y varias LineaFactura; su método total suma los subtotales de sus líneas." width="760" height="268" loading="lazy" decoding="async"></div></div><figcaption>La factura no hereda de nadie: contiene un cliente y una lista de líneas, y delega en ellas el cálculo.</figcaption></figure>
+  <div class="ciclo">
+    <h3>Caso: factura hecha de objetos</h3>
+    <div class="paso"><div>
+      <span class="etq">Pregunta</span>
+<p>¿Cómo modelo una factura donde cada línea sabe su subtotal y la factura sabe su total?</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Exploración</span>
+<p>Tres clases con responsabilidades separadas: <code>Producto</code> (precio), <code>Linea</code> (producto + cantidad) y <code>Factura</code> (lista de líneas). La factura no calcula subtotales: se los pide a sus líneas.</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Implementación</span>
+<pre data-file="factura_composicion.py"><code class="language-python">class Producto:
+    def __init__(self, codigo, nombre, precio):
+        self.codigo = codigo
+        self.nombre = nombre
+        self.precio = precio
+
+
+class Linea:
+    def __init__(self, producto, cantidad):
+        self.producto = producto           # una línea TIENE un producto
+        self.cantidad = cantidad
+
+    def subtotal(self):
+        return self.producto.precio * self.cantidad
+
+
+class Factura:
+    def __init__(self, numero, cliente):
+        self.numero = numero
+        self.cliente = cliente
+        self.lineas = []                   # una factura TIENE varias líneas
+
+    def agregar(self, producto, cantidad):
+        self.lineas.append(Linea(producto, cantidad))
+
+    def total(self):
+        return round(sum(l.subtotal() for l in self.lineas) * 1.13, 2)
+
+
+aceite = Producto(&quot;A01&quot;, &quot;Aceite 1 L&quot;, 12.50)
+cafe = Producto(&quot;D03&quot;, &quot;Café 400 g&quot;, 6.75)
+f = Factura(&quot;F-0002&quot;, &quot;Comedor Lupita&quot;)
+f.agregar(aceite, 2)
+f.agregar(cafe, 3)
+for l in f.lineas:
+    print(f&quot;{l.cantidad} x {l.producto.nombre:&lt;11} ${l.subtotal():.2f}&quot;)
+print(&quot;Total:&quot;, f.total())
+
+aceite.precio = 13.00                    # sube el precio del producto
+print(&quot;Total después del cambio de precio:&quot;, f.total())</code></pre>
+<pre class="salida" data-file="salida"><code>2 x Aceite 1 L  $25.00
+3 x Café 400 g  $20.25
+Total: 51.13
+Total después del cambio de precio: 52.26</code></pre>
+
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Interpretación</span>
+<p>La última línea muestra un efecto de compartir objetos: la línea guarda una <em>referencia</em> al producto, no una copia. Si el precio cambia, las facturas abiertas lo ven. En un sistema real, la línea debería guardar el precio <strong>al momento de la venta</strong>. Esa es una decisión de diseño que debes poder defender.</p>
+    </div></div>
+    <div class="paso verif"><div>
+      <span class="etq">Verificación</span>
+<p>(2 × 12.50 + 3 × 6.75) × 1.13 = 45.25 × 1.13 = 51.13 ✔.</p>
+    </div></div>
+  </div>
+<h3>Organizar en módulos</h3>
+<p>La arquitectura que pide el proyecto separa responsabilidades en archivos:</p>
+<pre data-file="estructura del proyecto"><code class="language-none">mi_sistema/
+├── modelos.py        # clases de dominio: Producto, Linea, Factura...
+├── servicios.py      # reglas de negocio que usan varios objetos
+├── persistencia.py   # cargar / guardar JSON o CSV
+├── interfaz.py       # menús, input(), print()
+├── main.py           # arranca el programa
+└── test_modelos.py   # pruebas con pytest</code></pre>
+<p>En <code>main.py</code>: <code>from modelos import Producto, Factura</code>. Regla de oro: <strong>los modelos no imprimen ni leen del teclado</strong>; eso es trabajo de <code>interfaz.py</code>. Así se pueden probar solos.</p>
+</section>
+
+<section id="trazas">
+  <h2>Tablas de traza</h2>
+<h3>Traza · ¿Qué método se ejecuta?</h3>
+<pre data-file="herencia_traza.py"><code class="language-python">class A:
+    def hola(self):
+        return &quot;A&quot;
+
+    def saludo(self):
+        return &quot;soy &quot; + self.hola()
+
+
+class B(A):
+    def hola(self):
+        return &quot;B&quot;
+
+
+class C(B):
+    pass</code></pre>
+  <div class="traza">
+    <div class="table-wrap"><table>
+      <thead><tr><th>Expresión</th><th>Resultado</th></tr></thead>
+      <tbody>
+        <tr><td class="dado"><code>A().hola()</code></td><td><input data-a="A" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado"><code>B().hola()</code></td><td><input data-a="B" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado"><code>C().hola()</code></td><td><input data-a="B" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado"><code>B().saludo()</code></td><td><input data-a="soy B" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado"><code>isinstance(C(), A)</code></td><td><input data-a="True" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado"><code>isinstance(A(), B)</code></td><td><input data-a="False" aria-label="Respuesta"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="acciones"><button class="btn" type="button" data-comprobar>Comprobar</button><button class="btn sec" type="button" data-solucion>Ver solución</button><button class="btn sec" type="button" data-limpiar>Limpiar</button><span class="resultado" aria-live="polite"></span></div>
+  </div>
+<details class="defensa"><summary>¿Por qué <code>B().saludo()</code> da “soy B” si <code>saludo</code> está en A?</summary><div><p><code>saludo</code> llama a <code>self.hola()</code>, y <code>self</code> es un objeto B: Python usa la versión de B. Esta es la clave del polimorfismo.</p></div></details>
+  <ul class="check">
+    <li><input type="checkbox" id="s9-t1" data-track="s9-t1"><label for="s9-t1">Traza completa.</label></li>
+  </ul>
+</section>
+
+<section id="ejercicios">
+  <h2>Ejercicios</h2>
+  <article class="ejercicio">
+    <header><h3>E1 · Cuentas de ahorro y corriente</h3><span class="nivel">herencia + redefinición · ★★★</span></header>
+    <div class="cuerpo">
+<p>Clase <code>Cuenta</code> y dos hijas. <code>Ahorro</code> gana interés mensual al cierre. <code>Corriente</code> permite sobregiro hasta $200 y cobra $3 de cuota al cierre. Ambas redefinen lo necesario. Procesa el cierre de mes de una lista mixta.</p>
+    </div>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="cuentas.py"><code class="language-python">class Cuenta:
+    def __init__(self, titular, saldo=0):
+        self.titular = titular
+        self.saldo = saldo
+
+    def retirar(self, monto):
+        if monto &gt; self.saldo:
+            raise ValueError(&quot;saldo insuficiente&quot;)
+        self.saldo -= monto
+
+    def cierre_de_mes(self):
+        pass
+
+
+class Ahorro(Cuenta):
+    def __init__(self, titular, saldo=0, tasa_mensual=0.005):
+        super().__init__(titular, saldo)
+        self.tasa_mensual = tasa_mensual
+
+    def cierre_de_mes(self):
+        self.saldo = round(self.saldo * (1 + self.tasa_mensual), 2)
+
+
+class Corriente(Cuenta):
+    def __init__(self, titular, saldo=0, sobregiro=200, cuota=3.00):
+        super().__init__(titular, saldo)
+        self.sobregiro = sobregiro
+        self.cuota = cuota
+
+    def retirar(self, monto):
+        if monto &gt; self.saldo + self.sobregiro:
+            raise ValueError(&quot;excede el sobregiro permitido&quot;)
+        self.saldo -= monto
+
+    def cierre_de_mes(self):
+        self.saldo -= self.cuota
+
+
+cuentas = [Ahorro(&quot;Ana&quot;, 1000), Corriente(&quot;Luis&quot;, 50)]
+cuentas[1].retirar(180)          # queda en -130, dentro del sobregiro
+for c in cuentas:
+    c.cierre_de_mes()
+    print(f&quot;{c.titular:&lt;5} {type(c).__name__:&lt;9} ${c.saldo:,.2f}&quot;)</code></pre>
+<pre class="salida" data-file="salida"><code>Ana   Ahorro    $1,005.00
+Luis  Corriente $-133.00</code></pre>
+<p><strong>Verificación:</strong> Ana: 1,000 × 1.005 = 1,005 ✔. Luis: 50 − 180 = −130, menos la cuota de 3 → −133 ✔.</p>
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s9-e1" data-track="s9-e1"><label for="s9-e1">Resuelto</label></li></ul>
+  </article>
+  <article class="ejercicio">
+    <header><h3>E2 · Inventario multibodega</h3><span class="nivel">composición · ★★★</span></header>
+    <div class="cuerpo">
+<p>Una <code>Empresa</code> tiene varias <code>Bodega</code>, y cada bodega tiene productos con su stock. Implementa el stock total por producto y una transferencia entre bodegas que no permita enviar más de lo que hay.</p>
+    </div>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="multibodega.py"><code class="language-python">class Producto:
+    def __init__(self, codigo, stock):
+        self.codigo = codigo
+        self.stock = stock
+
+
+class Bodega:
+    def __init__(self, nombre):
+        self.nombre = nombre
+        self.productos = {}                    # codigo -&gt; Producto
+
+    def recibir(self, codigo, cantidad):
+        if codigo not in self.productos:
+            self.productos[codigo] = Producto(codigo, 0)
+        self.productos[codigo].stock += cantidad
+
+    def stock_de(self, codigo):
+        p = self.productos.get(codigo)
+        return p.stock if p else 0
+
+
+class Empresa:
+    def __init__(self):
+        self.bodegas = []
+
+    def stock_total(self, codigo):
+        return sum(b.stock_de(codigo) for b in self.bodegas)
+
+    def transferir(self, codigo, cantidad, origen, destino):
+        if origen.stock_de(codigo) &lt; cantidad:
+            raise ValueError(f&quot;{origen.nombre} no tiene {cantidad} de {codigo}&quot;)
+        origen.productos[codigo].stock -= cantidad
+        destino.recibir(codigo, cantidad)
+
+
+central, norte = Bodega(&quot;Central&quot;), Bodega(&quot;Norte&quot;)
+empresa = Empresa()
+empresa.bodegas += [central, norte]
+central.recibir(&quot;A01&quot;, 100)
+norte.recibir(&quot;A01&quot;, 20)
+empresa.transferir(&quot;A01&quot;, 30, central, norte)
+print(central.stock_de(&quot;A01&quot;), norte.stock_de(&quot;A01&quot;), empresa.stock_total(&quot;A01&quot;))
+assert empresa.stock_total(&quot;A01&quot;) == 120          # transferir no crea ni destruye stock</code></pre>
+<pre class="salida" data-file="salida"><code>70 50 120</code></pre>
+<p><strong>Invariante del sistema:</strong> una transferencia no cambia el stock total. La prueba final lo comprueba; pruebas así detectan errores de lógica que un caso normal no muestra.</p>
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s9-e2" data-track="s9-e2"><label for="s9-e2">Resuelto</label></li></ul>
+  </article>
+</section>
+
+<section id="practica">
+  <h2>Práctica intensiva</h2>
+<p>Ejercicios rápidos que se corrigen solos y problemas de arquitectura, que es lo que se evalúa en la Fase 5.</p>
+  <h3>Ejercicios rápidos · ¿Qué imprime?</h3>
+  <p>Si da error, escribe el nombre del error.</p>
+  <div class="traza taladro">
+    <div class="table-wrap"><table>
+      <thead><tr><th>Código</th><th>Tu respuesta</th></tr></thead>
+      <tbody>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">class A:
+    def f(self): return 1
+class B(A):
+    pass
+print(B().f())</code></pre></td><td><input data-a="1" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">class A:
+    def f(self): return 1
+class B(A):
+    def f(self): return 2
+print(B().f())</code></pre></td><td><input data-a="2" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">class A:
+    def f(self): return 1
+class B(A):
+    def f(self): return super().f() + 10
+print(B().f())</code></pre></td><td><input data-a="11" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">class A:
+    def __init__(self, x): self.x = x
+class B(A):
+    def __init__(self, x, y):
+        super().__init__(x)
+        self.y = y
+b = B(1, 2)
+print(b.x + b.y)</code></pre></td><td><input data-a="3" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">class A:
+    def __init__(self, x): self.x = x
+class B(A):
+    def __init__(self, y):
+        self.y = y
+print(B(2).x)</code></pre></td><td><input data-a="AttributeError" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">class A: pass
+class B(A): pass
+print(isinstance(B(), A), isinstance(A(), B))</code></pre></td><td><input data-a="True False" aria-label="Respuesta"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="acciones"><button class="btn" type="button" data-comprobar>Comprobar</button><button class="btn sec" type="button" data-solucion>Ver solución</button><button class="btn sec" type="button" data-limpiar>Limpiar</button><span class="resultado" aria-live="polite"></span></div>
+  </div>
+  <ul class="check">
+    <li><input type="checkbox" id="s9-px" data-track="s9-px"><label for="s9-px">Completé los ejercicios rápidos sin ejecutar el código.</label></li>
+  </ul>
+  <h3>Problemas tipo examen</h3>
+  <article class="ejercicio problema">
+    <header><h3>P1 · Reservas de hotel con tarifas polimórficas</h3><span class="nivel">herencia + composición · ★★★★</span></header>
+    <div class="cuerpo">
+      <p>Tarifas: estándar $55/noche; corporativa con 15 % de descuento; temporada con recargo del 40 % si la ocupación es ≥ 90 % o del 10 % si no. Una <code>Reserva</code> tiene un huésped y una tarifa. Calcula el ingreso proyectado de una lista de reservas.</p>
+      <p><strong>Tu programa debe cumplir estos casos de prueba:</strong></p>
+      <div class="table-wrap"><table><thead><tr><th>Reserva</th><th>Total esperado</th></tr></thead><tbody><tr><td>Ana, estándar, 3 noches</td><td>$165.00</td></tr><tr><td>ACME, corporativa, 5 noches</td><td>$233.75</td></tr><tr><td>Luis, temporada 95 %, 2 noches</td><td>$154.00</td></tr><tr><td>Eva, temporada 60 %, 2 noches</td><td>$121.00</td></tr><tr><td>Ingreso proyectado</td><td>$673.75</td></tr></tbody></table></div>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p>La clase base define <code>total()</code> usando <code>self.precio_noche()</code>, que cada hija redefine. <code>NotImplementedError</code> en la base avisa si alguien olvida redefinirlo.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="hotel.py"><code class="language-python">class Tarifa:
+    &quot;&quot;&quot;Clase base: define cómo se cobra una reserva.&quot;&quot;&quot;
+    def __init__(self, noches):
+        if noches &lt;= 0:
+            raise ValueError(&quot;al menos una noche&quot;)
+        self.noches = noches
+
+    def precio_noche(self):
+        raise NotImplementedError(&quot;cada tarifa define su precio&quot;)
+
+    def total(self):
+        return round(self.noches * self.precio_noche(), 2)
+
+
+class Estandar(Tarifa):
+    def precio_noche(self):
+        return 55.0
+
+
+class Corporativa(Tarifa):
+    def precio_noche(self):
+        return 55.0 * 0.85                       # 15 % de convenio
+
+
+class Temporada(Tarifa):
+    def __init__(self, noches, ocupacion):
+        super().__init__(noches)
+        self.ocupacion = ocupacion
+
+    def precio_noche(self):
+        return 55.0 * (1.4 if self.ocupacion &gt;= 0.9 else 1.1)
+
+
+class Reserva:
+    def __init__(self, huesped, tarifa):
+        self.huesped = huesped
+        self.tarifa = tarifa                     # composición: la reserva TIENE una tarifa
+
+    def __str__(self):
+        return f&quot;{self.huesped:&lt;8} {type(self.tarifa).__name__:&lt;11} {self.tarifa.noches} noches ${self.tarifa.total():&gt;7.2f}&quot;
+
+
+reservas = [Reserva(&quot;Ana&quot;, Estandar(3)), Reserva(&quot;ACME SA&quot;, Corporativa(5)),
+            Reserva(&quot;Luis&quot;, Temporada(2, 0.95)), Reserva(&quot;Eva&quot;, Temporada(2, 0.6))]
+for r in reservas:
+    print(r)
+print(f&quot;Ingreso proyectado: ${sum(r.tarifa.total() for r in reservas):,.2f}&quot;)
+assert Corporativa(1).total() == 46.75</code></pre>
+<pre class="salida" data-file="salida"><code>Ana      Estandar    3 noches $ 165.00
+ACME SA  Corporativa 5 noches $ 233.75
+Luis     Temporada   2 noches $ 154.00
+Eva      Temporada   2 noches $ 121.00
+Ingreso proyectado: $673.75</code></pre>
+
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s9-pr1" data-track="s9-pr1"><label for="s9-pr1">Resuelto y probado con todos los casos</label></li></ul>
+  </article>
+  <article class="ejercicio problema">
+    <header><h3>P2 · Objetos que se guardan y se recuperan</h3><span class="nivel">composición + persistencia · ★★★★</span></header>
+    <div class="cuerpo">
+      <p>Un <code>Catalogo</code> que contiene objetos <code>Producto</code> debe poder convertirse a JSON y reconstruirse desde JSON, sin perder datos. No se permiten códigos repetidos.</p>
+      <p><strong>Tu programa debe cumplir estos casos de prueba:</strong></p>
+      <div class="table-wrap"><table><thead><tr><th>Comprobación</th><th>Esperado</th></tr></thead><tbody><tr><td>Ida y vuelta a JSON</td><td>mismo valor de inventario (534.0)</td></tr><tr><td>Agregar un código repetido</td><td>ValueError</td></tr></tbody></table></div>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p>Cada <code>Producto</code> sabe convertirse a diccionario (<code>a_dict</code>) y crearse desde uno (<code>desde_dict</code>). <code>@classmethod</code> define un método que se llama sobre la clase: <code>Producto.desde_dict(d)</code>.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="catalogo_json.py"><code class="language-python">class Producto:
+    def __init__(self, codigo, nombre, precio, stock):
+        self.codigo, self.nombre, self.precio, self.stock = codigo, nombre, precio, stock
+
+    def a_dict(self):
+        return {&quot;codigo&quot;: self.codigo, &quot;nombre&quot;: self.nombre, &quot;precio&quot;: self.precio, &quot;stock&quot;: self.stock}
+
+    @classmethod
+    def desde_dict(cls, d):
+        return cls(d[&quot;codigo&quot;], d[&quot;nombre&quot;], d[&quot;precio&quot;], d[&quot;stock&quot;])
+
+
+class Catalogo:
+    def __init__(self):
+        self._productos = {}
+
+    def agregar(self, producto):
+        if producto.codigo in self._productos:
+            raise ValueError(f&quot;código repetido: {producto.codigo}&quot;)
+        self._productos[producto.codigo] = producto
+
+    def valor(self):
+        return sum(p.precio * p.stock for p in self._productos.values())
+
+    def a_json(self):
+        import json
+        return json.dumps([p.a_dict() for p in self._productos.values()])
+
+    @classmethod
+    def desde_json(cls, texto):
+        import json
+        c = cls()
+        for d in json.loads(texto):
+            c.agregar(Producto.desde_dict(d))
+        return c
+
+
+c = Catalogo()
+c.agregar(Producto(&quot;A01&quot;, &quot;Aceite&quot;, 12.5, 40))
+c.agregar(Producto(&quot;B07&quot;, &quot;Arroz&quot;, 4.25, 8))
+texto = c.a_json()
+copia = Catalogo.desde_json(texto)                  # ida y vuelta
+print(texto)
+print(&quot;Valor original:&quot;, c.valor(), &quot;| valor recuperado:&quot;, copia.valor())
+assert copia.valor() == c.valor()</code></pre>
+<pre class="salida" data-file="salida"><code>[{&quot;codigo&quot;: &quot;A01&quot;, &quot;nombre&quot;: &quot;Aceite&quot;, &quot;precio&quot;: 12.5, &quot;stock&quot;: 40}, {&quot;codigo&quot;: &quot;B07&quot;, &quot;nombre&quot;: &quot;Arroz&quot;, &quot;precio&quot;: 4.25, &quot;stock&quot;: 8}]
+Valor original: 534.0 | valor recuperado: 534.0</code></pre>
+<p>Este patrón conecta la Fase 4 (persistencia) con la Fase 5 (clases).</p>
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s9-pr2" data-track="s9-pr2"><label for="s9-pr2">Resuelto y probado con todos los casos</label></li></ul>
+  </article>
+</section>
+
+<section id="proyecto">
+  <h2>Proyecto integrador · Fase 5</h2>
+<p><strong>Semana 9 · Arquitectura con clases y pruebas unitarias.</strong></p>
+<div class="card">
+<h3>Entregables de esta fase</h3>
+  <ul class="check">
+    <li><input type="checkbox" id="s9-p1" data-track="s9-p1"><label for="s9-p1"><strong>Mínimo 3 clases de dominio</strong> relacionadas por composición o herencia justificada.</label></li>
+    <li><input type="checkbox" id="s9-p2" data-track="s9-p2"><label for="s9-p2">Atributos encapsulados y validación de invariantes en los métodos.</label></li>
+    <li><input type="checkbox" id="s9-p3" data-track="s9-p3"><label for="s9-p3">Separación en módulos: <code>modelos.py</code>, <code>servicios.py</code>, <code>persistencia.py</code>, <code>interfaz.py</code>, <code>main.py</code>.</label></li>
+    <li><input type="checkbox" id="s9-p4" data-track="s9-p4"><label for="s9-p4"><strong>5 pruebas unitarias</strong> (assert o pytest) sobre los cálculos centrales y sus casos borde.</label></li>
+    <li><input type="checkbox" id="s9-p5" data-track="s9-p5"><label for="s9-p5">Commits de todos los integrantes en esta refactorización.</label></li>
+  </ul>
+</div>
+  <div class="box negocio">
+    <span class="box-title">Cómo lo evalúa la rúbrica (25 %)</span>
+    <p><strong>Excelente:</strong> 3 o más clases con responsabilidades claras, composición o herencia justificada, atributos encapsulados, interfaz separada de la lógica. <strong>Aceptable:</strong> hay clases, pero mezclan cálculos con <code>print</code>. <strong>Deficiente:</strong> código procedural metido en clases artificiales.</p>
+  </div>
+<h3>Preguntas de defensa</h3>
+  <details class="defensa"><summary>¿Por qué usaron herencia aquí y composición allá?</summary><div><p>Aplica la prueba de la frase: “un Vendedor <em>es un</em> Empleado” (herencia); “una Factura <em>tiene</em> líneas” (composición).</p></div></details>
+  <details class="defensa"><summary>Agreguen en vivo un tipo nuevo (de pago, de empleado, de tarifa).</summary><div><p>Si su diseño es polimórfico, basta crear una subclase y redefinir un método, sin tocar el resto. Practica hacerlo en menos de 5 minutos.</p></div></details>
+  <details class="defensa"><summary>¿Por qué sus clases de modelo no tienen <code>print</code> ni <code>input</code>?</summary><div><p>Para poder probarlas y reutilizarlas: la interfaz decide cómo mostrar; los modelos solo calculan y validan.</p></div></details>
+  <details class="defensa"><summary>¿Qué prueba esta prueba unitaria?</summary><div><p>Nombra la regla de negocio, el caso borde y demuestra que la prueba falla si se rompe la regla.</p></div></details>
+</section>
+
+<section id="evaluacion">
+  <h2>Rumbo al Control 4 y al Final</h2>
+<p>Control 4 en la semana 11 y Examen Final en la 12. De esta semana:</p>
+  <ul class="check">
+    <li><input type="checkbox" id="s9-v1" data-track="s9-v1"><label for="s9-v1">Escribir una subclase con <code>super().__init__</code> y un método redefinido.</label></li>
+    <li><input type="checkbox" id="s9-v2" data-track="s9-v2"><label for="s9-v2">Predecir qué versión de un método se ejecuta.</label></li>
+    <li><input type="checkbox" id="s9-v3" data-track="s9-v3"><label for="s9-v3">Distinguir “es un” de “tiene un” y justificar el diseño.</label></li>
+    <li><input type="checkbox" id="s9-v4" data-track="s9-v4"><label for="s9-v4">Usar polimorfismo para eliminar cadenas de <code>if</code> por tipo.</label></li>
+  </ul>
+</section>
+
+<section id="fuentes">
+  <h2>Fuentes</h2>
+<ul><li><strong>[PCC]</strong> Matthes, E. (2023). <em>Python Crash Course</em>, 3.ª ed. Cap. 9.</li><li><strong>[TRO]</strong> Troelsen, A. y Japikse, P. (2022). <em>Pro C# 10 with .NET 6</em>. Cap. 6 (sección conceptual).</li></ul>
+</section>
+
+  <nav class="nav-semanas" aria-label="Navegación entre semanas">
+    <a class="nav-prev" href="semana-08.html"><span class="btn-ico" aria-hidden="true"></span><span>Semana 8</span></a>
+    <a class="nav-next" href="semana-10.html"><span>Semana 10: transición a c# y .net</span><span class="btn-ico" aria-hidden="true"></span></a>
+  </nav>
+
+<footer class="pie">Guía de estudio · Introducción al Desarrollo de Software · ESEN · Ciclo III/2026. Material de apoyo no oficial; el programa y Moodle mandan.</footer>
+</main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+<script src="../assets/guia.js"></script>
+<script src="../assets/ejecutar.js"></script>
+</body>
+</html>

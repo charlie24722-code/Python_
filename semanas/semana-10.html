@@ -1,0 +1,798 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Semana 10 · Transición a C# y .NET</title>
+<meta name="description" content="Guía de estudio, semana 10: de Python a C#, compilación, CLR, tipos estáticos, decimal, Console, TryParse, condicionales, bucles y métodos. Proyecto: Fase 6.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/guia.css">
+<script>try{var t=localStorage.getItem("ids-guia-v1-tema");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+</head>
+<body data-semana="s10">
+
+<header class="isla-wrap">
+  <div class="isla">
+    <a class="brand" href="../index.html">IDS <small>Guía de estudio</small></a>
+    <nav class="isla-semanas" aria-label="Semanas">
+    <a href="semana-01.html">S1</a>
+    <a href="semana-02.html">S2</a>
+    <a href="semana-03.html">S3</a>
+    <a href="semana-04.html">S4</a>
+    <a href="semana-05.html">S5</a>
+    <a href="semana-06.html">S6</a>
+    <a href="semana-07.html">S7</a>
+    <a href="semana-08.html">S8</a>
+    <a href="semana-09.html">S9</a>
+    <a href="semana-10.html" aria-current="page">S10</a>
+    <a href="semana-11.html">S11</a>
+    <a href="semana-12.html">S12</a>
+  </nav>
+    <button class="theme-btn" type="button" aria-label="Cambiar tema claro/oscuro"><span class="ico-tema" aria-hidden="true"></span></button>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu-completo"><span class="hb" aria-hidden="true"></span><span class="hb" aria-hidden="true"></span><span class="sr">Menú</span></button>
+  </div>
+</header>
+<div class="menu-completo" id="menu-completo" hidden></div>
+
+<header class="hero-semana">
+  <div class="hero-in">
+    <p class="hero-num" aria-hidden="true">10</p>
+    <div class="hero-txt">
+      <p class="hero-mod"><span class="sr">Semana 10 · </span>Módulo 9</p>
+      <h1>Transición a C#: tipado estático y plataforma .NET</h1>
+      <p class="lead">Todo lo que aprendiste sigue valiendo: variables, decisiones, bucles, funciones. Lo que cambia es que en C# declaras qué <strong>tipo</strong> tiene cada dato y un <strong>compilador</strong> revisa el programa completo antes de ejecutarlo.</p>
+    </div>
+    <p class="pregunta"><span class="pregunta-lbl">Pregunta orientadora</span><mark>¿Qué cambia y qué se mantiene cuando paso un programa de Python a un lenguaje compilado y fuertemente tipado?</mark></p>
+    <dl class="hero-meta">
+      <div><dt>Lecturas</dt><dd>TRO 1 · TRO 3 · MSDN</dd></div>
+      <div><dt>Proyecto</dt><dd>Fase 6 (esta semana)</dd></div>
+      <div class="eval"><dt>Evaluación</dt><dd>Control 4: próxima semana</dd></div>
+    </dl>
+    <div class="progress" data-progreso-pagina>
+      <div class="progress-bar"><span></span></div>
+      <div class="progress-label"></div>
+    </div>
+  </div>
+</header>
+
+<div class="layout with-toc">
+<aside class="toc" aria-label="Contenido de la semana">
+  <p>Semana 10</p>
+  <ol>
+    <li class="grupo" aria-hidden="true">Antes de clase</li>
+    <li><a href="#uso">Cómo usar la guía</a></li>
+    <li><a href="#mapa">Qué puedes usar</a></li>
+    <li><a href="#lecturas">Lecturas</a></li>
+    <li><a href="#checkpoint">Reading checkpoint</a></li>
+    <li class="grupo" aria-hidden="true">Aprender</li>
+    <li><a href="#entorno">Compilado vs. interpretado</a></li>
+    <li><a href="#tipos">Tipos y operadores</a></li>
+    <li><a href="#traduccion">De Python a C#</a></li>
+    <li><a href="#errores">Errores de compilación</a></li>
+    <li class="grupo" aria-hidden="true">Practicar</li>
+    <li><a href="#trazas">Tabla de traza</a></li>
+    <li><a href="#ejercicios">Ejercicios</a></li>
+    <li><a href="#practica">Práctica intensiva</a></li>
+    <li class="grupo" aria-hidden="true">Entregar y evaluar</li>
+    <li><a href="#proyecto">Proyecto: Fase 6</a></li>
+    <li><a href="#evaluacion">Rumbo al Final</a></li>
+    <li><a href="#fuentes">Fuentes</a></li>
+  </ol>
+</aside>
+
+<main>
+<section id="uso">
+  <h2>Cómo usar esta guía</h2>
+  <div class="momentos">
+    <div><strong>Antes de clase</strong>TRO 1 y 3, y la guía rápida de Microsoft Learn. Instala el SDK de .NET (ver <a href="#entorno">entorno</a>).</div>
+    <div><strong>Durante el laboratorio</strong>Taller de portabilidad: traducir tus soluciones de las semanas 2 a 4. Usa la <a href="#traduccion">tabla de traducción</a>.</div>
+    <div><strong>Después de clase</strong>Los errores de compilación más comunes están en <a href="#errores">esta tabla</a>. Practica leyéndolos.</div>
+    <div><strong>Proyecto</strong>Fase 6: README definitivo y bitácora de IA (el proyecto sigue en Python).</div>
+  </div>
+  <ul class="ciclo-leyenda" aria-label="Ciclo de trabajo">
+    <li>Pregunta</li><li class="sep">→</li><li>Exploración</li><li class="sep">→</li><li>Implementación</li><li class="sep">→</li><li>Resultado</li><li class="sep">→</li><li>Interpretación</li><li class="sep">→</li><li class="v">Verificación</li>
+  </ul>
+  <div class="box nota">
+    <span class="box-title">Sobre ejecutar el código</span>
+    <p>Los bloques de <strong>C#</strong> no se ejecutan en esta página: necesitan el compilador de .NET. Cópialos a tu proyecto y usa <code>dotnet run</code>. Todas las salidas que ves aquí salieron de ejecutarlos de verdad con .NET 8.</p>
+  </div>
+</section>
+
+<section id="mapa">
+  <h2>Qué puedes usar esta semana</h2>
+  <div class="permisos">
+    <div class="si">
+      <h4>Sí, desde ahora</h4>
+      <ul>
+        <li>La lógica de las semanas 1 a 9: lo que cambia es la sintaxis</li>
+        <li>Tipos <code>int</code>, <code>double</code>, <code>decimal</code>, <code>string</code>, <code>bool</code>, <code>char</code>; <code>var</code> y <code>const</code></li>
+        <li><code>Console.WriteLine</code>, <code>Console.ReadLine</code>, interpolación <code>$"..."</code></li>
+        <li><code>int.Parse</code>, <code>decimal.TryParse</code>, <code>Math.Round</code></li>
+        <li><code>if</code> / <code>else if</code> / <code>else</code>, <code>switch</code>, <code>while</code>, <code>for</code></li>
+        <li>Métodos <code>static</code> con tipos de parámetros y de retorno</li>
+      </ul>
+    </div>
+    <div class="no">
+      <h4>Todavía no / fuera del curso</h4>
+      <ul>
+        <li>Clases, propiedades, <code>List&lt;T&gt;</code> y herencia en C# → semana 11</li>
+        <li>LINQ, <code>async</code>, interfaces gráficas: materias posteriores</li>
+      </ul>
+      <p style="margin-top:.5rem;font-size:.9rem">El proyecto integrador <strong>no</strong> se programa en C#. Estas semanas son el puente hacia Programación Orientada a Objetos y Estructuras de Datos.</p>
+    </div>
+  </div>
+</section>
+
+<section id="lecturas">
+  <h2>Lecturas de preparación</h2>
+  <ul class="check">
+    <li><input type="checkbox" id="s10-l1" data-track="s10-l1"><label for="s10-l1"><span class="ref">[TRO] Cap. 1</span> “The Philosophy of .NET”: qué es el runtime (CLR), el lenguaje intermedio (IL/CIL), los ensamblados y por qué C# se compila.</label></li>
+    <li><input type="checkbox" id="s10-l2" data-track="s10-l2"><label for="s10-l2"><span class="ref">[TRO] Cap. 3</span> “Core C# Programming Constructs, Part I”: anatomía de un programa, tipos de datos, variables, conversiones, <code>Parse</code>/<code>TryParse</code>, condicionales y bucles.</label></li>
+    <li><input type="checkbox" id="s10-l3" data-track="s10-l3"><label for="s10-l3"><span class="ref">[MSDN]</span> Guía de inicio rápido de C#: estructura del programa y tipos. Acceso libre.</label></li>
+  </ul>
+  <div class="box nota">
+    <span class="box-title">Complementos gratuitos</span>
+    <ul><li><a href="https://learn.microsoft.com/es-es/dotnet/csharp/tour-of-csharp/" target="_blank" rel="noopener">Microsoft Learn — Paseo por C#</a></li><li><a href="https://learn.microsoft.com/es-es/dotnet/csharp/fundamentals/program-structure/" target="_blank" rel="noopener">Estructura general de un programa de C#</a></li><li><a href="https://learn.microsoft.com/es-es/dotnet/core/install/" target="_blank" rel="noopener">Instalar .NET</a></li></ul>
+  </div>
+</section>
+
+<section id="checkpoint">
+  <h2>Reading checkpoint</h2>
+  <div class="quiz">
+    <div class="qq" data-q="s10-q1">
+      <p>¿Qué hace el compilador de C# antes de que el programa se ejecute?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Revisa tipos y sintaxis y traduce el código a lenguaje intermedio (IL)</button>
+        <button class="quiz-opt">Ejecuta el programa línea por línea</button>
+        <button class="quiz-opt">Convierte el código a Python</button>
+        <button class="quiz-opt">Nada: C# es interpretado</button>
+      </div>
+      <p class="why">Si hay un error de tipos, el programa ni siquiera se genera. En Python ese error aparecería al ejecutar la línea.</p>
+    </div>
+    <div class="qq" data-q="s10-q2">
+      <p>¿Qué es el CLR?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>El entorno de ejecución de .NET que corre el IL y lo convierte a código de máquina (JIT)</button>
+        <button class="quiz-opt">Un editor de código</button>
+        <button class="quiz-opt">Una librería de gráficos</button>
+        <button class="quiz-opt">El compilador de Python</button>
+      </div>
+      <p class="why">CLR = Common Language Runtime. El JIT (just-in-time) traduce el IL a código de máquina mientras el programa corre.</p>
+    </div>
+    <div class="qq" data-q="s10-q3">
+      <p>¿Qué tipo conviene para dinero en C#?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>decimal</code></button>
+        <button class="quiz-opt"><code>double</code></button>
+        <button class="quiz-opt"><code>int</code></button>
+        <button class="quiz-opt"><code>float</code></button>
+      </div>
+      <p class="why"><code>decimal</code> representa exactamente los decimales en base 10: <code>0.1m + 0.2m == 0.3m</code> es verdadero. Los literales llevan <code>m</code>: <code>12.50m</code>.</p>
+    </div>
+    <div class="qq" data-q="s10-q4">
+      <p>¿Qué produce <code>7 / 2</code> en C#?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>3</code> (división entera, porque ambos son int)</button>
+        <button class="quiz-opt"><code>3.5</code></button>
+        <button class="quiz-opt">Error de compilación</button>
+        <button class="quiz-opt"><code>4</code></button>
+      </div>
+      <p class="why">A diferencia de Python 3, en C# <code>int / int</code> es división entera. Para 3.5: <code>7 / 2.0</code> o <code>(double)7 / 2</code>.</p>
+    </div>
+    <div class="qq" data-q="s10-q5">
+      <p>¿Qué pasa con <code>int cantidad = "4";</code>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Error de compilación: no se puede convertir <code>string</code> a <code>int</code></button>
+        <button class="quiz-opt">Se guarda 4</button>
+        <button class="quiz-opt">Se guarda "4"</button>
+        <button class="quiz-opt">Error al ejecutar</button>
+      </div>
+      <p class="why">El compilador lo rechaza (error CS0029). Para convertir texto: <code>int.Parse("4")</code>.</p>
+    </div>
+    <div class="qq" data-q="s10-q6">
+      <p>¿Qué hace <code>decimal.TryParse(texto, out decimal monto)</code>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Devuelve <code>true</code> y guarda el número en <code>monto</code> si el texto es válido; si no, devuelve <code>false</code> sin lanzar excepción</button>
+        <button class="quiz-opt">Lanza una excepción si el texto no es número</button>
+        <button class="quiz-opt">Convierte a texto</button>
+        <button class="quiz-opt">Solo funciona con enteros</button>
+      </div>
+      <p class="why">Es el equivalente cómodo de <code>try: float(texto) except ValueError</code> de la semana 7.</p>
+    </div>
+    <div class="qq" data-q="s10-q7">
+      <p>¿Qué le falta a esta línea?</p>
+<pre data-norun><code class="language-csharp">Console.WriteLine(&quot;Total&quot;)</code></pre>
+      <p style="margin:0"></p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>El punto y coma final</button>
+        <button class="quiz-opt">Paréntesis</button>
+        <button class="quiz-opt">Comillas simples</button>
+        <button class="quiz-opt">Nada</button>
+      </div>
+      <p class="why">En C# cada instrucción termina en <code>;</code>. El compilador lo reporta como error CS1002.</p>
+    </div>
+    <div class="qq" data-q="s10-q8">
+      <p>¿Qué define los bloques (cuerpo de un <code>if</code>, de un bucle) en C#?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Las llaves <code>{ }</code></button>
+        <button class="quiz-opt">La sangría</button>
+        <button class="quiz-opt">Los dos puntos</button>
+        <button class="quiz-opt">Las líneas en blanco</button>
+      </div>
+      <p class="why">La sangría en C# es solo para leer mejor; lo que manda son las llaves. Aun así, indenta igual que en Python.</p>
+    </div>
+    <div class="quiz-score"><span data-score></span><button class="btn sec" type="button" data-reset>Reiniciar quiz</button></div>
+  </div>
+</section>
+
+<section id="entorno">
+  <h2>Compilado vs. interpretado, y tu primer programa</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p>Python es un <strong>intérprete simultáneo</strong>: traduce mientras hablas; si una frase no tiene sentido, te enteras en ese momento. C# es un <strong>traductor de libros</strong>: revisa y traduce el libro completo antes de publicarlo; si una frase no cuadra, el libro no sale.</p>
+  </div>
+<figure class="lamina "><div class="placa"><div class="placa-core"><img src="../assets/img/s10-compilacion.svg" alt="Python interpreta el archivo y los errores de tipo aparecen al ejecutar; C# compila a lenguaje intermedio IL que el CLR convierte a código de máquina con JIT, y los errores de tipo se detectan antes de ejecutar." width="760" height="268" loading="lazy" decoding="async"></div></div><figcaption>En C#, los errores de tipo se detectan al compilar, antes de que el programa llegue a un usuario.</figcaption></figure>
+<h3>Crear y ejecutar un proyecto</h3>
+<pre data-file="terminal"><code class="language-bash">dotnet --version                 # comprobar la instalación del SDK
+dotnet new console -o LaCeiba    # crea la carpeta y Program.cs
+cd LaCeiba
+dotnet run                       # compila y ejecuta</code></pre>
+  <div class="ciclo">
+    <h3>Caso: la factura de la semana 2, en C#</h3>
+    <div class="paso"><div>
+      <span class="etq">Pregunta</span>
+<p>¿Qué cambia al escribir el mismo cálculo en C#?</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Implementación (estilo moderno)</span>
+<pre data-file="Program.cs"><code class="language-csharp">// Program.cs (.NET 6 o superior: instrucciones de nivel superior)
+decimal precioUnitario = 12.50m;
+int cantidad = 4;
+const decimal TasaIva = 0.13m;
+
+decimal subtotal = precioUnitario * cantidad;
+decimal total = subtotal * (1 + TasaIva);
+Console.WriteLine($&quot;Subtotal: {subtotal:F2}&quot;);
+Console.WriteLine($&quot;Total:    {total:F2}&quot;);</code></pre>
+<pre class="salida" data-file="salida"><code>Subtotal: 50.00
+Total:    56.50</code></pre>
+
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Implementación (estilo clásico, el que verás en muchos libros)</span>
+<pre data-file="Program.cs"><code class="language-csharp">using System;
+
+namespace LaCeiba
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            decimal precioUnitario = 12.50m;
+            int cantidad = 4;
+            Console.WriteLine($&quot;Subtotal: {precioUnitario * cantidad:F2}&quot;);
+        }
+    }
+}</code></pre>
+<pre class="salida" data-file="salida"><code>Subtotal: 50.00</code></pre>
+<p>Ambos son el mismo programa. Desde .NET 6 el compilador genera por ti la clase y el <code>static void Main</code>. En TRO y en exámenes verás la forma clásica: identifica <code>namespace</code> (agrupa clases), <code>class Program</code> y <code>static void Main</code> (punto de entrada).</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Interpretación</span>
+<p>Cada variable declara su tipo (<code>decimal</code>, <code>int</code>). <code>12.50m</code> es un literal <code>decimal</code>. <code>{total:F2}</code> formatea con 2 decimales. <code>const</code> es una constante de verdad: el compilador impide cambiarla.</p>
+    </div></div>
+    <div class="paso verif"><div>
+      <span class="etq">Verificación</span>
+<p>12.50 × 4 = 50 y 50 × 1.13 = 56.50, igual que en la semana 2 ✔. Prueba quitar la <code>m</code> de <code>12.50m</code>: el compilador protesta porque <code>12.50</code> es <code>double</code> y no se convierte solo a <code>decimal</code> (CS0664).</p>
+    </div></div>
+  </div>
+</section>
+
+<section id="tipos">
+  <h2>Tipos, variables y operadores</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p>En Python una variable es una etiqueta que se puede pegar en cualquier caja. En C# cada variable es un <strong>casillero con forma</strong>: el de <code>int</code> solo acepta enteros, el de <code>string</code> solo texto. Intentar meter otra cosa no compila.</p>
+  </div>
+<pre data-file="tipos.cs"><code class="language-csharp">int cajas = 17;
+int porCamion = 5;
+Console.WriteLine(cajas / porCamion);          // división entera
+Console.WriteLine(cajas % porCamion);
+Console.WriteLine(cajas / (double)porCamion);  // conversión explícita (cast)
+
+double d = 0.1 + 0.2;
+decimal m = 0.1m + 0.2m;
+Console.WriteLine(d == 0.3);
+Console.WriteLine(m == 0.3m);
+
+var nombre = &quot;Aceite&quot;;         // var: el compilador deduce string
+char inicial = nombre[0];
+bool hayStock = true;
+Console.WriteLine($&quot;{nombre} empieza con {inicial}; ¿stock? {hayStock}&quot;);
+
+decimal mitad = 2.665m;
+Console.WriteLine(Math.Round(mitad, 2));                                   // redondeo bancario
+Console.WriteLine(Math.Round(mitad, 2, MidpointRounding.AwayFromZero));   // redondeo comercial</code></pre>
+<pre class="salida" data-file="salida"><code>3
+2
+3.4
+False
+True
+Aceite empieza con A; ¿stock? True
+2.66
+2.67</code></pre>
+<div class="table-wrap"><table><thead><tr><th>Python</th><th>C#</th><th>Úsalo para</th></tr></thead><tbody><tr><td><code>int</code></td><td><code>int</code> (<code>long</code> si es enorme)</td><td>cantidades, contadores</td></tr><tr><td><code>float</code></td><td><code>double</code></td><td>medidas, cálculos científicos</td></tr><tr><td><code>float</code> con dinero</td><td><code>decimal</code> (literal <code>12.50m</code>)</td><td>dinero: siempre</td></tr><tr><td><code>str</code></td><td><code>string</code> (y <code>char</code> para un carácter: <code>'A'</code>)</td><td>texto</td></tr><tr><td><code>bool</code> (<code>True</code>)</td><td><code>bool</code> (<code>true</code>, en minúscula)</td><td>sí/no</td></tr></tbody></table></div>
+  <div class="box ojo">
+    <span class="box-title">Dos trampas nuevas</span>
+    <ul><li><code>int / int</code> trunca: <code>17 / 5</code> es 3. Si necesitas decimales, convierte uno de los dos.</li><li><code>Math.Round</code> redondea “al par” por defecto (2.675 → 2.68, pero 2.665 → 2.66). Para dinero usa <code>MidpointRounding.AwayFromZero</code>.</li></ul>
+  </div>
+</section>
+
+<section id="traduccion">
+  <h2>Traducir de Python a C#</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p>Traducir no es cambiar palabras una por una: la <strong>lógica</strong> es la misma (tus algoritmos de las semanas 1 a 9 siguen valiendo). Cambian la gramática: tipos, llaves, punto y coma y nombres de funciones.</p>
+  </div>
+<figure class="lamina "><div class="placa"><div class="placa-core"><img src="../assets/img/s10-traduccion.svg" alt="Tabla de traducción de Python a C#: declaración de variables con tipo, conversión con int.Parse, if y else if con llaves, for con contador, while, Console.WriteLine y métodos static." width="760" height="360" loading="lazy" decoding="async"></div></div><figcaption>Las equivalencias que más vas a usar en el taller de portabilidad.</figcaption></figure>
+  <div class="ciclo">
+    <h3>Caso: la caja registradora de la semana 3</h3>
+    <div class="paso"><div>
+      <span class="etq">Pregunta</span>
+<p>¿Cómo se ve el bucle con centinela y validación de la semana 3 en C#?</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Exploración</span>
+<p><code>input()</code> → <code>Console.ReadLine()</code> (puede devolver <code>null</code>, por eso el tipo es <code>string?</code>). La validación con <code>try</code> o <code>isdigit</code> → <code>decimal.TryParse</code>. <code>+= 1</code> → <code>++</code>.</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Implementación</span>
+<pre data-file="Caja.cs" data-stdin="25.50\n100\ndiez\n74.50\nfin\n"><code class="language-csharp">decimal total = 0;
+int ventas = 0;
+
+Console.WriteLine(&quot;Montos de venta (escriba &#x27;fin&#x27; para cerrar):&quot;);
+while (true)
+{
+    Console.Write(&quot;Monto: &quot;);
+    string? entrada = Console.ReadLine();
+    if (entrada == null || entrada.Trim().ToLower() == &quot;fin&quot;)
+    {
+        break;
+    }
+
+    if (decimal.TryParse(entrada, out decimal monto) &amp;&amp; monto &gt; 0)
+    {
+        total += monto;
+        ventas++;
+    }
+    else
+    {
+        Console.WriteLine($&quot;  &#x27;{entrada}&#x27; no es un monto válido.&quot;);
+    }
+}
+
+Console.WriteLine($&quot;Ventas: {ventas}  Total: {total:F2}&quot;);
+if (ventas &gt; 0)
+{
+    Console.WriteLine($&quot;Promedio: {total / ventas:F2}&quot;);
+}</code></pre>
+<pre class="salida" data-file="salida" data-nocheck><code>Montos de venta (escriba &#x27;fin&#x27; para cerrar):
+Monto: 25.50
+Monto: 100
+Monto: diez
+  &#x27;diez&#x27; no es un monto válido.
+Monto: 74.50
+Monto: fin
+Ventas: 3  Total: 200.00
+Promedio: 66.67</code></pre>
+
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Interpretación</span>
+<p><code>TryParse</code> junta dos pasos: “¿es número?” y “conviértelo”. <code>out decimal monto</code> declara la variable donde queda el resultado. <code>&amp;&amp;</code> es <code>and</code>, <code>||</code> es <code>or</code>, <code>!</code> es <code>not</code>.</p>
+    </div></div>
+    <div class="paso verif"><div>
+      <span class="etq">Verificación</span>
+<p>Mismo resultado que en Python: 3 ventas, $200.00, promedio $66.67 ✔. La salida del bloque es la de una ejecución real con esas entradas.</p>
+    </div></div>
+  </div>
+<h3>Funciones → métodos <code>static</code></h3>
+<p>La tarifa de envío de las semanas 2 y 4, con tipo en cada parámetro y en el retorno:</p>
+<pre data-file="Envio.cs"><code class="language-csharp">Console.WriteLine(TarifaEnvio(1.01, &quot;rural&quot;));
+Console.WriteLine(TarifaEnvio(20));
+Console.WriteLine(TarifaEnvio(25));
+
+static decimal TarifaEnvio(double pesoKg, string zona = &quot;urbana&quot;)
+{
+    if (pesoKg &lt;= 0 || pesoKg &gt; 20)
+    {
+        return -1;                      // señal de &quot;no se puede enviar&quot;
+    }
+
+    decimal tarifa;
+    if (pesoKg &lt;= 1)
+    {
+        tarifa = 3.50m;
+    }
+    else if (pesoKg &lt;= 5)
+    {
+        tarifa = 6.00m;
+    }
+    else
+    {
+        tarifa = 12.00m;
+    }
+
+    if (zona == &quot;rural&quot;)
+    {
+        tarifa += 2.50m;
+    }
+    return tarifa;
+}</code></pre>
+<pre class="salida" data-file="salida"><code>8.50
+12.00
+-1</code></pre>
+<p>El parámetro opcional funciona igual que en Python (<code>zona = "urbana"</code>). Como <code>decimal</code> no puede ser <code>null</code>, aquí se usa −1 como señal; en la semana 11 verás una alternativa mejor (lanzar una excepción).</p>
+<h3><code>switch</code> y <code>for</code></h3>
+<pre data-file="Switch.cs"><code class="language-csharp">string metodo = &quot;tarjeta&quot;;
+decimal monto = 80m;
+
+decimal comision = metodo switch
+{
+    &quot;efectivo&quot; =&gt; 0m,
+    &quot;tarjeta&quot; =&gt; monto * 0.035m,
+    &quot;transferencia&quot; =&gt; monto &lt; 100 ? 0.75m : 0m,
+    _ =&gt; throw new ArgumentException($&quot;método desconocido: {metodo}&quot;)
+};
+Console.WriteLine($&quot;Comisión: {comision:F2}&quot;);
+
+for (int mes = 1; mes &lt;= 3; mes++)
+{
+    Console.WriteLine($&quot;Mes {mes}: saldo {1000m * (decimal)Math.Pow(1.02, mes):F2}&quot;);
+}</code></pre>
+<pre class="salida" data-file="salida"><code>Comisión: 2.80
+Mes 1: saldo 1020.00
+Mes 2: saldo 1040.40
+Mes 3: saldo 1061.21</code></pre>
+<p>El <code>switch</code> con <code>=&gt;</code> reemplaza cadenas largas de <code>else if</code> sobre un mismo valor; <code>_</code> es “cualquier otro caso”. <code>for (int mes = 1; mes &lt;= 3; mes++)</code> equivale a <code>for mes in range(1, 4)</code>: inicio; condición; paso.</p>
+</section>
+
+<section id="errores">
+  <h2>Errores de compilación frecuentes</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p>Un error de compilación es el corrector ortográfico del libro: te marca la línea exacta y el tipo de error antes de publicar. Aprender a leerlo ahorra horas.</p>
+  </div>
+<p>Así se ve uno de verdad (compilado con .NET 8):</p>
+<pre data-file="Program.cs" data-error><code class="language-csharp">int cantidad = &quot;4&quot;;
+Console.WriteLine(cantidad);</code></pre>
+<pre class="salida" data-file="salida" data-nocheck><code>Program.cs(1,16): error CS0029: Cannot implicitly convert type &#x27;string&#x27; to &#x27;int&#x27;</code></pre>
+<p>Se lee así: archivo <code>Program.cs</code>, <strong>línea 1, columna 16</strong>, código <code>CS0029</code>, y el mensaje (“no se puede convertir implícitamente <code>string</code> a <code>int</code>”). Busca el código en Microsoft Learn si no lo entiendes.</p>
+<div class="table-wrap"><table><thead><tr><th>Código</th><th>Qué significa</th><th>Ejemplo</th><th>Arreglo</th></tr></thead><tbody><tr><td><code>CS1002</code></td><td>falta <code>;</code></td><td><code>int x = 5</code></td><td><code>int x = 5;</code></td></tr><tr><td><code>CS0103</code></td><td>el nombre no existe (mal escrito o fuera de su bloque)</td><td><code>Console.WriteLine(totl);</code></td><td>corregir el nombre o declarar antes</td></tr><tr><td><code>CS0029</code></td><td>tipos incompatibles</td><td><code>int c = "4";</code></td><td><code>int c = int.Parse("4");</code></td></tr><tr><td><code>CS0165</code></td><td>variable usada sin valor asignado</td><td><code>decimal t; if (x) t = 1; Console.Write(t);</code></td><td>asignar en todas las ramas o al declarar</td></tr><tr><td><code>CS0664</code></td><td>literal <code>double</code> donde va <code>decimal</code></td><td><code>decimal p = 12.5;</code></td><td><code>decimal p = 12.5m;</code></td></tr><tr><td><code>CS0161</code></td><td>no todos los caminos devuelven valor</td><td>método con <code>return</code> solo dentro de un <code>if</code></td><td>agregar un <code>return</code> final</td></tr></tbody></table></div>
+  <div class="box negocio">
+    <span class="box-title">Por qué esto importa</span>
+    <p><code>CS0165</code> y <code>CS0161</code> son los errores de las semanas 2 y 4 (<code>NameError</code> por variable sin asignar en una rama, <code>None</code> inesperado): en Python aparecían con el programa corriendo; en C# el compilador los detecta antes. Es la ventaja del tipado estático.</p>
+  </div>
+</section>
+
+<section id="trazas">
+  <h2>Tabla de traza</h2>
+<h3>¿Qué imprime cada expresión en C#?</h3>
+<p>Escribe el valor como lo mostraría <code>Console.WriteLine</code> (los booleanos se muestran <code>True</code>/<code>False</code>).</p>
+  <div class="traza">
+    <div class="table-wrap"><table>
+      <thead><tr><th>Expresión C#</th><th>Resultado</th></tr></thead>
+      <tbody>
+        <tr><td class="dado"><code>7 / 2</code></td><td><input data-a="3" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado"><code>7 / 2.0</code></td><td><input data-a="3.5" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado"><code>7 % 3</code></td><td><input data-a="1" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado"><code>"5" + 3</code></td><td><input data-a="53" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado"><code>int.Parse("12") + 1</code></td><td><input data-a="13" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado"><code>10m / 4</code></td><td><input data-a="2.5" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado"><code>5 == 5.0</code></td><td><input data-a="True" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado"><code>!(3 &gt; 2 &amp;&amp; 2 &gt; 5)</code></td><td><input data-a="True" aria-label="Respuesta"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="acciones"><button class="btn" type="button" data-comprobar>Comprobar</button><button class="btn sec" type="button" data-solucion>Ver solución</button><button class="btn sec" type="button" data-limpiar>Limpiar</button><span class="resultado" aria-live="polite"></span></div>
+  </div>
+<details class="defensa"><summary>¿Por qué <code>"5" + 3</code> da “53” y no un error?</summary><div><p>Si uno de los operandos de <code>+</code> es <code>string</code>, C# convierte el otro a texto y concatena. En Python <code>"5" + 3</code> es <code>TypeError</code>. Mismo símbolo, reglas distintas: por eso se estudia la transición.</p></div></details>
+  <ul class="check">
+    <li><input type="checkbox" id="s10-t1" data-track="s10-t1"><label for="s10-t1">Traza completa.</label></li>
+  </ul>
+</section>
+
+<section id="ejercicios">
+  <h2>Ejercicios</h2>
+  <article class="ejercicio">
+    <header><h3>E1 · La factura con descuento, en C#</h3><span class="nivel">traducción · ★★</span></header>
+    <div class="cuerpo">
+<p>Traduce <code>calcular_total</code> de la semana 4 (descuento del 10 % desde $50 e IVA del 13 %) a un método <code>static</code>. Comprueba los mismos tres casos de la traza de la semana 1.</p>
+    </div>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="Factura.cs"><code class="language-csharp">const decimal TasaIva = 0.13m;
+const decimal TasaDescuento = 0.10m;
+const decimal MinimoDescuento = 50m;
+
+Console.WriteLine(CalcularTotal(12.50m, 4));
+Console.WriteLine(CalcularTotal(8.00m, 3));
+Console.WriteLine(CalcularTotal(30.00m, 2));
+
+static decimal CalcularTotal(decimal precioUnitario, int cantidad)
+{
+    decimal subtotal = precioUnitario * cantidad;
+    decimal descuento = subtotal &gt;= MinimoDescuento ? subtotal * TasaDescuento : 0m;
+    decimal total = (subtotal - descuento) * (1 + TasaIva);
+    return Math.Round(total, 2, MidpointRounding.AwayFromZero);
+}</code></pre>
+<pre class="salida" data-file="salida"><code>50.85
+27.12
+61.02</code></pre>
+<p><code>condicion ? a : b</code> es el operador ternario (la expresión condicional de Python). Resultados idénticos a Python: 50.85, 27.12 y 61.02 ✔.</p>
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s10-e1" data-track="s10-e1"><label for="s10-e1">Resuelto</label></li></ul>
+  </article>
+  <article class="ejercicio">
+    <header><h3>E2 · Tabla de interés compuesto</h3><span class="nivel">for + formato · ★</span></header>
+    <div class="cuerpo">
+<p>Traduce la tabla de ahorro a plazo de la semana 3 ($1,000 al 8 % anual, 5 años) con <code>for</code> y alineación de columnas.</p>
+    </div>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="Plazo.cs"><code class="language-csharp">decimal capital = 1000m;
+const decimal Tasa = 0.08m;
+
+decimal saldo = capital;
+Console.WriteLine(&quot;Año   Interés      Saldo&quot;);
+for (int anio = 1; anio &lt;= 5; anio++)
+{
+    decimal interes = saldo * Tasa;
+    saldo += interes;
+    Console.WriteLine($&quot;{anio,3}  {interes,8:F2}  {saldo,9:F2}&quot;);
+}
+Console.WriteLine($&quot;Ganancia total: ${saldo - capital:N2}&quot;);</code></pre>
+<pre class="salida" data-file="salida"><code>Año   Interés      Saldo
+  1     80.00    1080.00
+  2     86.40    1166.40
+  3     93.31    1259.71
+  4    100.78    1360.49
+  5    108.84    1469.33
+Ganancia total: $469.33</code></pre>
+<p><code>{valor,8:F2}</code> alinea a la derecha en 8 caracteres con 2 decimales (como <code>:&gt;8.2f</code> en Python). <code>N2</code> agrega separador de miles. Como aquí se usa <code>decimal</code>, no hay error de redondeo acumulado.</p>
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s10-e2" data-track="s10-e2"><label for="s10-e2">Resuelto</label></li></ul>
+  </article>
+  <article class="ejercicio">
+    <header><h3>E3 · Validador de claves</h3><span class="nivel">foreach + char · ★★</span></header>
+    <div class="cuerpo">
+<p>Traduce el validador de la semana 2: mínimo 8 caracteres, solo letras y dígitos, y al menos una letra y un dígito. Esta vez recorre la clave carácter por carácter.</p>
+    </div>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="Clave.cs"><code class="language-csharp">Console.WriteLine(ValidarClave(&quot;ceiba2026&quot;));
+Console.WriteLine(ValidarClave(&quot;ceibaceiba&quot;));
+Console.WriteLine(ValidarClave(&quot;12345678&quot;));
+Console.WriteLine(ValidarClave(&quot;Ceiba26&quot;));
+
+static string ValidarClave(string clave)
+{
+    if (clave.Length &lt; 8)
+    {
+        return &quot;Rechazada: mínimo 8 caracteres&quot;;
+    }
+    bool tieneLetra = false;
+    bool tieneDigito = false;
+    foreach (char c in clave)
+    {
+        if (char.IsLetter(c)) tieneLetra = true;
+        else if (char.IsDigit(c)) tieneDigito = true;
+        else return &quot;Rechazada: solo letras y dígitos&quot;;
+    }
+    if (!tieneLetra) return &quot;Rechazada: falta una letra&quot;;
+    if (!tieneDigito) return &quot;Rechazada: falta un dígito&quot;;
+    return &quot;Aceptada&quot;;
+}</code></pre>
+<pre class="salida" data-file="salida"><code>Aceptada
+Rechazada: falta un dígito
+Rechazada: falta una letra
+Rechazada: mínimo 8 caracteres</code></pre>
+<p><code>foreach (char c in clave)</code> recorre un <code>string</code> como <code>for c in clave</code>. <code>char.IsLetter</code> y <code>char.IsDigit</code> equivalen a <code>isalpha</code> e <code>isdigit</code>.</p>
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s10-e3" data-track="s10-e3"><label for="s10-e3">Resuelto</label></li></ul>
+  </article>
+  <article class="ejercicio">
+    <header><h3>E4 · Auditoría: el programa que no compila</h3><span class="nivel">errores de compilación · ★★</span></header>
+    <div class="cuerpo">
+<p>Este código tiene cuatro errores de compilación. Para cada uno, di el código CS y la corrección.</p><pre data-file="Promedio.cs" data-norun><code class="language-csharp">int ventas = 3
+decimal total = 250.5;
+if (ventas &gt; 0) {
+    promedio = total / ventas;
+}
+Console.WriteLine(&quot;Promedio: &quot; + promedio);</code></pre>
+    </div>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<ol><li><strong>CS1002</strong>: falta <code>;</code> en la línea 1.</li><li><strong>CS0664</strong>: <code>250.5</code> es <code>double</code>; para <code>decimal</code> va <code>250.5m</code>.</li><li><strong>CS0103</strong>: <code>promedio</code> no está declarada.</li><li><strong>CS0165</strong>: aunque se declare, si <code>ventas</code> fuera 0 no tendría valor al imprimirla.</li></ol><pre data-file="Promedio.cs"><code class="language-csharp">int ventas = 3;                       // CS1002: faltaba ;
+decimal total = 250.5m;               // CS0664: literal decimal con m
+decimal promedio = 0;                 // CS0103: no estaba declarada
+                                      // CS0165: y necesita valor en todos los caminos
+if (ventas &gt; 0)
+{
+    promedio = total / ventas;
+}
+Console.WriteLine($&quot;Promedio: {promedio:F2}&quot;);</code></pre>
+<pre class="salida" data-file="salida"><code>Promedio: 83.50</code></pre>
+
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s10-e4" data-track="s10-e4"><label for="s10-e4">Resuelto</label></li></ul>
+  </article>
+</section>
+
+<section id="practica">
+  <h2>Práctica intensiva</h2>
+<p>Ejercicios rápidos sobre las diferencias de C# con Python y problemas de traducción tipo examen.</p>
+  <h3>Ejercicios rápidos · ¿Qué imprime en C#?</h3>
+  <p>Escribe lo que muestra <code>Console.WriteLine</code>. Si no compila, escribe <em>error</em>.</p>
+  <div class="traza taladro">
+    <div class="table-wrap"><table>
+      <thead><tr><th>Código</th><th>Tu respuesta</th></tr></thead>
+      <tbody>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-csharp">Console.WriteLine(9 / 4);</code></pre></td><td><input data-a="2" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-csharp">Console.WriteLine(9 / 4.0);</code></pre></td><td><input data-a="2.25" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-csharp">Console.WriteLine(9 % 4);</code></pre></td><td><input data-a="1" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-csharp">Console.WriteLine(&quot;Total: &quot; + 5 + 5);</code></pre></td><td><input data-a="Total: 55" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-csharp">Console.WriteLine(5 + 5 + &quot; unidades&quot;);</code></pre></td><td><input data-a="10 unidades" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-csharp">int x = 3;
+x++;
+x += 2;
+Console.WriteLine(x);</code></pre></td><td><input data-a="6" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-csharp">int n = &quot;7&quot;;</code></pre></td><td><input data-a="error" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-csharp">for (int i = 0; i &lt; 3; i++)
+    Console.Write(i);</code></pre></td><td><input data-a="012" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-csharp">Console.WriteLine(10 &gt; 3 &amp;&amp; 2 &gt; 5);</code></pre></td><td><input data-a="False" aria-label="Respuesta"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="acciones"><button class="btn" type="button" data-comprobar>Comprobar</button><button class="btn sec" type="button" data-solucion>Ver solución</button><button class="btn sec" type="button" data-limpiar>Limpiar</button><span class="resultado" aria-live="polite"></span></div>
+  </div>
+  <ul class="check">
+    <li><input type="checkbox" id="s10-px" data-track="s10-px"><label for="s10-px">Completé los ejercicios rápidos sin ejecutar el código.</label></li>
+  </ul>
+  <h3>Problemas tipo examen</h3>
+  <article class="ejercicio problema">
+    <header><h3>P1 · Movimientos de caja con validación</h3><span class="nivel">foreach + TryParse + continue · ★★★</span></header>
+    <div class="cuerpo">
+      <p>Procesa movimientos de texto (<code>"+50"</code>, <code>"-20"</code>…) sobre un saldo que empieza en 0. Rechaza los que no son números y las salidas que dejarían el saldo negativo, informando el motivo.</p>
+      <p><strong>Tu programa debe cumplir estos casos de prueba:</strong></p>
+      <div class="table-wrap"><table><thead><tr><th>Dato</th><th>Esperado</th></tr></thead><tbody><tr><td>Movimientos</td><td>+50, −20, abc, −100, +15, −30</td></tr><tr><td>Saldo final</td><td>15.00</td></tr><tr><td>Rechazos</td><td>2 (abc y −100)</td></tr></tbody></table></div>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p><code>decimal.TryParse("+50", out ...)</code> acepta el signo. <code>continue</code> funciona igual que en Python.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="Movimientos.cs"><code class="language-csharp">string[] movimientos = { &quot;+50&quot;, &quot;-20&quot;, &quot;abc&quot;, &quot;-100&quot;, &quot;+15&quot;, &quot;-30&quot; };
+decimal saldo = 0m;
+int rechazos = 0;
+
+foreach (string mov in movimientos)
+{
+    if (!decimal.TryParse(mov, out decimal monto))
+    {
+        Console.WriteLine($&quot;  &#x27;{mov}&#x27;: formato inválido&quot;);
+        rechazos++;
+        continue;
+    }
+    if (saldo + monto &lt; 0)
+    {
+        Console.WriteLine($&quot;  {mov}: rechazado, saldo insuficiente ({saldo:F2})&quot;);
+        rechazos++;
+        continue;
+    }
+    saldo += monto;
+}
+Console.WriteLine($&quot;Saldo final: {saldo:F2}  Rechazos: {rechazos}&quot;);</code></pre>
+<pre class="salida" data-file="salida"><code>  &#x27;abc&#x27;: formato inválido
+  -100: rechazado, saldo insuficiente (30.00)
+Saldo final: 15.00  Rechazos: 2</code></pre>
+
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s10-pr1" data-track="s10-pr1"><label for="s10-pr1">Resuelto y probado con todos los casos</label></li></ul>
+  </article>
+  <article class="ejercicio problema">
+    <header><h3>P2 · Cuota y meta de ahorro como métodos</h3><span class="nivel">métodos static + Math · ★★★</span></header>
+    <div class="cuerpo">
+      <p>Traduce <code>calcular_cuota</code> (semana 4) y el “¿cuándo se duplica mi inversión?” (semana 3) a métodos <code>static</code>. La potencia se calcula con <code>Math.Pow</code>, que trabaja con <code>double</code>: convierte con cuidado.</p>
+      <p><strong>Tu programa debe cumplir estos casos de prueba:</strong></p>
+      <div class="table-wrap"><table><thead><tr><th>Llamada</th><th>Esperado</th></tr></thead><tbody><tr><td><code>Cuota(1200m, 0.18m, 6)</code></td><td>210.63</td></tr><tr><td><code>Cuota(1200m, 0m, 12)</code></td><td>100.00</td></tr><tr><td>Duplicar al 8 % anual (mensual)</td><td>105 meses</td></tr></tbody></table></div>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p><code>(double)monto</code> convierte de <code>decimal</code> a <code>double</code>; <code>(decimal)cuota</code> vuelve. Estas conversiones explícitas (<em>casts</em>) son obligatorias en C#.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="Prestamos.cs"><code class="language-csharp">Console.WriteLine($&quot;Cuota: {Cuota(1200m, 0.18m, 6):F2}&quot;);
+Console.WriteLine($&quot;Cuota sin interés: {Cuota(1200m, 0m, 12):F2}&quot;);
+Console.WriteLine($&quot;Meses para duplicar al 8 %: {MesesParaMeta(1000m, 0.08m / 12, 2000m)}&quot;);
+
+static decimal Cuota(decimal monto, decimal tasaAnual, int meses)
+{
+    if (tasaAnual == 0)
+    {
+        return Math.Round(monto / meses, 2, MidpointRounding.AwayFromZero);
+    }
+    double i = (double)tasaAnual / 12;
+    double cuota = (double)monto * i / (1 - Math.Pow(1 + i, -meses));
+    return Math.Round((decimal)cuota, 2, MidpointRounding.AwayFromZero);
+}
+
+static int MesesParaMeta(decimal saldo, decimal tasaMensual, decimal meta)
+{
+    int meses = 0;
+    while (saldo &lt; meta)
+    {
+        saldo *= 1 + tasaMensual;
+        meses++;
+    }
+    return meses;
+}</code></pre>
+<pre class="salida" data-file="salida"><code>Cuota: 210.63
+Cuota sin interés: 100.00
+Meses para duplicar al 8 %: 105</code></pre>
+<p><strong>Verificación:</strong> la cuota coincide con la de Python en las semanas 3 y 8 ✔. 105 meses son 8.75 años: con capitalización mensual se duplica antes que con la anual (10 años).</p>
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s10-pr2" data-track="s10-pr2"><label for="s10-pr2">Resuelto y probado con todos los casos</label></li></ul>
+  </article>
+</section>
+
+<section id="proyecto">
+  <h2>Proyecto integrador · Fase 6</h2>
+<p><strong>Semana 10 · Documentación técnica, auditoría de IA y métricas.</strong> El proyecto sigue en Python.</p>
+<div class="card">
+<h3>Entregables de esta fase</h3>
+  <ul class="check">
+    <li><input type="checkbox" id="s10-p1" data-track="s10-p1"><label for="s10-p1"><strong>README.md definitivo</strong>: problema de negocio, guía de instalación y ejecución, arquitectura (qué hace cada módulo y clase), supuestos del negocio, cómo correr las pruebas.</label></li>
+    <li><input type="checkbox" id="s10-p2" data-track="s10-p2"><label for="s10-p2"><strong>Bitácora de transparencia técnica</strong>: qué partes fueron asistidas por IA y cómo se auditaron y corrigieron.</label></li>
+    <li><input type="checkbox" id="s10-p3" data-track="s10-p3"><label for="s10-p3">Datos de ejemplo con <strong>al menos 20 registros</strong> para que la app funcione de inmediato.</label></li>
+    <li><input type="checkbox" id="s10-p4" data-track="s10-p4"><label for="s10-p4">Todas las pruebas pasan (<code>python -m pytest</code>) y el historial de commits está equilibrado.</label></li>
+  </ul>
+</div>
+<p>Plantilla sugerida para la bitácora:</p>
+<pre data-file="BITACORA_IA.md"><code class="language-none"># Bitácora de transparencia técnica (uso de IA)
+
+| Fecha | Integrante | Herramienta | Qué se pidió | Qué se aceptó | Qué se corrigió y cómo se verificó |
+|---|---|---|---|---|---|
+| 2026-10-02 | Ana | Asistente X | Estructura inicial de la clase Factura | El esqueleto de métodos | Tenía el saldo como atributo de clase (compartido); se movió a __init__ y se agregó la prueba test_facturas_independientes |
+| 2026-10-05 | Luis | Asistente X | Lectura de CSV | csv.DictReader | No manejaba montos vacíos; se agregó try/except ValueError y el caso CB-04 de la matriz |
+
+## Criterios de auditoría usados
+1. ¿Ejecuta? 2. ¿Hace lo que se pidió? 3. ¿Usa las variables correctas?
+4. ¿El resultado tiene sentido? 5. ¿Cómo se comprueba? 6. ¿Qué supuestos introduce?</code></pre>
+<h3>Preguntas de defensa</h3>
+  <details class="defensa"><summary>¿Qué partes usaron IA y cómo saben que están bien?</summary><div><p>Señala filas concretas de la bitácora y la prueba que respalda cada corrección. “Funcionó cuando lo probé” no es suficiente.</p></div></details>
+  <details class="defensa"><summary>Si instalo su proyecto desde cero, ¿qué hago?</summary><div><p>El README debe permitirlo sin preguntarles nada: requisitos, <code>git clone</code>, cómo ejecutar, cómo correr pruebas.</p></div></details>
+  <details class="defensa"><summary>¿Qué supuestos de negocio tomaron?</summary><div><p>Las decisiones de frontera (≥ vs &gt;), el orden de descuentos, qué pasa con datos vacíos: todo documentado.</p></div></details>
+</section>
+
+<section id="evaluacion">
+  <h2>Rumbo al Control 4 y al Final</h2>
+<p>El Examen Final evalúa lógica en Python <strong>y fundamentos formales de C#</strong>. De esta semana:</p>
+  <ul class="check">
+    <li><input type="checkbox" id="s10-v1" data-track="s10-v1"><label for="s10-v1">Explicar compilado vs. interpretado, IL, CLR y JIT.</label></li>
+    <li><input type="checkbox" id="s10-v2" data-track="s10-v2"><label for="s10-v2">Declarar variables con el tipo correcto (<code>decimal</code> para dinero).</label></li>
+    <li><input type="checkbox" id="s10-v3" data-track="s10-v3"><label for="s10-v3">Predecir división entera, concatenación y redondeo en C#.</label></li>
+    <li><input type="checkbox" id="s10-v4" data-track="s10-v4"><label for="s10-v4">Traducir condicionales, bucles y funciones de Python a C#.</label></li>
+    <li><input type="checkbox" id="s10-v5" data-track="s10-v5"><label for="s10-v5">Leer un error de compilación: línea, código y significado.</label></li>
+  </ul>
+</section>
+
+<section id="fuentes">
+  <h2>Fuentes</h2>
+<ul><li><strong>[TRO]</strong> Troelsen, A. y Japikse, P. (2022). <em>Pro C# 10 with .NET 6</em>, 11.ª ed. Caps. 1 y 3.</li><li><strong>[MSDN]</strong> Microsoft Learn. <a href="https://learn.microsoft.com/es-es/dotnet/csharp/tour-of-csharp/" target="_blank" rel="noopener">Paseo por C#</a> · <a href="https://learn.microsoft.com/es-es/dotnet/csharp/language-reference/compiler-messages/" target="_blank" rel="noopener">Errores del compilador</a>.</li></ul>
+</section>
+
+  <nav class="nav-semanas" aria-label="Navegación entre semanas">
+    <a class="nav-prev" href="semana-09.html"><span class="btn-ico" aria-hidden="true"></span><span>Semana 9</span></a>
+    <a class="nav-next" href="semana-11.html"><span>Semana 11: poo en c# y colecciones</span><span class="btn-ico" aria-hidden="true"></span></a>
+  </nav>
+
+<footer class="pie">Guía de estudio · Introducción al Desarrollo de Software · ESEN · Ciclo III/2026. Material de apoyo no oficial; el programa y Moodle mandan.</footer>
+</main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+<script src="../assets/guia.js"></script>
+<script src="../assets/ejecutar.js"></script>
+</body>
+</html>

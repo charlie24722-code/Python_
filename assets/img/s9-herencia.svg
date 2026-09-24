@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 306" width="760" height="306" role="img" aria-label="Jerarquía de herencia: Asalariado, PorHora y Vendedor son un Empleado; heredan sus atributos y cada una redefine calcular_pago.">
+<title>Jerarquía de herencia: Asalariado, PorHora y Vendedor son un Empleado; heredan sus atributos y cada una redefine calcular_pago.</title>
+<style>
+  text { font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; fill: #1b2430; }
+  .m { font-family: 'JetBrains Mono', Menlo, Consolas, monospace; font-size: 13px; }
+  .s { font-size: 12px; fill: #465264; }
+  .t { font-size: 16px; font-weight: 700; }
+  .b { font-weight: 700; }
+  .mu { fill: #6b7380; }
+  .w { fill: #fff; }
+  .ln { stroke: #465264; stroke-width: 1.6; fill: none; }
+  .ln-s { stroke: #c5ced6; stroke-width: 1.2; fill: none; }
+</style>
+<defs><marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#465264"/></marker><marker id="pb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0a70a8"/></marker><marker id="pg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2e7d4f"/></marker></defs>
+<rect x="270" y="14" width="220" height="96" rx="8" fill="#e2ecf1" stroke="#1d4f66" stroke-width="1.5"/>
+<text x="380.0" y="38" text-anchor="middle" class="b">Empleado</text>
+<text x="380.0" y="62" text-anchor="middle" class="m s">nombre, salario_base</text>
+<text x="380.0" y="81" text-anchor="middle" class="m s">calcular_pago()</text>
+<rect x="30" y="170" width="200" height="96" rx="8" fill="#fbf1b8" stroke="#b07600" stroke-width="1.5"/>
+<text x="130.0" y="194" text-anchor="middle" class="b">Asalariado</text>
+<text x="130.0" y="218" text-anchor="middle" class="m s">pago = base</text>
+<path class="ln" d="M130 168 V140 H380 V112" marker-end="url(#p)"/>
+<rect x="280" y="170" width="200" height="96" rx="8" fill="#fbf1b8" stroke="#b07600" stroke-width="1.5"/>
+<text x="380.0" y="194" text-anchor="middle" class="b">PorHora</text>
+<text x="380.0" y="218" text-anchor="middle" class="m s">horas × tarifa</text>
+<text x="380.0" y="237" text-anchor="middle" class="m s">override</text>
+<path class="ln" d="M380 168 V140 H380 V112" marker-end="url(#p)"/>
+<rect x="530" y="170" width="200" height="96" rx="8" fill="#fbf1b8" stroke="#b07600" stroke-width="1.5"/>
+<text x="630.0" y="194" text-anchor="middle" class="b">Vendedor</text>
+<text x="630.0" y="218" text-anchor="middle" class="m s">base + comisión</text>
+<text x="630.0" y="237" text-anchor="middle" class="m s">override</text>
+<path class="ln" d="M630 168 V140 H380 V112" marker-end="url(#p)"/>
+<text x="560" y="140" text-anchor="middle" class="s b">“es un” Empleado</text>
+<text x="380" y="294" text-anchor="middle" class="s">Las subclases heredan nombre y salario_base, y redefinen calcular_pago() a su manera (polimorfismo).</text>
+</svg>

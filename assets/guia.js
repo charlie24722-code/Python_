@@ -257,6 +257,7 @@
     var archivo = pre.getAttribute("data-file") || "";
     if (code.classList.contains("language-python")) return ["python", "Python"];
     if (code.classList.contains("language-bash")) return ["bash", "Terminal"];
+    if (code.classList.contains("language-csharp")) return ["csharp", "C#"];
     if (/\.pseudo$/.test(archivo)) return ["pseudo", "Pseudocódigo"];
     return ["texto", "Texto"];
   }
@@ -349,7 +350,9 @@
 
   /* ---------- Menú de pantalla completa ---------- */
   var TITULOS = ["Pensamiento computacional, entorno y Git", "Variables, tipos y condicionales",
-                 "Bucles y patrones de control", "Funciones, ámbito y pruebas", "Listas, búsqueda y ordenamiento"];
+                 "Bucles y patrones de control", "Funciones, ámbito y pruebas", "Listas, búsqueda y ordenamiento",
+                 "Repaso y Examen Parcial", "Diccionarios, conjuntos y archivos", "POO: clases y encapsulamiento",
+                 "Herencia, composición y modularidad", "Transición a C# y .NET", "POO en C# y colecciones", "Repaso y Examen Final"];
   var menuBtn = document.querySelector(".menu-btn");
   var menu = document.getElementById("menu-completo");
   if (menuBtn && menu) {
@@ -360,7 +363,7 @@
     html += "<li>" + entra('<a href="' + inicio.getAttribute("href") + '"><span class="n">↖</span><span class="tit">Inicio y temario</span></a>') + "</li>";
     document.querySelectorAll(".isla-semanas a").forEach(function (a, i) {
       var actual = a.getAttribute("aria-current") === "page" ? ' aria-current="page"' : "";
-      html += "<li>" + entra('<a href="' + a.getAttribute("href") + '"' + actual + '><span class="n">0' + (i + 1) +
+      html += "<li>" + entra('<a href="' + a.getAttribute("href") + '"' + actual + '><span class="n">' + (i < 9 ? "0" : "") + (i + 1) +
         '</span><span class="tit">' + TITULOS[i] + "</span></a>") + "</li>";
     });
     html += "</ol></nav>";

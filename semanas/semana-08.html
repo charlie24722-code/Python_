@@ -1,0 +1,771 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Semana 8 · Clases y encapsulamiento</title>
+<meta name="description" content="Guía de estudio, semana 8: programación orientada a objetos en Python, clases, objetos, métodos, encapsulamiento e invariantes. Control 3.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/guia.css">
+<script>try{var t=localStorage.getItem("ids-guia-v1-tema");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+</head>
+<body data-semana="s8">
+
+<header class="isla-wrap">
+  <div class="isla">
+    <a class="brand" href="../index.html">IDS <small>Guía de estudio</small></a>
+    <nav class="isla-semanas" aria-label="Semanas">
+    <a href="semana-01.html">S1</a>
+    <a href="semana-02.html">S2</a>
+    <a href="semana-03.html">S3</a>
+    <a href="semana-04.html">S4</a>
+    <a href="semana-05.html">S5</a>
+    <a href="semana-06.html">S6</a>
+    <a href="semana-07.html">S7</a>
+    <a href="semana-08.html" aria-current="page">S8</a>
+    <a href="semana-09.html">S9</a>
+    <a href="semana-10.html">S10</a>
+    <a href="semana-11.html">S11</a>
+    <a href="semana-12.html">S12</a>
+  </nav>
+    <button class="theme-btn" type="button" aria-label="Cambiar tema claro/oscuro"><span class="ico-tema" aria-hidden="true"></span></button>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu-completo"><span class="hb" aria-hidden="true"></span><span class="hb" aria-hidden="true"></span><span class="sr">Menú</span></button>
+  </div>
+</header>
+<div class="menu-completo" id="menu-completo" hidden></div>
+
+<header class="hero-semana">
+  <div class="hero-in">
+    <p class="hero-num" aria-hidden="true">08</p>
+    <div class="hero-txt">
+      <p class="hero-mod"><span class="sr">Semana 8 · </span>Módulo 8</p>
+      <h1>Programación orientada a objetos: clases y encapsulamiento</h1>
+      <p class="lead">Los diccionarios guardaban datos, pero cualquiera podía romper sus reglas. Esta semana los datos y las reglas viajan juntos en <strong>objetos</strong>: una cuenta que no se deja sobregirar, un producto que no vende lo que no tiene.</p>
+    </div>
+    <p class="pregunta"><span class="pregunta-lbl">Pregunta orientadora</span><mark>¿Cómo modelo las entidades de un negocio para que sus reglas se cumplan siempre, sin importar qué parte del programa las use?</mark></p>
+    <dl class="hero-meta">
+      <div><dt>Lecturas</dt><dd>PCC 9 (1.ª parte) · TRO 5</dd></div>
+      <div><dt>Proyecto</dt><dd>Preparar Fase 5</dd></div>
+      <div class="eval"><dt>Evaluación</dt><dd>Control 3 (esta semana)</dd></div>
+    </dl>
+    <div class="progress" data-progreso-pagina>
+      <div class="progress-bar"><span></span></div>
+      <div class="progress-label"></div>
+    </div>
+  </div>
+</header>
+
+<div class="layout with-toc">
+<aside class="toc" aria-label="Contenido de la semana">
+  <p>Semana 8</p>
+  <ol>
+    <li class="grupo" aria-hidden="true">Antes de clase</li>
+    <li><a href="#uso">Cómo usar la guía</a></li>
+    <li><a href="#mapa">Qué puedes usar</a></li>
+    <li><a href="#lecturas">Lecturas</a></li>
+    <li><a href="#checkpoint">Reading checkpoint</a></li>
+    <li class="grupo" aria-hidden="true">Aprender</li>
+    <li><a href="#clases">Clases y objetos</a></li>
+    <li><a href="#encapsulamiento">Encapsulamiento</a></li>
+    <li class="grupo" aria-hidden="true">Practicar</li>
+    <li><a href="#trazas">Tablas de traza</a></li>
+    <li><a href="#ejercicios">Ejercicios</a></li>
+    <li><a href="#practica">Práctica intensiva</a></li>
+    <li class="grupo" aria-hidden="true">Entregar y evaluar</li>
+    <li><a href="#proyecto">Proyecto</a></li>
+    <li><a href="#evaluacion">Control 3</a></li>
+    <li><a href="#fuentes">Fuentes</a></li>
+  </ol>
+</aside>
+
+<main>
+<section id="uso">
+  <h2>Cómo usar esta guía</h2>
+  <div class="momentos">
+    <div><strong>Antes de clase</strong>PCC 9 (primera parte) y el inicio de TRO 5. Luego el <a href="#checkpoint">checkpoint</a>.</div>
+    <div><strong>Durante el laboratorio</strong>Modelas un sistema bancario o académico: usa el <a href="#clases">caso guiado</a> como plantilla.</div>
+    <div><strong>Después de clase</strong>La <a href="#ejercicios">auditoría de código IA</a> (E4) es exactamente el ejercicio de clase.</div>
+    <div><strong>Control 3</strong>Esta semana. Repasa la lista de <a href="#evaluacion">“puedo…”</a>. Sin IA.</div>
+  </div>
+  <ul class="ciclo-leyenda" aria-label="Ciclo de trabajo">
+    <li>Pregunta</li><li class="sep">→</li><li>Exploración</li><li class="sep">→</li><li>Implementación</li><li class="sep">→</li><li>Resultado</li><li class="sep">→</li><li>Interpretación</li><li class="sep">→</li><li class="v">Verificación</li>
+  </ul>
+</section>
+
+<section id="mapa">
+  <h2>Qué puedes usar esta semana</h2>
+  <div class="permisos">
+    <div class="si">
+      <h4>Sí, desde ahora</h4>
+      <ul>
+        <li>Todo lo de las semanas 1 a 7</li>
+        <li><code>class</code>, <code>__init__</code>, <code>self</code>, atributos y métodos</li>
+        <li>Crear objetos (instancias) y llamar a sus métodos</li>
+        <li>Convención de atributo interno con guion bajo: <code>self._saldo</code></li>
+        <li><code>@property</code> para leer un atributo sin permitir modificarlo</li>
+        <li><code>raise ValueError</code> para proteger las reglas (invariantes)</li>
+        <li><code>__str__</code> para mostrar un objeto de forma legible</li>
+      </ul>
+    </div>
+    <div class="no">
+      <h4>Todavía no / fuera del curso</h4>
+      <ul>
+        <li>Herencia y <code>super()</code> → semana 9</li>
+        <li>Objetos que contienen otros objetos (composición) → semana 9</li>
+        <li>Clases en C# → semana 11</li>
+      </ul>
+      <p style="margin-top:.5rem;font-size:.9rem">En PCC 9 la herencia viene después de la primera parte: léela, pero se practica la semana próxima.</p>
+    </div>
+  </div>
+</section>
+
+<section id="lecturas">
+  <h2>Lecturas de preparación</h2>
+  <ul class="check">
+    <li><input type="checkbox" id="s8-l1" data-track="s8-l1"><label for="s8-l1"><span class="ref">[PCC] Cap. 9, primera parte</span> “Classes”: crear y usar una clase, <code>__init__</code>, trabajar con instancias, valores por defecto de atributos y modificar atributos a través de métodos.</label></li>
+    <li><input type="checkbox" id="s8-l2" data-track="s8-l2"><label for="s8-l2"><span class="ref">[TRO] Cap. 5, sección inicial</span> “Understanding Encapsulation”: la diferencia entre clase y objeto, y por qué el estado interno se protege. Aún no necesitas la sintaxis de C#; enfócate en las ideas.</label></li>
+  </ul>
+  <div class="box nota">
+    <span class="box-title">Complementos gratuitos</span>
+    <ul><li><a href="https://docs.python.org/es/3/tutorial/classes.html" target="_blank" rel="noopener">Tutorial oficial — Clases</a> (secciones 9.3 y 9.4)</li><li><a href="https://learn.microsoft.com/es-es/dotnet/csharp/fundamentals/object-oriented/" target="_blank" rel="noopener">Microsoft Learn — Programación orientada a objetos (conceptos)</a></li></ul>
+  </div>
+</section>
+
+<section id="checkpoint">
+  <h2>Reading checkpoint</h2>
+  <div class="quiz">
+    <div class="qq" data-q="s8-q1">
+      <p>¿Cuál es la relación entre una clase y un objeto?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>La clase es el molde; el objeto es un ejemplar concreto creado con ese molde</button>
+        <button class="quiz-opt">Son lo mismo con distinto nombre</button>
+        <button class="quiz-opt">El objeto define a la clase</button>
+        <button class="quiz-opt">Una clase solo puede tener un objeto</button>
+      </div>
+      <p class="why">Una clase <code>CuentaBancaria</code> describe qué datos y acciones tiene toda cuenta; <code>cuenta_ana</code> es una cuenta en particular con su propio saldo.</p>
+    </div>
+    <div class="qq" data-q="s8-q2">
+      <p>¿Qué es <code>self</code> dentro de un método?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>El objeto con el que se llamó el método</button>
+        <button class="quiz-opt">La clase</button>
+        <button class="quiz-opt">Una palabra reservada que se puede omitir</button>
+        <button class="quiz-opt">El primer argumento que escribe quien llama</button>
+      </div>
+      <p class="why">En <code>cuenta_ana.depositar(50)</code>, dentro de <code>depositar</code>, <code>self</code> es <code>cuenta_ana</code>. Python lo pasa solo; quien llama no lo escribe.</p>
+    </div>
+    <div class="qq" data-q="s8-q3">
+      <p>¿Cuándo se ejecuta <code>__init__</code>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Automáticamente al crear el objeto: <code>CuentaBancaria("Ana")</code></button>
+        <button class="quiz-opt">Cada vez que se llama un método</button>
+        <button class="quiz-opt">Solo si se llama explícitamente</button>
+        <button class="quiz-opt">Al terminar el programa</button>
+      </div>
+      <p class="why"><code>__init__</code> prepara el objeto nuevo: asigna sus atributos iniciales.</p>
+    </div>
+    <div class="qq" data-q="s8-q4">
+      <p>Con <code>class Producto:</code> y un método <code>vender(self, n)</code>, ¿cómo se llama correctamente?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>p.vender(3)</code></button>
+        <button class="quiz-opt"><code>p.vender(self, 3)</code></button>
+        <button class="quiz-opt"><code>Producto.vender(3)</code></button>
+        <button class="quiz-opt"><code>vender(p)</code></button>
+      </div>
+      <p class="why">Se llama sobre el objeto y solo con los argumentos después de <code>self</code>.</p>
+    </div>
+    <div class="qq" data-q="s8-q5">
+      <p>¿Qué indica el guion bajo en <code>self._saldo</code>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Que es un detalle interno: desde afuera no se debería tocar directamente</button>
+        <button class="quiz-opt">Que Python lo vuelve imposible de modificar</button>
+        <button class="quiz-opt">Que es una constante</button>
+        <button class="quiz-opt">Que es un error de estilo</button>
+      </div>
+      <p class="why">Python no lo impide, es una <strong>convención</strong>. El acceso correcto es por los métodos, que validan las reglas.</p>
+    </div>
+    <div class="qq" data-q="s8-q6">
+      <p>Un método <code>retirar</code> recibe un monto mayor que el saldo. ¿Qué es lo más adecuado?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Lanzar <code>ValueError</code> con un mensaje claro y dejar el saldo igual</button>
+        <button class="quiz-opt">Dejar el saldo negativo</button>
+        <button class="quiz-opt">Imprimir un aviso y retirar igual</button>
+        <button class="quiz-opt">Poner el saldo en 0</button>
+      </div>
+      <p class="why">El objeto protege su regla (“el saldo nunca es negativo”). A eso se le llama <strong>invariante</strong>.</p>
+    </div>
+    <div class="qq" data-q="s8-q7">
+      <p>Dos objetos creados con la misma clase…</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Tienen atributos independientes: cambiar uno no cambia el otro</button>
+        <button class="quiz-opt">Comparten los mismos valores</button>
+        <button class="quiz-opt">Son el mismo objeto</button>
+        <button class="quiz-opt">No pueden existir a la vez</button>
+      </div>
+      <p class="why">Cada instancia guarda sus propios datos. Depositar en la cuenta de Ana no cambia la de Luis.</p>
+    </div>
+    <div class="qq" data-q="s8-q8">
+      <p>¿Para qué sirve <code>@property</code> en <code>def saldo(self): return self._saldo</code>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Para leer <code>cuenta.saldo</code> como atributo sin permitir asignarlo desde afuera</button>
+        <button class="quiz-opt">Para que el método se ejecute al crear el objeto</button>
+        <button class="quiz-opt">Para borrar el saldo</button>
+        <button class="quiz-opt">Para que sea privado de verdad</button>
+      </div>
+      <p class="why">Con la propiedad, <code>cuenta.saldo</code> funciona para leer, pero <code>cuenta.saldo = 1000</code> da error: solo los métodos cambian el saldo.</p>
+    </div>
+    <div class="quiz-score"><span data-score></span><button class="btn sec" type="button" data-reset>Reiniciar quiz</button></div>
+  </div>
+</section>
+
+<section id="clases">
+  <h2>Clases y objetos</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p>Una clase es un <strong>formulario en blanco</strong> (qué casillas tiene y qué se puede hacer con él). Cada objeto es un <strong>formulario lleno</strong>: el de Ana, el de Luis. Los métodos son los trámites que se hacen con cada formulario.</p>
+  </div>
+<figure class="lamina "><div class="placa"><div class="placa-core"><img src="../assets/img/s8-clase-objetos.svg" alt="Una clase CuentaBancaria funciona como molde con atributos y métodos; de ella se crean tres objetos, cada uno con su propio titular y saldo." width="760" height="278" loading="lazy" decoding="async"></div></div><figcaption>Un molde, muchas cuentas. Cada objeto tiene su propio saldo.</figcaption></figure>
+  <div class="ciclo">
+    <h3>Caso: una cuenta bancaria que no se deja romper</h3>
+    <div class="paso"><div>
+      <span class="etq">Pregunta</span>
+<p>Con diccionarios, cualquier parte del programa podía escribir <code>cuenta["saldo"] = -500</code>. ¿Cómo hago que el saldo <strong>solo</strong> cambie por depósitos y retiros válidos?</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Exploración</span>
+<ul><li><strong>Datos</strong> (atributos): titular, saldo, movimientos.</li><li><strong>Acciones</strong> (métodos): depositar, retirar, estado de cuenta.</li><li><strong>Regla</strong> (invariante): el saldo nunca es negativo; montos siempre positivos.</li></ul><p>Una clase junta datos, acciones y reglas en un solo lugar.</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Implementación</span>
+<pre data-file="cuenta.py"><code class="language-python">class CuentaBancaria:
+    &quot;&quot;&quot;Cuenta con saldo que nunca puede ser negativo.&quot;&quot;&quot;
+
+    def __init__(self, titular, saldo_inicial=0):
+        if saldo_inicial &lt; 0:
+            raise ValueError(&quot;el saldo inicial no puede ser negativo&quot;)
+        self.titular = titular
+        self._saldo = saldo_inicial
+        self._movimientos = []
+
+    @property
+    def saldo(self):
+        return self._saldo
+
+    def depositar(self, monto):
+        if monto &lt;= 0:
+            raise ValueError(&quot;el depósito debe ser positivo&quot;)
+        self._saldo += monto
+        self._movimientos.append((&quot;depósito&quot;, monto))
+
+    def retirar(self, monto):
+        if monto &lt;= 0:
+            raise ValueError(&quot;el retiro debe ser positivo&quot;)
+        if monto &gt; self._saldo:
+            raise ValueError(f&quot;saldo insuficiente (${self._saldo:.2f})&quot;)
+        self._saldo -= monto
+        self._movimientos.append((&quot;retiro&quot;, monto))
+
+    def estado_de_cuenta(self):
+        lineas = [f&quot;Cuenta de {self.titular}&quot;]
+        for tipo, monto in self._movimientos:
+            lineas.append(f&quot;  {tipo:&lt;9} ${monto:&gt;8.2f}&quot;)
+        lineas.append(f&quot;  saldo     ${self._saldo:&gt;8.2f}&quot;)
+        return &quot;\n&quot;.join(lineas)
+
+
+ana = CuentaBancaria(&quot;Ana&quot;, 100)
+luis = CuentaBancaria(&quot;Luis&quot;)
+ana.depositar(50)
+ana.retirar(30)
+try:
+    luis.retirar(10)
+except ValueError as e:
+    print(&quot;Luis:&quot;, e)
+print(ana.estado_de_cuenta())
+print(&quot;Saldo de Luis:&quot;, luis.saldo)</code></pre>
+<pre class="salida" data-file="salida"><code>Luis: saldo insuficiente ($0.00)
+Cuenta de Ana
+  depósito  $   50.00
+  retiro    $   30.00
+  saldo     $  120.00
+Saldo de Luis: 0</code></pre>
+
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Interpretación</span>
+<p>Cada método revisa las reglas <strong>antes</strong> de cambiar el estado: si algo no cuadra, lanza <code>ValueError</code> y el saldo queda intacto. <code>saldo</code> es una propiedad: se lee como atributo, pero no se puede asignar. <code>ana</code> y <code>luis</code> son independientes.</p>
+    </div></div>
+    <div class="paso verif"><div>
+      <span class="etq">Verificación</span>
+<p>100 + 50 − 30 = 120 ✔. Prueba en el editor: <code>ana.saldo = 1000</code> (da <code>AttributeError</code>), <code>ana.depositar(-5)</code> y <code>CuentaBancaria("X", -1)</code>. Cada regla debe tener una prueba que la intente romper.</p>
+    </div></div>
+  </div>
+  <div class="box ojo">
+    <span class="box-title">Anatomía de una clase</span>
+    <ul><li><code>class Nombre:</code> en <strong>PascalCase</strong> (PEP 8).</li><li><code>__init__(self, ...)</code>: se ejecuta al crear el objeto; asigna <code>self.atributo = valor</code>.</li><li>Todo método recibe <code>self</code> primero; quien llama no lo escribe.</li><li>Los atributos se leen con <code>objeto.atributo</code>; los métodos se llaman con <code>objeto.metodo(args)</code>.</li></ul>
+  </div>
+</section>
+
+<section id="encapsulamiento">
+  <h2>Encapsulamiento e invariantes</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p>Encapsular es poner el dinero en una <strong>caja fuerte con ventanilla</strong>: nadie mete la mano directo; todo pasa por la ventanilla (los métodos), donde alguien revisa que la operación sea válida.</p>
+  </div>
+<figure class="lamina "><div class="placa"><div class="placa-core"><img src="../assets/img/s8-encapsulamiento.svg" alt="Encapsulamiento: el saldo interno está protegido y el código externo lo modifica solo a través de los métodos depositar y retirar, que validan las reglas; asignar directamente el atributo interno se salta esas reglas." width="760" height="262" loading="lazy" decoding="async"></div></div><figcaption>El estado interno solo se toca a través de los métodos, que hacen cumplir las reglas.</figcaption></figure>
+<h3><code>__str__</code>: cómo se ve un objeto al imprimirlo</h3>
+<pre data-file="producto.py"><code class="language-python">class Producto:
+    def __init__(self, codigo, nombre, precio, stock=0):
+        self.codigo = codigo
+        self.nombre = nombre
+        self.precio = precio
+        self.stock = stock
+
+    def __str__(self):
+        return f&quot;{self.codigo} {self.nombre} (${self.precio:.2f}, stock {self.stock})&quot;
+
+    def valor_en_bodega(self):
+        return self.precio * self.stock
+
+
+aceite = Producto(&quot;A01&quot;, &quot;Aceite 1 L&quot;, 12.50, 40)
+print(aceite)                      # usa __str__
+print(aceite.valor_en_bodega())</code></pre>
+<pre class="salida" data-file="salida"><code>A01 Aceite 1 L ($12.50, stock 40)
+500.0</code></pre>
+<p>Sin <code>__str__</code>, <code>print(aceite)</code> mostraría algo como <code>&lt;__main__.Producto object at 0x7f…&gt;</code>. Con él, el objeto se presenta en términos del negocio.</p>
+  <div class="box negocio">
+    <span class="box-title">Por qué importa a un negocio</span>
+    <p>Un invariante es una regla que <strong>siempre</strong> se cumple: saldo ≥ 0, stock ≥ 0, precio &gt; 0. Si solo se valida “en la pantalla de ventas”, otra parte del sistema (un reporte, una importación de CSV) puede romperla. Si la valida el objeto, se cumple venga de donde venga el cambio.</p>
+  </div>
+</section>
+
+<section id="trazas">
+  <h2>Tablas de traza</h2>
+<h3>Traza 1 · Dos objetos y un alias</h3>
+<pre data-file="traza1.py"><code class="language-python">class Contador:
+    def __init__(self, inicio=0):
+        self.valor = inicio
+
+    def sumar(self, n=1):
+        self.valor += n
+        return self.valor
+
+
+a = Contador()
+b = Contador(10)
+a.sumar()
+b.sumar(5)
+a.sumar(3)
+c = a
+c.sumar()</code></pre>
+  <div class="traza">
+    <div class="table-wrap"><table>
+      <thead><tr><th>Después de</th><th>a.valor</th><th>b.valor</th></tr></thead>
+      <tbody>
+        <tr><td class="dado"><code>b = Contador(10)</code></td><td><input data-a="0" aria-label="Respuesta"></td><td><input data-a="10" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado"><code>a.sumar()</code></td><td><input data-a="1" aria-label="Respuesta"></td><td><input data-a="10" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado"><code>b.sumar(5)</code></td><td><input data-a="1" aria-label="Respuesta"></td><td><input data-a="15" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado"><code>a.sumar(3)</code></td><td><input data-a="4" aria-label="Respuesta"></td><td><input data-a="15" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado"><code>c = a; c.sumar()</code></td><td><input data-a="5" aria-label="Respuesta"></td><td><input data-a="15" aria-label="Respuesta"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="acciones"><button class="btn" type="button" data-comprobar>Comprobar</button><button class="btn sec" type="button" data-solucion>Ver solución</button><button class="btn sec" type="button" data-limpiar>Limpiar</button><span class="resultado" aria-live="polite"></span></div>
+  </div>
+<details class="defensa"><summary>¿Por qué <code>c.sumar()</code> cambió <code>a</code>?</summary><div><p>Igual que con las listas (semana 5): <code>c = a</code> no copia el objeto, crea otro nombre para el mismo. Cambiar por <code>c</code> es cambiar <code>a</code>.</p></div></details>
+<h3>Traza 2 · ¿Qué pasa con la cuenta?</h3>
+<p>Usa <a href="#clases">cuenta.py</a> empezando cada fila con <code>c = CuentaBancaria("X", 100)</code>. Escribe el saldo final o, si hay error, <em>ValueError</em>.</p>
+  <div class="traza">
+    <div class="table-wrap"><table>
+      <thead><tr><th>Operación</th><th>Resultado</th></tr></thead>
+      <tbody>
+        <tr><td class="dado"><code>c.depositar(20)</code></td><td><input data-a="120" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado"><code>c.retirar(100)</code></td><td><input data-a="0" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado"><code>c.retirar(100.01)</code></td><td><input data-a="ValueError" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado"><code>c.depositar(0)</code></td><td><input data-a="ValueError" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado"><code>c.depositar(5); c.retirar(105)</code></td><td><input data-a="0" aria-label="Respuesta"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="acciones"><button class="btn" type="button" data-comprobar>Comprobar</button><button class="btn sec" type="button" data-solucion>Ver solución</button><button class="btn sec" type="button" data-limpiar>Limpiar</button><span class="resultado" aria-live="polite"></span></div>
+  </div>
+  <ul class="check">
+    <li><input type="checkbox" id="s8-t1" data-track="s8-t1"><label for="s8-t1">Traza 1 completa.</label></li>
+    <li><input type="checkbox" id="s8-t2" data-track="s8-t2"><label for="s8-t2">Traza 2 completa.</label></li>
+  </ul>
+</section>
+
+<section id="ejercicios">
+  <h2>Ejercicios</h2>
+  <article class="ejercicio">
+    <header><h3>E1 · Producto que protege su stock</h3><span class="nivel">clase + invariantes · ★★</span></header>
+    <div class="cuerpo">
+<p>Escribe la clase <code>Producto</code> con código, nombre, precio y stock. Métodos: <code>vender(cantidad)</code> (devuelve el importe; no permite dejar stock negativo), <code>reponer(cantidad)</code> y <code>necesita_reorden(minimo=10)</code>. El precio debe ser positivo desde la creación.</p>
+    </div>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="producto_stock.py"><code class="language-python">class Producto:
+    def __init__(self, codigo, nombre, precio, stock=0):
+        if precio &lt;= 0:
+            raise ValueError(&quot;el precio debe ser positivo&quot;)
+        self.codigo = codigo
+        self.nombre = nombre
+        self.precio = precio
+        self._stock = stock
+
+    @property
+    def stock(self):
+        return self._stock
+
+    def vender(self, cantidad):
+        if cantidad &lt;= 0:
+            raise ValueError(&quot;cantidad inválida&quot;)
+        if cantidad &gt; self._stock:
+            raise ValueError(f&quot;solo hay {self._stock} unidades de {self.nombre}&quot;)
+        self._stock -= cantidad
+        return cantidad * self.precio
+
+    def reponer(self, cantidad):
+        if cantidad &lt;= 0:
+            raise ValueError(&quot;cantidad inválida&quot;)
+        self._stock += cantidad
+
+    def necesita_reorden(self, minimo=10):
+        return self._stock &lt; minimo
+
+
+arroz = Producto(&quot;B07&quot;, &quot;Arroz 5 lb&quot;, 4.25, 12)
+print(&quot;Venta:&quot;, arroz.vender(5))
+print(&quot;¿Reordenar?&quot;, arroz.necesita_reorden())
+arroz.reponer(20)
+print(&quot;Stock:&quot;, arroz.stock)
+assert arroz.stock == 27
+try:
+    arroz.vender(100)
+except ValueError as e:
+    print(&quot;Rechazado:&quot;, e)</code></pre>
+<pre class="salida" data-file="salida"><code>Venta: 21.25
+¿Reordenar? True
+Stock: 27
+Rechazado: solo hay 27 unidades de Arroz 5 lb</code></pre>
+
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s8-e1" data-track="s8-e1"><label for="s8-e1">Resuelto</label></li></ul>
+  </article>
+  <article class="ejercicio">
+    <header><h3>E2 · Estudiante con notas</h3><span class="nivel">clase + lista interna · ★★</span></header>
+    <div class="cuerpo">
+<p>Clase <code>Estudiante</code> con nombre, carnet y una lista interna de notas. Métodos: <code>agregar_nota</code> (solo de 0 a 10), <code>promedio</code> (0 si no hay notas) y <code>aprobado(minimo=6)</code>. Agrega <code>__str__</code>.</p>
+    </div>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="estudiante.py"><code class="language-python">class Estudiante:
+    def __init__(self, nombre, carnet):
+        self.nombre = nombre
+        self.carnet = carnet
+        self._notas = []
+
+    def agregar_nota(self, nota):
+        if not 0 &lt;= nota &lt;= 10:
+            raise ValueError(f&quot;nota fuera de rango: {nota}&quot;)
+        self._notas.append(nota)
+
+    def promedio(self):
+        if not self._notas:
+            return 0
+        return round(sum(self._notas) / len(self._notas), 2)
+
+    def aprobado(self, minimo=6):
+        return self.promedio() &gt;= minimo
+
+    def __str__(self):
+        estado = &quot;aprobado&quot; if self.aprobado() else &quot;en riesgo&quot;
+        return f&quot;{self.carnet} {self.nombre}: {self.promedio()} ({estado})&quot;
+
+
+e = Estudiante(&quot;Carla&quot;, &quot;2026-0412&quot;)
+for n in [7.5, 5.0, 8.0]:
+    e.agregar_nota(n)
+print(e)
+try:
+    e.agregar_nota(11)
+except ValueError as err:
+    print(&quot;Error:&quot;, err)</code></pre>
+<pre class="salida" data-file="salida"><code>2026-0412 Carla: 6.83 (aprobado)
+Error: nota fuera de rango: 11</code></pre>
+<p><code>"aprobado" if condicion else "en riesgo"</code> es una <strong>expresión condicional</strong>: un <code>if/else</code> en una sola línea que produce un valor.</p>
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s8-e2" data-track="s8-e2"><label for="s8-e2">Resuelto</label></li></ul>
+  </article>
+  <article class="ejercicio">
+    <header><h3>E3 · Auditoría: una clase generada por IA</h3><span class="nivel">auditoría · ★★★</span></header>
+    <div class="cuerpo">
+<p>Una IA propuso esta clase. Tiene cuatro errores conceptuales marcados con números. Explica cada uno sin ejecutar y luego corrígela.</p><pre data-file="cuenta_ia.py"><code class="language-python">class Cuenta:
+    saldo = 0                         # (1)
+
+    def __init__(self, titular):
+        titular = titular             # (2)
+
+    def depositar(monto):             # (3)
+        saldo = saldo + monto
+
+    def retirar(self, monto):
+        self.saldo = self.saldo - monto   # (4)
+        print(&quot;Retiro exitoso&quot;)</code></pre>
+
+    </div>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<ol><li><strong>Atributo de clase</strong>: <code>saldo = 0</code> fuera de <code>__init__</code> lo comparten todas las cuentas; el estado de cada cuenta debe ir en <code>self</code>.</li><li><code>titular = titular</code> asigna a una variable local que desaparece; debe ser <code>self.titular</code>.</li><li><code>depositar(monto)</code> no recibe <code>self</code>: al llamar <code>c.depositar(50)</code>, Python pasa dos argumentos y da <code>TypeError</code>. Además <code>saldo</code> dentro es local.</li><li><code>retirar</code> no valida: permite saldo negativo e imprime “exitoso” siempre.</li></ol><pre data-file="cuenta_corregida.py"><code class="language-python">class Cuenta:
+    def __init__(self, titular):
+        self.titular = titular          # (2) guardar en el objeto
+        self._saldo = 0                 # (1) estado por instancia
+
+    @property
+    def saldo(self):
+        return self._saldo
+
+    def depositar(self, monto):         # (3) self como primer parámetro
+        if monto &lt;= 0:
+            raise ValueError(&quot;monto inválido&quot;)
+        self._saldo += monto
+
+    def retirar(self, monto):
+        if monto &lt;= 0 or monto &gt; self._saldo:    # (4) validar antes de cambiar
+            raise ValueError(&quot;retiro no permitido&quot;)
+        self._saldo -= monto
+
+
+c = Cuenta(&quot;Ana&quot;)
+c.depositar(100)
+c.retirar(40)
+print(c.titular, c.saldo)</code></pre>
+<pre class="salida" data-file="salida"><code>Ana 60</code></pre>
+
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s8-e3" data-track="s8-e3"><label for="s8-e3">Resuelto</label></li></ul>
+  </article>
+</section>
+
+<section id="practica">
+  <h2>Práctica intensiva</h2>
+<p>Ejercicios rápidos que se corrigen solos y problemas tipo examen. Todo se puede ejecutar y modificar aquí mismo.</p>
+  <h3>Ejercicios rápidos · ¿Qué imprime?</h3>
+  <p>Con la clase <code>C</code> de cada fila. Si da error, escribe el nombre del error.</p>
+  <div class="traza taladro">
+    <div class="table-wrap"><table>
+      <thead><tr><th>Código</th><th>Tu respuesta</th></tr></thead>
+      <tbody>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">class C:
+    def __init__(self, x):
+        self.x = x
+c = C(3)
+print(c.x)</code></pre></td><td><input data-a="3" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">class C:
+    def __init__(self, x):
+        self.x = x
+a = C(1)
+b = C(2)
+a.x = 9
+print(b.x)</code></pre></td><td><input data-a="2" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">class C:
+    def __init__(self):
+        self.n = 0
+    def mas(self):
+        self.n += 1
+c = C()
+c.mas()
+c.mas()
+print(c.n)</code></pre></td><td><input data-a="2" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">class C:
+    def f():
+        return 1
+print(C().f())</code></pre></td><td><input data-a="TypeError" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">class C:
+    def __init__(self, x):
+        x = x
+print(C(5).x)</code></pre></td><td><input data-a="AttributeError" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">class C:
+    def __str__(self):
+        return &quot;hola&quot;
+print(C())</code></pre></td><td><input data-a="hola" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">class C:
+    def __init__(self, x):
+        self.x = x
+a = C(1)
+b = a
+b.x = 7
+print(a.x)</code></pre></td><td><input data-a="7" aria-label="Respuesta"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="acciones"><button class="btn" type="button" data-comprobar>Comprobar</button><button class="btn sec" type="button" data-solucion>Ver solución</button><button class="btn sec" type="button" data-limpiar>Limpiar</button><span class="resultado" aria-live="polite"></span></div>
+  </div>
+  <ul class="check">
+    <li><input type="checkbox" id="s8-px" data-track="s8-px"><label for="s8-px">Completé los ejercicios rápidos sin ejecutar el código.</label></li>
+  </ul>
+  <h3>Problemas tipo examen</h3>
+  <article class="ejercicio problema">
+    <header><h3>P1 · La factura de la semana 1, ahora como objeto</h3><span class="nivel">clase con lista interna · ★★★</span></header>
+    <div class="cuerpo">
+      <p>Modela una <code>Factura</code> con número, cliente y líneas (descripción, cantidad, precio). Métodos: <code>agregar</code>, <code>subtotal</code>, <code>descuento</code> (10 % desde $50), <code>total</code> (con IVA 13 %) y <code>__str__</code>. No se permiten cantidades ni precios no positivos.</p>
+      <p><strong>Tu programa debe cumplir estos casos de prueba:</strong></p>
+      <div class="table-wrap"><table><thead><tr><th>Situación</th><th>Esperado</th></tr></thead><tbody><tr><td>3 aceites + 2 arroces</td><td>subtotal $46 → sin descuento → $51.98</td></tr><tr><td>+ 1 café ($6.75)</td><td>subtotal $52.75 → descuento $5.28 → $53.65</td></tr><tr><td><code>agregar("x", 0, 5)</code></td><td>ValueError</td></tr></tbody></table></div>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p>Guarda las líneas como tuplas en una lista interna. <code>total()</code> se apoya en <code>subtotal()</code> y <code>descuento()</code>: un método puede llamar a otros con <code>self.</code>.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="factura_obj.py"><code class="language-python">class Factura:
+    TASA_IVA = 0.13
+
+    def __init__(self, numero, cliente):
+        self.numero = numero
+        self.cliente = cliente
+        self._lineas = []            # (descripcion, cantidad, precio_unitario)
+
+    def agregar(self, descripcion, cantidad, precio):
+        if cantidad &lt;= 0 or precio &lt;= 0:
+            raise ValueError(&quot;cantidad y precio deben ser positivos&quot;)
+        self._lineas.append((descripcion, cantidad, precio))
+
+    def subtotal(self):
+        return sum(c * p for _, c, p in self._lineas)
+
+    def descuento(self):
+        return self.subtotal() * 0.10 if self.subtotal() &gt;= 50 else 0
+
+    def total(self):
+        base = self.subtotal() - self.descuento()
+        return round(base * (1 + self.TASA_IVA), 2)
+
+    def __str__(self):
+        filas = [f&quot;Factura {self.numero} · {self.cliente}&quot;]
+        for d, c, p in self._lineas:
+            filas.append(f&quot;  {c:&gt;3} x {d:&lt;12} ${c * p:&gt;7.2f}&quot;)
+        filas.append(f&quot;  Total con IVA: ${self.total():.2f}&quot;)
+        return &quot;\n&quot;.join(filas)
+
+
+f = Factura(&quot;F-0001&quot;, &quot;Tienda Don Beto&quot;)
+f.agregar(&quot;Aceite 1 L&quot;, 3, 12.50)
+f.agregar(&quot;Arroz 5 lb&quot;, 2, 4.25)
+print(f)
+assert f.total() == round((37.5 + 8.5) * 1.13, 2)       # sin descuento: 46 &lt; 50
+f.agregar(&quot;Café 400 g&quot;, 1, 6.75)
+assert abs(f.descuento() - 5.275) &lt; 1e-9
+print(&quot;Total tras agregar café:&quot;, f.total())</code></pre>
+<pre class="salida" data-file="salida"><code>Factura F-0001 · Tienda Don Beto
+    3 x Aceite 1 L   $  37.50
+    2 x Arroz 5 lb   $   8.50
+  Total con IVA: $51.98
+Total tras agregar café: 53.65</code></pre>
+<p><strong>Observa la evolución:</strong> es la misma regla de negocio de la semana 1 (pseudocódigo), la 2 (variables), la 4 (funciones) y ahora la 8 (un objeto que la protege).</p>
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s8-pr1" data-track="s8-pr1"><label for="s8-pr1">Resuelto y probado con todos los casos</label></li></ul>
+  </article>
+  <article class="ejercicio problema">
+    <header><h3>P2 · Préstamo con su tabla de amortización</h3><span class="nivel">clase con cálculo · ★★★★</span></header>
+    <div class="cuerpo">
+      <p>Clase <code>Prestamo(monto, tasa_anual, meses)</code> con <code>cuota()</code>, <code>tabla()</code> (lista de tuplas mes, interés, capital, saldo; el último mes deja saldo 0) e <code>intereses_totales()</code>. Tasa 0 debe funcionar.</p>
+      <p><strong>Tu programa debe cumplir estos casos de prueba:</strong></p>
+      <div class="table-wrap"><table><thead><tr><th>Llamada</th><th>Esperado</th></tr></thead><tbody><tr><td><code>Prestamo(1200, 0.18, 6).cuota()</code></td><td>210.63</td></tr><tr><td>Saldo del último mes</td><td>0.0</td></tr><tr><td><code>Prestamo(1200, 0, 12).cuota()</code></td><td>100.0</td></tr><tr><td><code>Prestamo(-5, 0.1, 12)</code></td><td>ValueError</td></tr></tbody></table></div>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p>Reutiliza la fórmula de la semana 4 y el bucle de la semana 3, pero ahora los datos viven en <code>self</code>.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="prestamo_obj.py"><code class="language-python">class Prestamo:
+    def __init__(self, monto, tasa_anual, meses):
+        if monto &lt;= 0 or meses &lt;= 0 or tasa_anual &lt; 0:
+            raise ValueError(&quot;datos del préstamo inválidos&quot;)
+        self.monto = monto
+        self.tasa_anual = tasa_anual
+        self.meses = meses
+
+    def cuota(self):
+        if self.tasa_anual == 0:
+            return round(self.monto / self.meses, 2)
+        i = self.tasa_anual / 12
+        return round(self.monto * i / (1 - (1 + i) ** -self.meses), 2)
+
+    def tabla(self):
+        &quot;&quot;&quot;Lista de (mes, interes, capital, saldo); el último mes ajusta centavos.&quot;&quot;&quot;
+        i = self.tasa_anual / 12
+        saldo = self.monto
+        filas = []
+        for mes in range(1, self.meses + 1):
+            interes = round(saldo * i, 2)
+            capital = saldo if mes == self.meses else round(self.cuota() - interes, 2)
+            saldo = round(saldo - capital, 2)
+            filas.append((mes, interes, capital, saldo))
+        return filas
+
+    def intereses_totales(self):
+        return round(sum(f[1] for f in self.tabla()), 2)
+
+
+p = Prestamo(1200, 0.18, 6)
+print(&quot;Cuota:&quot;, p.cuota())
+for mes, interes, capital, saldo in p.tabla():
+    print(f&quot;{mes:&gt;2} {interes:&gt;7.2f} {capital:&gt;8.2f} {saldo:&gt;9.2f}&quot;)
+print(&quot;Intereses:&quot;, p.intereses_totales())
+assert p.tabla()[-1][3] == 0
+assert Prestamo(1200, 0, 12).cuota() == 100</code></pre>
+<pre class="salida" data-file="salida"><code>Cuota: 210.63
+ 1   18.00   192.63   1007.37
+ 2   15.11   195.52    811.85
+ 3   12.18   198.45    613.40
+ 4    9.20   201.43    411.97
+ 5    6.18   204.45    207.52
+ 6    3.11   207.52      0.00
+Intereses: 63.78</code></pre>
+
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s8-pr2" data-track="s8-pr2"><label for="s8-pr2">Resuelto y probado con todos los casos</label></li></ul>
+  </article>
+</section>
+
+<section id="proyecto">
+  <h2>Proyecto integrador · Preparar la Fase 5</h2>
+<p>La <strong>Fase 5 (semana 9)</strong> pide refactorizar el sistema a clases (mínimo 3, con composición o herencia) y 5 pruebas. Esta semana diseñen las clases.</p>
+<div class="card">
+<h3>Tareas sugeridas</h3>
+  <ul class="check">
+    <li><input type="checkbox" id="s8-p1" data-track="s8-p1"><label for="s8-p1">Listar los <strong>sustantivos</strong> del dominio (cliente, producto, factura, préstamo…): son candidatos a clase.</label></li>
+    <li><input type="checkbox" id="s8-p2" data-track="s8-p2"><label for="s8-p2">Para cada clase: atributos, métodos y <strong>una regla que nunca debe romperse</strong>.</label></li>
+    <li><input type="checkbox" id="s8-p3" data-track="s8-p3"><label for="s8-p3">Convertir la primera clase y hacer que la persistencia de la Fase 4 guarde y cargue sus objetos (a diccionario y de vuelta).</label></li>
+    <li><input type="checkbox" id="s8-p4" data-track="s8-p4"><label for="s8-p4">Revisar código generado por IA con el mismo método del E3 antes de integrarlo, y anotarlo en la bitácora.</label></li>
+  </ul>
+</div>
+<h3>Preguntas de defensa</h3>
+  <details class="defensa"><summary>¿Por qué esto es una clase y no solo un diccionario?</summary><div><p>Porque además de datos tiene reglas y acciones: la clase garantiza que el stock nunca sea negativo, algo que un diccionario no puede impedir.</p></div></details>
+  <details class="defensa"><summary>¿Qué es <code>self</code> en su método tal?</summary><div><p>El objeto sobre el que se llamó el método; señala en el código una llamada y di qué objeto es <code>self</code> en ese momento.</p></div></details>
+  <details class="defensa"><summary>¿Qué invariante protege esta clase y dónde?</summary><div><p>Nombra la regla y muestra la validación dentro del método (y la prueba que intenta romperla).</p></div></details>
+  <details class="defensa"><summary>¿Cómo guardan un objeto en JSON?</summary><div><p>Con un método que lo convierte a diccionario (<code>a_dict</code>) y una función que lo reconstruye (<code>desde_dict</code>). JSON no guarda objetos directamente.</p></div></details>
+</section>
+
+<section id="evaluacion">
+  <h2>Control 3</h2>
+<p>El programa ubica el <strong>Control 3 en esta semana</strong> (individual, sin IA). De esta semana y la anterior:</p>
+  <ul class="check">
+    <li><input type="checkbox" id="s8-v1" data-track="s8-v1"><label for="s8-v1">Escribir una clase con <code>__init__</code>, atributos y métodos.</label></li>
+    <li><input type="checkbox" id="s8-v2" data-track="s8-v2"><label for="s8-v2">Explicar clase vs. objeto y qué es <code>self</code>.</label></li>
+    <li><input type="checkbox" id="s8-v3" data-track="s8-v3"><label for="s8-v3">Proteger un invariante con validación y <code>raise</code>.</label></li>
+    <li><input type="checkbox" id="s8-v4" data-track="s8-v4"><label for="s8-v4">Detectar errores conceptuales en clases ajenas (atributos de clase, falta de <code>self</code>).</label></li>
+    <li><input type="checkbox" id="s8-v5" data-track="s8-v5"><label for="s8-v5">Repasar diccionarios, archivos y excepciones de la <a href="semana-07.html#evaluacion">semana 7</a>.</label></li>
+  </ul>
+</section>
+
+<section id="fuentes">
+  <h2>Fuentes</h2>
+<ul><li><strong>[PCC]</strong> Matthes, E. (2023). <em>Python Crash Course</em>, 3.ª ed. Cap. 9.</li><li><strong>[TRO]</strong> Troelsen, A. y Japikse, P. (2022). <em>Pro C# 10 with .NET 6</em>. Cap. 5 (sección conceptual).</li><li>Python Software Foundation. <a href="https://docs.python.org/es/3/tutorial/classes.html" target="_blank" rel="noopener">Tutorial — Clases</a>.</li></ul>
+</section>
+
+  <nav class="nav-semanas" aria-label="Navegación entre semanas">
+    <a class="nav-prev" href="semana-07.html"><span class="btn-ico" aria-hidden="true"></span><span>Semana 7</span></a>
+    <a class="nav-next" href="semana-09.html"><span>Semana 9: herencia</span><span class="btn-ico" aria-hidden="true"></span></a>
+  </nav>
+
+<footer class="pie">Guía de estudio · Introducción al Desarrollo de Software · ESEN · Ciclo III/2026. Material de apoyo no oficial; el programa y Moodle mandan.</footer>
+</main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+<script src="../assets/guia.js"></script>
+<script src="../assets/ejecutar.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 308" width="760" height="308" role="img" aria-label="Mapa de repaso de las semanas 1 a 5: algoritmos y Git, variables y condicionales, bucles, funciones y listas; cada tema se apoya en el anterior.">
+<title>Mapa de repaso de las semanas 1 a 5: algoritmos y Git, variables y condicionales, bucles, funciones y listas; cada tema se apoya en el anterior.</title>
+<style>
+  text { font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; fill: #1b2430; }
+  .m { font-family: 'JetBrains Mono', Menlo, Consolas, monospace; font-size: 13px; }
+  .s { font-size: 12px; fill: #465264; }
+  .t { font-size: 16px; font-weight: 700; }
+  .b { font-weight: 700; }
+  .mu { fill: #6b7380; }
+  .w { fill: #fff; }
+  .ln { stroke: #465264; stroke-width: 1.6; fill: none; }
+  .ln-s { stroke: #c5ced6; stroke-width: 1.2; fill: none; }
+</style>
+<defs><marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#465264"/></marker><marker id="pb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0a70a8"/></marker><marker id="pg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2e7d4f"/></marker></defs>
+<circle cx="80" cy="34" r="20" fill="#1d4f66"/>
+<text x="80" y="39" text-anchor="middle" class="b w">S1</text>
+<path class="ln" d="M102 34 H208" marker-end="url(#p)"/>
+<rect x="14" y="70" width="132" height="150" rx="8" fill="#e2ecf1" stroke="#1d4f66" stroke-width="1.5"/>
+<text x="80" y="94" text-anchor="middle" class="b">Algoritmos y Git</text>
+<text x="80" y="124" text-anchor="middle" class="s">pseudocódigo</text>
+<text x="80" y="150" text-anchor="middle" class="s">diagramas</text>
+<text x="80" y="176" text-anchor="middle" class="s">add · commit · push</text>
+<circle cx="230" cy="34" r="20" fill="#1d4f66"/>
+<text x="230" y="39" text-anchor="middle" class="b w">S2</text>
+<path class="ln" d="M252 34 H358" marker-end="url(#p)"/>
+<rect x="164" y="70" width="132" height="150" rx="8" fill="#e2ecf1" stroke="#1d4f66" stroke-width="1.5"/>
+<text x="230" y="94" text-anchor="middle" class="b">Variables y if</text>
+<text x="230" y="124" text-anchor="middle" class="s">int · float · str · bool</text>
+<text x="230" y="150" text-anchor="middle" class="s">if / elif / else</text>
+<text x="230" y="176" text-anchor="middle" class="s">fronteras</text>
+<circle cx="380" cy="34" r="20" fill="#1d4f66"/>
+<text x="380" y="39" text-anchor="middle" class="b w">S3</text>
+<path class="ln" d="M402 34 H508" marker-end="url(#p)"/>
+<rect x="314" y="70" width="132" height="150" rx="8" fill="#e2ecf1" stroke="#1d4f66" stroke-width="1.5"/>
+<text x="380" y="94" text-anchor="middle" class="b">Bucles</text>
+<text x="380" y="124" text-anchor="middle" class="s">while · for · range</text>
+<text x="380" y="150" text-anchor="middle" class="s">acumulador</text>
+<text x="380" y="176" text-anchor="middle" class="s">break · continue</text>
+<circle cx="530" cy="34" r="20" fill="#1d4f66"/>
+<text x="530" y="39" text-anchor="middle" class="b w">S4</text>
+<path class="ln" d="M552 34 H658" marker-end="url(#p)"/>
+<rect x="464" y="70" width="132" height="150" rx="8" fill="#e2ecf1" stroke="#1d4f66" stroke-width="1.5"/>
+<text x="530" y="94" text-anchor="middle" class="b">Funciones</text>
+<text x="530" y="124" text-anchor="middle" class="s">def · return</text>
+<text x="530" y="150" text-anchor="middle" class="s">ámbito</text>
+<text x="530" y="176" text-anchor="middle" class="s">assert · pytest</text>
+<circle cx="680" cy="34" r="20" fill="#1d4f66"/>
+<text x="680" y="39" text-anchor="middle" class="b w">S5</text>
+<rect x="614" y="70" width="132" height="150" rx="8" fill="#e2ecf1" stroke="#1d4f66" stroke-width="1.5"/>
+<text x="680" y="94" text-anchor="middle" class="b">Listas</text>
+<text x="680" y="124" text-anchor="middle" class="s">índices · slicing</text>
+<text x="680" y="150" text-anchor="middle" class="s">tuplas · alias</text>
+<text x="680" y="176" text-anchor="middle" class="s">búsqueda · sorting</text>
+<rect x="14" y="246" width="732" height="50" rx="8" fill="#fbf1b8" stroke="#b07600" stroke-width="1.5"/>
+<text x="380" y="267" text-anchor="middle" class="s">Cada semana usa todo lo anterior: una lista (S5) se recorre con un bucle (S3), dentro de una función (S4),</text>
+<text x="380" y="286" text-anchor="middle" class="s">con decisiones (S2) que siguen un algoritmo (S1). El Parcial pregunta por esas combinaciones.</text>
+</svg>

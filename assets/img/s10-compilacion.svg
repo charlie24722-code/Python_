@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 268" width="760" height="268" role="img" aria-label="Python interpreta el archivo y los errores de tipo aparecen al ejecutar; C# compila a lenguaje intermedio IL que el CLR convierte a código de máquina con JIT, y los errores de tipo se detectan antes de ejecutar.">
+<title>Python interpreta el archivo y los errores de tipo aparecen al ejecutar; C# compila a lenguaje intermedio IL que el CLR convierte a código de máquina con JIT, y los errores de tipo se detectan antes de ejecutar.</title>
+<style>
+  text { font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; fill: #1b2430; }
+  .m { font-family: 'JetBrains Mono', Menlo, Consolas, monospace; font-size: 13px; }
+  .s { font-size: 12px; fill: #465264; }
+  .t { font-size: 16px; font-weight: 700; }
+  .b { font-weight: 700; }
+  .mu { fill: #6b7380; }
+  .w { fill: #fff; }
+  .ln { stroke: #465264; stroke-width: 1.6; fill: none; }
+  .ln-s { stroke: #c5ced6; stroke-width: 1.2; fill: none; }
+</style>
+<defs><marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#465264"/></marker><marker id="pb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0a70a8"/></marker><marker id="pg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2e7d4f"/></marker></defs>
+<text x="20" y="26" text-anchor="start" class="t">Python: interpretado</text>
+<rect x="20" y="40" width="200" height="46" rx="8" fill="#e9eef1" stroke="#465264" stroke-width="1.5"/>
+<text x="120" y="68" text-anchor="middle" class="m b">factura.py</text>
+<path class="ln" d="M222 63 H268" marker-end="url(#p)"/>
+<rect x="270" y="40" width="200" height="46" rx="8" fill="#e2ecf1" stroke="#1d4f66" stroke-width="1.5"/>
+<text x="370" y="68" text-anchor="middle" class="m b">intérprete python</text>
+<path class="ln" d="M472 63 H518" marker-end="url(#p)"/>
+<rect x="520" y="40" width="200" height="46" rx="8" fill="#dcefe3" stroke="#2e7d4f" stroke-width="1.5"/>
+<text x="620" y="68" text-anchor="middle" class="m b">resultado</text>
+<text x="20" y="108" text-anchor="start" class="s" style="fill:#b8402f">Los errores de tipo aparecen al ejecutar esa línea (quizá frente al cliente).</text>
+<text x="20" y="150" text-anchor="start" class="t">C#: compilado a IL y ejecutado por el CLR</text>
+<rect x="20" y="164" width="124" height="46" rx="8" fill="#e9eef1" stroke="#465264" stroke-width="1.5"/>
+<text x="82" y="192" text-anchor="middle" class="m b">Program.cs</text>
+<path class="ln" d="M146 187 H166" marker-end="url(#p)"/>
+<rect x="168" y="164" width="124" height="46" rx="8" fill="#fbf1b8" stroke="#b07600" stroke-width="1.5"/>
+<text x="230" y="192" text-anchor="middle" class="m b">compilador</text>
+<path class="ln" d="M294 187 H314" marker-end="url(#p)"/>
+<rect x="316" y="164" width="124" height="46" rx="8" fill="#e2ecf1" stroke="#1d4f66" stroke-width="1.5"/>
+<text x="378" y="192" text-anchor="middle" class="m b">IL (.dll)</text>
+<path class="ln" d="M442 187 H462" marker-end="url(#p)"/>
+<rect x="464" y="164" width="124" height="46" rx="8" fill="#e2ecf1" stroke="#1d4f66" stroke-width="1.5"/>
+<text x="526" y="192" text-anchor="middle" class="m b">CLR + JIT</text>
+<path class="ln" d="M590 187 H610" marker-end="url(#p)"/>
+<rect x="612" y="164" width="124" height="46" rx="8" fill="#dcefe3" stroke="#2e7d4f" stroke-width="1.5"/>
+<text x="674" y="192" text-anchor="middle" class="m b">resultado</text>
+<text x="20" y="234" text-anchor="start" class="s" style="fill:#2e7d4f">El compilador revisa tipos ANTES de ejecutar: si algo no cuadra, no se genera el programa.</text>
+<text x="20" y="254" text-anchor="start" class="s">El JIT traduce el IL a código de máquina mientras corre (por eso es rápido).</text>
+</svg>

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 226" width="760" height="226" role="img" aria-label="Persistencia: los datos en memoria se guardan en un archivo JSON con json.dumps y write_text, y se cargan con read_text y json.loads; el archivo permanece entre ejecuciones.">
+<title>Persistencia: los datos en memoria se guardan en un archivo JSON con json.dumps y write_text, y se cargan con read_text y json.loads; el archivo permanece entre ejecuciones.</title>
+<style>
+  text { font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; fill: #1b2430; }
+  .m { font-family: 'JetBrains Mono', Menlo, Consolas, monospace; font-size: 13px; }
+  .s { font-size: 12px; fill: #465264; }
+  .t { font-size: 16px; font-weight: 700; }
+  .b { font-weight: 700; }
+  .mu { fill: #6b7380; }
+  .w { fill: #fff; }
+  .ln { stroke: #465264; stroke-width: 1.6; fill: none; }
+  .ln-s { stroke: #c5ced6; stroke-width: 1.2; fill: none; }
+</style>
+<defs><marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#465264"/></marker><marker id="pb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0a70a8"/></marker><marker id="pg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2e7d4f"/></marker></defs>
+<rect x="20" y="30" width="250" height="150" rx="10" fill="#e2ecf1" stroke="#1d4f66" stroke-width="1.5"/>
+<text x="145" y="56" text-anchor="middle" class="t">Memoria (RAM)</text>
+<text x="145" y="84" text-anchor="middle" class="m s">inventario = {</text>
+<text x="145" y="104" text-anchor="middle" class="m s">"A01": 40,</text>
+<text x="145" y="124" text-anchor="middle" class="m s">"B07": 8 }</text>
+<text x="145" y="162" text-anchor="middle" class="s" style="fill:#b8402f">rápida, pero se borra al cerrar</text>
+<rect x="490" y="30" width="250" height="150" rx="10" fill="#fbf1b8" stroke="#b07600" stroke-width="1.5"/>
+<text x="615" y="56" text-anchor="middle" class="t">Disco: inventario.json</text>
+<text x="615" y="84" text-anchor="middle" class="m s">{"A01": 40, "B07": 8}</text>
+<text x="615" y="110" text-anchor="middle" class="s">texto con formato JSON</text>
+<text x="615" y="162" text-anchor="middle" class="s" style="fill:#2e7d4f">permanece entre ejecuciones</text>
+<path class="ln" d="M272 80 H486" marker-end="url(#pb)" stroke="#0a70a8" stroke-width="2"/>
+<text x="380" y="70" text-anchor="middle" class="m s">guardar: json.dumps() + write_text()</text>
+<path class="ln" d="M488 140 H274" marker-end="url(#pg)" stroke="#2e7d4f" stroke-width="2"/>
+<text x="380" y="160" text-anchor="middle" class="m s">cargar: read_text() + json.loads()</text>
+<text x="380" y="212" text-anchor="middle" class="s">Si el archivo no existe o está corrupto: FileNotFoundError / JSONDecodeError → se maneja con try.</text>
+</svg>

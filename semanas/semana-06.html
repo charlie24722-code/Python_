@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Semana 6 · Repaso y Examen Parcial</title>
+<meta name="description" content="Guía de estudio, semana 6: repaso integrador de las semanas 1 a 5, errores comunes, simulacro teórico y práctico para el Examen Parcial.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/guia.css">
+<script>try{var t=localStorage.getItem("ids-guia-v1-tema");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+</head>
+<body data-semana="s6">
+
+<header class="isla-wrap">
+  <div class="isla">
+    <a class="brand" href="../index.html">IDS <small>Guía de estudio</small></a>
+    <nav class="isla-semanas" aria-label="Semanas">
+    <a href="semana-01.html">S1</a>
+    <a href="semana-02.html">S2</a>
+    <a href="semana-03.html">S3</a>
+    <a href="semana-04.html">S4</a>
+    <a href="semana-05.html">S5</a>
+    <a href="semana-06.html" aria-current="page">S6</a>
+    <a href="semana-07.html">S7</a>
+    <a href="semana-08.html">S8</a>
+    <a href="semana-09.html">S9</a>
+    <a href="semana-10.html">S10</a>
+    <a href="semana-11.html">S11</a>
+    <a href="semana-12.html">S12</a>
+  </nav>
+    <button class="theme-btn" type="button" aria-label="Cambiar tema claro/oscuro"><span class="ico-tema" aria-hidden="true"></span></button>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu-completo"><span class="hb" aria-hidden="true"></span><span class="hb" aria-hidden="true"></span><span class="sr">Menú</span></button>
+  </div>
+</header>
+<div class="menu-completo" id="menu-completo" hidden></div>
+
+<header class="hero-semana">
+  <div class="hero-in">
+    <p class="hero-num" aria-hidden="true">06</p>
+    <div class="hero-txt">
+      <p class="hero-mod"><span class="sr">Semana 6 · </span>Evaluación de medio ciclo</p>
+      <h1>Repaso y Examen Parcial</h1>
+      <p class="lead">Semana de examen. Aquí tienes un plan de estudio de 5 días, los 10 errores más comunes, un simulacro teórico de 15 preguntas y un simulacro práctico de 90 minutos con problemas que integran las semanas 1 a 5.</p>
+    </div>
+    <p class="pregunta"><span class="pregunta-lbl">Pregunta orientadora</span><mark>¿Puedo combinar algoritmos, decisiones, bucles, funciones y listas para resolver un problema nuevo, sin ayuda y con tiempo limitado?</mark></p>
+    <dl class="hero-meta">
+      <div><dt>Lecturas</dt><dd>Repaso PCC 1–8, 11.1 · BOU 1–4</dd></div>
+      <div><dt>Proyecto</dt><dd>Al día con la Fase 3</dd></div>
+      <div class="eval"><dt>Evaluación</dt><dd>Examen Parcial (esta semana)</dd></div>
+    </dl>
+    <div class="progress" data-progreso-pagina>
+      <div class="progress-bar"><span></span></div>
+      <div class="progress-label"></div>
+    </div>
+  </div>
+</header>
+
+<div class="layout with-toc">
+<aside class="toc" aria-label="Contenido de la semana">
+  <p>Semana 6</p>
+  <ol>
+    <li class="grupo" aria-hidden="true">Prepararse</li>
+    <li><a href="#uso">Plan de estudio</a></li>
+    <li><a href="#mapa">Mapa de repaso</a></li>
+    <li><a href="#errores">Errores comunes</a></li>
+    <li class="grupo" aria-hidden="true">Simulacros</li>
+    <li><a href="#simulacro">Simulacro teórico</a></li>
+    <li><a href="#practico">Simulacro práctico</a></li>
+    <li class="grupo" aria-hidden="true">El día</li>
+    <li><a href="#estrategia">Estrategia</a></li>
+  </ol>
+</aside>
+
+<main>
+<section id="uso">
+  <h2>Cómo usar esta semana</h2>
+<p>No hay contenido nuevo: esta semana es el <strong>Examen Parcial</strong> (teórico-práctico, individual, presencial en laboratorio, <strong>sin IA</strong>). El temario exacto lo confirma el docente en Moodle; lo razonable es que integre las semanas 1 a 5.</p>
+  <div class="momentos">
+    <div><strong>5 días antes</strong>Haz el <a href="#simulacro">simulacro teórico</a> sin apuntes. Anota qué semanas fallaste.</div>
+    <div><strong>3 días antes</strong>Repasa solo esas semanas: sus trazas y sus listas “puedo…”.</div>
+    <div><strong>2 días antes</strong>Resuelve el <a href="#practico">simulacro práctico</a> con reloj: 90 minutos.</div>
+    <div><strong>El día antes</strong>Relee los <a href="#errores">errores más comunes</a> y duerme. No aprendas nada nuevo.</div>
+  </div>
+</section>
+
+<section id="mapa">
+  <h2>Mapa de repaso</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p>El Parcial no pregunta temas sueltos: pregunta <strong>combinaciones</strong>. Una lista (S5) que se recorre con un bucle (S3), dentro de una función (S4), con decisiones (S2) que siguen un algoritmo (S1).</p>
+  </div>
+<figure class="lamina "><div class="placa"><div class="placa-core"><img src="../assets/img/s6-mapa.svg" alt="Mapa de repaso de las semanas 1 a 5: algoritmos y Git, variables y condicionales, bucles, funciones y listas; cada tema se apoya en el anterior." width="760" height="308" loading="lazy" decoding="async"></div></div><figcaption>Cada semana se apoya en la anterior.</figcaption></figure>
+<div class="table-wrap"><table><thead><tr><th>Semana</th><th>Lo indispensable</th><th>Repasa aquí</th></tr></thead><tbody><tr><td>1</td><td>algoritmos precisos, diagramas, estados de Git, <code>add</code> vs <code>commit</code> vs <code>push</code></td><td><a href="semana-01.html#trazas">trazas S1</a></td></tr><tr><td>2</td><td><code>/ // % **</code>, tipos, <code>0.1 + 0.2</code>, orden de <code>elif</code>, fronteras</td><td><a href="semana-02.html#trazas">trazas S2</a></td></tr><tr><td>3</td><td><code>range</code>, acumulador/contador/bandera, <code>break</code>/<code>continue</code>, bucles infinitos</td><td><a href="semana-03.html#trazas">trazas S3</a></td></tr><tr><td>4</td><td><code>return</code> vs <code>print</code>, parámetros, ámbito, recursión, <code>assert</code></td><td><a href="semana-04.html#trazas">trazas S4</a></td></tr><tr><td>5</td><td>índices y slicing, alias, tuplas, búsqueda lineal, Bubble/Insertion Sort</td><td><a href="semana-05.html#trazas">trazas S5</a></td></tr></tbody></table></div>
+</section>
+
+<section id="errores">
+  <h2>Los 10 errores más comunes</h2>
+<p>Cada uno aparece en algún ejercicio o auditoría de las semanas 1 a 5. Si puedes explicar por qué cada línea de la izquierda está mal, vas bien.</p>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Mal</th><th>Por qué</th><th>Bien</th></tr></thead><tbody><tr><td>1</td><td><code>if total = 100:</code></td><td><code>=</code> asigna; en una condición se compara</td><td><code>if total == 100:</code></td></tr><tr><td>2</td><td><code>if m &gt; 100: … elif m &gt; 500:</code></td><td>la segunda rama es inalcanzable</td><td>del tramo más alto al más bajo</td></tr><tr><td>3</td><td><code>&gt; 50</code> cuando la regla dice “desde 50”</td><td>la frontera queda fuera</td><td><code>&gt;= 50</code></td></tr><tr><td>4</td><td><code>cantidad = input(...)</code> y luego <code>cantidad * 2</code></td><td><code>input</code> devuelve texto</td><td><code>int(input(...))</code></td></tr><tr><td>5</td><td><code>for m in ventas: total = 0; total += m</code></td><td>el acumulador se reinicia en cada vuelta</td><td><code>total = 0</code> antes del bucle</td></tr><tr><td>6</td><td><code>range(1, 12)</code> para 12 meses</td><td>el fin no se incluye: 11 vueltas</td><td><code>range(1, 13)</code></td></tr><tr><td>7</td><td><code>while saldo &gt; 0:</code> sin cambiar <code>saldo</code></td><td>bucle infinito</td><td>actualizar la variable de la condición</td></tr><tr><td>8</td><td>función que hace <code>print(x)</code> y se usa como valor</td><td>devuelve <code>None</code></td><td><code>return x</code></td></tr><tr><td>9</td><td><code>copia = lista</code></td><td>es un alias, no una copia</td><td><code>copia = lista[:]</code></td></tr><tr><td>10</td><td>borrar de una lista mientras se recorre</td><td>se salta elementos</td><td>construir una lista nueva</td></tr></tbody></table></div>
+</section>
+
+<section id="simulacro">
+  <h2>Simulacro teórico (15 preguntas)</h2>
+<p>Hazlo sin apuntes y sin ejecutar nada. Al final, cuenta cuántas acertaste por semana.</p>
+  <div class="quiz">
+    <div class="qq" data-q="s6-q1">
+      <p><em>(S1)</em> ¿Qué instrucción NO es válida en un algoritmo?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>“Cobra un recargo si el cliente tarda mucho”</button>
+        <button class="quiz-opt">“Si minutos &gt; 60, recargo = 0.75”</button>
+        <button class="quiz-opt">“Repite hasta que el saldo sea 0”</button>
+        <button class="quiz-opt">“Muestra el total”</button>
+      </div>
+      <p class="why">“Tarda mucho” es ambiguo. Un algoritmo exige pasos precisos.</p>
+    </div>
+    <div class="qq" data-q="s6-q2">
+      <p><em>(S1)</em> Editaste <code>app.py</code> y ejecutaste <code>git commit -m "x"</code> sin <code>add</code>. ¿Qué pasa?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>No se guarda nada: no hay cambios preparados</button>
+        <button class="quiz-opt">Se guarda app.py</button>
+        <button class="quiz-opt">Se sube a GitHub</button>
+        <button class="quiz-opt">Se borran los cambios</button>
+      </div>
+      <p class="why">El commit guarda solo lo que está en el área de preparación.</p>
+    </div>
+    <div class="qq" data-q="s6-q3">
+      <p><em>(S2)</em> ¿Cuánto vale <code>17 // 5 + 17 % 5</code>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>5</code></button>
+        <button class="quiz-opt"><code>3.4</code></button>
+        <button class="quiz-opt"><code>6</code></button>
+        <button class="quiz-opt"><code>2</code></button>
+      </div>
+      <p class="why">3 + 2 = 5.</p>
+    </div>
+    <div class="qq" data-q="s6-q4">
+      <p><em>(S2)</em> ¿Qué imprime?</p>
+<pre data-norun><code class="language-python">x = 7
+if x &gt; 5:
+    print(&quot;A&quot;)
+if x &gt; 3:
+    print(&quot;B&quot;)
+else:
+    print(&quot;C&quot;)</code></pre>
+      <p style="margin:0"></p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>A y luego B</button>
+        <button class="quiz-opt">Solo A</button>
+        <button class="quiz-opt">A y luego C</button>
+        <button class="quiz-opt">Solo B</button>
+      </div>
+      <p class="why">Son dos <code>if</code> independientes (no una cadena <code>elif</code>): se evalúan los dos.</p>
+    </div>
+    <div class="qq" data-q="s6-q5">
+      <p><em>(S2)</em> <code>round(0.1 + 0.2, 2) == 0.3</code> vale…</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>True</code></button>
+        <button class="quiz-opt"><code>False</code></button>
+        <button class="quiz-opt">Error</button>
+        <button class="quiz-opt"><code>0.3</code></button>
+      </div>
+      <p class="why">Sin redondear sería <code>False</code>; redondeado a 2 decimales ya coincide.</p>
+    </div>
+    <div class="qq" data-q="s6-q6">
+      <p><em>(S3)</em> ¿Qué imprime?</p>
+<pre data-norun><code class="language-python">n = 0
+for i in range(10, 0, -3):
+    n += 1
+print(n)</code></pre>
+      <p style="margin:0"></p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>4</code></button>
+        <button class="quiz-opt"><code>3</code></button>
+        <button class="quiz-opt"><code>10</code></button>
+        <button class="quiz-opt"><code>0</code></button>
+      </div>
+      <p class="why">Toma 10, 7, 4, 1: cuatro vueltas.</p>
+    </div>
+    <div class="qq" data-q="s6-q7">
+      <p><em>(S3)</em> ¿Qué imprime?</p>
+<pre data-norun><code class="language-python">for n in [3, 8, 2, 9]:
+    if n &gt; 5:
+        break
+    print(n, end=&quot; &quot;)</code></pre>
+      <p style="margin:0"></p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>3</code></button>
+        <button class="quiz-opt"><code>3 2</code></button>
+        <button class="quiz-opt"><code>3 8 2 9</code></button>
+        <button class="quiz-opt"><code>8 9</code></button>
+      </div>
+      <p class="why">Al llegar a 8, <code>break</code> termina todo el bucle.</p>
+    </div>
+    <div class="qq" data-q="s6-q8">
+      <p><em>(S3)</em> ¿Qué patrón responde “¿hubo al menos una devolución?”</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Bandera</button>
+        <button class="quiz-opt">Acumulador</button>
+        <button class="quiz-opt">Contador</button>
+        <button class="quiz-opt">Máximo</button>
+      </div>
+      <p class="why">Una variable booleana que se enciende cuando ocurre algo.</p>
+    </div>
+    <div class="qq" data-q="s6-q9">
+      <p><em>(S4)</em> ¿Qué vale <code>r</code>?</p>
+<pre data-norun><code class="language-python">def f(a, b=10):
+    return a - b
+r = f(b=3, a=20)</code></pre>
+      <p style="margin:0"></p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>17</code></button>
+        <button class="quiz-opt"><code>-17</code></button>
+        <button class="quiz-opt"><code>10</code></button>
+        <button class="quiz-opt">Error</button>
+      </div>
+      <p class="why">Con argumentos nombrados el orden no importa: 20 − 3.</p>
+    </div>
+    <div class="qq" data-q="s6-q10">
+      <p><em>(S4)</em> ¿Qué imprime?</p>
+<pre data-norun><code class="language-python">total = 5
+def sumar():
+    total = 100
+sumar()
+print(total)</code></pre>
+      <p style="margin:0"></p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>5</code></button>
+        <button class="quiz-opt"><code>100</code></button>
+        <button class="quiz-opt"><code>105</code></button>
+        <button class="quiz-opt">Error</button>
+      </div>
+      <p class="why">La asignación dentro crea una variable local.</p>
+    </div>
+    <div class="qq" data-q="s6-q11">
+      <p><em>(S4)</em> ¿Qué le falta a una recursión que termina en <code>RecursionError</code>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Un caso base alcanzable</button>
+        <button class="quiz-opt">Un <code>print</code></button>
+        <button class="quiz-opt">Un <code>while</code></button>
+        <button class="quiz-opt">Parámetros por defecto</button>
+      </div>
+      <p class="why">Cada llamada debe acercarse al caso base.</p>
+    </div>
+    <div class="qq" data-q="s6-q12">
+      <p><em>(S5)</em> Con <code>v = [5, 10, 15, 20, 25]</code>, ¿qué es <code>v[-3:-1]</code>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>[15, 20]</code></button>
+        <button class="quiz-opt"><code>[15, 20, 25]</code></button>
+        <button class="quiz-opt"><code>[10, 15]</code></button>
+        <button class="quiz-opt"><code>[20, 25]</code></button>
+      </div>
+      <p class="why">Desde la posición −3 (15) hasta antes de −1 (25).</p>
+    </div>
+    <div class="qq" data-q="s6-q13">
+      <p><em>(S5)</em> ¿Qué imprime?</p>
+<pre data-norun><code class="language-python">a = [1, 2]
+b = a
+b.append(3)
+print(len(a))</code></pre>
+      <p style="margin:0"></p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>3</code></button>
+        <button class="quiz-opt"><code>2</code></button>
+        <button class="quiz-opt">Error</button>
+        <button class="quiz-opt"><code>1</code></button>
+      </div>
+      <p class="why"><code>b</code> es un alias de <code>a</code>.</p>
+    </div>
+    <div class="qq" data-q="s6-q14">
+      <p><em>(S5)</em> ¿Cuántas comparaciones hace Bubble Sort (sin bandera) sobre 6 elementos?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>15</code></button>
+        <button class="quiz-opt"><code>6</code></button>
+        <button class="quiz-opt"><code>36</code></button>
+        <button class="quiz-opt"><code>5</code></button>
+      </div>
+      <p class="why">n(n − 1)/2 = 6 × 5 / 2 = 15.</p>
+    </div>
+    <div class="qq" data-q="s6-q15">
+      <p><em>(S5)</em> ¿Con qué datos Insertion Sort hace menos trabajo?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Casi ordenados</button>
+        <button class="quiz-opt">En orden inverso</button>
+        <button class="quiz-opt">Aleatorios</button>
+        <button class="quiz-opt">Siempre igual</button>
+      </div>
+      <p class="why">Cada elemento se compara una vez y se queda en su lugar.</p>
+    </div>
+    <div class="quiz-score"><span data-score></span><button class="btn sec" type="button" data-reset>Reiniciar simulacro</button></div>
+  </div>
+</section>
+
+<section id="practico">
+  <h2>Simulacro práctico (90 minutos)</h2>
+<p>Tres problemas que integran varias semanas. Resuélvelos en tu computadora con reloj y sin IA. Luego compara con la solución (puedes ejecutarla y modificarla aquí).</p>
+<h3>Parte A · Traza (15 min)</h3>
+<pre data-file="traza_parcial.py"><code class="language-python">def resumen(ventas, meta):
+    total = 0
+    dias_meta = 0
+    for v in ventas:
+        if v &lt; 0:
+            continue
+        total += v
+        if v &gt;= meta:
+            dias_meta += 1
+    return total, dias_meta
+
+
+t, d = resumen([120, -30, 200, 80, 200], 200)</code></pre>
+  <div class="traza">
+    <div class="table-wrap"><table>
+      <thead><tr><th>Vuelta</th><th>v</th><th>total</th><th>dias_meta</th></tr></thead>
+      <tbody>
+        <tr><td class="dado">1</td><td><input data-a="120" aria-label="Respuesta"></td><td><input data-a="120" aria-label="Respuesta"></td><td><input data-a="0" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado">2</td><td><input data-a="-30" aria-label="Respuesta"></td><td><input data-a="120" aria-label="Respuesta"></td><td><input data-a="0" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado">3</td><td><input data-a="200" aria-label="Respuesta"></td><td><input data-a="320" aria-label="Respuesta"></td><td><input data-a="1" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado">4</td><td><input data-a="80" aria-label="Respuesta"></td><td><input data-a="400" aria-label="Respuesta"></td><td><input data-a="1" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado">5</td><td><input data-a="200" aria-label="Respuesta"></td><td><input data-a="600" aria-label="Respuesta"></td><td><input data-a="2" aria-label="Respuesta"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="acciones"><button class="btn" type="button" data-comprobar>Comprobar</button><button class="btn sec" type="button" data-solucion>Ver solución</button><button class="btn sec" type="button" data-limpiar>Limpiar</button><span class="resultado" aria-live="polite"></span></div>
+  </div>
+<p>Resultado: <code>t = 600</code>, <code>d = 2</code>. En la vuelta 2, <code>continue</code> salta el resto del cuerpo: nada cambia.</p>
+<h3>Parte B · Programación (75 min)</h3>
+  <article class="ejercicio problema">
+    <header><h3>P1 · Reporte semanal (S3 + S4 + S5)</h3><span class="nivel">funciones + listas de tuplas · ★★★</span></header>
+    <div class="cuerpo">
+      <p>Escribe <code>reporte(ventas)</code> que reciba una lista de tuplas <code>(dia, monto)</code> y <strong>devuelva</strong> total, promedio, mejor día y la lista de días bajo el promedio. Una lista vacía no debe causar error.</p>
+      <p><strong>Tu programa debe cumplir estos casos de prueba:</strong></p>
+      <div class="table-wrap"><table><thead><tr><th>Entrada</th><th>Esperado</th></tr></thead><tbody><tr><td>Semana de la S5</td><td>(3600, 514.29, "sáb", ["lun", "mar", "mié", "dom"])</td></tr><tr><td><code>[]</code></td><td>(0, 0, None, [])</td></tr></tbody></table></div>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p>Primero el caso borde (lista vacía). Luego un solo recorrido para total y máximo, y una comprensión para los días bajo el promedio.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="reporte.py"><code class="language-python">def reporte(ventas):
+    &quot;&quot;&quot;Recibe [(dia, monto)] y devuelve (total, promedio, mejor_dia, dias_bajo_promedio).&quot;&quot;&quot;
+    if not ventas:
+        return 0, 0, None, []
+    total = 0
+    mejor_dia, mejor_monto = ventas[0]
+    for dia, monto in ventas:
+        total += monto
+        if monto &gt; mejor_monto:
+            mejor_dia, mejor_monto = dia, monto
+    promedio = total / len(ventas)
+    bajos = [dia for dia, monto in ventas if monto &lt; promedio]
+    return total, round(promedio, 2), mejor_dia, bajos
+
+
+semana = [(&quot;lun&quot;, 340), (&quot;mar&quot;, 410), (&quot;mié&quot;, 380), (&quot;jue&quot;, 520), (&quot;vie&quot;, 610), (&quot;sáb&quot;, 890), (&quot;dom&quot;, 450)]
+print(reporte(semana))
+assert reporte([]) == (0, 0, None, [])
+assert reporte([(&quot;lun&quot;, 100)]) == (100, 100.0, &quot;lun&quot;, [])</code></pre>
+<pre class="salida" data-file="salida"><code>(3600, 514.29, &#x27;sáb&#x27;, [&#x27;lun&#x27;, &#x27;mar&#x27;, &#x27;mié&#x27;, &#x27;dom&#x27;])</code></pre>
+
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s6-pr1" data-track="s6-pr1"><label for="s6-pr1">Resuelto y probado con todos los casos</label></li></ul>
+  </article>
+  <article class="ejercicio problema">
+    <header><h3>P2 · Top 3 de facturas sin sort (S5)</h3><span class="nivel">Insertion Sort + búsqueda lineal · ★★★</span></header>
+    <div class="cuerpo">
+      <p>Con una lista de facturas <code>(numero, monto)</code>: devuelve las 3 de mayor monto usando tu propio Insertion Sort (sin modificar la lista original) y escribe una búsqueda lineal por número.</p>
+      <p><strong>Tu programa debe cumplir estos casos de prueba:</strong></p>
+      <div class="table-wrap"><table><thead><tr><th>Llamada</th><th>Esperado</th></tr></thead><tbody><tr><td>Top 3</td><td>F-102, F-104, F-101</td></tr><tr><td><code>buscar(facturas, "F-103")</code></td><td>2</td></tr><tr><td><code>buscar(facturas, "F-999")</code></td><td>-1</td></tr></tbody></table></div>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p>Ordena una copia (<code>facturas[:]</code>) comparando el campo <code>[1]</code> y toma <code>[:3]</code>.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="facturas.py"><code class="language-python">def ordenar_por_monto_desc(facturas):
+    &quot;&quot;&quot;Insertion Sort descendente por monto (sin sort ni sorted). No modifica la original.&quot;&quot;&quot;
+    datos = facturas[:]
+    for i in range(1, len(datos)):
+        actual = datos[i]
+        j = i - 1
+        while j &gt;= 0 and datos[j][1] &lt; actual[1]:
+            datos[j + 1] = datos[j]
+            j -= 1
+        datos[j + 1] = actual
+    return datos
+
+
+def buscar(facturas, numero):
+    &quot;&quot;&quot;Búsqueda lineal: devuelve la posición o -1.&quot;&quot;&quot;
+    for i in range(len(facturas)):
+        if facturas[i][0] == numero:
+            return i
+    return -1
+
+
+facturas = [(&quot;F-101&quot;, 45.5), (&quot;F-102&quot;, 120.0), (&quot;F-103&quot;, 12.75), (&quot;F-104&quot;, 88.0)]
+top = ordenar_por_monto_desc(facturas)[:3]
+print(&quot;Top 3:&quot;, top)
+print(&quot;F-103 está en la posición&quot;, buscar(facturas, &quot;F-103&quot;))
+print(&quot;F-999:&quot;, buscar(facturas, &quot;F-999&quot;))
+assert facturas[0] == (&quot;F-101&quot;, 45.5)            # la original no cambió</code></pre>
+<pre class="salida" data-file="salida"><code>Top 3: [(&#x27;F-102&#x27;, 120.0), (&#x27;F-104&#x27;, 88.0), (&#x27;F-101&#x27;, 45.5)]
+F-103 está en la posición 2
+F-999: -1</code></pre>
+
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s6-pr2" data-track="s6-pr2"><label for="s6-pr2">Resuelto y probado con todos los casos</label></li></ul>
+  </article>
+  <article class="ejercicio problema">
+    <header><h3>P3 · El parqueo de la semana 1, programado y probado (S1 + S2 + S4)</h3><span class="nivel">del pseudocódigo al código · ★★</span></header>
+    <div class="cuerpo">
+      <p>Convierte el pseudocódigo del E1 de la semana 1 en la función <code>cobro_parqueo(minutos, tiene_sello=False)</code> y verifícala con los 6 casos de la tabla de esa semana.</p>
+      <p><strong>Tu programa debe cumplir estos casos de prueba:</strong></p>
+      <div class="table-wrap"><table><thead><tr><th>Minutos, sello</th><th>Esperado</th></tr></thead><tbody><tr><td>60, no</td><td>$1.00</td></tr><tr><td>61, no</td><td>$1.75</td></tr><tr><td>600, no</td><td>$6.00</td></tr><tr><td>30, sí</td><td>$0.00</td></tr><tr><td>600, sí</td><td>$5.00</td></tr><tr><td>0, no</td><td>$0.00</td></tr></tbody></table></div>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p>“Hora o fracción” es redondear hacia arriba: <code>minutos // 60</code> y sumar 1 si sobra algo.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="parqueo.py"><code class="language-python">def cobro_parqueo(minutos, tiene_sello=False):
+    &quot;&quot;&quot;$1.00 la primera hora, $0.75 cada hora o fracción adicional, tope $6.00; sello descuenta $1.00 al final.&quot;&quot;&quot;
+    if minutos &lt;= 0:
+        return 0.0
+    horas = minutos // 60
+    if minutos % 60 != 0:
+        horas += 1                                  # techo sin importar math
+    cobro = 1.00 + (horas - 1) * 0.75
+    if cobro &gt; 6.00:
+        cobro = 6.00
+    if tiene_sello:
+        cobro = max(0.0, cobro - 1.00)
+    return round(cobro, 2)
+
+
+casos = [(60, False, 1.00), (61, False, 1.75), (600, False, 6.00), (30, True, 0.00), (600, True, 5.00), (0, False, 0.0)]
+for minutos, sello, esperado in casos:
+    obtenido = cobro_parqueo(minutos, sello)
+    marca = &quot;✓&quot; if obtenido == esperado else &quot;✗&quot;
+    print(f&quot;{marca} {minutos:&gt;4} min, sello={sello!s:&lt;5} -&gt; ${obtenido:.2f}&quot;)</code></pre>
+<pre class="salida" data-file="salida"><code>✓   60 min, sello=False -&gt; $1.00
+✓   61 min, sello=False -&gt; $1.75
+✓  600 min, sello=False -&gt; $6.00
+✓   30 min, sello=True  -&gt; $0.00
+✓  600 min, sello=True  -&gt; $5.00
+✓    0 min, sello=False -&gt; $0.00</code></pre>
+<p>Imprimir ✓/✗ por caso es una forma rápida de probar sin pytest; en el examen te ayuda a revisar tu propio trabajo.</p>
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s6-pr3" data-track="s6-pr3"><label for="s6-pr3">Resuelto y probado con todos los casos</label></li></ul>
+  </article>
+</section>
+
+<section id="estrategia">
+  <h2>Estrategia para el día del examen</h2>
+  <div class="box ok">
+    <span class="box-title">Durante el examen</span>
+    <ul><li>Lee todo el examen primero (3 minutos) y empieza por lo que dominas.</li><li>En preguntas de “¿qué imprime?”, <strong>traza en papel</strong> con una tabla: no confíes en la intuición.</li><li>Antes de programar, escribe en comentarios los pasos (pseudocódigo). Ya son puntos de lógica.</li><li>Prueba tu código con un caso normal y con uno de frontera antes de entregar.</li><li>Si algo no corre, deja lo que sí funciona y explica en un comentario qué falta.</li></ul>
+  </div>
+  <div class="box ojo">
+    <span class="box-title">Recuerda</span>
+    <p>Es individual y sin IA. Aplica el código de honor: “Por mi honor y por mis compañeros me comprometo a no copiar para que este examen revele mi verdadero nivel de conocimientos.”</p>
+  </div>
+  <ul class="check">
+    <li><input type="checkbox" id="s6-v1" data-track="s6-v1"><label for="s6-v1">Hice el simulacro teórico y repasé las semanas que fallé.</label></li>
+    <li><input type="checkbox" id="s6-v2" data-track="s6-v2"><label for="s6-v2">Resolví el simulacro práctico con reloj.</label></li>
+    <li><input type="checkbox" id="s6-v3" data-track="s6-v3"><label for="s6-v3">Puedo explicar los 10 errores comunes.</label></li>
+    <li><input type="checkbox" id="s6-v4" data-track="s6-v4"><label for="s6-v4">Mi proyecto está al día con la Fase 3.</label></li>
+  </ul>
+</section>
+
+  <nav class="nav-semanas" aria-label="Navegación entre semanas">
+    <a class="nav-prev" href="semana-05.html"><span class="btn-ico" aria-hidden="true"></span><span>Semana 5</span></a>
+    <a class="nav-next" href="semana-07.html"><span>Semana 7: diccionarios</span><span class="btn-ico" aria-hidden="true"></span></a>
+  </nav>
+
+<footer class="pie">Guía de estudio · Introducción al Desarrollo de Software · ESEN · Ciclo III/2026. Material de apoyo no oficial; el programa y Moodle mandan.</footer>
+</main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+<script src="../assets/guia.js"></script>
+<script src="../assets/ejecutar.js"></script>
+</body>
+</html>

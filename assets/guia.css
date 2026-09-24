@@ -176,10 +176,13 @@ blockquote { margin: 1rem 0; padding: .6rem 1rem; background: var(--surface-2); 
 .menu-btn[aria-expanded="true"] { background: var(--mark); color: var(--mark-ink); }
 .menu-btn[aria-expanded="true"] .hb:nth-child(1) { transform: rotate(45deg); }
 .menu-btn[aria-expanded="true"] .hb:nth-child(2) { transform: rotate(-45deg); }
-@media (max-width: 700px) {
+@media (max-width: 980px) {
   .isla-semanas a:not([aria-current="page"]) { display: none; }
+}
+@media (max-width: 700px) {
   .isla .brand small { display: none; }
 }
+.isla-semanas a { min-width: 2.05rem; padding: 0 .3rem; font-size: .8rem; }
 
 /* ---------- Menú de pantalla completa ---------- */
 .menu-completo {
@@ -955,6 +958,13 @@ body[data-semana="s2"] { --campo-1: oklch(0.80 0.14 75 / .75); --campo-3: oklch(
 body[data-semana="s3"] { --campo-1: oklch(0.76 0.14 150 / .75); --campo-4: oklch(0.74 0.12 230 / .70); --luz-1: oklch(0.58 0.13 155 / .55); --luz-2: oklch(0.48 0.11 235 / .6); }
 body[data-semana="s4"] { --campo-1: oklch(0.72 0.14 285 / .70); --campo-3: oklch(0.78 0.11 195 / .70); --luz-1: oklch(0.55 0.14 290 / .55); --luz-2: oklch(0.50 0.11 205 / .6); }
 body[data-semana="s5"] { --campo-1: oklch(0.76 0.14 30 / .65); --campo-3: oklch(0.78 0.12 180 / .70); --luz-1: oklch(0.60 0.14 30 / .5); --luz-2: oklch(0.50 0.11 190 / .6); }
+body[data-semana="s6"] { --campo-1: oklch(0.76 0.13 55 / .70); --campo-3: oklch(0.76 0.11 215 / .70); --luz-1: oklch(0.58 0.13 55 / .55); --luz-2: oklch(0.50 0.11 215 / .6); --h1: 55; }
+body[data-semana="s7"] { --campo-1: oklch(0.76 0.13 165 / .70); --campo-3: oklch(0.76 0.11 250 / .70); --luz-1: oklch(0.58 0.13 165 / .55); --luz-2: oklch(0.50 0.11 250 / .6); --h1: 165; }
+body[data-semana="s8"] { --campo-1: oklch(0.76 0.13 305 / .70); --campo-3: oklch(0.76 0.11 190 / .70); --luz-1: oklch(0.58 0.13 305 / .55); --luz-2: oklch(0.50 0.11 190 / .6); --h1: 305; }
+body[data-semana="s9"] { --campo-1: oklch(0.76 0.13 120 / .70); --campo-3: oklch(0.76 0.11 300 / .70); --luz-1: oklch(0.58 0.13 120 / .55); --luz-2: oklch(0.50 0.11 300 / .6); --h1: 120; }
+body[data-semana="s10"] { --campo-1: oklch(0.76 0.13 265 / .70); --campo-3: oklch(0.76 0.11 160 / .70); --luz-1: oklch(0.58 0.13 265 / .55); --luz-2: oklch(0.50 0.11 160 / .6); --h1: 265; }
+body[data-semana="s11"] { --campo-1: oklch(0.76 0.13 330 / .70); --campo-3: oklch(0.76 0.11 200 / .70); --luz-1: oklch(0.58 0.13 330 / .55); --luz-2: oklch(0.50 0.11 200 / .6); --h1: 330; }
+body[data-semana="s12"] { --campo-1: oklch(0.76 0.13 90 / .70); --campo-3: oklch(0.76 0.11 230 / .70); --luz-1: oklch(0.58 0.13 90 / .55); --luz-2: oklch(0.50 0.11 230 / .6); --h1: 90; }
 :root[data-theme="dark"] body[data-semana] { --campo-1: oklch(0.40 0.13 var(--h1, 215) / .70); }
 body[data-semana="s2"] { --h1: 75; } body[data-semana="s3"] { --h1: 150; } body[data-semana="s4"] { --h1: 285; } body[data-semana="s5"] { --h1: 30; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) body[data-semana] { --campo-1: oklch(0.40 0.13 var(--h1, 215) / .70); } }
@@ -1134,3 +1144,51 @@ main h2::after { content: ""; display: block; width: 3.2rem; height: 4px; margin
 }
 @media (prefers-reduced-motion: reduce) { .hero-semana::before, .portada::before { animation: none; } }
 .hero-semana::before, .portada::before { filter: saturate(1.5) brightness(1.15); }
+
+/* ---------- Ejecutar código en la página ---------- */
+.btn-mini {
+  flex: none; font: 700 .72rem var(--font); cursor: pointer; border-radius: 99px; padding: .2rem .75rem;
+  color: oklch(0.9 0.02 230); background: oklch(1 0 0 / .07); border: 1px solid oklch(1 0 0 / .14);
+  transition: background-color .3s var(--ease-masa), transform .3s var(--ease-masa);
+}
+.btn-mini:hover { background: oklch(1 0 0 / .14); }
+.btn-mini:active { transform: scale(.95); }
+.btn-correr {
+  color: oklch(0.2 0.05 150); border: 0;
+  background: linear-gradient(180deg, oklch(0.86 0.17 150), oklch(0.72 0.17 150));
+  box-shadow: inset 0 1px 0 oklch(1 0 0 / .5), 0 0 14px oklch(0.75 0.17 150 / .45);
+}
+.btn-correr:hover { background: linear-gradient(180deg, oklch(0.90 0.16 150), oklch(0.76 0.17 150)); }
+.btn-correr[disabled] { opacity: .6; cursor: progress; }
+.ventana-lang { margin-left: auto; }
+.ventana .copy-btn { margin-left: 0; }
+.ventana textarea.editor {
+  display: block; width: 100%; margin: 0; border: 0; resize: vertical; min-height: 8rem;
+  padding: .95rem 1.2rem 1.05rem; background: oklch(0.15 0.03 250 / .65); color: var(--code-ink);
+  font: .84rem/1.6 var(--mono); font-variant-ligatures: none; tab-size: 4; white-space: pre; overflow-x: auto;
+  outline: none; box-shadow: inset 0 0 0 2px oklch(0.75 0.17 150 / .35);
+}
+.ventana textarea.editor:focus { box-shadow: inset 0 0 0 2px oklch(0.80 0.17 150 / .8); }
+.entradas {
+  margin: -.6rem 0 1rem; padding: .7rem .9rem; border-radius: 0 0 16px 16px;
+  border: 1.5px solid transparent; border-top: 0;
+  background: var(--lg-sheen) padding-box, var(--lg-fill) padding-box, var(--lg-rim) border-box;
+  -webkit-backdrop-filter: var(--lg-blur); backdrop-filter: var(--lg-blur);
+}
+.entradas label { display: block; font-weight: 700; font-size: .85rem; margin-bottom: .35rem; }
+.entradas label span { font-weight: 400; color: var(--ink-3); margin-left: .4rem; }
+.entradas textarea {
+  width: 100%; font: .84rem/1.5 var(--mono); padding: .45rem .6rem; border-radius: 10px; resize: vertical;
+  color: var(--ink); background: oklch(1 0 0 / .45); border: 1px solid color-mix(in oklch, var(--ink) 18%, transparent);
+}
+:root[data-theme="dark"] .entradas textarea { background: oklch(1 0 0 / .06); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .entradas textarea { background: oklch(1 0 0 / .06); } }
+.ejecucion { margin-top: -.4rem; animation: aparece .3s var(--ease-masa) both; }
+.ejecucion .ventana-archivo::before { content: "▶ "; }
+.ejecucion .estado { margin-left: auto; font-size: .76rem; color: var(--ink-3); }
+.ejecucion > pre { max-height: 26rem; overflow: auto; }
+.ejecucion .err { color: var(--bad); }
+.ejecucion.con-error { box-shadow: var(--lg-inner), inset 0 0 0 1.5px color-mix(in oklch, var(--bad) 55%, transparent), var(--lg-drop); }
+.ventana-nota { margin-left: .4rem; font-size: .7rem; color: oklch(0.75 0.03 230); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; flex: 0 1 auto; }
+@media (max-width: 560px) { .ventana-nota { display: none; } }
+@media (max-width: 600px) { .ventana-archivo { max-width: 7rem; } .ventana-lang { display: none; } }

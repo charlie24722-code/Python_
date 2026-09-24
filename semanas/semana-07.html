@@ -1,0 +1,965 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Semana 7 · Diccionarios, archivos y excepciones</title>
+<meta name="description" content="Guía de estudio, semana 7: diccionarios, conjuntos, archivos CSV y JSON, y manejo de excepciones. Proyecto: Fase 4.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/guia.css">
+<script>try{var t=localStorage.getItem("ids-guia-v1-tema");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+</head>
+<body data-semana="s7">
+
+<header class="isla-wrap">
+  <div class="isla">
+    <a class="brand" href="../index.html">IDS <small>Guía de estudio</small></a>
+    <nav class="isla-semanas" aria-label="Semanas">
+    <a href="semana-01.html">S1</a>
+    <a href="semana-02.html">S2</a>
+    <a href="semana-03.html">S3</a>
+    <a href="semana-04.html">S4</a>
+    <a href="semana-05.html">S5</a>
+    <a href="semana-06.html">S6</a>
+    <a href="semana-07.html" aria-current="page">S7</a>
+    <a href="semana-08.html">S8</a>
+    <a href="semana-09.html">S9</a>
+    <a href="semana-10.html">S10</a>
+    <a href="semana-11.html">S11</a>
+    <a href="semana-12.html">S12</a>
+  </nav>
+    <button class="theme-btn" type="button" aria-label="Cambiar tema claro/oscuro"><span class="ico-tema" aria-hidden="true"></span></button>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu-completo"><span class="hb" aria-hidden="true"></span><span class="hb" aria-hidden="true"></span><span class="sr">Menú</span></button>
+  </div>
+</header>
+<div class="menu-completo" id="menu-completo" hidden></div>
+
+<header class="hero-semana">
+  <div class="hero-in">
+    <p class="hero-num" aria-hidden="true">07</p>
+    <div class="hero-txt">
+      <p class="hero-mod"><span class="sr">Semana 7 · </span>Módulo 7</p>
+      <h1>Mapeos avanzados, conjuntos y persistencia de archivos</h1>
+      <p class="lead">Hasta ahora todo se perdía al cerrar el programa y los registros eran tuplas que había que leer por posición. Esta semana los datos tienen <strong>nombre</strong> (diccionarios), se <strong>guardan en disco</strong> (CSV y JSON) y el programa aprende a <strong>fallar sin caerse</strong> (excepciones).</p>
+    </div>
+    <p class="pregunta"><span class="pregunta-lbl">Pregunta orientadora</span><mark>¿Cómo organizo registros con nombre, los guardo para la próxima vez y evito que un dato malo tumbe el sistema?</mark></p>
+    <dl class="hero-meta">
+      <div><dt>Lecturas</dt><dd>PCC 6 · PCC 10</dd></div>
+      <div><dt>Proyecto</dt><dd>Fase 4 (esta semana)</dd></div>
+      <div class="eval"><dt>Evaluación</dt><dd>Control 3: próxima semana</dd></div>
+    </dl>
+    <div class="progress" data-progreso-pagina>
+      <div class="progress-bar"><span></span></div>
+      <div class="progress-label"></div>
+    </div>
+  </div>
+</header>
+
+<div class="layout with-toc">
+<aside class="toc" aria-label="Contenido de la semana">
+  <p>Semana 7</p>
+  <ol>
+    <li class="grupo" aria-hidden="true">Antes de clase</li>
+    <li><a href="#uso">Cómo usar la guía</a></li>
+    <li><a href="#mapa">Qué puedes usar</a></li>
+    <li><a href="#lecturas">Lecturas</a></li>
+    <li><a href="#checkpoint">Reading checkpoint</a></li>
+    <li class="grupo" aria-hidden="true">Aprender</li>
+    <li><a href="#diccionarios">Diccionarios</a></li>
+    <li><a href="#conjuntos">Conjuntos</a></li>
+    <li><a href="#archivos">Archivos CSV y JSON</a></li>
+    <li><a href="#excepciones">Excepciones</a></li>
+    <li class="grupo" aria-hidden="true">Practicar</li>
+    <li><a href="#trazas">Tablas de traza</a></li>
+    <li><a href="#ejercicios">Ejercicios</a></li>
+    <li><a href="#practica">Práctica intensiva</a></li>
+    <li class="grupo" aria-hidden="true">Entregar y evaluar</li>
+    <li><a href="#proyecto">Proyecto: Fase 4</a></li>
+    <li><a href="#evaluacion">Rumbo al Control 3</a></li>
+    <li><a href="#fuentes">Fuentes</a></li>
+  </ol>
+</aside>
+
+<main>
+<section id="uso">
+  <h2>Cómo usar esta guía</h2>
+  <div class="momentos">
+    <div><strong>Antes de clase</strong>PCC 6 y 10. Luego el <a href="#checkpoint">checkpoint</a>.</div>
+    <div><strong>Durante el laboratorio</strong>El taller es un <em>gestor de registros</em> con CSV/JSON: ten a mano <a href="#archivos">archivos</a> y <a href="#excepciones">excepciones</a>.</div>
+    <div><strong>Después de clase</strong>Trazas, ejercicios y la <a href="#practica">práctica intensiva</a>. Pulsa <strong>▶ Ejecutar</strong> en cualquier ejemplo.</div>
+    <div><strong>Proyecto</strong>Esta semana es la <a href="#proyecto">Fase 4</a>: persistencia y manejo de errores.</div>
+  </div>
+  <ul class="ciclo-leyenda" aria-label="Ciclo de trabajo">
+    <li>Pregunta</li><li class="sep">→</li><li>Exploración</li><li class="sep">→</li><li>Implementación</li><li class="sep">→</li><li>Resultado</li><li class="sep">→</li><li>Interpretación</li><li class="sep">→</li><li class="v">Verificación</li>
+  </ul>
+</section>
+
+<section id="mapa">
+  <h2>Qué puedes usar esta semana</h2>
+  <div class="permisos">
+    <div class="si">
+      <h4>Sí, desde ahora</h4>
+      <ul>
+        <li>Todo lo de las semanas 1 a 5</li>
+        <li>Diccionarios: <code>{}</code>, <code>d[clave]</code>, <code>get</code>, <code>items</code>, <code>keys</code>, <code>values</code>, <code>del</code>, <code>in</code></li>
+        <li>Diccionarios anidados: lista de diccionarios y diccionario de listas</li>
+        <li>Conjuntos: <code>set()</code>, <code>add</code>, <code>|</code> <code>&amp;</code> <code>-</code></li>
+        <li>Archivos con <code>pathlib.Path</code>: <code>read_text</code>, <code>write_text</code>, <code>exists</code></li>
+        <li>Módulos <code>json</code> y <code>csv</code> de la biblioteca estándar</li>
+        <li><code>try</code> / <code>except</code> / <code>else</code>, excepciones específicas y <code>raise</code></li>
+      </ul>
+    </div>
+    <div class="no">
+      <h4>Todavía no / fuera del curso</h4>
+      <ul>
+        <li>Clases propias → semana 8 (por ahora los registros son diccionarios)</li>
+        <li>Bases de datos (SQL) → materias posteriores</li>
+        <li>Librerías externas como pandas: fuera del curso</li>
+      </ul>
+      <p style="margin-top:.5rem;font-size:.9rem">Con <code>try</code> reemplazas el truco de <code>isdigit()</code> de las semanas 2 y 3: intentas convertir y atrapas el error.</p>
+    </div>
+  </div>
+</section>
+
+<section id="lecturas">
+  <h2>Lecturas de preparación</h2>
+  <ul class="check">
+    <li><input type="checkbox" id="s7-l1" data-track="s7-l1"><label for="s7-l1"><span class="ref">[PCC] Cap. 6</span> “Dictionaries”. Enfócate en: pares clave-valor, <code>get()</code> con valor por defecto, recorrer con <code>items()</code>, y anidar (lista de diccionarios, diccionario dentro de diccionario).</label></li>
+    <li><input type="checkbox" id="s7-l2" data-track="s7-l2"><label for="s7-l2"><span class="ref">[PCC] Cap. 10</span> “Files and Exceptions”. Enfócate en: leer y escribir con <code>Path</code>, <code>try</code>/<code>except</code>/<code>else</code>, fallar en silencio vs. informar, y guardar datos con <code>json</code>.</label></li>
+  </ul>
+  <div class="box nota">
+    <span class="box-title">Complementos gratuitos</span>
+    <ul><li><a href="https://docs.python.org/es/3/tutorial/datastructures.html#dictionaries" target="_blank" rel="noopener">Tutorial oficial — Diccionarios</a> y <a href="https://docs.python.org/es/3/tutorial/datastructures.html#sets" target="_blank" rel="noopener">conjuntos</a></li><li><a href="https://docs.python.org/es/3/tutorial/errors.html" target="_blank" rel="noopener">Tutorial oficial — Errores y excepciones</a></li><li><a href="https://docs.python.org/es/3/library/json.html" target="_blank" rel="noopener">Módulo json</a> · <a href="https://docs.python.org/es/3/library/csv.html" target="_blank" rel="noopener">módulo csv</a></li></ul>
+  </div>
+</section>
+
+<section id="checkpoint">
+  <h2>Reading checkpoint</h2>
+  <div class="quiz">
+    <div class="qq" data-q="s7-q1">
+      <p>Con <code>precios = {"A01": 12.5, "B07": 4.25}</code>, ¿qué da <code>precios["Z99"]</code>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>KeyError</code></button>
+        <button class="quiz-opt"><code>None</code></button>
+        <button class="quiz-opt"><code>0</code></button>
+        <button class="quiz-opt"><code>""</code></button>
+      </div>
+      <p class="why">Una clave inexistente lanza <code>KeyError</code>. Para un valor por defecto: <code>precios.get("Z99", 0)</code>.</p>
+    </div>
+    <div class="qq" data-q="s7-q2">
+      <p>¿Qué hace <code>precios["C12"] = 3.90</code> si <code>"C12"</code> no existe?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Agrega la pareja nueva</button>
+        <button class="quiz-opt">Da <code>KeyError</code></button>
+        <button class="quiz-opt">Reemplaza el primer elemento</button>
+        <button class="quiz-opt">No hace nada</button>
+      </div>
+      <p class="why">Asignar a una clave nueva la crea; a una existente, la reemplaza. Por eso sirve para acumular: <code>totales[v] = totales.get(v, 0) + monto</code>.</p>
+    </div>
+    <div class="qq" data-q="s7-q3">
+      <p>¿Qué recorre <code>for codigo, precio in precios.items():</code>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Cada pareja clave-valor</button>
+        <button class="quiz-opt">Solo las claves</button>
+        <button class="quiz-opt">Solo los valores</button>
+        <button class="quiz-opt">Las posiciones 0, 1, 2…</button>
+      </div>
+      <p class="why"><code>items()</code> entrega tuplas (clave, valor) que se desempacan en dos variables.</p>
+    </div>
+    <div class="qq" data-q="s7-q4">
+      <p><code>set([3, 1, 3, 2, 1])</code> produce…</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>{1, 2, 3}</code></button>
+        <button class="quiz-opt"><code>[3, 1, 3, 2, 1]</code></button>
+        <button class="quiz-opt"><code>{3, 1, 3, 2, 1}</code></button>
+        <button class="quiz-opt">Un error</button>
+      </div>
+      <p class="why">Un conjunto guarda cada elemento una sola vez y sin orden garantizado. Ideal para “¿cuántos clientes distintos?”.</p>
+    </div>
+    <div class="qq" data-q="s7-q5">
+      <p>¿Qué bloque se ejecuta si <code>float(texto)</code> <strong>no</strong> falla?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>else</code> (después del <code>try</code>)</button>
+        <button class="quiz-opt"><code>except</code></button>
+        <button class="quiz-opt">Ninguno</button>
+        <button class="quiz-opt">Los dos</button>
+      </div>
+      <p class="why"><code>else</code> corre solo si el <code>try</code> terminó sin error: ahí va el código que usa el valor ya validado.</p>
+    </div>
+    <div class="qq" data-q="s7-q6">
+      <p>¿Por qué conviene <code>except ValueError:</code> en vez de <code>except:</code> a secas?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Porque solo atrapa el error que esperas y deja ver los demás</button>
+        <button class="quiz-opt">Porque es más rápido</button>
+        <button class="quiz-opt">Porque <code>except:</code> no existe</button>
+        <button class="quiz-opt">No hay diferencia</button>
+      </div>
+      <p class="why">Un <code>except:</code> genérico también esconde errores de programación (un nombre mal escrito) y los vuelve invisibles.</p>
+    </div>
+    <div class="qq" data-q="s7-q7">
+      <p>Tu programa hace <code>Path("inventario.json").read_text()</code> y el archivo no existe. ¿Qué excepción aparece?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>FileNotFoundError</code></button>
+        <button class="quiz-opt"><code>ValueError</code></button>
+        <button class="quiz-opt"><code>KeyError</code></button>
+        <button class="quiz-opt"><code>IndexError</code></button>
+      </div>
+      <p class="why">La primera vez que corre un sistema, el archivo aún no existe: hay que atraparlo y empezar con datos vacíos.</p>
+    </div>
+    <div class="qq" data-q="s7-q8">
+      <p>¿Qué hace <code>json.dumps(datos)</code>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Convierte un diccionario o lista en texto con formato JSON</button>
+        <button class="quiz-opt">Guarda el archivo en el disco</button>
+        <button class="quiz-opt">Lee un archivo JSON</button>
+        <button class="quiz-opt">Borra los datos</button>
+      </div>
+      <p class="why"><code>dumps</code> = “dump string”: produce texto. Guardarlo en disco es otro paso: <code>path.write_text(texto)</code>. Al revés: <code>read_text</code> + <code>json.loads</code>.</p>
+    </div>
+    <div class="quiz-score"><span data-score></span><button class="btn sec" type="button" data-reset>Reiniciar quiz</button></div>
+  </div>
+</section>
+
+<section id="diccionarios">
+  <h2>Diccionarios: datos con nombre</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p>Un diccionario es una <strong>agenda</strong>: buscas por el nombre (la clave) y encuentras el dato (el valor). Ya no tienes que recordar que el stock estaba “en la posición 3”.</p>
+  </div>
+<figure class="lamina "><div class="placa"><div class="placa-core"><img src="../assets/img/s7-diccionario.svg" alt="Comparación entre una tupla, donde el stock se lee como p[3], y un diccionario, donde se lee como producto["stock"]: cada clave apunta a su valor." width="760" height="256" loading="lazy" decoding="async"></div></div><figcaption>Lo que en la semana 5 era <code>p[3]</code> ahora se escribe <code>producto["stock"]</code>.</figcaption></figure>
+  <div class="ciclo">
+    <h3>Caso: la ficha de un producto</h3>
+    <div class="paso"><div>
+      <span class="etq">Pregunta</span>
+<p>¿Cómo guardo los datos de un producto de forma que el código se entienda solo y pueda agregar campos nuevos después?</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Exploración</span>
+<p>Cada dato tiene un nombre natural (código, nombre, precio, stock). Un diccionario los asocia: <code>{"clave": valor}</code>. Las claves suelen ser texto; los valores, lo que sea.</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Implementación</span>
+<pre data-file="producto.py"><code class="language-python">producto = {&quot;codigo&quot;: &quot;A01&quot;, &quot;nombre&quot;: &quot;Aceite 1 L&quot;, &quot;precio&quot;: 12.50, &quot;stock&quot;: 40}
+
+print(producto[&quot;nombre&quot;], &quot;cuesta&quot;, producto[&quot;precio&quot;])
+producto[&quot;stock&quot;] -= 5                 # vendimos 5
+producto[&quot;proveedor&quot;] = &quot;La Ceiba&quot;     # clave nueva
+print(producto.get(&quot;descuento&quot;, 0))    # no existe: valor por defecto
+
+for clave, valor in producto.items():
+    print(f&quot;  {clave:&lt;10} {valor}&quot;)</code></pre>
+<pre class="salida" data-file="salida"><code>Aceite 1 L cuesta 12.5
+0
+  codigo     A01
+  nombre     Aceite 1 L
+  precio     12.5
+  stock      35
+  proveedor  La Ceiba</code></pre>
+
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Interpretación</span>
+<p>Leer, modificar y agregar usan la misma sintaxis <code>d[clave]</code>. <code>get</code> evita el <code>KeyError</code> cuando un dato es opcional. Recorrer con <code>items()</code> da la clave y el valor a la vez.</p>
+    </div></div>
+    <div class="paso verif"><div>
+      <span class="etq">Verificación</span>
+<p>Stock inicial 40, se vendieron 5 → 35 ✔. Prueba <code>producto["Descuento"]</code> (con mayúscula): las claves distinguen mayúsculas y darás con un <code>KeyError</code>.</p>
+    </div></div>
+  </div>
+<h3>El problema de la semana 5, en tres líneas</h3>
+<p>En la semana 5 sumaste las ventas por vendedor con dos listas paralelas. Con un diccionario:</p>
+<pre data-file="totales.py"><code class="language-python">ventas = [(&quot;Ana&quot;, 120), (&quot;Luis&quot;, 80), (&quot;Ana&quot;, 200),
+          (&quot;Eva&quot;, 150), (&quot;Luis&quot;, 40), (&quot;Ana&quot;, 30)]
+
+totales = {}
+for vendedor, monto in ventas:
+    totales[vendedor] = totales.get(vendedor, 0) + monto
+
+print(totales)
+mejor = max(totales, key=totales.get)
+print(f&quot;Mejor vendedor: {mejor} con ${totales[mejor]}&quot;)</code></pre>
+<pre class="salida" data-file="salida"><code>{&#x27;Ana&#x27;: 350, &#x27;Luis&#x27;: 120, &#x27;Eva&#x27;: 150}
+Mejor vendedor: Ana con $350</code></pre>
+<p><code>totales.get(vendedor, 0)</code> devuelve 0 la primera vez que aparece un vendedor. Este patrón (<strong>acumular por clave</strong>) resuelve “total por categoría”, “ventas por mes”, “stock por bodega”… <code>max(totales, key=totales.get)</code> busca la clave cuyo valor es mayor.</p>
+<h3>Lista de diccionarios: una tabla en memoria</h3>
+<pre data-file="catalogo.py"><code class="language-python">catalogo = [
+    {&quot;codigo&quot;: &quot;A01&quot;, &quot;nombre&quot;: &quot;Aceite 1 L&quot;, &quot;precio&quot;: 12.50, &quot;stock&quot;: 40},
+    {&quot;codigo&quot;: &quot;B07&quot;, &quot;nombre&quot;: &quot;Arroz 5 lb&quot;, &quot;precio&quot;: 4.25, &quot;stock&quot;: 8},
+    {&quot;codigo&quot;: &quot;C12&quot;, &quot;nombre&quot;: &quot;Azúcar 5 lb&quot;, &quot;precio&quot;: 3.90, &quot;stock&quot;: 0},
+]
+
+valor_total = 0
+for p in catalogo:
+    valor_total += p[&quot;precio&quot;] * p[&quot;stock&quot;]
+    if p[&quot;stock&quot;] &lt; 10:
+        print(f&quot;Reordenar: {p[&#x27;nombre&#x27;]} (quedan {p[&#x27;stock&#x27;]})&quot;)
+print(f&quot;Valor del inventario: ${valor_total:,.2f}&quot;)</code></pre>
+<pre class="salida" data-file="salida"><code>Reordenar: Arroz 5 lb (quedan 8)
+Reordenar: Azúcar 5 lb (quedan 0)
+Valor del inventario: $534.00</code></pre>
+  <div class="box nota">
+    <span class="box-title">Qué estructura elegir</span>
+    <ul><li><strong>Lista</strong>: una secuencia ordenada (ventas del día).</li><li><strong>Tupla</strong>: un registro fijo pequeño (coordenada, par base-IVA).</li><li><strong>Diccionario</strong>: un registro con campos con nombre, o un índice por clave (catálogo por código).</li><li><strong>Conjunto</strong>: elementos únicos y preguntas de pertenencia.</li></ul>
+  </div>
+</section>
+
+<section id="conjuntos">
+  <h2>Conjuntos: únicos y comparaciones</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p>Un conjunto es una <strong>lista de invitados</strong>: nadie aparece dos veces y lo importante es si alguien está o no, no el orden.</p>
+  </div>
+  <div class="ciclo">
+    <h3>Caso: ¿qué clientes volvieron a comprar?</h3>
+    <div class="paso"><div>
+      <span class="etq">Pregunta</span>
+<p>El gerente quiere saber cuántos clientes de mayo volvieron en junio (retención), cuántos son nuevos y cuántos se perdieron.</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Exploración</span>
+<p>Son preguntas de conjuntos: intersección (<code>&amp;</code>), diferencia (<code>-</code>) y unión (<code>|</code>). Con listas harías bucles anidados.</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Implementación</span>
+<pre data-file="clientes.py"><code class="language-python">clientes_mayo = {&quot;Ana&quot;, &quot;Luis&quot;, &quot;Eva&quot;, &quot;José&quot;, &quot;Marta&quot;}
+clientes_junio = {&quot;Ana&quot;, &quot;Eva&quot;, &quot;Carla&quot;, &quot;Pedro&quot;}
+
+repiten = clientes_mayo &amp; clientes_junio      # en los dos meses
+nuevos = clientes_junio - clientes_mayo        # solo en junio
+perdidos = clientes_mayo - clientes_junio      # compraron en mayo y no volvieron
+todos = clientes_mayo | clientes_junio
+
+print(&quot;Repiten:&quot;, sorted(repiten))
+print(&quot;Nuevos:&quot;, sorted(nuevos))
+print(&quot;Perdidos:&quot;, sorted(perdidos))
+print(f&quot;Retención: {len(repiten) / len(clientes_mayo):.0%}&quot;)
+print(&quot;Clientes distintos en total:&quot;, len(todos))</code></pre>
+<pre class="salida" data-file="salida"><code>Repiten: [&#x27;Ana&#x27;, &#x27;Eva&#x27;]
+Nuevos: [&#x27;Carla&#x27;, &#x27;Pedro&#x27;]
+Perdidos: [&#x27;José&#x27;, &#x27;Luis&#x27;, &#x27;Marta&#x27;]
+Retención: 40%
+Clientes distintos en total: 7</code></pre>
+
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Interpretación</span>
+<p>2 de 5 clientes volvieron: 40 % de retención. Ese indicador dice más del negocio que el total de ventas del mes.</p>
+    </div></div>
+    <div class="paso verif"><div>
+      <span class="etq">Verificación</span>
+<p>Comprueba a mano: repiten + perdidos = clientes de mayo (2 + 3 = 5) ✔; repiten + nuevos = clientes de junio (2 + 2 = 4) ✔.</p>
+    </div></div>
+  </div>
+</section>
+
+<section id="archivos">
+  <h2>Archivos: que los datos sobrevivan</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p>La memoria del programa es una <strong>pizarra</strong>: al cerrar, se borra. Un archivo es un <strong>cuaderno</strong>: lo que escribes ahí sigue ahí mañana.</p>
+  </div>
+<figure class="lamina "><div class="placa"><div class="placa-core"><img src="../assets/img/s7-persistencia.svg" alt="Persistencia: los datos en memoria se guardan en un archivo JSON con json.dumps y write_text, y se cargan con read_text y json.loads; el archivo permanece entre ejecuciones." width="760" height="226" loading="lazy" decoding="async"></div></div><figcaption>Guardar y cargar son dos pasos cada uno: convertir a texto y escribir; leer y convertir de vuelta.</figcaption></figure>
+  <div class="ciclo">
+    <h3>Caso: reporte de ventas desde un CSV</h3>
+    <div class="paso"><div>
+      <span class="etq">Pregunta</span>
+<p>La caja exporta las ventas en un archivo CSV (valores separados por comas, como una hoja de cálculo). ¿Cuánto se vendió por categoría?</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Exploración</span>
+<p><code>csv.DictReader</code> lee cada fila como diccionario usando la primera línea como nombres de columna. Todo llega como <strong>texto</strong>: el monto hay que convertirlo con <code>float</code>.</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Implementación</span>
+<pre data-file="reporte_csv.py"><code class="language-python">import csv
+from pathlib import Path
+
+ruta = Path(&quot;ventas.csv&quot;)
+ruta.write_text(&quot;&quot;&quot;fecha,categoria,monto
+2026-09-01,abarrotes,120.50
+2026-09-01,limpieza,45.00
+2026-09-02,abarrotes,80.25
+2026-09-02,bebidas,60.00
+2026-09-03,limpieza,15.75
+&quot;&quot;&quot;)
+
+por_categoria = {}
+with ruta.open() as archivo:
+    for fila in csv.DictReader(archivo):          # cada fila es un diccionario
+        monto = float(fila[&quot;monto&quot;])
+        por_categoria[fila[&quot;categoria&quot;]] = por_categoria.get(fila[&quot;categoria&quot;], 0) + monto
+
+for categoria, total in sorted(por_categoria.items()):
+    print(f&quot;{categoria:&lt;10} ${total:&gt;8.2f}&quot;)</code></pre>
+<pre class="salida" data-file="salida"><code>abarrotes  $  200.75
+bebidas    $   60.00
+limpieza   $   60.75</code></pre>
+
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Interpretación</span>
+<p><code>with ... as archivo:</code> abre el archivo y lo cierra solo al terminar el bloque. El resultado es el mismo patrón de acumular por clave, ahora alimentado desde un archivo.</p>
+    </div></div>
+    <div class="paso verif"><div>
+      <span class="etq">Verificación</span>
+<p>abarrotes: 120.50 + 80.25 = 200.75 ✔. Prueba agregar una fila con <code>monto</code> vacío: <code>float("")</code> lanza <code>ValueError</code>. Eso lo resuelve la siguiente sección.</p>
+    </div></div>
+  </div>
+<h3>JSON: guardar estructuras completas</h3>
+<p>JSON guarda diccionarios y listas (también anidados) tal cual. Es el formato ideal para el estado del proyecto.</p>
+<pre data-file="inventario_json.py"><code class="language-python">import json
+from pathlib import Path
+
+ruta = Path(&quot;inventario.json&quot;)
+inventario = {&quot;A01&quot;: {&quot;nombre&quot;: &quot;Aceite 1 L&quot;, &quot;stock&quot;: 40},
+              &quot;B07&quot;: {&quot;nombre&quot;: &quot;Arroz 5 lb&quot;, &quot;stock&quot;: 8}}
+
+ruta.write_text(json.dumps(inventario, indent=2, ensure_ascii=False))   # guardar
+
+cargado = json.loads(ruta.read_text())                                   # cargar
+cargado[&quot;B07&quot;][&quot;stock&quot;] += 20
+print(cargado[&quot;B07&quot;])
+print(ruta.read_text()[:60], &quot;...&quot;)</code></pre>
+<pre class="salida" data-file="salida"><code>{&#x27;nombre&#x27;: &#x27;Arroz 5 lb&#x27;, &#x27;stock&#x27;: 28}
+{
+  &quot;A01&quot;: {
+    &quot;nombre&quot;: &quot;Aceite 1 L&quot;,
+    &quot;stock&quot;: 40
+  } ...</code></pre>
+  <div class="box ojo">
+    <span class="box-title">CSV o JSON</span>
+    <p><strong>CSV</strong>: tablas planas, se abre en Excel, lo producen otros sistemas. <strong>JSON</strong>: datos anidados (un cliente con su lista de compras), ideal para guardar y volver a cargar el estado de tu programa.</p>
+  </div>
+</section>
+
+<section id="excepciones">
+  <h2>Excepciones: fallar sin caerse</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p>Una excepción es una <strong>alarma</strong>. <code>try</code> significa “intenta esto”; <code>except</code>, “si suena esta alarma en particular, haz esto otro en vez de evacuar el edificio”.</p>
+  </div>
+<figure class="lamina "><div class="placa"><div class="placa-core"><img src="../assets/img/s7-excepciones.svg" alt="Flujo de try y except: si no hay error se ejecuta else; si hay un ValueError lo atrapa except y el programa continúa; si es otro error no atrapado, el programa se detiene con un Traceback." width="760" height="326" loading="lazy" decoding="async"></div></div><figcaption>Si el error coincide con el <code>except</code>, el programa sigue. Si no hay <code>except</code> para ese error, el programa se detiene.</figcaption></figure>
+  <div class="ciclo">
+    <h3>Caso: validar montos de verdad</h3>
+    <div class="paso"><div>
+      <span class="etq">Pregunta</span>
+<p>En la semana 2 validabas con <code>replace(".", "", 1).isdigit()</code>, que rechazaba negativos y notación como <code>1e3</code>. ¿Cuál es la forma idiomática?</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Exploración</span>
+<p>“Es más fácil pedir perdón que permiso”: intenta convertir; si falla, atrapa el <code>ValueError</code>. Después valida la regla de negocio (positivo) en el <code>else</code>.</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Implementación</span>
+<pre data-file="validar.py"><code class="language-python">def pedir_monto(texto):
+    &quot;&quot;&quot;Convierte el texto a monto positivo; devuelve None si no es válido.&quot;&quot;&quot;
+    try:
+        monto = float(texto)
+    except ValueError:
+        print(f&quot;  &#x27;{texto}&#x27; no es un número.&quot;)
+        return None
+    else:
+        if monto &lt;= 0:
+            print(f&quot;  {monto} no es un monto positivo.&quot;)
+            return None
+        return monto
+
+
+for entrada in [&quot;150.75&quot;, &quot;diez&quot;, &quot;&quot;, &quot;-5&quot;, &quot;1e3&quot;]:
+    print(repr(entrada), &quot;-&gt;&quot;, pedir_monto(entrada))</code></pre>
+<pre class="salida" data-file="salida"><code>&#x27;150.75&#x27; -&gt; 150.75
+  &#x27;diez&#x27; no es un número.
+&#x27;diez&#x27; -&gt; None
+  &#x27;&#x27; no es un número.
+&#x27;&#x27; -&gt; None
+  -5.0 no es un monto positivo.
+&#x27;-5&#x27; -&gt; None
+&#x27;1e3&#x27; -&gt; 1000.0</code></pre>
+
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Interpretación</span>
+<p><code>"1e3"</code> ahora se acepta (1000.0) y <code>"-5"</code> se rechaza por la regla de negocio, no por el formato. Separar “¿es un número?” de “¿tiene sentido?” da mensajes de error más claros.</p>
+    </div></div>
+    <div class="paso verif"><div>
+      <span class="etq">Verificación</span>
+<p>Cada entrada de prueba recorre un camino distinto: válida, texto, vacía, negativa y notación científica. Esa es tu matriz de casos borde.</p>
+    </div></div>
+  </div>
+<h3>Cargar datos sin cerrarse</h3>
+<pre data-file="cargar.py"><code class="language-python">import json
+from pathlib import Path
+
+
+def cargar_inventario(ruta):
+    &quot;&quot;&quot;Carga el inventario; si no existe o está dañado, empieza vacío sin cerrarse.&quot;&quot;&quot;
+    try:
+        return json.loads(Path(ruta).read_text())
+    except FileNotFoundError:
+        print(f&quot;Aviso: {ruta} no existe todavía. Se empieza con un inventario vacío.&quot;)
+        return {}
+    except json.JSONDecodeError:
+        print(f&quot;Aviso: {ruta} está dañado. Se empieza vacío (revisa el respaldo).&quot;)
+        return {}
+
+
+Path(&quot;danado.json&quot;).write_text(&#x27;{&quot;A01&quot;: 40, &#x27;)      # archivo cortado a la mitad
+print(cargar_inventario(&quot;no_existe.json&quot;))
+print(cargar_inventario(&quot;danado.json&quot;))</code></pre>
+<pre class="salida" data-file="salida"><code>Aviso: no_existe.json no existe todavía. Se empieza con un inventario vacío.
+{}
+Aviso: danado.json está dañado. Se empieza vacío (revisa el respaldo).
+{}</code></pre>
+<h3>Lanzar tus propias excepciones con <code>raise</code></h3>
+<p>Cuando una función no puede cumplir su trabajo, en vez de devolver un valor raro (<code>None</code>, -1), puede <strong>lanzar</strong> una excepción con un mensaje claro. Quien la llama decide qué hacer.</p>
+<pre data-file="retiro.py"><code class="language-python">def retirar(saldo, monto):
+    &quot;&quot;&quot;Devuelve el nuevo saldo; lanza ValueError si el retiro no es posible.&quot;&quot;&quot;
+    if monto &lt;= 0:
+        raise ValueError(&quot;el monto debe ser positivo&quot;)
+    if monto &gt; saldo:
+        raise ValueError(f&quot;saldo insuficiente: hay ${saldo}, se pidieron ${monto}&quot;)
+    return saldo - monto
+
+
+saldo = 100
+for monto in [30, 500, -2]:
+    try:
+        saldo = retirar(saldo, monto)
+        print(f&quot;Retiro de ${monto} aprobado. Saldo: ${saldo}&quot;)
+    except ValueError as error:
+        print(f&quot;Retiro de ${monto} rechazado: {error}&quot;)</code></pre>
+<pre class="salida" data-file="salida"><code>Retiro de $30 aprobado. Saldo: $70
+Retiro de $500 rechazado: saldo insuficiente: hay $70, se pidieron $500
+Retiro de $-2 rechazado: el monto debe ser positivo</code></pre>
+  <div class="box error">
+    <span class="box-title">Tres errores comunes</span>
+    <ul><li><code>except:</code> sin tipo: esconde también los errores de programación.</li><li>Un <code>try</code> gigante alrededor de todo el programa: no sabes qué línea falló. Envuelve solo la operación riesgosa.</li><li>Atrapar y no hacer nada (<code>pass</code>) sin avisar: el usuario cree que todo salió bien.</li></ul>
+  </div>
+</section>
+
+<section id="trazas">
+  <h2>Tablas de traza</h2>
+<h3>Traza 1 · Un diccionario que cambia</h3>
+<pre data-file="traza1.py"><code class="language-python">stock = {&quot;A01&quot;: 40, &quot;B07&quot;: 8}
+stock[&quot;B07&quot;] -= 3
+stock[&quot;C12&quot;] = 15
+stock[&quot;A01&quot;] = stock.get(&quot;A01&quot;, 0) + 10
+total = sum(stock.values())
+hay_D = &quot;D05&quot; in stock</code></pre>
+  <div class="traza">
+    <div class="table-wrap"><table>
+      <thead><tr><th>Después de la línea</th><th>stock["A01"]</th><th>stock["B07"]</th><th>¿existe "C12"?</th></tr></thead>
+      <tbody>
+        <tr><td class="dado">1</td><td><input data-a="40" aria-label="Respuesta"></td><td><input data-a="8" aria-label="Respuesta"></td><td><input data-a="no" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado">2</td><td><input data-a="40" aria-label="Respuesta"></td><td><input data-a="5" aria-label="Respuesta"></td><td><input data-a="no" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado">3</td><td><input data-a="40" aria-label="Respuesta"></td><td><input data-a="5" aria-label="Respuesta"></td><td><input data-a="sí|si" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado">4</td><td><input data-a="50" aria-label="Respuesta"></td><td><input data-a="5" aria-label="Respuesta"></td><td><input data-a="sí|si" aria-label="Respuesta"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="acciones"><button class="btn" type="button" data-comprobar>Comprobar</button><button class="btn sec" type="button" data-solucion>Ver solución</button><button class="btn sec" type="button" data-limpiar>Limpiar</button><span class="resultado" aria-live="polite"></span></div>
+  </div>
+<p>Al final, <code>total</code> vale 70 (50 + 5 + 15) y <code>hay_D</code> es <code>False</code>.</p>
+<h3>Traza 2 · ¿Qué bloque se ejecuta?</h3>
+<p>Para <code>try: n = int(x) / d</code> con <code>except ValueError</code>, <code>except ZeroDivisionError</code> y <code>else</code>. Escribe <em>ValueError</em>, <em>ZeroDivisionError</em> o <em>else</em>.</p>
+  <div class="traza">
+    <div class="table-wrap"><table>
+      <thead><tr><th>x</th><th>d</th><th>Bloque</th></tr></thead>
+      <tbody>
+        <tr><td class="dado">"10"</td><td class="dado">2</td><td><input data-a="else" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado">"diez"</td><td class="dado">2</td><td><input data-a="ValueError" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado">"10"</td><td class="dado">0</td><td><input data-a="ZeroDivisionError" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado">"3.5"</td><td class="dado">1</td><td><input data-a="ValueError" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado">"-4"</td><td class="dado">4</td><td><input data-a="else" aria-label="Respuesta"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="acciones"><button class="btn" type="button" data-comprobar>Comprobar</button><button class="btn sec" type="button" data-solucion>Ver solución</button><button class="btn sec" type="button" data-limpiar>Limpiar</button><span class="resultado" aria-live="polite"></span></div>
+  </div>
+<details class="defensa"><summary>¿Por qué <code>int("3.5")</code> da ValueError?</summary><div><p><code>int()</code> con texto exige un entero escrito. Para aceptar decimales: <code>float("3.5")</code>.</p></div></details>
+  <ul class="check">
+    <li><input type="checkbox" id="s7-t1" data-track="s7-t1"><label for="s7-t1">Traza 1 completa.</label></li>
+    <li><input type="checkbox" id="s7-t2" data-track="s7-t2"><label for="s7-t2">Traza 2 completa.</label></li>
+  </ul>
+</section>
+
+<section id="ejercicios">
+  <h2>Ejercicios</h2>
+  <article class="ejercicio">
+    <header><h3>E1 · Actualizar una lista de precios</h3><span class="nivel">diccionarios · ★</span></header>
+    <div class="cuerpo">
+<p>Con <code>precios = {"A01": 12.50, "B07": 4.25, "C12": 3.90, "D03": 6.75}</code>: sube todos los precios 5 %, obtén un diccionario con los productos de más de $5, y encuentra el más barato.</p>
+    </div>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="precios.py"><code class="language-python">precios = {&quot;A01&quot;: 12.50, &quot;B07&quot;: 4.25, &quot;C12&quot;: 3.90, &quot;D03&quot;: 6.75}
+
+# 1. Subir 5 % todos los precios (redondeados a centavos)
+for codigo in precios:
+    precios[codigo] = round(precios[codigo] * 1.05, 2)
+
+# 2. Productos de más de $5
+caros = {c: p for c, p in precios.items() if p &gt; 5}
+
+# 3. Producto más barato
+barato = min(precios, key=precios.get)
+
+print(precios)
+print(caros)
+print(f&quot;Más barato: {barato} (${precios[barato]})&quot;)</code></pre>
+<pre class="salida" data-file="salida"><code>{&#x27;A01&#x27;: 13.12, &#x27;B07&#x27;: 4.46, &#x27;C12&#x27;: 4.09, &#x27;D03&#x27;: 7.09}
+{&#x27;A01&#x27;: 13.12, &#x27;D03&#x27;: 7.09}
+Más barato: C12 ($4.09)</code></pre>
+<p>La línea 7 es una <strong>comprensión de diccionario</strong>, la misma idea que las comprensiones de lista de la semana 5.</p>
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s7-e1" data-track="s7-e1"><label for="s7-e1">Resuelto</label></li></ul>
+  </article>
+  <article class="ejercicio">
+    <header><h3>E2 · Ventas por mes y por producto</h3><span class="nivel">lista de diccionarios · ★★</span></header>
+    <div class="cuerpo">
+<p>Con una lista de ventas (cada una un diccionario con mes, producto y monto), calcula el total por mes, el total por producto y qué porcentaje representa el producto líder.</p>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p>Dos diccionarios acumuladores, uno por cada forma de agrupar, llenados en el mismo recorrido.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="agrupar.py"><code class="language-python">ventas = [{&quot;mes&quot;: &quot;ene&quot;, &quot;producto&quot;: &quot;Aceite&quot;, &quot;monto&quot;: 300},
+          {&quot;mes&quot;: &quot;ene&quot;, &quot;producto&quot;: &quot;Arroz&quot;, &quot;monto&quot;: 120},
+          {&quot;mes&quot;: &quot;feb&quot;, &quot;producto&quot;: &quot;Aceite&quot;, &quot;monto&quot;: 450},
+          {&quot;mes&quot;: &quot;feb&quot;, &quot;producto&quot;: &quot;Café&quot;, &quot;monto&quot;: 200},
+          {&quot;mes&quot;: &quot;mar&quot;, &quot;producto&quot;: &quot;Arroz&quot;, &quot;monto&quot;: 90}]
+
+por_mes = {}
+por_producto = {}
+for v in ventas:
+    por_mes[v[&quot;mes&quot;]] = por_mes.get(v[&quot;mes&quot;], 0) + v[&quot;monto&quot;]
+    por_producto[v[&quot;producto&quot;]] = por_producto.get(v[&quot;producto&quot;], 0) + v[&quot;monto&quot;]
+
+print(&quot;Por mes:&quot;, por_mes)
+print(&quot;Por producto:&quot;, por_producto)
+lider = max(por_producto, key=por_producto.get)
+print(f&quot;Producto líder: {lider} ({por_producto[lider] / sum(por_producto.values()):.0%} de las ventas)&quot;)</code></pre>
+<pre class="salida" data-file="salida"><code>Por mes: {&#x27;ene&#x27;: 420, &#x27;feb&#x27;: 650, &#x27;mar&#x27;: 90}
+Por producto: {&#x27;Aceite&#x27;: 750, &#x27;Arroz&#x27;: 210, &#x27;Café&#x27;: 200}
+Producto líder: Aceite (65% de las ventas)</code></pre>
+<p><strong>Verificación:</strong> la suma de los totales por mes y la de los totales por producto deben ser iguales (1,160). Si no lo son, se perdió o duplicó alguna venta.</p>
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s7-e2" data-track="s7-e2"><label for="s7-e2">Resuelto</label></li></ul>
+  </article>
+  <article class="ejercicio">
+    <header><h3>E3 · Bitácora de caja en un archivo de texto</h3><span class="nivel">archivos · ★★</span></header>
+    <div class="cuerpo">
+<p>Escribe una función <code>registrar(mensaje)</code> que agregue una línea a <code>bitacora.txt</code> sin borrar lo anterior. Registra tres eventos y luego lee el archivo y muéstralo.</p>
+    </div>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="bitacora.py"><code class="language-python">from pathlib import Path
+
+ruta = Path(&quot;bitacora.txt&quot;)
+if ruta.exists():
+    ruta.unlink()          # empezar limpio para el ejemplo
+
+
+def registrar(mensaje):
+    &quot;&quot;&quot;Agrega una línea al final del archivo sin borrar lo anterior.&quot;&quot;&quot;
+    anterior = ruta.read_text() if ruta.exists() else &quot;&quot;
+    ruta.write_text(anterior + mensaje + &quot;\n&quot;)
+
+
+registrar(&quot;09:00 Caja abierta&quot;)
+registrar(&quot;09:15 Venta $25.50&quot;)
+registrar(&quot;18:00 Caja cerrada&quot;)
+
+lineas = ruta.read_text().splitlines()
+print(f&quot;{len(lineas)} registros&quot;)
+for linea in lineas:
+    print(&quot; -&quot;, linea)</code></pre>
+<pre class="salida" data-file="salida"><code>3 registros
+ - 09:00 Caja abierta
+ - 09:15 Venta $25.50
+ - 18:00 Caja cerrada</code></pre>
+<p><code>write_text</code> reemplaza el contenido completo, por eso primero se lee lo anterior. (En Python también existe <code>open(ruta, "a")</code> para agregar directamente.)</p>
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s7-e3" data-track="s7-e3"><label for="s7-e3">Resuelto</label></li></ul>
+  </article>
+  <article class="ejercicio">
+    <header><h3>E4 · Auditoría: el <code>except</code> que todo lo esconde</h3><span class="nivel">auditoría · ★★★</span></header>
+    <div class="cuerpo">
+<p>Una IA propuso esta función. “Nunca falla”, pero devuelve 0 cuando el archivo no existe, cuando está dañado, cuando a un producto le falta el precio… y también si escribes mal una variable. ¿Qué problemas tiene y cómo lo rediseñarías?</p><pre data-file="auditar.py"><code class="language-python">import json
+from pathlib import Path
+
+
+def cargar(ruta):
+    try:
+        datos = json.loads(Path(ruta).read_text())
+        total = 0
+        for codigo in datos:
+            total = total + datos[codigo][&quot;precio&quot;] * datos[codigo][&quot;stock&quot;]
+        return total
+    except:
+        return 0</code></pre>
+
+    </div>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<ol><li><strong><code>except:</code> sin tipo</strong>: atrapa todo, incluso errores de programación; nunca sabrás por qué dio 0.</li><li><strong>Devolver 0 es ambiguo</strong>: ¿el inventario vale 0 o hubo un error?</li><li><strong>Hace dos cosas</strong>: cargar y calcular. Separarlas permite probar cada una.</li></ol><pre data-file="corregido.py"><code class="language-python">import json
+from pathlib import Path
+
+
+def cargar(ruta):
+    &quot;&quot;&quot;Lee el inventario; devuelve {} si no existe (primera ejecución).&quot;&quot;&quot;
+    try:
+        return json.loads(Path(ruta).read_text())
+    except FileNotFoundError:
+        return {}
+
+
+def valor_inventario(datos):
+    &quot;&quot;&quot;Suma precio x stock; ignora (y reporta) productos incompletos.&quot;&quot;&quot;
+    total = 0
+    for codigo, p in datos.items():
+        if &quot;precio&quot; not in p or &quot;stock&quot; not in p:
+            print(f&quot;Aviso: al producto {codigo} le faltan datos.&quot;)
+            continue
+        total += p[&quot;precio&quot;] * p[&quot;stock&quot;]
+    return total
+
+
+Path(&quot;inv.json&quot;).write_text(&#x27;{&quot;A01&quot;: {&quot;precio&quot;: 12.5, &quot;stock&quot;: 4}, &quot;B07&quot;: {&quot;precio&quot;: 4.25}}&#x27;)
+print(valor_inventario(cargar(&quot;inv.json&quot;)))
+print(valor_inventario(cargar(&quot;no_existe.json&quot;)))</code></pre>
+<pre class="salida" data-file="salida"><code>Aviso: al producto B07 le faltan datos.
+50.0
+0</code></pre>
+
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s7-e4" data-track="s7-e4"><label for="s7-e4">Resuelto</label></li></ul>
+  </article>
+</section>
+
+<section id="practica">
+  <h2>Práctica intensiva</h2>
+<p>Primero ejercicios rápidos que se corrigen solos; luego problemas tipo laboratorio. Pulsa <strong>▶ Ejecutar</strong> en las soluciones y modifícalas con <strong>Editar</strong>.</p>
+  <h3>Ejercicios rápidos · ¿Qué resulta?</h3>
+  <p>Con <code>d = {"a": 1, "b": 2}</code> cuando aparezca. Escribe el resultado; si da error, escribe el nombre del error.</p>
+  <div class="traza taladro">
+    <div class="table-wrap"><table>
+      <thead><tr><th>Código</th><th>Tu respuesta</th></tr></thead>
+      <tbody>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">d[&quot;b&quot;]</code></pre></td><td><input data-a="2" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">d.get(&quot;c&quot;, 0)</code></pre></td><td><input data-a="0" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">d[&quot;c&quot;]</code></pre></td><td><input data-a="KeyError" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">len({&quot;x&quot;: 1, &quot;x&quot;: 2})</code></pre></td><td><input data-a="1" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">d[&quot;a&quot;] = 5
+d</code></pre></td><td><input data-a="{&#x27;a&#x27;: 5, &#x27;b&#x27;: 2}|{&quot;a&quot;: 5, &quot;b&quot;: 2}" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">&quot;a&quot; in d</code></pre></td><td><input data-a="True" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">len({3, 1, 3, 2})</code></pre></td><td><input data-a="3" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">{1, 2, 3} &amp; {2, 3, 4}</code></pre></td><td><input data-a="{2, 3}" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">int(&quot;12.5&quot;)</code></pre></td><td><input data-a="ValueError" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-python">10 / 0</code></pre></td><td><input data-a="ZeroDivisionError" aria-label="Respuesta"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="acciones"><button class="btn" type="button" data-comprobar>Comprobar</button><button class="btn sec" type="button" data-solucion>Ver solución</button><button class="btn sec" type="button" data-limpiar>Limpiar</button><span class="resultado" aria-live="polite"></span></div>
+  </div>
+  <ul class="check">
+    <li><input type="checkbox" id="s7-px" data-track="s7-px"><label for="s7-px">Completé los ejercicios rápidos sin ejecutar el código.</label></li>
+  </ul>
+  <h3>Problemas tipo examen</h3>
+  <article class="ejercicio problema">
+    <header><h3>P1 · Gestor de transacciones desde CSV</h3><span class="nivel">CSV + diccionarios + excepciones · ★★★★</span></header>
+    <div class="cuerpo">
+      <p>Lee un CSV de transacciones (id, tipo, categoría, monto). Suma los ingresos, agrupa los gastos por categoría con su porcentaje (de mayor a menor) y calcula la utilidad. Las filas con monto inválido o tipo desconocido se <strong>rechazan con su motivo</strong>, sin detener el programa.</p>
+      <p><strong>Tu programa debe cumplir estos casos de prueba:</strong></p>
+      <div class="table-wrap"><table><thead><tr><th>Resultado</th><th>Esperado</th></tr></thead><tbody><tr><td>Ingresos</td><td>$2,320.00</td></tr><tr><td>Planilla</td><td>$900.00 (57 %)</td></tr><tr><td>Utilidad</td><td>$734.60</td></tr><tr><td>Rechazadas</td><td>id 4 (monto “abc”) e id 6 (tipo “retiro”)</td></tr></tbody></table></div>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p>Un <code>try</code> pequeño solo alrededor de <code>float(...)</code>; el tipo desconocido se detecta con el <code>else</code> final de la cadena <code>if</code>. Ordena con <code>sorted(gastos.items(), key=...)</code>.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="gestor.py"><code class="language-python">import csv
+from pathlib import Path
+
+Path(&quot;transacciones.csv&quot;).write_text(&quot;&quot;&quot;id,tipo,categoria,monto
+1,ingreso,ventas,1500.00
+2,gasto,alquiler,600.00
+3,gasto,servicios,85.40
+4,ingreso,ventas,abc
+5,gasto,planilla,900.00
+6,retiro,otros,50.00
+7,ingreso,ventas,820.00
+&quot;&quot;&quot;)
+
+ingresos = 0
+gastos = {}
+rechazadas = []
+with open(&quot;transacciones.csv&quot;) as archivo:
+    for fila in csv.DictReader(archivo):
+        try:
+            monto = float(fila[&quot;monto&quot;])
+        except ValueError:
+            rechazadas.append(f&quot;id {fila[&#x27;id&#x27;]}: monto inválido &#x27;{fila[&#x27;monto&#x27;]}&#x27;&quot;)
+            continue
+        if fila[&quot;tipo&quot;] == &quot;ingreso&quot;:
+            ingresos += monto
+        elif fila[&quot;tipo&quot;] == &quot;gasto&quot;:
+            gastos[fila[&quot;categoria&quot;]] = gastos.get(fila[&quot;categoria&quot;], 0) + monto
+        else:
+            rechazadas.append(f&quot;id {fila[&#x27;id&#x27;]}: tipo desconocido &#x27;{fila[&#x27;tipo&#x27;]}&#x27;&quot;)
+
+total_gastos = sum(gastos.values())
+print(f&quot;Ingresos: ${ingresos:,.2f}&quot;)
+for categoria, monto in sorted(gastos.items(), key=lambda par: par[1], reverse=True):
+    print(f&quot;  {categoria:&lt;10} ${monto:&gt;8,.2f}  ({monto / total_gastos:.0%})&quot;)
+print(f&quot;Utilidad: ${ingresos - total_gastos:,.2f}&quot;)
+print(&quot;Rechazadas:&quot;, rechazadas)</code></pre>
+<pre class="salida" data-file="salida"><code>Ingresos: $2,320.00
+  planilla   $  900.00  (57%)
+  alquiler   $  600.00  (38%)
+  servicios  $   85.40  (5%)
+Utilidad: $734.60
+Rechazadas: [&quot;id 4: monto inválido &#x27;abc&#x27;&quot;, &quot;id 6: tipo desconocido &#x27;retiro&#x27;&quot;]</code></pre>
+<p><strong>Verificación:</strong> 1,500 + 820 = 2,320 ✔; gastos 600 + 85.40 + 900 = 1,585.40; utilidad 734.60 ✔. Este es exactamente el laboratorio de la semana.</p>
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s7-pr1" data-track="s7-pr1"><label for="s7-pr1">Resuelto y probado con todos los casos</label></li></ul>
+  </article>
+  <article class="ejercicio problema">
+    <header><h3>P2 · Inventario persistente a prueba de fallos</h3><span class="nivel">JSON + raise + recuperación · ★★★★</span></header>
+    <div class="cuerpo">
+      <p>Construye <code>cargar</code>, <code>guardar</code> y <code>mover(stock, codigo, cantidad)</code>. El stock se guarda en JSON y se recupera en la siguiente ejecución. Una salida que deje stock negativo lanza <code>ValueError</code>. Si el archivo está dañado, se renombra como respaldo y se empieza vacío.</p>
+      <p><strong>Tu programa debe cumplir estos casos de prueba:</strong></p>
+      <div class="table-wrap"><table><thead><tr><th>Situación</th><th>Esperado</th></tr></thead><tbody><tr><td>Primera ejecución (sin archivo)</td><td>empieza con {}</td></tr><tr><td>A01 +40, B07 +10, A01 −15</td><td>A01: 25, B07: 10</td></tr><tr><td>B07 −30</td><td>rechazado con mensaje</td></tr><tr><td>Archivo dañado</td><td>{} y se crea stock_danado.json</td></tr></tbody></table></div>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p>Esta es la estructura del <code>persistencia.py</code> de tu proyecto: tres funciones pequeñas, cada una con una sola responsabilidad.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="stock_persistente.py"><code class="language-python">import json
+from pathlib import Path
+
+RUTA = Path(&quot;stock.json&quot;)
+
+
+def cargar():
+    try:
+        return json.loads(RUTA.read_text())
+    except FileNotFoundError:
+        return {}
+    except json.JSONDecodeError:
+        RUTA.rename(&quot;stock_danado.json&quot;)          # conservar evidencia
+        return {}
+
+
+def guardar(stock):
+    RUTA.write_text(json.dumps(stock, indent=2))
+
+
+def mover(stock, codigo, cantidad):
+    &quot;&quot;&quot;Suma (entrada) o resta (salida) stock; lanza ValueError si queda negativo.&quot;&quot;&quot;
+    nuevo = stock.get(codigo, 0) + cantidad
+    if nuevo &lt; 0:
+        raise ValueError(f&quot;{codigo}: no hay suficiente stock ({stock.get(codigo, 0)})&quot;)
+    stock[codigo] = nuevo
+
+
+# Primera ejecución: no hay archivo
+if RUTA.exists():
+    RUTA.unlink()
+stock = cargar()
+for codigo, cantidad in [(&quot;A01&quot;, 40), (&quot;B07&quot;, 10), (&quot;A01&quot;, -15), (&quot;B07&quot;, -30)]:
+    try:
+        mover(stock, codigo, cantidad)
+    except ValueError as error:
+        print(&quot;Rechazado:&quot;, error)
+guardar(stock)
+
+# &quot;Segunda ejecución&quot;: el estado se recupera desde el disco
+print(&quot;Recuperado:&quot;, cargar())
+
+# Archivo dañado: el programa no se cae
+RUTA.write_text(&quot;{ esto no es JSON&quot;)
+print(&quot;Tras daño:&quot;, cargar(), &quot;| respaldo existe:&quot;, Path(&quot;stock_danado.json&quot;).exists())</code></pre>
+<pre class="salida" data-file="salida"><code>Rechazado: B07: no hay suficiente stock (10)
+Recuperado: {&#x27;A01&#x27;: 25, &#x27;B07&#x27;: 10}
+Tras daño: {} | respaldo existe: True</code></pre>
+
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s7-pr2" data-track="s7-pr2"><label for="s7-pr2">Resuelto y probado con todos los casos</label></li></ul>
+  </article>
+  <article class="ejercicio problema">
+    <header><h3>P3 · Análisis de canasta con conjuntos</h3><span class="nivel">diccionario de conjuntos · ★★★</span></header>
+    <div class="cuerpo">
+      <p>Con una lista de compras (cliente, producto), arma un diccionario cliente → conjunto de productos. Luego: ¿qué producto recomendarías a Eva según lo que compra Ana? ¿Qué clientes compraron el combo A01 + B07?</p>
+      <p><strong>Tu programa debe cumplir estos casos de prueba:</strong></p>
+      <div class="table-wrap"><table><thead><tr><th>Pregunta</th><th>Esperado</th></tr></thead><tbody><tr><td>Productos de Ana</td><td>['A01', 'C12'] (sin repetir A01)</td></tr><tr><td>Recomendar a Eva</td><td>['C12']</td></tr><tr><td>Compraron el combo</td><td>['Eva', 'Luis']</td></tr></tbody></table></div>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p><code>d.setdefault(clave, set())</code> devuelve el conjunto de esa clave, creándolo vacío si no existía. <code>a &lt;= b</code> pregunta si <code>a</code> es subconjunto de <code>b</code>.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="canasta.py"><code class="language-python">compras = [(&quot;Ana&quot;, &quot;A01&quot;), (&quot;Luis&quot;, &quot;B07&quot;), (&quot;Ana&quot;, &quot;C12&quot;), (&quot;Eva&quot;, &quot;A01&quot;),
+           (&quot;Luis&quot;, &quot;A01&quot;), (&quot;Ana&quot;, &quot;A01&quot;), (&quot;Marta&quot;, &quot;D03&quot;), (&quot;Eva&quot;, &quot;B07&quot;)]
+
+productos_por_cliente = {}
+for cliente, producto in compras:
+    productos_por_cliente.setdefault(cliente, set()).add(producto)
+
+for cliente, productos in sorted(productos_por_cliente.items()):
+    print(f&quot;{cliente:&lt;6} {sorted(productos)}&quot;)
+
+# ¿Qué productos compró Ana que Eva no? (recomendación para Eva)
+recomendar = productos_por_cliente[&quot;Ana&quot;] - productos_por_cliente[&quot;Eva&quot;]
+print(&quot;Recomendar a Eva:&quot;, sorted(recomendar))
+
+# Clientes que compraron A01 y B07 (combo)
+combo = [c for c, ps in productos_por_cliente.items() if {&quot;A01&quot;, &quot;B07&quot;} &lt;= ps]
+print(&quot;Compraron el combo A01 + B07:&quot;, sorted(combo))</code></pre>
+<pre class="salida" data-file="salida"><code>Ana    [&#x27;A01&#x27;, &#x27;C12&#x27;]
+Eva    [&#x27;A01&#x27;, &#x27;B07&#x27;]
+Luis   [&#x27;A01&#x27;, &#x27;B07&#x27;]
+Marta  [&#x27;D03&#x27;]
+Recomendar a Eva: [&#x27;C12&#x27;]
+Compraron el combo A01 + B07: [&#x27;Eva&#x27;, &#x27;Luis&#x27;]</code></pre>
+<p><strong>Interpretación:</strong> así funcionan, en versión mínima, los “clientes que compraron esto también compraron…” de las tiendas en línea.</p>
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s7-pr3" data-track="s7-pr3"><label for="s7-pr3">Resuelto y probado con todos los casos</label></li></ul>
+  </article>
+</section>
+
+<section id="proyecto">
+  <h2>Proyecto integrador · Fase 4</h2>
+<p><strong>Semana 7 · Persistencia en disco y manejo de errores.</strong></p>
+<div class="card">
+<h3>Entregables de esta fase</h3>
+  <ul class="check">
+    <li><input type="checkbox" id="s7-p1" data-track="s7-p1"><label for="s7-p1"><strong>Módulo de persistencia</strong> (<code>persistencia.py</code>): leer y escribir el estado en JSON o CSV.</label></li>
+    <li><input type="checkbox" id="s7-p2" data-track="s7-p2"><label for="s7-p2">El sistema <strong>recupera sus datos</strong> al volver a ejecutarse (cierra, abre y comprueba).</label></li>
+    <li><input type="checkbox" id="s7-p3" data-track="s7-p3"><label for="s7-p3"><strong>Manejo de excepciones</strong> específicas: <code>FileNotFoundError</code>, <code>ValueError</code>, <code>json.JSONDecodeError</code>.</label></li>
+    <li><input type="checkbox" id="s7-p4" data-track="s7-p4"><label for="s7-p4">Ninguna entrada del usuario (texto donde va número, vacío, negativo) cierra el programa.</label></li>
+  </ul>
+</div>
+<h3>Preguntas de defensa</h3>
+  <details class="defensa"><summary>¿Qué pasa si borran el archivo de datos antes de ejecutar?</summary><div><p>El sistema atrapa <code>FileNotFoundError</code>, empieza con datos vacíos (o de ejemplo) y lo informa. Muestra el <code>try</code> exacto.</p></div></details>
+  <details class="defensa"><summary>¿Por qué eligieron JSON (o CSV)?</summary><div><p>JSON guarda estructuras anidadas y se recupera tal cual; CSV sirve para tablas planas que otros abren en Excel. Justifica según la forma de tus datos.</p></div></details>
+  <details class="defensa"><summary>¿Por qué no usan un <code>except:</code> general?</summary><div><p>Porque escondería errores de programación. Atrapamos solo los errores esperados y dejamos que los inesperados se vean para corregirlos.</p></div></details>
+  <details class="defensa"><summary>¿Cómo validan que un monto sea correcto?</summary><div><p>Primero el formato (<code>try: float(...)</code>), luego la regla de negocio (positivo, dentro de rango) con un mensaje distinto para cada caso.</p></div></details>
+  <details class="defensa"><summary>Muéstrennos el archivo de datos y expliquen su estructura.</summary><div><p>Abre el JSON, señala claves y valores, y relaciona cada campo con el código que lo lee.</p></div></details>
+</section>
+
+<section id="evaluacion">
+  <h2>Rumbo al Control 3</h2>
+<p>El <strong>Control 3 es en la semana 8</strong> (confirma el temario en Moodle). De esta semana, asegúrate de poder:</p>
+  <ul class="check">
+    <li><input type="checkbox" id="s7-v1" data-track="s7-v1"><label for="s7-v1">Crear, leer, modificar y recorrer diccionarios, y usar <code>get</code> con valor por defecto.</label></li>
+    <li><input type="checkbox" id="s7-v2" data-track="s7-v2"><label for="s7-v2">Aplicar el patrón “acumular por clave”.</label></li>
+    <li><input type="checkbox" id="s7-v3" data-track="s7-v3"><label for="s7-v3">Usar conjuntos para únicos, intersección, unión y diferencia.</label></li>
+    <li><input type="checkbox" id="s7-v4" data-track="s7-v4"><label for="s7-v4">Leer y escribir archivos de texto, CSV y JSON.</label></li>
+    <li><input type="checkbox" id="s7-v5" data-track="s7-v5"><label for="s7-v5">Escribir <code>try/except/else</code> con excepciones específicas y lanzar las propias con <code>raise</code>.</label></li>
+  </ul>
+</section>
+
+<section id="fuentes">
+  <h2>Fuentes</h2>
+<ul><li><strong>[PCC]</strong> Matthes, E. (2023). <em>Python Crash Course</em>, 3.ª ed. Caps. 6 y 10.</li><li>Python Software Foundation. <a href="https://docs.python.org/es/3/tutorial/errors.html" target="_blank" rel="noopener">Tutorial — Errores y excepciones</a> · <a href="https://docs.python.org/es/3/library/json.html" target="_blank" rel="noopener">json</a> · <a href="https://docs.python.org/es/3/library/csv.html" target="_blank" rel="noopener">csv</a>.</li></ul>
+</section>
+
+  <nav class="nav-semanas" aria-label="Navegación entre semanas">
+    <a class="nav-prev" href="semana-06.html"><span class="btn-ico" aria-hidden="true"></span><span>Semana 6</span></a>
+    <a class="nav-next" href="semana-08.html"><span>Semana 8: poo: clases y encapsulamiento</span><span class="btn-ico" aria-hidden="true"></span></a>
+  </nav>
+
+<footer class="pie">Guía de estudio · Introducción al Desarrollo de Software · ESEN · Ciclo III/2026. Material de apoyo no oficial; el programa y Moodle mandan.</footer>
+</main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+<script src="../assets/guia.js"></script>
+<script src="../assets/ejecutar.js"></script>
+</body>
+</html>

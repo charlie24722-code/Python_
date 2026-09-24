@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 280" width="760" height="280" role="img" aria-label="Un arreglo decimal de C# tiene tamaño fijo de 5 posiciones; una List de decimal crece con Add y solo acepta elementos de ese tipo.">
+<title>Un arreglo decimal de C# tiene tamaño fijo de 5 posiciones; una List de decimal crece con Add y solo acepta elementos de ese tipo.</title>
+<style>
+  text { font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; fill: #1b2430; }
+  .m { font-family: 'JetBrains Mono', Menlo, Consolas, monospace; font-size: 13px; }
+  .s { font-size: 12px; fill: #465264; }
+  .t { font-size: 16px; font-weight: 700; }
+  .b { font-weight: 700; }
+  .mu { fill: #6b7380; }
+  .w { fill: #fff; }
+  .ln { stroke: #465264; stroke-width: 1.6; fill: none; }
+  .ln-s { stroke: #c5ced6; stroke-width: 1.2; fill: none; }
+</style>
+<defs><marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#465264"/></marker><marker id="pb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0a70a8"/></marker><marker id="pg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2e7d4f"/></marker></defs>
+<text x="20" y="26" text-anchor="start" class="m b">decimal[] precios = new decimal[5];</text>
+<rect x="20" y="42" width="62" height="44" rx="4" fill="#fff" stroke="#1d4f66" stroke-width="2"/>
+<text x="51" y="70" text-anchor="middle" class="m s">12.50</text>
+<text x="51" y="104" text-anchor="middle" class="m s mu">0</text>
+<rect x="90" y="42" width="62" height="44" rx="4" fill="#fff" stroke="#1d4f66" stroke-width="2"/>
+<text x="121" y="70" text-anchor="middle" class="m s">4.25</text>
+<text x="121" y="104" text-anchor="middle" class="m s mu">1</text>
+<rect x="160" y="42" width="62" height="44" rx="4" fill="#fff" stroke="#1d4f66" stroke-width="2"/>
+<text x="191" y="70" text-anchor="middle" class="m s">0.00</text>
+<text x="191" y="104" text-anchor="middle" class="m s mu">2</text>
+<rect x="230" y="42" width="62" height="44" rx="4" fill="#fff" stroke="#1d4f66" stroke-width="2"/>
+<text x="261" y="70" text-anchor="middle" class="m s">0.00</text>
+<text x="261" y="104" text-anchor="middle" class="m s mu">3</text>
+<rect x="300" y="42" width="62" height="44" rx="4" fill="#fff" stroke="#1d4f66" stroke-width="2"/>
+<text x="331" y="70" text-anchor="middle" class="m s">0.00</text>
+<text x="331" y="104" text-anchor="middle" class="m s mu">4</text>
+<text x="20" y="132" text-anchor="start" class="s" style="fill:#b8402f">Arreglo: tamaño fijo. Un sexto precio no cabe → IndexOutOfRangeException.</text>
+<text x="20" y="176" text-anchor="start" class="m b">List&lt;decimal&gt; precios = new List&lt;decimal&gt;();</text>
+<rect x="20" y="192" width="62" height="44" rx="4" fill="#dcefe3" stroke="#2e7d4f" stroke-width="2"/>
+<text x="51" y="220" text-anchor="middle" class="m s">12.50</text>
+<rect x="90" y="192" width="62" height="44" rx="4" fill="#dcefe3" stroke="#2e7d4f" stroke-width="2"/>
+<text x="121" y="220" text-anchor="middle" class="m s">4.25</text>
+<rect x="160" y="192" width="62" height="44" rx="4" fill="#dcefe3" stroke="#2e7d4f" stroke-width="2"/>
+<text x="191" y="220" text-anchor="middle" class="m s">3.90</text>
+<rect x="230" y="192" width="62" height="44" rx="4" fill="#fff" stroke="#2e7d4f" stroke-width="2" stroke-dasharray="5 4"/>
+<text x="261" y="220" text-anchor="middle" class="b">+</text>
+<text x="310" y="219" text-anchor="start" class="m s">precios.Add(6.75m);  crece según haga falta</text>
+<text x="20" y="266" text-anchor="start" class="s" style="fill:#2e7d4f">Lista genérica: como la lista de Python, pero todos sus elementos son del tipo indicado (&lt;decimal&gt;).</text>
+</svg>

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 326" width="760" height="326" role="img" aria-label="Flujo de try y except: si no hay error se ejecuta else; si hay un ValueError lo atrapa except y el programa continúa; si es otro error no atrapado, el programa se detiene con un Traceback.">
+<title>Flujo de try y except: si no hay error se ejecuta else; si hay un ValueError lo atrapa except y el programa continúa; si es otro error no atrapado, el programa se detiene con un Traceback.</title>
+<style>
+  text { font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; fill: #1b2430; }
+  .m { font-family: 'JetBrains Mono', Menlo, Consolas, monospace; font-size: 13px; }
+  .s { font-size: 12px; fill: #465264; }
+  .t { font-size: 16px; font-weight: 700; }
+  .b { font-weight: 700; }
+  .mu { fill: #6b7380; }
+  .w { fill: #fff; }
+  .ln { stroke: #465264; stroke-width: 1.6; fill: none; }
+  .ln-s { stroke: #c5ced6; stroke-width: 1.2; fill: none; }
+</style>
+<defs><marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#465264"/></marker><marker id="pb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0a70a8"/></marker><marker id="pg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2e7d4f"/></marker></defs>
+<rect x="250" y="10" width="260" height="50" rx="8" fill="#e2ecf1" stroke="#1d4f66" stroke-width="1.5"/>
+<text x="380" y="32" text-anchor="middle" class="m b">try:</text>
+<text x="380" y="50" text-anchor="middle" class="m s">monto = float(texto)</text>
+<path class="ln" d="M380 60 V84" marker-end="url(#p)"/>
+<polygon points="380,86 480,122 380,158 280,122" fill="#fbf1b8" stroke="#b07600" stroke-width="1.5"/>
+<text x="380" y="127" text-anchor="middle" class="b">¿hubo error?</text>
+<path class="ln" d="M480 122 H600 V176" marker-end="url(#pg)" stroke="#2e7d4f"/>
+<text x="530" y="114" text-anchor="middle" class="b">No</text>
+<rect x="520" y="178" width="180" height="50" rx="8" fill="#dcefe3" stroke="#2e7d4f" stroke-width="1.5"/>
+<text x="610" y="200" text-anchor="middle" class="m b">else:</text>
+<text x="610" y="218" text-anchor="middle" class="m s">usar monto</text>
+<path class="ln" d="M280 122 H160 V176" marker-end="url(#p)"/>
+<text x="230" y="114" text-anchor="middle" class="b">Sí</text>
+<polygon points="160,178 250,212 160,246 70,212" fill="#e9eef1" stroke="#465264" stroke-width="1.5"/>
+<text x="160" y="210" text-anchor="middle" class="s b">¿es un</text>
+<text x="160" y="226" text-anchor="middle" class="m s">ValueError?</text>
+<path class="ln" d="M250 212 H330 V262" marker-end="url(#pb)" stroke="#0a70a8"/>
+<text x="290" y="204" text-anchor="middle" class="b">Sí</text>
+<rect x="250" y="264" width="200" height="50" rx="8" fill="#e2ecf1" stroke="#0a70a8" stroke-width="1.5"/>
+<text x="350" y="286" text-anchor="middle" class="m b">except ValueError:</text>
+<text x="350" y="304" text-anchor="middle" class="m s">avisar y seguir</text>
+<path class="ln" d="M160 246 V262" marker-end="url(#p)"/>
+<text x="146" y="258" text-anchor="end" class="b">No</text>
+<rect x="40" y="264" width="180" height="50" rx="8" fill="#f7e0dc" stroke="#b8402f" stroke-width="1.5"/>
+<text x="130" y="286" text-anchor="middle" class="m b">Traceback</text>
+<text x="130" y="304" text-anchor="middle" class="s">el programa se detiene</text>
+<path d="M450 289 H610 V230" stroke="#465264" stroke-width="1.5" fill="none" stroke-dasharray="4 4"/>
+<text x="620" y="270" text-anchor="start" class="s b" style="fill:#2e7d4f">el programa continúa</text>
+</svg>

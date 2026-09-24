@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 344" width="760" height="344" role="img" aria-label="Equivalencias entre una clase en Python y en C#: constructor, atributo privado, propiedad de solo lectura, método, excepción, herencia y redefinición con override.">
+<title>Equivalencias entre una clase en Python y en C#: constructor, atributo privado, propiedad de solo lectura, método, excepción, herencia y redefinición con override.</title>
+<style>
+  text { font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; fill: #1b2430; }
+  .m { font-family: 'JetBrains Mono', Menlo, Consolas, monospace; font-size: 13px; }
+  .s { font-size: 12px; fill: #465264; }
+  .t { font-size: 16px; font-weight: 700; }
+  .b { font-weight: 700; }
+  .mu { fill: #6b7380; }
+  .w { fill: #fff; }
+  .ln { stroke: #465264; stroke-width: 1.6; fill: none; }
+  .ln-s { stroke: #c5ced6; stroke-width: 1.2; fill: none; }
+</style>
+<defs><marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#465264"/></marker><marker id="pb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0a70a8"/></marker><marker id="pg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2e7d4f"/></marker></defs>
+<rect x="20" y="14" width="350" height="34" rx="6" fill="#1d4f66" stroke="none" stroke-width="1.5"/>
+<text x="195" y="36" text-anchor="middle" class="b w">Python (semana 8)</text>
+<rect x="390" y="14" width="350" height="34" rx="6" fill="#b07600" stroke="none" stroke-width="1.5"/>
+<text x="565" y="36" text-anchor="middle" class="b w">C# (semana 11)</text>
+<rect x="20" y="49" width="720" height="30" rx="3" fill="#e9eef1" stroke="none" stroke-width="1.5"/>
+<text x="34" y="69" text-anchor="start" class="m">class Cuenta:</text>
+<text x="404" y="69" text-anchor="start" class="m">public class Cuenta {</text>
+<rect x="20" y="81" width="720" height="30" rx="3" fill="#fff" stroke="none" stroke-width="1.5"/>
+<text x="34" y="101" text-anchor="start" class="m">self._saldo = 0</text>
+<text x="404" y="101" text-anchor="start" class="m">private decimal saldo;</text>
+<rect x="20" y="113" width="720" height="30" rx="3" fill="#e9eef1" stroke="none" stroke-width="1.5"/>
+<text x="34" y="133" text-anchor="start" class="m">def __init__(self, titular):</text>
+<text x="404" y="133" text-anchor="start" class="m">public Cuenta(string titular) {</text>
+<rect x="20" y="145" width="720" height="30" rx="3" fill="#fff" stroke="none" stroke-width="1.5"/>
+<text x="34" y="165" text-anchor="start" class="m">@property  def saldo(self)</text>
+<text x="404" y="165" text-anchor="start" class="m">public decimal Saldo =&gt; saldo;</text>
+<rect x="20" y="177" width="720" height="30" rx="3" fill="#e9eef1" stroke="none" stroke-width="1.5"/>
+<text x="34" y="197" text-anchor="start" class="m">def depositar(self, monto):</text>
+<text x="404" y="197" text-anchor="start" class="m">public void Depositar(decimal monto)</text>
+<rect x="20" y="209" width="720" height="30" rx="3" fill="#fff" stroke="none" stroke-width="1.5"/>
+<text x="34" y="229" text-anchor="start" class="m">raise ValueError("...")</text>
+<text x="404" y="229" text-anchor="start" class="m">throw new ArgumentException("...");</text>
+<rect x="20" y="241" width="720" height="30" rx="3" fill="#e9eef1" stroke="none" stroke-width="1.5"/>
+<text x="34" y="261" text-anchor="start" class="m">class Ahorro(Cuenta):</text>
+<text x="404" y="261" text-anchor="start" class="m">public class Ahorro : Cuenta</text>
+<rect x="20" y="273" width="720" height="30" rx="3" fill="#fff" stroke="none" stroke-width="1.5"/>
+<text x="34" y="293" text-anchor="start" class="m">def interes(self):  # redefine</text>
+<text x="404" y="293" text-anchor="start" class="m">public override decimal Interes()</text>
+<text x="380" y="330" text-anchor="middle" class="s b">El diseño es el mismo; C# obliga a declarar tipos y visibilidad (public / private).</text>
+</svg>

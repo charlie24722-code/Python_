@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Semana 12 · Repaso y Examen Final</title>
+<meta name="description" content="Guía de estudio, semana 12: repaso integral de Python y C#, errores comunes, simulacro teórico y práctico para el Examen Final.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/guia.css">
+<script>try{var t=localStorage.getItem("ids-guia-v1-tema");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+</head>
+<body data-semana="s12">
+
+<header class="isla-wrap">
+  <div class="isla">
+    <a class="brand" href="../index.html">IDS <small>Guía de estudio</small></a>
+    <nav class="isla-semanas" aria-label="Semanas">
+    <a href="semana-01.html">S1</a>
+    <a href="semana-02.html">S2</a>
+    <a href="semana-03.html">S3</a>
+    <a href="semana-04.html">S4</a>
+    <a href="semana-05.html">S5</a>
+    <a href="semana-06.html">S6</a>
+    <a href="semana-07.html">S7</a>
+    <a href="semana-08.html">S8</a>
+    <a href="semana-09.html">S9</a>
+    <a href="semana-10.html">S10</a>
+    <a href="semana-11.html">S11</a>
+    <a href="semana-12.html" aria-current="page">S12</a>
+  </nav>
+    <button class="theme-btn" type="button" aria-label="Cambiar tema claro/oscuro"><span class="ico-tema" aria-hidden="true"></span></button>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu-completo"><span class="hb" aria-hidden="true"></span><span class="hb" aria-hidden="true"></span><span class="sr">Menú</span></button>
+  </div>
+</header>
+<div class="menu-completo" id="menu-completo" hidden></div>
+
+<header class="hero-semana">
+  <div class="hero-in">
+    <p class="hero-num" aria-hidden="true">12</p>
+    <div class="hero-txt">
+      <p class="hero-mod"><span class="sr">Semana 12 · </span>Evaluación de fin de ciclo</p>
+      <h1>Repaso y Examen Final</h1>
+      <p class="lead">Última semana: examen integral de lógica en Python y fundamentos de C#. Aquí tienes el mapa de todo el curso, los errores más comunes de la segunda mitad, un simulacro teórico y un problema resuelto en los dos lenguajes.</p>
+    </div>
+    <p class="pregunta"><span class="pregunta-lbl">Pregunta orientadora</span><mark>¿Puedo resolver un problema de negocio completo y expresar la misma solución en Python y en C#?</mark></p>
+    <dl class="hero-meta">
+      <div><dt>Lecturas</dt><dd>Repaso de todo el ciclo</dd></div>
+      <div><dt>Proyecto</dt><dd>Proyecto entregado (v1.0)</dd></div>
+      <div class="eval"><dt>Evaluación</dt><dd>Examen Final (esta semana)</dd></div>
+    </dl>
+    <div class="progress" data-progreso-pagina>
+      <div class="progress-bar"><span></span></div>
+      <div class="progress-label"></div>
+    </div>
+  </div>
+</header>
+
+<div class="layout with-toc">
+<aside class="toc" aria-label="Contenido de la semana">
+  <p>Semana 12</p>
+  <ol>
+    <li class="grupo" aria-hidden="true">Prepararse</li>
+    <li><a href="#uso">Plan de estudio</a></li>
+    <li><a href="#mapa">Mapa del curso</a></li>
+    <li><a href="#errores">Errores comunes</a></li>
+    <li class="grupo" aria-hidden="true">Simulacros</li>
+    <li><a href="#simulacro">Simulacro teórico</a></li>
+    <li><a href="#practico">Simulacro práctico</a></li>
+    <li class="grupo" aria-hidden="true">El día</li>
+    <li><a href="#estrategia">Estrategia</a></li>
+  </ol>
+</aside>
+
+<main>
+<section id="uso">
+  <h2>Cómo usar esta semana</h2>
+<p>Esta semana es el <strong>Examen Final Integral</strong>: evaluación individual de <strong>lógica en Python</strong> y <strong>fundamentos formales de C#</strong>, sin IA. El temario exacto lo confirma el docente en Moodle.</p>
+  <div class="momentos">
+    <div><strong>6 días antes</strong>Simulacro teórico sin apuntes. Clasifica tus errores: ¿Python básico, estructuras, objetos o C#?</div>
+    <div><strong>4 días antes</strong>Repasa las semanas débiles: sus trazas y listas “puedo…”. Rehaz el <a href="semana-06.html">simulacro del Parcial</a>.</div>
+    <div><strong>2 días antes</strong>Simulacro práctico con reloj (2 horas): dos problemas en Python y dos traducciones a C#.</div>
+    <div><strong>El día antes</strong>Tabla de equivalencias Python ↔ C# y errores comunes. Descansa.</div>
+  </div>
+</section>
+
+<section id="mapa">
+  <h2>Mapa de repaso de todo el curso</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p>El curso es una escalera: <strong>pensar</strong> el algoritmo (S1), <strong>escribirlo</strong> con variables, decisiones, bucles y funciones (S2–S4), <strong>organizar los datos</strong> (S5, S7), <strong>modelar el negocio</strong> con objetos (S8–S9) y <strong>cambiar de lenguaje</strong> sin cambiar el diseño (S10–S11).</p>
+  </div>
+<div class="table-wrap"><table><thead><tr><th>Bloque</th><th>Semanas</th><th>Lo indispensable</th></tr></thead><tbody><tr><td>Fundamentos</td><td><a href="semana-01.html">1</a>–<a href="semana-04.html">4</a></td><td>algoritmos, tipos, <code>if/elif</code>, bucles, funciones, ámbito, pruebas</td></tr><tr><td>Datos</td><td><a href="semana-05.html">5</a>, <a href="semana-07.html">7</a></td><td>listas, tuplas, ordenamiento, diccionarios, conjuntos, archivos, excepciones</td></tr><tr><td>Objetos</td><td><a href="semana-08.html">8</a>–<a href="semana-09.html">9</a></td><td>clases, invariantes, herencia, polimorfismo, composición</td></tr><tr><td>C#</td><td><a href="semana-10.html">10</a>–<a href="semana-11.html">11</a></td><td>compilación, tipos, <code>decimal</code>, <code>TryParse</code>, clases, propiedades, <code>List&lt;T&gt;</code>, <code>virtual/override</code></td></tr></tbody></table></div>
+<figure class="lamina "><div class="placa"><div class="placa-core"><img src="../assets/img/s10-traduccion.svg" alt="Tabla de traducción de Python a C#: declaración de variables con tipo, conversión con int.Parse, if y else if con llaves, for con contador, while, Console.WriteLine y métodos static." width="760" height="360" loading="lazy" decoding="async"></div></div><figcaption>Las equivalencias de sintaxis que más se preguntan.</figcaption></figure>
+<figure class="lamina "><div class="placa"><div class="placa-core"><img src="../assets/img/s11-clase-csharp.svg" alt="Equivalencias entre una clase en Python y en C#: constructor, atributo privado, propiedad de solo lectura, método, excepción, herencia y redefinición con override." width="760" height="344" loading="lazy" decoding="async"></div></div><figcaption>Las equivalencias de clases entre Python y C#.</figcaption></figure>
+</section>
+
+<section id="errores">
+  <h2>Errores comunes de la segunda mitad</h2>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Mal</th><th>Por qué</th><th>Bien</th></tr></thead><tbody><tr><td>1</td><td><code>d["clave"]</code> con clave que puede no existir</td><td><code>KeyError</code></td><td><code>d.get("clave", valor)</code></td></tr><tr><td>2</td><td><code>except:</code> a secas</td><td>esconde errores de programación</td><td><code>except ValueError:</code></td></tr><tr><td>3</td><td><code>json.dumps(datos)</code> y creer que ya se guardó</td><td>solo produce texto</td><td><code>Path(r).write_text(json.dumps(datos))</code></td></tr><tr><td>4</td><td>atributo definido fuera de <code>__init__</code> (<code>saldo = 0</code> en la clase)</td><td>lo comparten todos los objetos</td><td><code>self._saldo = 0</code> en <code>__init__</code></td></tr><tr><td>5</td><td>método sin <code>self</code></td><td><code>TypeError</code> al llamarlo</td><td><code>def depositar(self, monto):</code></td></tr><tr><td>6</td><td>hija sin <code>super().__init__</code></td><td>faltan los atributos de la madre</td><td>llamar a <code>super().__init__(...)</code></td></tr><tr><td>7</td><td>herencia para “tiene un”</td><td>una factura no <em>es</em> un cliente</td><td>composición</td></tr><tr><td>8</td><td>C#: <code>7 / 2</code> esperando 3.5</td><td>división entera</td><td><code>7 / 2.0</code></td></tr><tr><td>9</td><td>C#: <code>decimal p = 12.5;</code></td><td>literal <code>double</code> (CS0664)</td><td><code>12.5m</code></td></tr><tr><td>10</td><td>C#: redefinir sin <code>virtual</code>/<code>override</code></td><td>no hay polimorfismo</td><td><code>virtual</code> en la base, <code>override</code> en la hija</td></tr></tbody></table></div>
+</section>
+
+<section id="simulacro">
+  <h2>Simulacro teórico (15 preguntas)</h2>
+<p>Sin apuntes y sin ejecutar nada.</p>
+  <div class="quiz">
+    <div class="qq" data-q="s12-q1">
+      <p><em>(Python)</em> ¿Qué imprime?</p>
+<pre data-norun><code class="language-python">ventas = [3, 8, 1, 9, 4]
+print(sum(v for v in ventas if v &gt; 3), ventas[1:4])</code></pre>
+      <p style="margin:0"></p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>21 [8, 1, 9]</code></button>
+        <button class="quiz-opt"><code>25 [8, 1, 9]</code></button>
+        <button class="quiz-opt"><code>21 [3, 8, 1]</code></button>
+        <button class="quiz-opt"><code>17 [8, 1, 9, 4]</code></button>
+      </div>
+      <p class="why">8 + 9 + 4 = 21; slice de 1 a 3.</p>
+    </div>
+    <div class="qq" data-q="s12-q2">
+      <p><em>(Python)</em> ¿Qué devuelve <code>f(4)</code>?</p>
+<pre data-norun><code class="language-python">def f(n):
+    if n == 0:
+        return 1
+    return 2 * f(n - 1)</code></pre>
+      <p style="margin:0"></p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>16</code></button>
+        <button class="quiz-opt"><code>8</code></button>
+        <button class="quiz-opt"><code>4</code></button>
+        <button class="quiz-opt"><code>RecursionError</code></button>
+      </div>
+      <p class="why">2 × 2 × 2 × 2 × 1 = 16.</p>
+    </div>
+    <div class="qq" data-q="s12-q3">
+      <p><em>(Python)</em> ¿Qué imprime?</p>
+<pre data-norun><code class="language-python">stock = {&quot;A&quot;: 5}
+stock[&quot;B&quot;] = stock.get(&quot;B&quot;, 0) + 3
+stock[&quot;A&quot;] -= 2
+print(stock)</code></pre>
+      <p style="margin:0"></p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>{'A': 3, 'B': 3}</code></button>
+        <button class="quiz-opt"><code>{'A': 5, 'B': 3}</code></button>
+        <button class="quiz-opt"><code>KeyError</code></button>
+        <button class="quiz-opt"><code>{'A': 3}</code></button>
+      </div>
+      <p class="why"><code>get</code> da 0 para B; A baja a 3.</p>
+    </div>
+    <div class="qq" data-q="s12-q4">
+      <p><em>(Python)</em> ¿Qué imprime?</p>
+<pre data-norun><code class="language-python">try:
+    x = int(&quot;4.5&quot;)
+except ValueError:
+    x = -1
+else:
+    x = x * 2
+print(x)</code></pre>
+      <p style="margin:0"></p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>-1</code></button>
+        <button class="quiz-opt"><code>9</code></button>
+        <button class="quiz-opt"><code>4</code></button>
+        <button class="quiz-opt"><code>8</code></button>
+      </div>
+      <p class="why"><code>int("4.5")</code> falla: se ejecuta <code>except</code>, no <code>else</code>.</p>
+    </div>
+    <div class="qq" data-q="s12-q5">
+      <p><em>(Python)</em> <code>{"a", "b", "c"} - {"b"}</code> es…</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>{"a", "c"}</code></button>
+        <button class="quiz-opt"><code>{"b"}</code></button>
+        <button class="quiz-opt"><code>{"a", "b", "c"}</code></button>
+        <button class="quiz-opt">Error</button>
+      </div>
+      <p class="why">Diferencia de conjuntos.</p>
+    </div>
+    <div class="qq" data-q="s12-q6">
+      <p><em>(Objetos)</em> ¿Qué imprime?</p>
+<pre data-norun><code class="language-python">class C:
+    def __init__(self):
+        self.n = 0
+    def mas(self):
+        self.n += 1
+        return self
+print(C().mas().mas().n)</code></pre>
+      <p style="margin:0"></p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>2</code></button>
+        <button class="quiz-opt"><code>1</code></button>
+        <button class="quiz-opt"><code>0</code></button>
+        <button class="quiz-opt">Error</button>
+      </div>
+      <p class="why">Cada <code>mas()</code> devuelve el mismo objeto; se encadenan.</p>
+    </div>
+    <div class="qq" data-q="s12-q7">
+      <p><em>(Objetos)</em> Con <code>class B(A)</code> que redefine <code>f</code>, y <code>A.g</code> que llama a <code>self.f()</code>, ¿qué versión de <code>f</code> usa <code>B().g()</code>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>La de B</button>
+        <button class="quiz-opt">La de A</button>
+        <button class="quiz-opt">Las dos</button>
+        <button class="quiz-opt">Ninguna: error</button>
+      </div>
+      <p class="why"><code>self</code> es un objeto B: polimorfismo.</p>
+    </div>
+    <div class="qq" data-q="s12-q8">
+      <p><em>(Objetos)</em> Un <code>Pedido</code> contiene una lista de <code>Item</code>. ¿Qué relación es?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Composición</button>
+        <button class="quiz-opt">Herencia</button>
+        <button class="quiz-opt">Polimorfismo</button>
+        <button class="quiz-opt">Ninguna</button>
+      </div>
+      <p class="why">“Tiene un”.</p>
+    </div>
+    <div class="qq" data-q="s12-q9">
+      <p><em>(C#)</em> ¿Qué imprime?</p>
+<pre data-norun><code class="language-csharp">int a = 10, b = 4;
+Console.WriteLine(a / b + a % b);</code></pre>
+      <p style="margin:0"></p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>4</code></button>
+        <button class="quiz-opt"><code>4.5</code></button>
+        <button class="quiz-opt"><code>2.5</code></button>
+        <button class="quiz-opt"><code>6</code></button>
+      </div>
+      <p class="why">10 / 4 = 2 (entera) y 10 % 4 = 2.</p>
+    </div>
+    <div class="qq" data-q="s12-q10">
+      <p><em>(C#)</em> ¿Qué tipo usar para el saldo de una cuenta?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>decimal</code></button>
+        <button class="quiz-opt"><code>double</code></button>
+        <button class="quiz-opt"><code>float</code></button>
+        <button class="quiz-opt"><code>int</code></button>
+      </div>
+      <p class="why">Exacto en base 10; literales con <code>m</code>.</p>
+    </div>
+    <div class="qq" data-q="s12-q11">
+      <p><em>(C#)</em> ¿Qué hace el compilador con <code>string s = 5;</code>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>No compila (CS0029)</button>
+        <button class="quiz-opt">Guarda "5"</button>
+        <button class="quiz-opt">Error al ejecutar</button>
+        <button class="quiz-opt">Guarda 5</button>
+      </div>
+      <p class="why">Tipos incompatibles detectados antes de ejecutar.</p>
+    </div>
+    <div class="qq" data-q="s12-q12">
+      <p><em>(C#)</em> ¿Qué es <code>public decimal Saldo { get; private set; }</code>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Propiedad legible desde afuera y modificable solo dentro de la clase</button>
+        <button class="quiz-opt">Un campo público</button>
+        <button class="quiz-opt">Un método</button>
+        <button class="quiz-opt">Un constructor</button>
+      </div>
+      <p class="why">Equivale a <code>@property</code> sin setter público.</p>
+    </div>
+    <div class="qq" data-q="s12-q13">
+      <p><em>(C#)</em> ¿Qué equivale a <code>super().__init__(nombre)</code>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>: base(nombre)</code> en el constructor</button>
+        <button class="quiz-opt"><code>this(nombre)</code></button>
+        <button class="quiz-opt"><code>new Base(nombre)</code></button>
+        <button class="quiz-opt"><code>override</code></button>
+      </div>
+      <p class="why">Llama al constructor de la clase base.</p>
+    </div>
+    <div class="qq" data-q="s12-q14">
+      <p><em>(C#)</em> <code>decimal.TryParse("abc", out decimal m)</code> devuelve…</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>false</code> y no lanza excepción</button>
+        <button class="quiz-opt"><code>true</code></button>
+        <button class="quiz-opt">Lanza <code>FormatException</code></button>
+        <button class="quiz-opt">No compila</button>
+      </div>
+      <p class="why">Es la forma segura de convertir texto.</p>
+    </div>
+    <div class="qq" data-q="s12-q15">
+      <p><em>(C#)</em> ¿Qué propiedad da la cantidad de elementos de una <code>List&lt;T&gt;</code>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>Count</code></button>
+        <button class="quiz-opt"><code>Length</code></button>
+        <button class="quiz-opt"><code>Size</code></button>
+        <button class="quiz-opt"><code>len()</code></button>
+      </div>
+      <p class="why">En arreglos es <code>Length</code>; en listas, <code>Count</code>.</p>
+    </div>
+    <div class="quiz-score"><span data-score></span><button class="btn sec" type="button" data-reset>Reiniciar simulacro</button></div>
+  </div>
+</section>
+
+<section id="practico">
+  <h2>Simulacro práctico (2 horas)</h2>
+<p>El mismo problema de negocio, primero en Python (con archivos, diccionarios y clases) y luego en C#. Es exactamente el tipo de “equivalencia entre lenguajes” que evalúa el Final.</p>
+  <article class="ejercicio problema">
+    <header><h3>P1 · Suscripciones SaaS en Python (S7 + S8)</h3><span class="nivel">clases + JSON + diccionarios · ★★★★</span></header>
+    <div class="cuerpo">
+      <p>Una plataforma cobra planes <em>básico</em> ($9.99) y <em>pro</em> ($24.99) por mes; desde 12 meses activos el cliente recibe 15 % de descuento. Carga las suscripciones desde JSON (si el archivo no existe, lista vacía), calcula el ingreso mensual y cuenta clientes por plan. Un plan desconocido lanza <code>ValueError</code>.</p>
+      <p><strong>Tu programa debe cumplir estos casos de prueba:</strong></p>
+      <div class="table-wrap"><table><thead><tr><th>Dato</th><th>Esperado</th></tr></thead><tbody><tr><td>Ana, pro, 14 meses</td><td>$21.24</td></tr><tr><td>Luis, básico, 3 meses</td><td>$9.99</td></tr><tr><td>Eva, pro, 2 meses</td><td>$24.99</td></tr><tr><td>Ingreso mensual</td><td>$56.22</td></tr><tr><td>Clientes por plan</td><td>{'pro': 2, 'basico': 1}</td></tr><tr><td>Sin archivo</td><td>[]</td></tr></tbody></table></div>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p>Clase con validación en <code>__init__</code>; función <code>cargar</code> con <code>try/except FileNotFoundError</code>; acumular por clave para contar planes.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="suscripciones.py"><code class="language-python">import json
+from pathlib import Path
+
+
+class Suscripcion:
+    PRECIOS = {&quot;basico&quot;: 9.99, &quot;pro&quot;: 24.99}
+
+    def __init__(self, cliente, plan, meses_activos=0):
+        if plan not in self.PRECIOS:
+            raise ValueError(f&quot;plan desconocido: {plan}&quot;)
+        self.cliente = cliente
+        self.plan = plan
+        self.meses_activos = meses_activos
+
+    def cobro_mensual(self):
+        precio = self.PRECIOS[self.plan]
+        if self.meses_activos &gt;= 12:
+            precio *= 0.85                       # lealtad: 15 % desde el año
+        return round(precio, 2)
+
+    def a_dict(self):
+        return {&quot;cliente&quot;: self.cliente, &quot;plan&quot;: self.plan, &quot;meses_activos&quot;: self.meses_activos}
+
+
+def cargar(ruta):
+    try:
+        datos = json.loads(Path(ruta).read_text())
+    except FileNotFoundError:
+        return []
+    return [Suscripcion(d[&quot;cliente&quot;], d[&quot;plan&quot;], d[&quot;meses_activos&quot;]) for d in datos]
+
+
+Path(&quot;subs.json&quot;).write_text(json.dumps([
+    {&quot;cliente&quot;: &quot;Ana&quot;, &quot;plan&quot;: &quot;pro&quot;, &quot;meses_activos&quot;: 14},
+    {&quot;cliente&quot;: &quot;Luis&quot;, &quot;plan&quot;: &quot;basico&quot;, &quot;meses_activos&quot;: 3},
+    {&quot;cliente&quot;: &quot;Eva&quot;, &quot;plan&quot;: &quot;pro&quot;, &quot;meses_activos&quot;: 2}]))
+
+subs = cargar(&quot;subs.json&quot;)
+ingreso = sum(s.cobro_mensual() for s in subs)
+por_plan = {}
+for s in subs:
+    por_plan[s.plan] = por_plan.get(s.plan, 0) + 1
+print(f&quot;Ingreso mensual: ${ingreso:.2f}&quot;)
+print(&quot;Clientes por plan:&quot;, por_plan)
+print(&quot;Sin archivo:&quot;, cargar(&quot;no_existe.json&quot;))</code></pre>
+<pre class="salida" data-file="salida"><code>Ingreso mensual: $56.22
+Clientes por plan: {&#x27;pro&#x27;: 2, &#x27;basico&#x27;: 1}
+Sin archivo: []</code></pre>
+
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s12-pr1" data-track="s12-pr1"><label for="s12-pr1">Resuelto y probado con todos los casos</label></li></ul>
+  </article>
+  <article class="ejercicio problema">
+    <header><h3>P2 · La misma clase, en C# (S10 + S11)</h3><span class="nivel">traducción de clase · ★★★</span></header>
+    <div class="cuerpo">
+      <p>Traduce <code>Suscripcion</code> y el cálculo del ingreso a C#. Usa propiedades de solo lectura, <code>decimal</code> y <code>List&lt;Suscripcion&gt;</code>. El resultado debe ser idéntico al de Python.</p>
+      <p><strong>Tu programa debe cumplir estos casos de prueba:</strong></p>
+      <div class="table-wrap"><table><thead><tr><th>Dato</th><th>Esperado</th></tr></thead><tbody><tr><td>Ingreso mensual</td><td>56.22 (igual que Python)</td></tr><tr><td><code>new Suscripcion("X", "gold", 1)</code></td><td>ArgumentException</td></tr></tbody></table></div>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p><code>raise ValueError</code> → <code>throw new ArgumentException</code>; <code>@property</code> → <code>{ get; }</code>; lista → <code>List&lt;T&gt;</code>; el operador ternario reemplaza el diccionario de precios.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="Suscripciones.cs"><code class="language-csharp">var subs = new List&lt;Suscripcion&gt;
+{
+    new Suscripcion(&quot;Ana&quot;, &quot;pro&quot;, 14),
+    new Suscripcion(&quot;Luis&quot;, &quot;basico&quot;, 3),
+    new Suscripcion(&quot;Eva&quot;, &quot;pro&quot;, 2),
+};
+decimal ingreso = 0;
+foreach (var s in subs) ingreso += s.CobroMensual();
+Console.WriteLine($&quot;Ingreso mensual: {ingreso:F2}&quot;);
+
+
+public class Suscripcion
+{
+    public string Cliente { get; }
+    public string Plan { get; }
+    public int MesesActivos { get; }
+
+    public Suscripcion(string cliente, string plan, int mesesActivos)
+    {
+        if (plan != &quot;basico&quot; &amp;&amp; plan != &quot;pro&quot;)
+            throw new ArgumentException($&quot;plan desconocido: {plan}&quot;);
+        Cliente = cliente;
+        Plan = plan;
+        MesesActivos = mesesActivos;
+    }
+
+    public decimal CobroMensual()
+    {
+        decimal precio = Plan == &quot;pro&quot; ? 24.99m : 9.99m;
+        if (MesesActivos &gt;= 12) precio *= 0.85m;
+        return Math.Round(precio, 2, MidpointRounding.AwayFromZero);
+    }
+}</code></pre>
+<pre class="salida" data-file="salida"><code>Ingreso mensual: 56.22</code></pre>
+<p><strong>Verificación:</strong> 24.99 × 0.85 = 21.2415 → 21.24; 21.24 + 9.99 + 24.99 = 56.22 ✔ en ambos lenguajes.</p>
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s12-pr2" data-track="s12-pr2"><label for="s12-pr2">Resuelto y probado con todos los casos</label></li></ul>
+  </article>
+</section>
+
+<section id="estrategia">
+  <h2>Estrategia para el Final</h2>
+  <div class="box ok">
+    <span class="box-title">Durante el examen</span>
+    <ul><li>Separa mentalmente las preguntas de Python y las de C#: antes de responder, pregúntate “¿en qué lenguaje estoy?” (división entera, <code>True</code> vs <code>true</code>, <code>;</code>).</li><li>En C#, escribe primero los tipos de cada variable: evita la mitad de los errores.</li><li>En problemas de objetos: lista atributos, métodos y la regla que se protege antes de escribir.</li><li>Traza en papel. Prueba con un caso normal y uno de frontera.</li></ul>
+  </div>
+  <ul class="check">
+    <li><input type="checkbox" id="s12-v1" data-track="s12-v1"><label for="s12-v1">Hice el simulacro teórico y repasé mis bloques débiles.</label></li>
+    <li><input type="checkbox" id="s12-v2" data-track="s12-v2"><label for="s12-v2">Resolví los dos problemas del simulacro práctico.</label></li>
+    <li><input type="checkbox" id="s12-v3" data-track="s12-v3"><label for="s12-v3">Puedo escribir de memoria una clase en Python y su equivalente en C#.</label></li>
+    <li><input type="checkbox" id="s12-v4" data-track="s12-v4"><label for="s12-v4">Puedo leer un error de compilación y un Traceback.</label></li>
+    <li><input type="checkbox" id="s12-v5" data-track="s12-v5"><label for="s12-v5">Repasé las listas “puedo…” de las semanas 7 a 11.</label></li>
+  </ul>
+</section>
+
+  <nav class="nav-semanas" aria-label="Navegación entre semanas">
+    <a class="nav-prev" href="semana-11.html"><span class="btn-ico" aria-hidden="true"></span><span>Semana 11</span></a>
+    <a class="nav-next" href="../index.html"><span>Inicio</span><span class="btn-ico" aria-hidden="true"></span></a>
+  </nav>
+
+<footer class="pie">Guía de estudio · Introducción al Desarrollo de Software · ESEN · Ciclo III/2026. Material de apoyo no oficial; el programa y Moodle mandan.</footer>
+</main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+<script src="../assets/guia.js"></script>
+<script src="../assets/ejecutar.js"></script>
+</body>
+</html>

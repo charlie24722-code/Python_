@@ -1,0 +1,756 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Semana 11 · POO en C# y colecciones</title>
+<meta name="description" content="Guía de estudio, semana 11: clases, propiedades, modificadores de acceso, List&lt;T&gt;, herencia con virtual/override en C#, y guía de la defensa del proyecto. Control 4.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/guia.css">
+<script>try{var t=localStorage.getItem("ids-guia-v1-tema");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+</head>
+<body data-semana="s11">
+
+<header class="isla-wrap">
+  <div class="isla">
+    <a class="brand" href="../index.html">IDS <small>Guía de estudio</small></a>
+    <nav class="isla-semanas" aria-label="Semanas">
+    <a href="semana-01.html">S1</a>
+    <a href="semana-02.html">S2</a>
+    <a href="semana-03.html">S3</a>
+    <a href="semana-04.html">S4</a>
+    <a href="semana-05.html">S5</a>
+    <a href="semana-06.html">S6</a>
+    <a href="semana-07.html">S7</a>
+    <a href="semana-08.html">S8</a>
+    <a href="semana-09.html">S9</a>
+    <a href="semana-10.html">S10</a>
+    <a href="semana-11.html" aria-current="page">S11</a>
+    <a href="semana-12.html">S12</a>
+  </nav>
+    <button class="theme-btn" type="button" aria-label="Cambiar tema claro/oscuro"><span class="ico-tema" aria-hidden="true"></span></button>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu-completo"><span class="hb" aria-hidden="true"></span><span class="hb" aria-hidden="true"></span><span class="sr">Menú</span></button>
+  </div>
+</header>
+<div class="menu-completo" id="menu-completo" hidden></div>
+
+<header class="hero-semana">
+  <div class="hero-in">
+    <p class="hero-num" aria-hidden="true">11</p>
+    <div class="hero-txt">
+      <p class="hero-mod"><span class="sr">Semana 11 · </span>Módulo 10</p>
+      <h1>POO en C# y colecciones fuertemente tipadas</h1>
+      <p class="lead">El puente final: el mismo modelo de objetos que construiste en Python, ahora en C#. Verás que el <strong>diseño</strong> (clases, reglas, herencia, composición) se mantiene; cambia cómo se escribe y cuánto te ayuda el compilador.</p>
+    </div>
+    <p class="pregunta"><span class="pregunta-lbl">Pregunta orientadora</span><mark>¿Es mi diseño de objetos independiente del lenguaje? ¿Qué me da C# que Python no me daba?</mark></p>
+    <dl class="hero-meta">
+      <div><dt>Lecturas</dt><dd>TRO 5 · TRO 6 · MSDN</dd></div>
+      <div><dt>Proyecto</dt><dd>Fase 7: defensa (esta semana)</dd></div>
+      <div class="eval"><dt>Evaluación</dt><dd>Control 4 (esta semana)</dd></div>
+    </dl>
+    <div class="progress" data-progreso-pagina>
+      <div class="progress-bar"><span></span></div>
+      <div class="progress-label"></div>
+    </div>
+  </div>
+</header>
+
+<div class="layout with-toc">
+<aside class="toc" aria-label="Contenido de la semana">
+  <p>Semana 11</p>
+  <ol>
+    <li class="grupo" aria-hidden="true">Antes de clase</li>
+    <li><a href="#uso">Cómo usar la guía</a></li>
+    <li><a href="#mapa">Qué puedes usar</a></li>
+    <li><a href="#lecturas">Lecturas</a></li>
+    <li><a href="#checkpoint">Reading checkpoint</a></li>
+    <li class="grupo" aria-hidden="true">Aprender</li>
+    <li><a href="#clases">Clases y propiedades</a></li>
+    <li><a href="#colecciones">Arreglos y List&lt;T&gt;</a></li>
+    <li><a href="#herencia">Herencia en C#</a></li>
+    <li class="grupo" aria-hidden="true">Practicar</li>
+    <li><a href="#trazas">Tabla de traza</a></li>
+    <li><a href="#ejercicios">Ejercicios</a></li>
+    <li><a href="#practica">Práctica intensiva</a></li>
+    <li class="grupo" aria-hidden="true">Entregar y evaluar</li>
+    <li><a href="#defensa">Defensa del proyecto</a></li>
+    <li><a href="#evaluacion">Control 4</a></li>
+    <li><a href="#fuentes">Fuentes</a></li>
+  </ol>
+</aside>
+
+<main>
+<section id="uso">
+  <h2>Cómo usar esta guía</h2>
+  <div class="momentos">
+    <div><strong>Antes de clase</strong>TRO 5 y 6 (sintaxis de C#) y la página de Microsoft Learn sobre colecciones. Luego el <a href="#checkpoint">checkpoint</a>.</div>
+    <div><strong>Durante el laboratorio</strong>Implementas en C# el modelo de objetos de la semana 8. Usa la <a href="#clases">tabla de equivalencias</a>.</div>
+    <div><strong>Control 4</strong>Esta semana, individual y sin IA. Lista <a href="#evaluacion">“puedo…”</a>.</div>
+    <div><strong>Defensa del proyecto</strong>Esta semana. Lee la <a href="#defensa">guía de sustentación</a> y ensaya con tu equipo.</div>
+  </div>
+  <ul class="ciclo-leyenda" aria-label="Ciclo de trabajo">
+    <li>Pregunta</li><li class="sep">→</li><li>Exploración</li><li class="sep">→</li><li>Implementación</li><li class="sep">→</li><li>Resultado</li><li class="sep">→</li><li>Interpretación</li><li class="sep">→</li><li class="v">Verificación</li>
+  </ul>
+  <div class="box nota">
+    <span class="box-title">Sobre ejecutar el código</span>
+    <p>Los ejemplos de C# no se ejecutan en la página: cópialos a un proyecto y usa <code>dotnet run</code>. Todas las salidas mostradas vienen de ejecutarlos con .NET 8.</p>
+  </div>
+</section>
+
+<section id="mapa">
+  <h2>Qué puedes usar esta semana</h2>
+  <div class="permisos">
+    <div class="si">
+      <h4>Sí, desde ahora</h4>
+      <ul>
+        <li>Todo lo de la semana 10</li>
+        <li><code>class</code>, campos <code>private</code>, constructores, métodos</li>
+        <li>Propiedades: <code>{ get; set; }</code>, de solo lectura y con validación</li>
+        <li><code>public</code>, <code>private</code>, <code>protected</code></li>
+        <li>Arreglos <code>T[]</code> y colecciones genéricas <code>List&lt;T&gt;</code></li>
+        <li>Herencia <code>: Base</code>, <code>virtual</code> / <code>override</code>, <code>base(...)</code></li>
+        <li><code>throw new ArgumentException(...)</code>, <code>try</code>/<code>catch</code></li>
+      </ul>
+    </div>
+    <div class="no">
+      <h4>Todavía no / fuera del curso</h4>
+      <ul>
+        <li>Interfaces, genéricos propios, LINQ, <code>Dictionary</code> en profundidad → Programación Orientada a Objetos y Estructuras de Datos</li>
+        <li>Bases de datos y aplicaciones gráficas: materias posteriores</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="lecturas">
+  <h2>Lecturas de preparación</h2>
+  <ul class="check">
+    <li><input type="checkbox" id="s11-l1" data-track="s11-l1"><label for="s11-l1"><span class="ref">[TRO] Cap. 5</span> “Understanding Encapsulation”: clases, constructores, <code>this</code>, modificadores de acceso y propiedades (automáticas y con lógica).</label></li>
+    <li><input type="checkbox" id="s11-l2" data-track="s11-l2"><label for="s11-l2"><span class="ref">[TRO] Cap. 6</span> “Understanding Inheritance and Polymorphism”: <code>: Base</code>, <code>base(...)</code>, <code>virtual</code> y <code>override</code>, clases abstractas.</label></li>
+    <li><input type="checkbox" id="s11-l3" data-track="s11-l3"><label for="s11-l3"><span class="ref">[MSDN]</span> Colecciones genéricas en C#: <code>List&lt;T&gt;</code> frente a arreglos.</label></li>
+  </ul>
+  <div class="box nota">
+    <span class="box-title">Complementos gratuitos</span>
+    <ul><li><a href="https://learn.microsoft.com/es-es/dotnet/csharp/fundamentals/types/classes" target="_blank" rel="noopener">Microsoft Learn — Clases</a></li><li><a href="https://learn.microsoft.com/es-es/dotnet/csharp/programming-guide/classes-and-structs/properties" target="_blank" rel="noopener">Propiedades</a></li><li><a href="https://learn.microsoft.com/es-es/dotnet/standard/collections/" target="_blank" rel="noopener">Colecciones y estructuras de datos</a></li></ul>
+  </div>
+</section>
+
+<section id="checkpoint">
+  <h2>Reading checkpoint</h2>
+  <div class="quiz">
+    <div class="qq" data-q="s11-q1">
+      <p>¿Qué equivale en C# al <code>__init__</code> de Python?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>El constructor: un método con el mismo nombre de la clase y sin tipo de retorno</button>
+        <button class="quiz-opt"><code>static void Main</code></button>
+        <button class="quiz-opt">Una propiedad</button>
+        <button class="quiz-opt"><code>this</code></button>
+      </div>
+      <p class="why"><code>public Cuenta(string titular) { ... }</code> se ejecuta con <code>new Cuenta("Ana")</code>.</p>
+    </div>
+    <div class="qq" data-q="s11-q2">
+      <p>¿Qué equivale a <code>self</code>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>this</code> (y casi siempre se puede omitir)</button>
+        <button class="quiz-opt"><code>base</code></button>
+        <button class="quiz-opt"><code>new</code></button>
+        <button class="quiz-opt">No existe</button>
+      </div>
+      <p class="why">En C# los campos y métodos del propio objeto se usan directo; <code>this.saldo</code> es opcional salvo que haya un parámetro con el mismo nombre.</p>
+    </div>
+    <div class="qq" data-q="s11-q3">
+      <p>Un campo declarado <code>private decimal saldo;</code>…</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Solo se puede usar dentro de la clase: el compilador lo impide desde afuera</button>
+        <button class="quiz-opt">Es una convención como el <code>_</code> de Python</button>
+        <button class="quiz-opt">Es global</button>
+        <button class="quiz-opt">Es de solo lectura</button>
+      </div>
+      <p class="why">En Python el guion bajo es un acuerdo; en C# <code>private</code> lo hace cumplir el compilador.</p>
+    </div>
+    <div class="qq" data-q="s11-q4">
+      <p>¿Qué es <code>public decimal Saldo { get; private set; }</code>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Una propiedad que todos pueden leer pero solo la clase puede cambiar</button>
+        <button class="quiz-opt">Un método</button>
+        <button class="quiz-opt">Un campo público</button>
+        <button class="quiz-opt">Un constructor</button>
+      </div>
+      <p class="why">Es el equivalente de <code>@property</code> sin setter público.</p>
+    </div>
+    <div class="qq" data-q="s11-q5">
+      <p>¿Qué ventaja tiene <code>List&lt;decimal&gt;</code> sobre <code>decimal[]</code>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Crece con <code>Add</code>; el arreglo tiene tamaño fijo</button>
+        <button class="quiz-opt">Es más rápido siempre</button>
+        <button class="quiz-opt">Acepta cualquier tipo</button>
+        <button class="quiz-opt">No tiene índices</button>
+      </div>
+      <p class="why">Un arreglo se crea con un tamaño que no cambia. <code>List&lt;T&gt;</code> es como la lista de Python, pero solo acepta el tipo <code>T</code>.</p>
+    </div>
+    <div class="qq" data-q="s11-q6">
+      <p>Para que una clase hija pueda redefinir <code>CalcularPago()</code>, en la clase base el método debe ser…</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok><code>virtual</code> (y en la hija, <code>override</code>)</button>
+        <button class="quiz-opt"><code>static</code></button>
+        <button class="quiz-opt"><code>private</code></button>
+        <button class="quiz-opt">No hace falta nada</button>
+      </div>
+      <p class="why">En Python cualquier método se puede redefinir; en C# se declara explícitamente la intención con <code>virtual</code>/<code>override</code>.</p>
+    </div>
+    <div class="qq" data-q="s11-q7">
+      <p>¿Qué hace <code>: base(nombre, 0)</code> en el constructor de una clase hija?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-ok>Llama al constructor de la clase base, como <code>super().__init__</code></button>
+        <button class="quiz-opt">Crea otra clase</button>
+        <button class="quiz-opt">Borra la base</button>
+        <button class="quiz-opt">Llama a Main</button>
+      </div>
+      <p class="why">Es la misma idea de la semana 9 con otra sintaxis.</p>
+    </div>
+    <div class="quiz-score"><span data-score></span><button class="btn sec" type="button" data-reset>Reiniciar quiz</button></div>
+  </div>
+</section>
+
+<section id="clases">
+  <h2>Clases, campos y propiedades</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p>La cuenta bancaria de la semana 8 es la misma; solo cambia el <strong>idioma</strong>. C# te pide decir en voz alta lo que en Python era una convención: qué es privado, qué se puede leer y qué tipo tiene cada cosa.</p>
+  </div>
+<figure class="lamina "><div class="placa"><div class="placa-core"><img src="../assets/img/s11-clase-csharp.svg" alt="Equivalencias entre una clase en Python y en C#: constructor, atributo privado, propiedad de solo lectura, método, excepción, herencia y redefinición con override." width="760" height="344" loading="lazy" decoding="async"></div></div><figcaption>Cada idea de la semana 8 tiene su equivalente en C#.</figcaption></figure>
+  <div class="ciclo">
+    <h3>Caso: la CuentaBancaria de la semana 8 en C#</h3>
+    <div class="paso"><div>
+      <span class="etq">Pregunta</span>
+<p>¿Cómo se expresa en C# una cuenta cuyo saldo solo cambia con depósitos y retiros válidos?</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Exploración</span>
+<ul><li><code>self._saldo</code> + <code>@property</code> → <code>public decimal Saldo { get; private set; }</code></li><li><code>raise ValueError</code> → <code>throw new ArgumentException(...)</code></li><li><code>except ValueError as e</code> → <code>catch (ArgumentException ex)</code></li></ul>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Implementación</span>
+<pre data-file="Cuenta.cs"><code class="language-csharp">var ana = new Cuenta(&quot;Ana&quot;, 100m);
+ana.Depositar(50m);
+ana.Retirar(30m);
+Console.WriteLine($&quot;{ana.Titular}: {ana.Saldo:F2}&quot;);
+
+try
+{
+    ana.Retirar(500m);
+}
+catch (InvalidOperationException ex)
+{
+    Console.WriteLine($&quot;Rechazado: {ex.Message}&quot;);
+}
+// ana.Saldo = 1000m;   // no compila: el set es privado (CS0272)
+
+
+public class Cuenta
+{
+    private readonly List&lt;string&gt; movimientos = new();
+
+    public string Titular { get; }
+    public decimal Saldo { get; private set; }
+
+    public Cuenta(string titular, decimal saldoInicial = 0m)
+    {
+        if (saldoInicial &lt; 0)
+            throw new ArgumentException(&quot;el saldo inicial no puede ser negativo&quot;);
+        Titular = titular;
+        Saldo = saldoInicial;
+    }
+
+    public void Depositar(decimal monto)
+    {
+        if (monto &lt;= 0)
+            throw new ArgumentException(&quot;el depósito debe ser positivo&quot;);
+        Saldo += monto;
+        movimientos.Add($&quot;depósito {monto:F2}&quot;);
+    }
+
+    public void Retirar(decimal monto)
+    {
+        if (monto &lt;= 0)
+            throw new ArgumentException(&quot;el retiro debe ser positivo&quot;);
+        if (monto &gt; Saldo)
+            throw new InvalidOperationException($&quot;saldo insuficiente ({Saldo:F2})&quot;);
+        Saldo -= monto;
+        movimientos.Add($&quot;retiro {monto:F2}&quot;);
+    }
+}</code></pre>
+<pre class="salida" data-file="salida"><code>Ana: 120.00
+Rechazado: saldo insuficiente (120.00)</code></pre>
+
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Interpretación</span>
+<p><code>Titular { get; }</code> solo se asigna en el constructor. <code>Saldo</code> se lee desde afuera, pero su <code>set</code> es privado: la línea comentada no compilaría. La protección que en Python era una convención aquí la garantiza el compilador.</p>
+    </div></div>
+    <div class="paso verif"><div>
+      <span class="etq">Verificación</span>
+<p>100 + 50 − 30 = 120 ✔; el retiro de 500 se rechaza y el saldo queda en 120. Mismo comportamiento que la clase de la semana 8.</p>
+    </div></div>
+  </div>
+  <div class="box ojo">
+    <span class="box-title">Convenciones de nombres en C#</span>
+    <ul><li>Clases, métodos y propiedades: <strong>PascalCase</strong> (<code>Depositar</code>, <code>Saldo</code>).</li><li>Campos privados y variables locales: <strong>camelCase</strong> (<code>movimientos</code>, <code>saldoInicial</code>).</li><li>Una clase pública por archivo en proyectos reales (<code>Cuenta.cs</code>).</li></ul>
+  </div>
+</section>
+
+<section id="colecciones">
+  <h2>Arreglos y List&lt;T&gt;</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p>Un arreglo es una <strong>caja de huevos</strong>: trae 12 espacios y no más. Una <code>List&lt;T&gt;</code> es una <strong>bolsa con etiqueta</strong>: crece lo que necesites, pero solo acepta lo que dice la etiqueta.</p>
+  </div>
+<figure class="lamina "><div class="placa"><div class="placa-core"><img src="../assets/img/s11-array-list.svg" alt="Un arreglo decimal de C# tiene tamaño fijo de 5 posiciones; una List de decimal crece con Add y solo acepta elementos de ese tipo." width="760" height="280" loading="lazy" decoding="async"></div></div><figcaption>El arreglo tiene tamaño fijo; la lista genérica crece con <code>Add</code>.</figcaption></figure>
+<pre data-file="Colecciones.cs"><code class="language-csharp">decimal[] fijos = { 12.50m, 4.25m, 3.90m };        // arreglo: tamaño fijo
+Console.WriteLine($&quot;Arreglo: {fijos.Length} precios, primero {fijos[0]}&quot;);
+
+var precios = new List&lt;decimal&gt; { 12.50m, 4.25m };
+precios.Add(3.90m);
+precios.Add(6.75m);
+precios.Remove(4.25m);
+precios.Insert(0, 1.99m);
+Console.WriteLine($&quot;Lista: {string.Join(&quot;, &quot;, precios)} ({precios.Count} elementos)&quot;);
+
+decimal total = 0;
+foreach (decimal p in precios)
+{
+    total += p;
+}
+Console.WriteLine($&quot;Total: {total:F2}  ¿Contiene 3.90? {precios.Contains(3.90m)}&quot;);
+
+precios.Sort();
+Console.WriteLine($&quot;Ordenados: {string.Join(&quot;, &quot;, precios)}&quot;);
+
+var productos = new List&lt;Producto&gt;
+{
+    new Producto(&quot;A01&quot;, &quot;Aceite&quot;, 12.50m, 40),
+    new Producto(&quot;B07&quot;, &quot;Arroz&quot;, 4.25m, 8),
+};
+foreach (var p in productos)
+{
+    if (p.Stock &lt; 10) Console.WriteLine($&quot;Reordenar {p.Nombre}&quot;);
+}
+
+
+public class Producto
+{
+    public string Codigo { get; }
+    public string Nombre { get; }
+    public decimal Precio { get; }
+    public int Stock { get; set; }
+
+    public Producto(string codigo, string nombre, decimal precio, int stock)
+    {
+        Codigo = codigo;
+        Nombre = nombre;
+        Precio = precio;
+        Stock = stock;
+    }
+}</code></pre>
+<pre class="salida" data-file="salida"><code>Arreglo: 3 precios, primero 12.50
+Lista: 1.99, 12.50, 3.90, 6.75 (4 elementos)
+Total: 25.14  ¿Contiene 3.90? True
+Ordenados: 1.99, 3.90, 6.75, 12.50
+Reordenar Arroz</code></pre>
+<div class="table-wrap"><table><thead><tr><th>Python (lista)</th><th>C# (<code>List&lt;T&gt;</code>)</th></tr></thead><tbody><tr><td><code>len(v)</code></td><td><code>v.Count</code> (en arreglos: <code>v.Length</code>)</td></tr><tr><td><code>v.append(x)</code></td><td><code>v.Add(x)</code></td></tr><tr><td><code>v.insert(0, x)</code></td><td><code>v.Insert(0, x)</code></td></tr><tr><td><code>v.remove(x)</code></td><td><code>v.Remove(x)</code></td></tr><tr><td><code>x in v</code></td><td><code>v.Contains(x)</code></td></tr><tr><td><code>v.sort()</code></td><td><code>v.Sort()</code></td></tr><tr><td><code>for x in v:</code></td><td><code>foreach (var x in v)</code></td></tr></tbody></table></div>
+</section>
+
+<section id="herencia">
+  <h2>Herencia y polimorfismo en C#</h2>
+  <div class="box simple"><span class="box-title">En palabras simples</span>
+    <p>Es la planilla de la semana 9. La diferencia: en C# la clase base <strong>avisa</strong> qué se puede redefinir (<code>virtual</code>) y la hija <strong>declara</strong> que lo redefine (<code>override</code>). Nada pasa por accidente.</p>
+  </div>
+  <div class="ciclo">
+    <h3>Caso: la planilla polimórfica de la semana 9</h3>
+    <div class="paso"><div>
+      <span class="etq">Pregunta</span>
+<p>¿Se puede demostrar que el diseño de la semana 9 es independiente del lenguaje?</p>
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Implementación</span>
+<pre data-file="Planilla.cs"><code class="language-csharp">var planilla = new List&lt;Empleado&gt;
+{
+    new Empleado(&quot;Ana&quot;, 900m),
+    new PorHora(&quot;Luis&quot;, 4.5m, 170),
+    new Vendedor(&quot;Eva&quot;, 500m, 12000m),
+};
+
+decimal total = 0;
+foreach (Empleado e in planilla)          // polimorfismo
+{
+    Console.WriteLine($&quot;{e.Nombre,-6} {e.GetType().Name,-9} {e.CalcularPago(),9:N2}&quot;);
+    total += e.CalcularPago();
+}
+Console.WriteLine($&quot;Total planilla: {total:N2}&quot;);
+
+
+public class Empleado
+{
+    public string Nombre { get; }
+    protected decimal SalarioBase { get; }
+
+    public Empleado(string nombre, decimal salarioBase)
+    {
+        Nombre = nombre;
+        SalarioBase = salarioBase;
+    }
+
+    public virtual decimal CalcularPago() =&gt; SalarioBase;
+}
+
+public class PorHora : Empleado
+{
+    private readonly decimal tarifa;
+    private readonly int horas;
+
+    public PorHora(string nombre, decimal tarifa, int horas) : base(nombre, 0m)
+    {
+        this.tarifa = tarifa;
+        this.horas = horas;
+    }
+
+    public override decimal CalcularPago()
+    {
+        decimal extra = Math.Max(0, horas - 160) * tarifa * 0.5m;
+        return horas * tarifa + extra;
+    }
+}
+
+public class Vendedor : Empleado
+{
+    private readonly decimal ventas;
+
+    public Vendedor(string nombre, decimal salarioBase, decimal ventas) : base(nombre, salarioBase)
+    {
+        this.ventas = ventas;
+    }
+
+    public override decimal CalcularPago() =&gt; base.CalcularPago() + ventas * 0.05m;
+}</code></pre>
+<pre class="salida" data-file="salida"><code>Ana    Empleado     900.00
+Luis   PorHora      787.50
+Eva    Vendedor   1,100.00
+Total planilla: 2,787.50</code></pre>
+
+    </div></div>
+    <div class="paso"><div>
+      <span class="etq">Interpretación</span>
+<p><code>: base(nombre, 0m)</code> = <code>super().__init__(nombre, 0)</code>. <code>protected</code>: visible para las hijas, no para el resto. <code>=&gt;</code> define un método de una sola expresión. La lista es <code>List&lt;Empleado&gt;</code> y guarda objetos de las tres clases: polimorfismo.</p>
+    </div></div>
+    <div class="paso verif"><div>
+      <span class="etq">Verificación</span>
+<p>Mismos números que en Python: 900.00, 787.50, 1,100.00 y total 2,787.50 ✔. Esta equivalencia es lo que el programa llama “demostración de equivalencia semántica entre lenguajes”.</p>
+    </div></div>
+  </div>
+</section>
+
+<section id="trazas">
+  <h2>Tabla de traza</h2>
+<h3>¿Compila? ¿Qué pasa?</h3>
+<p>Con la clase <code>Cuenta</code> de arriba y <code>var c = new Cuenta("X", 100m);</code>. Escribe el saldo final, <em>no compila</em> o el nombre de la excepción.</p>
+  <div class="traza">
+    <div class="table-wrap"><table>
+      <thead><tr><th>Instrucción</th><th>Resultado</th></tr></thead>
+      <tbody>
+        <tr><td class="dado"><code>c.Depositar(20m);</code></td><td><input data-a="120" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado"><code>c.Saldo = 0m;</code></td><td><input data-a="no compila" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado"><code>c.Retirar(100m);</code></td><td><input data-a="0" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado"><code>c.Retirar(101m);</code></td><td><input data-a="InvalidOperationException" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado"><code>c.Depositar(-5m);</code></td><td><input data-a="ArgumentException" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado"><code>c.movimientos.Clear();</code></td><td><input data-a="no compila" aria-label="Respuesta"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="acciones"><button class="btn" type="button" data-comprobar>Comprobar</button><button class="btn sec" type="button" data-solucion>Ver solución</button><button class="btn sec" type="button" data-limpiar>Limpiar</button><span class="resultado" aria-live="polite"></span></div>
+  </div>
+  <ul class="check">
+    <li><input type="checkbox" id="s11-t1" data-track="s11-t1"><label for="s11-t1">Traza completa.</label></li>
+  </ul>
+</section>
+
+<section id="ejercicios">
+  <h2>Ejercicios</h2>
+  <article class="ejercicio">
+    <header><h3>E1 · Estudiante con notas, en C#</h3><span class="nivel">clase + List + propiedades · ★★</span></header>
+    <div class="cuerpo">
+<p>Traduce la clase <code>Estudiante</code> de la semana 8: lista privada de notas, validación de 0 a 10, <code>Promedio</code> y <code>Aprobado</code> como propiedades calculadas, y <code>ToString()</code> (el <code>__str__</code> de C#).</p>
+    </div>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="Estudiante.cs"><code class="language-csharp">var e = new Estudiante(&quot;Carla&quot;, &quot;2026-0412&quot;);
+e.AgregarNota(7.5m);
+e.AgregarNota(5.0m);
+e.AgregarNota(8.0m);
+Console.WriteLine(e);
+try { e.AgregarNota(11m); }
+catch (ArgumentOutOfRangeException ex) { Console.WriteLine($&quot;Error: {ex.ParamName} fuera de rango&quot;); }
+
+
+public class Estudiante
+{
+    private readonly List&lt;decimal&gt; notas = new();
+    public string Nombre { get; }
+    public string Carnet { get; }
+
+    public Estudiante(string nombre, string carnet)
+    {
+        Nombre = nombre;
+        Carnet = carnet;
+    }
+
+    public void AgregarNota(decimal nota)
+    {
+        if (nota &lt; 0 || nota &gt; 10)
+            throw new ArgumentOutOfRangeException(nameof(nota));
+        notas.Add(nota);
+    }
+
+    public decimal Promedio =&gt; notas.Count == 0 ? 0 : Math.Round(notas.Sum() / notas.Count, 2);
+    public bool Aprobado =&gt; Promedio &gt;= 6;
+
+    public override string ToString() =&gt;
+        $&quot;{Carnet} {Nombre}: {Promedio} ({(Aprobado ? &quot;aprobado&quot; : &quot;en riesgo&quot;)})&quot;;
+}</code></pre>
+<pre class="salida" data-file="salida"><code>2026-0412 Carla: 6.83 (aprobado)
+Error: nota fuera de rango</code></pre>
+<p><code>override string ToString()</code> hace que <code>Console.WriteLine(e)</code> muestre el objeto en términos del negocio. <code>notas.Sum()</code> suma la lista.</p>
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s11-e1" data-track="s11-e1"><label for="s11-e1">Resuelto</label></li></ul>
+  </article>
+  <article class="ejercicio">
+    <header><h3>E2 · Formas de pago con clase abstracta</h3><span class="nivel">abstract + override · ★★★</span></header>
+    <div class="cuerpo">
+<p>Traduce el simulador de pagos de la semana 9. La clase base es <code>abstract</code>: declara <code>Comision</code> sin implementarla y obliga a cada hija a hacerlo.</p>
+    </div>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="Pagos.cs"><code class="language-csharp">var metodos = new List&lt;MetodoPago&gt; { new Efectivo(), new Tarjeta(), new Transferencia() };
+foreach (var m in metodos)
+{
+    Console.WriteLine($&quot;{m.GetType().Name,-13} cobra {m.Cobrar(80m):F2}&quot;);
+}
+
+
+public abstract class MetodoPago
+{
+    public abstract decimal Comision(decimal monto);
+    public decimal Cobrar(decimal monto) =&gt; monto + Comision(monto);
+}
+
+public class Efectivo : MetodoPago
+{
+    public override decimal Comision(decimal monto) =&gt; 0m;
+}
+
+public class Tarjeta : MetodoPago
+{
+    public override decimal Comision(decimal monto) =&gt; Math.Round(monto * 0.035m, 2);
+}
+
+public class Transferencia : MetodoPago
+{
+    public override decimal Comision(decimal monto) =&gt; monto &lt; 100 ? 0.75m : 0m;
+}</code></pre>
+<pre class="salida" data-file="salida"><code>Efectivo      cobra 80.00
+Tarjeta       cobra 82.80
+Transferencia cobra 80.75</code></pre>
+<p>Si una hija olvida implementar <code>Comision</code>, el programa <strong>no compila</strong> (en Python, el <code>NotImplementedError</code> aparecía al ejecutar). Otra vez el compilador te cuida.</p>
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s11-e2" data-track="s11-e2"><label for="s11-e2">Resuelto</label></li></ul>
+  </article>
+</section>
+
+<section id="practica">
+  <h2>Práctica intensiva</h2>
+<p>Ejercicios rápidos con colecciones y herencia en C#, y un problema de modelado completo tipo examen final.</p>
+  <h3>Ejercicios rápidos · ¿Qué imprime en C#?</h3>
+  <p>Si no compila, escribe <em>error</em>.</p>
+  <div class="traza taladro">
+    <div class="table-wrap"><table>
+      <thead><tr><th>Código</th><th>Tu respuesta</th></tr></thead>
+      <tbody>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-csharp">var v = new List&lt;int&gt; { 3, 1, 2 };
+v.Add(5);
+Console.WriteLine(v.Count);</code></pre></td><td><input data-a="4" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-csharp">var v = new List&lt;int&gt; { 3, 1, 2 };
+v.Sort();
+Console.WriteLine(v[0]);</code></pre></td><td><input data-a="1" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-csharp">int[] a = { 4, 8, 15 };
+Console.WriteLine(a.Length);</code></pre></td><td><input data-a="3" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-csharp">var v = new List&lt;string&gt; { &quot;a&quot; };
+v.Add(5);</code></pre></td><td><input data-a="error" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-csharp">var v = new List&lt;int&gt; { 10, 20 };
+Console.WriteLine(v.Contains(20));</code></pre></td><td><input data-a="True" aria-label="Respuesta"></td></tr>
+        <tr><td class="dado codigo"><pre class="mini" data-norun><code class="language-csharp">A x = new B();
+Console.WriteLine(x.F());
+
+class A { public virtual string F() =&gt; &quot;A&quot;; }
+class B : A { public override string F() =&gt; &quot;B&quot;; }</code></pre></td><td><input data-a="B" aria-label="Respuesta"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="acciones"><button class="btn" type="button" data-comprobar>Comprobar</button><button class="btn sec" type="button" data-solucion>Ver solución</button><button class="btn sec" type="button" data-limpiar>Limpiar</button><span class="resultado" aria-live="polite"></span></div>
+  </div>
+  <ul class="check">
+    <li><input type="checkbox" id="s11-px" data-track="s11-px"><label for="s11-px">Completé los ejercicios rápidos sin ejecutar el código.</label></li>
+  </ul>
+  <h3>Problema tipo examen</h3>
+  <article class="ejercicio problema">
+    <header><h3>P1 · Inventario orientado a objetos en C#</h3><span class="nivel">composición + List&lt;T&gt; + excepciones · ★★★★</span></header>
+    <div class="cuerpo">
+      <p>Clase <code>Producto</code> (stock que solo baja con ventas válidas) y clase <code>Inventario</code> que <strong>contiene</strong> una <code>List&lt;Producto&gt;</code>: agregar (sin códigos repetidos), buscar, vender, valor total y lista de productos por reordenar.</p>
+      <p><strong>Tu programa debe cumplir estos casos de prueba:</strong></p>
+      <div class="table-wrap"><table><thead><tr><th>Situación</th><th>Esperado</th></tr></thead><tbody><tr><td>Vender 5 de A01</td><td>stock A01 = 35</td></tr><tr><td>Vender 20 de B07 (hay 8)</td><td>InvalidOperationException</td></tr><tr><td>Agregar otro A01</td><td>ArgumentException</td></tr><tr><td>Valor</td><td>471.50</td></tr><tr><td>Por reordenar (&lt; 10)</td><td>Arroz (8), Azúcar (0)</td></tr></tbody></table></div>
+    </div>
+    <details><summary>Pista</summary><div class="det"><p><code>Buscar</code> devuelve <code>Producto?</code> (puede ser <code>null</code>, como el <code>None</code> de Python). <code>??</code> da un valor alternativo si lo de la izquierda es <code>null</code>.</p></div></details>
+    <details class="solucion"><summary>Solución</summary><div class="det">
+<pre data-file="Inventario.cs"><code class="language-csharp">var inventario = new Inventario();
+inventario.Agregar(new Producto(&quot;A01&quot;, &quot;Aceite 1 L&quot;, 12.50m, 40));
+inventario.Agregar(new Producto(&quot;B07&quot;, &quot;Arroz 5 lb&quot;, 4.25m, 8));
+inventario.Agregar(new Producto(&quot;C12&quot;, &quot;Azúcar 5 lb&quot;, 3.90m, 0));
+
+inventario.Vender(&quot;A01&quot;, 5);
+try { inventario.Vender(&quot;B07&quot;, 20); }
+catch (InvalidOperationException ex) { Console.WriteLine($&quot;Rechazado: {ex.Message}&quot;); }
+try { inventario.Agregar(new Producto(&quot;A01&quot;, &quot;Duplicado&quot;, 1m, 1)); }
+catch (ArgumentException ex) { Console.WriteLine($&quot;Rechazado: {ex.Message}&quot;); }
+
+Console.WriteLine($&quot;Valor del inventario: {inventario.Valor():N2}&quot;);
+foreach (var p in inventario.PorReordenar(10))
+    Console.WriteLine($&quot;Reordenar: {p.Nombre} ({p.Stock})&quot;);
+
+
+public class Producto
+{
+    public string Codigo { get; }
+    public string Nombre { get; }
+    public decimal Precio { get; }
+    public int Stock { get; private set; }
+
+    public Producto(string codigo, string nombre, decimal precio, int stock)
+    {
+        if (precio &lt;= 0) throw new ArgumentException(&quot;precio inválido&quot;);
+        Codigo = codigo; Nombre = nombre; Precio = precio; Stock = stock;
+    }
+
+    public void Vender(int cantidad)
+    {
+        if (cantidad &lt;= 0 || cantidad &gt; Stock)
+            throw new InvalidOperationException($&quot;no hay {cantidad} de {Nombre} (quedan {Stock})&quot;);
+        Stock -= cantidad;
+    }
+}
+
+public class Inventario
+{
+    private readonly List&lt;Producto&gt; productos = new();
+
+    public void Agregar(Producto p)
+    {
+        if (Buscar(p.Codigo) != null)
+            throw new ArgumentException($&quot;código repetido: {p.Codigo}&quot;);
+        productos.Add(p);
+    }
+
+    public Producto? Buscar(string codigo)
+    {
+        foreach (var p in productos)
+            if (p.Codigo == codigo) return p;
+        return null;
+    }
+
+    public void Vender(string codigo, int cantidad)
+    {
+        Producto p = Buscar(codigo) ?? throw new ArgumentException($&quot;no existe {codigo}&quot;);
+        p.Vender(cantidad);
+    }
+
+    public decimal Valor()
+    {
+        decimal total = 0;
+        foreach (var p in productos) total += p.Precio * p.Stock;
+        return total;
+    }
+
+    public List&lt;Producto&gt; PorReordenar(int minimo)
+    {
+        var resultado = new List&lt;Producto&gt;();
+        foreach (var p in productos)
+            if (p.Stock &lt; minimo) resultado.Add(p);
+        return resultado;
+    }
+}</code></pre>
+<pre class="salida" data-file="salida"><code>Rechazado: no hay 20 de Arroz 5 lb (quedan 8)
+Rechazado: código repetido: A01
+Valor del inventario: 471.50
+Reordenar: Arroz 5 lb (8)
+Reordenar: Azúcar 5 lb (0)</code></pre>
+<p><strong>Verificación:</strong> 35 × 12.50 + 8 × 4.25 + 0 = 437.50 + 34 = 471.50 ✔.</p>
+    </div></details>
+    <ul class="check"><li><input type="checkbox" id="s11-pr1" data-track="s11-pr1"><label for="s11-pr1">Resuelto y probado con todos los casos</label></li></ul>
+  </article>
+</section>
+
+<section id="defensa">
+  <h2>Guía de la defensa del proyecto</h2>
+<p>La sustentación es en esta semana: <strong>15 minutos por equipo</strong>, 8 de demostración en vivo y 7 de preguntas individuales sobre el código. Vale el 25 % de la nota del proyecto, y quien no pueda explicar su código puede perder la nota del proyecto.</p>
+<h3>Antes del día</h3>
+  <ul class="check">
+    <li><input type="checkbox" id="s11-d1" data-track="s11-d1"><label for="s11-d1">Release <strong>v1.0</strong> creado en GitHub (etiqueta y descripción de lo que incluye).</label></li>
+    <li><input type="checkbox" id="s11-d2" data-track="s11-d2"><label for="s11-d2">El proyecto corre desde cero en una computadora del laboratorio siguiendo solo el README.</label></li>
+    <li><input type="checkbox" id="s11-d3" data-track="s11-d3"><label for="s11-d3">Datos de ejemplo con al menos 20 registros; la app funciona apenas se abre.</label></li>
+    <li><input type="checkbox" id="s11-d4" data-track="s11-d4"><label for="s11-d4"><code>python -m pytest</code> pasa el 100 %.</label></li>
+    <li><input type="checkbox" id="s11-d5" data-track="s11-d5"><label for="s11-d5">Cada integrante ensayó explicar <strong>todos</strong> los módulos, no solo los suyos.</label></li>
+    <li><input type="checkbox" id="s11-d6" data-track="s11-d6"><label for="s11-d6">Ensayaron un cambio en vivo (agregar una regla, un tipo nuevo, un campo) en menos de 5 minutos.</label></li>
+  </ul>
+<h3>Guion sugerido para los 8 minutos</h3>
+<ol><li><strong>1 min</strong> · El problema de negocio y quién usa el sistema.</li><li><strong>3 min</strong> · Demostración del flujo principal con datos reales, incluyendo un error manejado (dato inválido).</li><li><strong>2 min</strong> · Arquitectura: clases, módulos y por qué están así (diagrama o README).</li><li><strong>1 min</strong> · Pruebas corriendo en vivo.</li><li><strong>1 min</strong> · Valor para el negocio: qué automatiza, qué errores humanos evita, qué decisión mejora.</li></ol>
+<h3>Banco de preguntas de todo el ciclo</h3>
+  <details class="defensa"><summary>¿Qué hace esta línea? (señalan cualquier línea)</summary><div><p>Explica la línea en términos del negocio y del lenguaje: qué variable cambia, por qué, y qué pasaría sin ella.</p></div></details>
+  <details class="defensa"><summary>¿Qué pasa si el usuario escribe texto donde va un número?</summary><div><p>Muéstralo en vivo: el <code>try/except ValueError</code> o la validación, y el mensaje que ve el usuario.</p></div></details>
+  <details class="defensa"><summary>¿Cómo garantizan que ese bucle termina?</summary><div><p>Señala la variable que cambia en cada vuelta y la condición de salida (semana 3).</p></div></details>
+  <details class="defensa"><summary>¿Por qué esa función devuelve en vez de imprimir?</summary><div><p>Para poder probarla y reutilizarla; la interfaz decide cómo mostrar (semana 4).</p></div></details>
+  <details class="defensa"><summary>¿Qué estructura de datos usaron para X y por qué?</summary><div><p>Lista, tupla, diccionario o conjunto según el uso (semanas 5 y 7).</p></div></details>
+  <details class="defensa"><summary>¿Qué pasa si borro el archivo de datos?</summary><div><p>Se atrapa <code>FileNotFoundError</code> y se empieza vacío o con datos de ejemplo (semana 7).</p></div></details>
+  <details class="defensa"><summary>¿Por qué esto es una clase? ¿Qué invariante protege?</summary><div><p>Datos + reglas + acciones juntos; muestra la validación y la prueba que la ataca (semana 8).</p></div></details>
+  <details class="defensa"><summary>¿Herencia o composición? ¿Por qué?</summary><div><p>“Es un” vs. “tiene un” (semana 9).</p></div></details>
+  <details class="defensa"><summary>¿Qué partes hizo la IA y cómo lo verificaron?</summary><div><p>La bitácora con casos concretos y las pruebas que respaldan cada corrección (Fase 6).</p></div></details>
+  <details class="defensa"><summary>Si lo tuvieran que pasar a C#, ¿qué cambiaría?</summary><div><p>Tipos declarados, <code>decimal</code> para dinero, propiedades, <code>List&lt;T&gt;</code>, <code>virtual/override</code>: el diseño se mantiene (semanas 10 y 11).</p></div></details>
+</section>
+
+<section id="evaluacion">
+  <h2>Control 4 y rumbo al Final</h2>
+<p>El <strong>Control 4 es esta semana</strong> y el <strong>Examen Final</strong> la próxima (lógica en Python y fundamentos formales de C#). De esta semana:</p>
+  <ul class="check">
+    <li><input type="checkbox" id="s11-v1" data-track="s11-v1"><label for="s11-v1">Escribir una clase en C# con campo privado, propiedad, constructor y método con validación.</label></li>
+    <li><input type="checkbox" id="s11-v2" data-track="s11-v2"><label for="s11-v2">Usar <code>List&lt;T&gt;</code>: crear, agregar, recorrer, buscar.</label></li>
+    <li><input type="checkbox" id="s11-v3" data-track="s11-v3"><label for="s11-v3">Escribir herencia con <code>virtual</code>/<code>override</code> y <code>base(...)</code>.</label></li>
+    <li><input type="checkbox" id="s11-v4" data-track="s11-v4"><label for="s11-v4">Traducir una clase de Python a C# y viceversa.</label></li>
+    <li><input type="checkbox" id="s11-v5" data-track="s11-v5"><label for="s11-v5">Repasar el <a href="semana-12.html">plan del Final</a>.</label></li>
+  </ul>
+</section>
+
+<section id="fuentes">
+  <h2>Fuentes</h2>
+<ul><li><strong>[TRO]</strong> Troelsen, A. y Japikse, P. (2022). <em>Pro C# 10 with .NET 6</em>, 11.ª ed. Caps. 5 y 6.</li><li><strong>[MSDN]</strong> Microsoft Learn. <a href="https://learn.microsoft.com/es-es/dotnet/csharp/fundamentals/types/classes" target="_blank" rel="noopener">Clases</a> · <a href="https://learn.microsoft.com/es-es/dotnet/standard/collections/" target="_blank" rel="noopener">Colecciones</a>.</li></ul>
+</section>
+
+  <nav class="nav-semanas" aria-label="Navegación entre semanas">
+    <a class="nav-prev" href="semana-10.html"><span class="btn-ico" aria-hidden="true"></span><span>Semana 10</span></a>
+    <a class="nav-next" href="semana-12.html"><span>Semana 12: repaso y examen final</span><span class="btn-ico" aria-hidden="true"></span></a>
+  </nav>
+
+<footer class="pie">Guía de estudio · Introducción al Desarrollo de Software · ESEN · Ciclo III/2026. Material de apoyo no oficial; el programa y Moodle mandan.</footer>
+</main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+<script src="../assets/guia.js"></script>
+<script src="../assets/ejecutar.js"></script>
+</body>
+</html>

@@ -16,7 +16,7 @@
 <path d="M40 90 H560" stroke="#c5ced6" stroke-width="6" stroke-linecap="round"/>
 <path d="M40 220 H560" stroke="#c5ced6" stroke-width="6" stroke-linecap="round"/>
 <path d="M560 90 C620 90 620 220 560 220" stroke="#c5ced6" stroke-width="6" fill="none"/>
-<path d="M40 90 H456" stroke="#f2dc4a" stroke-width="6" stroke-linecap="round"/>
+<path d="M40 90 H560 C620 90 620 220 560 220 H40" stroke="#f2dc4a" stroke-width="6" stroke-linecap="round" fill="none"/>
 <circle cx="40" cy="90" r="16" fill="#1d4f66" stroke="#1d4f66" stroke-width="2"/>
 <text x="40" y="95" text-anchor="middle" class="b w">1</text>
 <text x="40" y="132" text-anchor="middle" class="s b" style="fill:#0a70a8">Fase 1</text>
@@ -35,26 +35,26 @@
 <circle cx="560" cy="90" r="20" fill="#b8402f" stroke="#b8402f" stroke-width="2"/>
 <text x="560" y="95" text-anchor="middle" class="b w">6</text>
 <text x="560" y="132" text-anchor="middle" class="s b" style="fill:#b8402f">Parcial</text>
-<circle cx="560" cy="220" r="16" fill="#fff" stroke="#1d4f66" stroke-width="2"/>
-<text x="560" y="225" text-anchor="middle" class="b">7</text>
+<circle cx="560" cy="220" r="16" fill="#1d4f66" stroke="#1d4f66" stroke-width="2"/>
+<text x="560" y="225" text-anchor="middle" class="b w">7</text>
 <text x="560" y="262" text-anchor="middle" class="s b" style="fill:#0a70a8">Fase 4</text>
-<circle cx="456" cy="220" r="16" fill="#fff" stroke="#1d4f66" stroke-width="2"/>
-<text x="456" y="225" text-anchor="middle" class="b">8</text>
+<circle cx="456" cy="220" r="16" fill="#1d4f66" stroke="#1d4f66" stroke-width="2"/>
+<text x="456" y="225" text-anchor="middle" class="b w">8</text>
 <text x="456" y="262" text-anchor="middle" class="s b" style="fill:#b8402f">Control 3</text>
-<circle cx="352" cy="220" r="16" fill="#fff" stroke="#1d4f66" stroke-width="2"/>
-<text x="352" y="225" text-anchor="middle" class="b">9</text>
+<circle cx="352" cy="220" r="16" fill="#1d4f66" stroke="#1d4f66" stroke-width="2"/>
+<text x="352" y="225" text-anchor="middle" class="b w">9</text>
 <text x="352" y="262" text-anchor="middle" class="s b" style="fill:#0a70a8">Fase 5</text>
-<circle cx="248" cy="220" r="16" fill="#fff" stroke="#1d4f66" stroke-width="2"/>
-<text x="248" y="225" text-anchor="middle" class="b">10</text>
+<circle cx="248" cy="220" r="16" fill="#1d4f66" stroke="#1d4f66" stroke-width="2"/>
+<text x="248" y="225" text-anchor="middle" class="b w">10</text>
 <text x="248" y="262" text-anchor="middle" class="s b" style="fill:#0a70a8">Fase 6</text>
-<circle cx="144" cy="220" r="16" fill="#fff" stroke="#1d4f66" stroke-width="2"/>
-<text x="144" y="225" text-anchor="middle" class="b">11</text>
+<circle cx="144" cy="220" r="16" fill="#1d4f66" stroke="#1d4f66" stroke-width="2"/>
+<text x="144" y="225" text-anchor="middle" class="b w">11</text>
 <text x="144" y="262" text-anchor="middle" class="s b" style="fill:#b8402f">Control 4</text>
 <text x="144" y="278" text-anchor="middle" class="s b" style="fill:#b8402f">Defensa</text>
 <circle cx="40" cy="220" r="20" fill="#b8402f" stroke="#b8402f" stroke-width="2"/>
 <text x="40" y="225" text-anchor="middle" class="b w">12</text>
 <text x="40" y="262" text-anchor="middle" class="s b" style="fill:#b8402f">Final</text>
 <rect x="20" y="300" width="16" height="6" rx="2" fill="#f2dc4a" stroke="none" stroke-width="1.5"/>
-<text x="44" y="307" text-anchor="start" class="s">semanas con guía (1–5)</text>
+<text x="44" y="307" text-anchor="start" class="s">todas las semanas tienen guía</text>
 <text x="230" y="307" text-anchor="start" class="s">Rojo: evaluaciones individuales · Azul: fases del proyecto</text>
 </svg>

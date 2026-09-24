@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 360" width="760" height="360" role="img" aria-label="Tabla de traducción de Python a C#: declaración de variables con tipo, conversión con int.Parse, if y else if con llaves, for con contador, while, Console.WriteLine y métodos static.">
+<title>Tabla de traducción de Python a C#: declaración de variables con tipo, conversión con int.Parse, if y else if con llaves, for con contador, while, Console.WriteLine y métodos static.</title>
+<style>
+  text { font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; fill: #1b2430; }
+  .m { font-family: 'JetBrains Mono', Menlo, Consolas, monospace; font-size: 13px; }
+  .s { font-size: 12px; fill: #465264; }
+  .t { font-size: 16px; font-weight: 700; }
+  .b { font-weight: 700; }
+  .mu { fill: #6b7380; }
+  .w { fill: #fff; }
+  .ln { stroke: #465264; stroke-width: 1.6; fill: none; }
+  .ln-s { stroke: #c5ced6; stroke-width: 1.2; fill: none; }
+</style>
+<defs><marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#465264"/></marker><marker id="pb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0a70a8"/></marker><marker id="pg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2e7d4f"/></marker></defs>
+<rect x="20" y="14" width="350" height="34" rx="6" fill="#1d4f66" stroke="none" stroke-width="1.5"/>
+<text x="195" y="36" text-anchor="middle" class="b w">Python</text>
+<rect x="390" y="14" width="350" height="34" rx="6" fill="#b07600" stroke="none" stroke-width="1.5"/>
+<text x="565" y="36" text-anchor="middle" class="b w">C#</text>
+<rect x="20" y="50" width="720" height="28" rx="3" fill="#e9eef1" stroke="none" stroke-width="1.5"/>
+<text x="34" y="69" text-anchor="start" class="m">precio = 12.50</text>
+<text x="404" y="69" text-anchor="start" class="m">decimal precio = 12.50m;</text>
+<rect x="20" y="80" width="720" height="28" rx="3" fill="#fff" stroke="none" stroke-width="1.5"/>
+<text x="34" y="99" text-anchor="start" class="m">cantidad = int(texto)</text>
+<text x="404" y="99" text-anchor="start" class="m">int cantidad = int.Parse(texto);</text>
+<rect x="20" y="110" width="720" height="28" rx="3" fill="#e9eef1" stroke="none" stroke-width="1.5"/>
+<text x="34" y="129" text-anchor="start" class="m">if total &gt;= 50:</text>
+<text x="404" y="129" text-anchor="start" class="m">if (total &gt;= 50) {</text>
+<rect x="20" y="140" width="720" height="28" rx="3" fill="#fff" stroke="none" stroke-width="1.5"/>
+<text x="34" y="159" text-anchor="start" class="m">elif total &gt; 0:</text>
+<text x="404" y="159" text-anchor="start" class="m">} else if (total &gt; 0) {</text>
+<rect x="20" y="170" width="720" height="28" rx="3" fill="#e9eef1" stroke="none" stroke-width="1.5"/>
+<text x="34" y="189" text-anchor="start" class="m">for i in range(1, 6):</text>
+<text x="404" y="189" text-anchor="start" class="m">for (int i = 1; i &lt; 6; i++) {</text>
+<rect x="20" y="200" width="720" height="28" rx="3" fill="#fff" stroke="none" stroke-width="1.5"/>
+<text x="34" y="219" text-anchor="start" class="m">while saldo &gt; 0:</text>
+<text x="404" y="219" text-anchor="start" class="m">while (saldo &gt; 0) {</text>
+<rect x="20" y="230" width="720" height="28" rx="3" fill="#e9eef1" stroke="none" stroke-width="1.5"/>
+<text x="34" y="249" text-anchor="start" class="m">print(f"Total: {t}")</text>
+<text x="404" y="249" text-anchor="start" class="m">Console.WriteLine($"Total: {t}");</text>
+<rect x="20" y="260" width="720" height="28" rx="3" fill="#fff" stroke="none" stroke-width="1.5"/>
+<text x="34" y="279" text-anchor="start" class="m">def iva(m):</text>
+<text x="404" y="279" text-anchor="start" class="m">static decimal Iva(decimal m) {</text>
+<rect x="20" y="290" width="720" height="28" rx="3" fill="#e9eef1" stroke="none" stroke-width="1.5"/>
+<text x="34" y="309" text-anchor="start" class="m">    return m * 0.13</text>
+<text x="404" y="309" text-anchor="start" class="m">    return m * 0.13m; }</text>
+<text x="380" y="346" text-anchor="middle" class="s b">En C#: tipo declarado · punto y coma · llaves en vez de sangría · paréntesis en las condiciones</text>
+</svg>
