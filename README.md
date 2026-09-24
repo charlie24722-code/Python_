@@ -29,8 +29,9 @@ Cada semana incluye:
 
 ## Diseño
 
-- **Liquid glass**: paneles translúcidos con desenfoque y brillo en el borde sobre un campo de color suave; el código se mantiene sólido para leerlo bien. Si el navegador no soporta el efecto o el sistema pide “reducir transparencia”, los paneles pasan a ser sólidos.
+- **Liquid glass**: paneles muy transparentes con desenfoque fuerte, brillo especular y un canto de luz degradado, sobre campos de color animados con un tono propio por semana; el código se mantiene sólido para leerlo bien. Si el navegador no soporta el efecto o el sistema pide “reducir transparencia”, los paneles pasan a ser sólidos.
 - Portada de cada semana en azul petróleo con la pregunta orientadora marcada con **resaltador amarillo**.
+- **Código como ventana de editor**: barra con botones de ventana, nombre del archivo, etiqueta del lenguaje, botón copiar y números de línea; las salidas se muestran como terminal de vidrio.
 - Tipografías: **Archivo** (títulos), **Atkinson Hyperlegible Next** (lectura, pensada para máxima legibilidad) y **JetBrains Mono** (código, sin ligaduras para que `<=` y `==` se vean tal cual).
 - **Láminas SVG independientes** en `assets/img/` (21 archivos): diagramas de flujo, Git, tramos, cadenas `if`, `range`, interés compuesto, funciones, ámbito, pila de llamadas, módulos, índices, alias, Bubble/Insertion Sort, crecimiento cuadrático y la ruta del ciclo. Se ven sobre fondo claro en ambos temas, como un apunte impreso.
 - Íconos SVG en `assets/icons/`. Modo claro y oscuro, adaptado a celular, respeta "reducir movimiento".

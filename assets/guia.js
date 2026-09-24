@@ -252,6 +252,57 @@
     pre.appendChild(b);
   });
 
+  /* ---------- Ventanas de código y terminal ---------- */
+  function nombreLenguaje(pre, code) {
+    var archivo = pre.getAttribute("data-file") || "";
+    if (code.classList.contains("language-python")) return ["python", "Python"];
+    if (code.classList.contains("language-bash")) return ["bash", "Terminal"];
+    if (/\.pseudo$/.test(archivo)) return ["pseudo", "Pseudocódigo"];
+    return ["texto", "Texto"];
+  }
+  document.querySelectorAll("pre").forEach(function (pre) {
+    var code = pre.querySelector("code");
+    if (!code || pre.classList.contains("mini") || pre.parentElement.classList.contains("ventana")) return;
+    var salida = pre.classList.contains("salida");
+    var ventana = document.createElement("div");
+    ventana.className = "ventana" + (salida ? " terminal" : "");
+    var barra = document.createElement("div");
+    barra.className = "ventana-barra";
+    var archivo = document.createElement("span");
+    archivo.className = "ventana-archivo";
+    if (salida) {
+      archivo.textContent = pre.getAttribute("data-file") || "salida";
+      barra.appendChild(archivo);
+    } else {
+      var lang = nombreLenguaje(pre, code);
+      var puntos = document.createElement("span");
+      puntos.className = "puntos";
+      puntos.setAttribute("aria-hidden", "true");
+      puntos.innerHTML = "<i></i><i></i><i></i>";
+      archivo.textContent = pre.getAttribute("data-file") || (lang[0] === "python" ? "ejemplo.py" : "");
+      var etiqueta = document.createElement("span");
+      etiqueta.className = "ventana-lang";
+      etiqueta.setAttribute("data-lang", lang[0]);
+      etiqueta.textContent = lang[1];
+      barra.appendChild(puntos);
+      barra.appendChild(archivo);
+      barra.appendChild(etiqueta);
+      var copiar = pre.querySelector(".copy-btn");
+      if (copiar) barra.appendChild(copiar);
+      var n = code.textContent.replace(/\n+$/, "").split("\n").length;
+      var lineas = document.createElement("span");
+      lineas.className = "lineas";
+      lineas.setAttribute("aria-hidden", "true");
+      var numeros = [];
+      for (var i = 1; i <= n; i++) numeros.push(i);
+      lineas.textContent = numeros.join("\n");
+      pre.insertBefore(lineas, code);
+    }
+    pre.parentNode.insertBefore(ventana, pre);
+    ventana.appendChild(barra);
+    ventana.appendChild(pre);
+  });
+
   /* ---------- Índice lateral: sección activa ---------- */
   var enlacesToc = Array.prototype.slice.call(document.querySelectorAll(".toc a[href^='#']"));
   if (enlacesToc.length && "IntersectionObserver" in window) {
