@@ -13,17 +13,21 @@
 </head>
 <body data-semana="s4">
 
-<header class="topbar">
-  <a class="brand" href="../index.html">IDS <span>·</span> <small>Guía de estudio</small></a>
-  <nav aria-label="Semanas">
+<header class="isla-wrap">
+  <div class="isla">
+    <a class="brand" href="../index.html">IDS <small>Guía de estudio</small></a>
+    <nav class="isla-semanas" aria-label="Semanas">
     <a href="semana-01.html">S1</a>
     <a href="semana-02.html">S2</a>
     <a href="semana-03.html">S3</a>
     <a href="semana-04.html" aria-current="page">S4</a>
     <a href="semana-05.html">S5</a>
   </nav>
-  <button class="theme-btn" type="button" aria-label="Cambiar tema claro/oscuro"><span class="ico-tema" aria-hidden="true"></span></button>
+    <button class="theme-btn" type="button" aria-label="Cambiar tema claro/oscuro"><span class="ico-tema" aria-hidden="true"></span></button>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu-completo"><span class="hb" aria-hidden="true"></span><span class="hb" aria-hidden="true"></span><span class="sr">Menú</span></button>
+  </div>
 </header>
+<div class="menu-completo" id="menu-completo" hidden></div>
 
 <header class="hero-semana">
   <div class="hero-in">
@@ -337,7 +341,7 @@ Cliente Marta: $50.85</code></pre>
       <p>Cada función se puede probar sola: <code>aplicar_descuento(50)</code> debe dar 45, <code>aplicar_descuento(49.99)</code> debe dar 49.99. Eso es exactamente lo que harán las <a href="#pruebas">pruebas automáticas</a>.</p>
     </div></div>
   </div>
-<figure class="lamina "><div class="placa"><img src="../assets/img/s4-funcion.svg" alt="Una función recibe argumentos, los asigna a sus parámetros, calcula y con return devuelve 50.85 a la variable total; print solo muestra en pantalla." width="760" height="294" loading="lazy" decoding="async"></div><figcaption>Los argumentos entran, el <code>return</code> devuelve el resultado a quien llamó. Un <code>print</code> solo lo muestra.</figcaption></figure>
+<figure class="lamina "><div class="placa"><div class="placa-core"><img src="../assets/img/s4-funcion.svg" alt="Una función recibe argumentos, los asigna a sus parámetros, calcula y con return devuelve 50.85 a la variable total; print solo muestra en pantalla." width="760" height="294" loading="lazy" decoding="async"></div></div><figcaption>Los argumentos entran, el <code>return</code> devuelve el resultado a quien llamó. Un <code>print</code> solo lo muestra.</figcaption></figure>
   <div class="box ojo">
     <span class="box-title">Anatomía de una función</span>
 <pre data-norun><code class="language-python">def nombre_en_verbo(parametro_1, parametro_2=valor_por_defecto):
@@ -438,7 +442,7 @@ a = precio_final(200)
 b = 200 * (1 - descuento)       # aquí se usa la global
 print(a, b, descuento)</code></pre>
 <pre class="salida" data-file="salida"><code>180.0 190.0 0.05</code></pre>
-<figure class="lamina "><div class="placa"><img src="../assets/img/s4-ambito.svg" alt="El espacio global contiene descuento igual a 0.05; la llamada a precio_final tiene su propio espacio local con precio 200 y otro descuento de 0.10 que desaparece al terminar." width="760" height="274" loading="lazy" decoding="async"></div><figcaption>Cada llamada tiene su propio espacio de variables; se crea al llamar y desaparece al terminar.</figcaption></figure>
+<figure class="lamina "><div class="placa"><div class="placa-core"><img src="../assets/img/s4-ambito.svg" alt="El espacio global contiene descuento igual a 0.05; la llamada a precio_final tiene su propio espacio local con precio 200 y otro descuento de 0.10 que desaparece al terminar." width="760" height="274" loading="lazy" decoding="async"></div></div><figcaption>Cada llamada tiene su propio espacio de variables; se crea al llamar y desaparece al terminar.</figcaption></figure>
 
   <div class="box error">
     <span class="box-title">El error de modificar una global</span>
@@ -493,7 +497,7 @@ print(valor_futuro(1000, 0.10, 3))</code></pre>
     <div class="paso"><div>
       <span class="etq">Interpretación</span>
       <p>La llamada con 3 años “espera” a la de 2, que espera a la de 1, que espera a la de 0. La de 0 responde 1000 y las respuestas regresan multiplicándose: 1100 → 1210 → 1331. Esa pila de llamadas en espera es lo que trazas en la <a href="#trazas">traza 2</a>.</p>
-<figure class="lamina "><div class="placa"><img src="../assets/img/s4-pila.svg" alt="Pila de llamadas de valor_futuro: la llamada con 3 años llama a la de 2, 1 y 0; la de 0 es el caso base y devuelve 1000, y las respuestas regresan como 1100, 1210 y 1331." width="800" height="302" loading="lazy" decoding="async"></div><figcaption>La última llamada en abrirse (el caso base) es la primera en responder.</figcaption></figure>
+<figure class="lamina "><div class="placa"><div class="placa-core"><img src="../assets/img/s4-pila.svg" alt="Pila de llamadas de valor_futuro: la llamada con 3 años llama a la de 2, 1 y 0; la de 0 es el caso base y devuelve 1000, y las respuestas regresan como 1100, 1210 y 1331." width="800" height="302" loading="lazy" decoding="async"></div></div><figcaption>La última llamada en abrirse (el caso base) es la primera en responder.</figcaption></figure>
 
     </div></div>
     <div class="paso verif"><div>
@@ -510,7 +514,7 @@ print(valor_futuro(1000, 0.10, 3))</code></pre>
 <section id="modulos">
   <h2>Módulos: separar el código en archivos</h2>
   <p>Un módulo es un archivo <code>.py</code> cuyas funciones se pueden importar desde otro. Es el principio de la arquitectura que exige el proyecto (<code>modelos.py</code>, <code>servicios.py</code>, <code>main.py</code>…).</p>
-<figure class="lamina "><div class="placa"><img src="../assets/img/s4-modulos.svg" alt="El módulo facturacion.py contiene las funciones; main.py y test_facturacion.py las importan." width="760" height="304" loading="lazy" decoding="async"></div><figcaption>Un módulo con la lógica; el programa principal y las pruebas lo importan.</figcaption></figure>
+<figure class="lamina "><div class="placa"><div class="placa-core"><img src="../assets/img/s4-modulos.svg" alt="El módulo facturacion.py contiene las funciones; main.py y test_facturacion.py las importan." width="760" height="304" loading="lazy" decoding="async"></div></div><figcaption>Un módulo con la lógica; el programa principal y las pruebas lo importan.</figcaption></figure>
 
 <pre data-file="facturacion.py" data-module><code class="language-python">"""Cálculos de facturación de la Distribuidora La Ceiba."""
 
@@ -967,8 +971,8 @@ print("Módulo corregido: pruebas superadas")</code></pre>
   </ul>
   <p style="font-size:.9rem;color:var(--ink-3)">Las tasas de la planilla (E1) son simplificadas y con fines didácticos; no constituyen asesoría legal ni reflejan necesariamente la normativa vigente.</p>
   <nav class="nav-semanas" aria-label="Navegación entre semanas">
-    <a href="semana-03.html">← Semana 3</a>
-    <a href="semana-05.html">Semana 5: listas y ordenamiento →</a>
+    <a class="nav-prev" href="semana-03.html"><span class="btn-ico" aria-hidden="true"></span><span>Semana 3</span></a>
+    <a class="nav-next" href="semana-05.html"><span>Semana 5: listas y ordenamiento</span><span class="btn-ico" aria-hidden="true"></span></a>
   </nav>
 </section>
 

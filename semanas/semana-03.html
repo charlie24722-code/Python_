@@ -13,17 +13,21 @@
 </head>
 <body data-semana="s3">
 
-<header class="topbar">
-  <a class="brand" href="../index.html">IDS <span>·</span> <small>Guía de estudio</small></a>
-  <nav aria-label="Semanas">
+<header class="isla-wrap">
+  <div class="isla">
+    <a class="brand" href="../index.html">IDS <small>Guía de estudio</small></a>
+    <nav class="isla-semanas" aria-label="Semanas">
     <a href="semana-01.html">S1</a>
     <a href="semana-02.html">S2</a>
     <a href="semana-03.html" aria-current="page">S3</a>
     <a href="semana-04.html">S4</a>
     <a href="semana-05.html">S5</a>
   </nav>
-  <button class="theme-btn" type="button" aria-label="Cambiar tema claro/oscuro"><span class="ico-tema" aria-hidden="true"></span></button>
+    <button class="theme-btn" type="button" aria-label="Cambiar tema claro/oscuro"><span class="ico-tema" aria-hidden="true"></span></button>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu-completo"><span class="hb" aria-hidden="true"></span><span class="hb" aria-hidden="true"></span><span class="sr">Menú</span></button>
+  </div>
 </header>
+<div class="menu-completo" id="menu-completo" hidden></div>
 
 <header class="hero-semana">
   <div class="hero-in">
@@ -243,7 +247,7 @@ for monto in [10, 20, 30]:
         <li>Necesitamos un <strong>acumulador</strong> (total), un <strong>contador</strong> (cantidad) y un <strong>máximo</strong>. Los tres se inicializan <em>antes</em> del bucle.</li>
         <li>Caso borde: si el cajero escribe <code>fin</code> de inmediato, el promedio sería una división entre cero.</li>
       </ul>
-      <figure class="lamina angosta"><div class="placa"><img src="../assets/img/s3-centinela.svg" alt="Diagrama de un bucle con centinela: inicializar total y cantidad, leer entrada, si es fin se sale y se muestra el reporte; si no, se acumula y se vuelve a leer." width="580" height="424" loading="lazy" decoding="async"></div><figcaption>Un bucle en un diagrama es una flecha que <strong>regresa</strong> a un punto anterior. La decisión es la condición de salida.</figcaption></figure>
+      <figure class="lamina angosta"><div class="placa"><div class="placa-core"><img src="../assets/img/s3-centinela.svg" alt="Diagrama de un bucle con centinela: inicializar total y cantidad, leer entrada, si es fin se sale y se muestra el reporte; si no, se acumula y se vuelve a leer." width="580" height="424" loading="lazy" decoding="async"></div></div><figcaption>Un bucle en un diagrama es una flecha que <strong>regresa</strong> a un punto anterior. La decisión es la condición de salida.</figcaption></figure>
     </div></div>
     <div class="paso"><div>
       <span class="etq">Implementación</span>
@@ -322,7 +326,7 @@ Venta mayor: $100.00</code></pre>
     <div class="paso"><div>
       <span class="etq">Exploración</span>
       <p>Sabemos exactamente cuántas vueltas: 5 → <code>for</code> con <code>range(1, 6)</code> (el 6 no se incluye). Cada año el saldo se multiplica por 1.08: el saldo es un acumulador que crece multiplicando.</p>
-<figure class="lamina "><div class="placa"><img src="../assets/img/s3-range.svg" alt="range(1, 6) incluye los números del 1 al 5: el inicio se incluye y el fin no." width="760" height="172" loading="lazy" decoding="async"></div><figcaption>El “uno de menos” más famoso de Python: el fin de <code>range</code> nunca se incluye.</figcaption></figure>
+<figure class="lamina "><div class="placa"><div class="placa-core"><img src="../assets/img/s3-range.svg" alt="range(1, 6) incluye los números del 1 al 5: el inicio se incluye y el fin no." width="760" height="172" loading="lazy" decoding="async"></div></div><figcaption>El “uno de menos” más famoso de Python: el fin de <code>range</code> nunca se incluye.</figcaption></figure>
 
     </div></div>
     <div class="paso"><div>
@@ -349,7 +353,7 @@ print(f"Ganancia total: ${saldo - capital:,.2f}")</code></pre>
   4    100.78    1360.49
   5    108.84    1469.33
 Ganancia total: $469.33</code></pre>
-<figure class="lamina "><div class="placa"><img src="../assets/img/s3-interes.svg" alt="Barras apiladas del saldo de un depósito de 1000 dólares al 8 % anual: 1080, 1166.40, 1259.71, 1360.49 y 1469.33; la parte de interés crece cada año." width="720" height="286" loading="lazy" decoding="async"></div><figcaption>El capital (azul) no cambia; la parte de interés (ocre) crece cada año porque se calcula sobre un saldo mayor. Valores exactos en la tabla de arriba.</figcaption></figure>
+<figure class="lamina "><div class="placa"><div class="placa-core"><img src="../assets/img/s3-interes.svg" alt="Barras apiladas del saldo de un depósito de 1000 dólares al 8 % anual: 1080, 1166.40, 1259.71, 1360.49 y 1469.33; la parte de interés crece cada año." width="720" height="286" loading="lazy" decoding="async"></div></div><figcaption>El capital (azul) no cambia; la parte de interés (ocre) crece cada año porque se calcula sobre un saldo mayor. Valores exactos en la tabla de arriba.</figcaption></figure>
 
     </div></div>
     <div class="paso"><div>
@@ -783,8 +787,8 @@ print(f"Total: {total}, promedio: {promedio}, días sin venta: {dias_sin_venta}"
     <li>Python Software Foundation. <a href="https://docs.python.org/es/3/tutorial/controlflow.html" target="_blank" rel="noopener">Tutorial — Más herramientas para control de flujo</a>.</li>
   </ul>
   <nav class="nav-semanas" aria-label="Navegación entre semanas">
-    <a href="semana-02.html">← Semana 2</a>
-    <a href="semana-04.html">Semana 4: funciones →</a>
+    <a class="nav-prev" href="semana-02.html"><span class="btn-ico" aria-hidden="true"></span><span>Semana 2</span></a>
+    <a class="nav-next" href="semana-04.html"><span>Semana 4: funciones</span><span class="btn-ico" aria-hidden="true"></span></a>
   </nav>
 </section>
 

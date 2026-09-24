@@ -295,4 +295,111 @@
     if (s.quizTotal) txt += " · quiz " + (s.quizOk || 0) + "/" + s.quizTotal;
     if (etiqueta) etiqueta.textContent = txt;
   });
+
+  /* ---------- Menú de pantalla completa ---------- */
+  var TITULOS = ["Pensamiento computacional, entorno y Git", "Variables, tipos y condicionales",
+                 "Bucles y patrones de control", "Funciones, ámbito y pruebas", "Listas, búsqueda y ordenamiento"];
+  var menuBtn = document.querySelector(".menu-btn");
+  var menu = document.getElementById("menu-completo");
+  if (menuBtn && menu) {
+    var n = 0;
+    function entra(html) { return '<span class="entra" style="--i:' + (n++) + '">' + html + "</span>"; }
+    var html = '<div class="menu-in"><nav aria-label="Semanas de la guía"><h2>Semanas</h2><ol class="menu-semanas">';
+    var inicio = document.querySelector(".isla .brand");
+    html += "<li>" + entra('<a href="' + inicio.getAttribute("href") + '"><span class="n">↖</span><span class="tit">Inicio y temario</span></a>') + "</li>";
+    document.querySelectorAll(".isla-semanas a").forEach(function (a, i) {
+      var actual = a.getAttribute("aria-current") === "page" ? ' aria-current="page"' : "";
+      html += "<li>" + entra('<a href="' + a.getAttribute("href") + '"' + actual + '><span class="n">0' + (i + 1) +
+        '</span><span class="tit">' + TITULOS[i] + "</span></a>") + "</li>";
+    });
+    html += "</ol></nav>";
+    var toc = document.querySelector(".toc ol");
+    if (toc) {
+      html += '<nav aria-label="En esta página"><h2>En esta página</h2><ol class="menu-secciones">';
+      toc.querySelectorAll("li").forEach(function (li) {
+        if (li.classList.contains("grupo")) html += '<li class="grupo">' + entra(li.textContent) + "</li>";
+        else {
+          var a = li.querySelector("a");
+          html += "<li>" + entra('<a href="' + a.getAttribute("href") + '">' + a.textContent + "</a>") + "</li>";
+        }
+      });
+      html += "</ol></nav>";
+    }
+    menu.innerHTML = html + "</div>";
+
+    function abrir() {
+      menu.hidden = false;
+      void menu.offsetWidth;
+      menu.classList.add("abierto");
+      menuBtn.setAttribute("aria-expanded", "true");
+      document.body.classList.add("menu-activo");
+      var primero = menu.querySelector("a");
+      if (primero) primero.focus({ preventScroll: true });
+    }
+    function cerrar(devolverFoco) {
+      menu.classList.remove("abierto");
+      menuBtn.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("menu-activo");
+      setTimeout(function () { if (!menu.classList.contains("abierto")) menu.hidden = true; }, 450);
+      if (devolverFoco) menuBtn.focus();
+    }
+    menuBtn.addEventListener("click", function () {
+      if (menuBtn.getAttribute("aria-expanded") === "true") cerrar(true); else abrir();
+    });
+    menu.addEventListener("click", function (e) { if (e.target.closest("a")) cerrar(false); });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && menuBtn.getAttribute("aria-expanded") === "true") cerrar(true);
+    });
+  }
+
+  /* ---------- Láminas: incrustar el SVG para que use las fuentes de la página ----------
+     Solo cuando la guía se sirve por http(s) (GitHub Pages); al abrirla como archivo local se queda la <img>.
+     El <style> y los id de cada SVG se aíslan con un prefijo único para no afectar al resto de la página. */
+  if (/^https?:$/.test(location.protocol) && window.fetch && window.DOMParser) {
+    document.querySelectorAll('.placa-core img[src$=".svg"]').forEach(function (img, k) {
+      fetch(img.getAttribute("src")).then(function (r) { return r.ok ? r.text() : Promise.reject(r.status); })
+        .then(function (txt) {
+          var uid = "lam" + k;
+          txt = txt.replace(/id="([^"]+)"/g, 'id="' + uid + '-$1"').replace(/url\(#([^)]+)\)/g, "url(#" + uid + "-$1)");
+          var doc = new DOMParser().parseFromString(txt, "image/svg+xml");
+          var svg = doc.documentElement;
+          if (!svg || svg.nodeName.toLowerCase() !== "svg") return;
+          var estilo = svg.querySelector("style");
+          if (estilo) {
+            estilo.textContent = estilo.textContent.replace(/(^|\})\s*([^{}]+)\{/g, function (_, cierre, sel) {
+              return cierre + "\n" + sel.split(",").map(function (x) { return "#" + uid + " " + x.trim(); }).join(", ") + " {";
+            });
+          }
+          svg.setAttribute("id", uid);
+          svg.setAttribute("role", "img");
+          svg.setAttribute("aria-label", img.getAttribute("alt") || "");
+          svg.removeAttribute("width");
+          svg.removeAttribute("height");
+          var titulo = svg.querySelector("title");
+          if (titulo) titulo.parentNode.removeChild(titulo);
+          img.replaceWith(document.importNode(svg, true));
+        })
+        .catch(function () { /* se queda la imagen */ });
+    });
+  }
+
+  /* ---------- Revelado al entrar en pantalla ---------- */
+  var sinMovimiento = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if ("IntersectionObserver" in window && !sinMovimiento) {
+    var objetivos = document.querySelectorAll("main h2, figure.lamina, .ciclo, .ejercicio, .momentos, .permisos, .quiz-score, .nav-semanas, .temario > li, .pesos > div");
+    document.documentElement.classList.add("revela");
+    var vistos = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add("visto"); vistos.unobserve(en.target); }
+      });
+    }, { rootMargin: "0px 0px -4% 0px", threshold: 0 });
+    objetivos.forEach(function (el) {
+      el.classList.add("rv");
+      if (el.parentElement && el.parentElement.classList.contains("temario")) {
+        el.style.setProperty("--i", Array.prototype.indexOf.call(el.parentElement.children, el) % 6);
+      }
+      vistos.observe(el);
+    });
+    window.addEventListener("beforeprint", function () { objetivos.forEach(function (el) { el.classList.add("visto"); }); });
+  }
 })();

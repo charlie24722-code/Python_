@@ -13,17 +13,21 @@
 </head>
 <body data-semana="s1">
 
-<header class="topbar">
-  <a class="brand" href="../index.html">IDS <span>·</span> <small>Guía de estudio</small></a>
-  <nav aria-label="Semanas">
+<header class="isla-wrap">
+  <div class="isla">
+    <a class="brand" href="../index.html">IDS <small>Guía de estudio</small></a>
+    <nav class="isla-semanas" aria-label="Semanas">
     <a href="semana-01.html" aria-current="page">S1</a>
     <a href="semana-02.html">S2</a>
     <a href="semana-03.html">S3</a>
     <a href="semana-04.html">S4</a>
     <a href="semana-05.html">S5</a>
   </nav>
-  <button class="theme-btn" type="button" aria-label="Cambiar tema claro/oscuro"><span class="ico-tema" aria-hidden="true"></span></button>
+    <button class="theme-btn" type="button" aria-label="Cambiar tema claro/oscuro"><span class="ico-tema" aria-hidden="true"></span></button>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu-completo"><span class="hb" aria-hidden="true"></span><span class="hb" aria-hidden="true"></span><span class="sr">Menú</span></button>
+  </div>
 </header>
+<div class="menu-completo" id="menu-completo" hidden></div>
 
 <header class="hero-semana">
   <div class="hero-in">
@@ -239,7 +243,7 @@
 <section id="vida">
   <h2>El ciclo de vida del software</h2>
   <p>Un programa no empieza en el teclado. Empieza en una necesidad del negocio y termina (si termina) cuando nadie lo usa. Las fases básicas:</p>
-<figure class="lamina "><div class="placa"><img src="../assets/img/s1-ciclo-vida.svg" alt="Ciclo de vida del software: requerimientos, diseño, implementación, pruebas, despliegue y mantenimiento; el mantenimiento vuelve a requerimientos." width="760" height="152" loading="lazy" decoding="async"></div><figcaption>Las pruebas están <strong>antes</strong> del despliegue: ahí es barato encontrar errores. El mantenimiento reinicia el ciclo.</figcaption></figure>
+<figure class="lamina "><div class="placa"><div class="placa-core"><img src="../assets/img/s1-ciclo-vida.svg" alt="Ciclo de vida del software: requerimientos, diseño, implementación, pruebas, despliegue y mantenimiento; el mantenimiento vuelve a requerimientos." width="760" height="152" loading="lazy" decoding="async"></div></div><figcaption>Las pruebas están <strong>antes</strong> del despliegue: ahí es barato encontrar errores. El mantenimiento reinicia el ciclo.</figcaption></figure>
 
   <div class="table-wrap"><table>
     <thead><tr><th>Fase</th><th>Pregunta que responde</th><th>Ejemplo: sistema de facturación</th></tr></thead>
@@ -266,7 +270,7 @@
     <li><strong>Finitud:</strong> termina siempre, para cualquier entrada válida.</li>
     <li><strong>Entradas y salidas definidas:</strong> sabes qué datos necesita y qué entrega.</li>
   </ol>
-<figure class="lamina "><div class="placa"><img src="../assets/img/s1-simbolos.svg" alt="Los cuatro símbolos del diagrama de flujo: óvalo para inicio o fin, paralelogramo para entrada o salida, rectángulo para proceso y rombo para decisión." width="720" height="172" loading="lazy" decoding="async"></div><figcaption>Los cuatro símbolos que necesitas para cualquier diagrama de flujo del curso.</figcaption></figure>
+<figure class="lamina "><div class="placa"><div class="placa-core"><img src="../assets/img/s1-simbolos.svg" alt="Los cuatro símbolos del diagrama de flujo: óvalo para inicio o fin, paralelogramo para entrada o salida, rectángulo para proceso y rombo para decisión." width="720" height="172" loading="lazy" decoding="async"></div></div><figcaption>Los cuatro símbolos que necesitas para cualquier diagrama de flujo del curso.</figcaption></figure>
 
 
   <div class="ciclo">
@@ -301,7 +305,7 @@
   total ← base + iva
   MOSTRAR total
 FIN</code></pre>
-      <figure class="lamina angosta"><div class="placa"><img src="../assets/img/s1-flujo-factura.svg" alt="Diagrama de flujo de la factura: leer precio y cantidad, calcular subtotal, decidir si el subtotal es mayor o igual a 50 para aplicar 10 % de descuento, calcular base, IVA y total, y mostrar el total." width="610" height="610" loading="lazy" decoding="async"></div><figcaption>El mismo algoritmo que el pseudocódigo. Fíjate en la frontera: con un subtotal de exactamente $50 se toma la rama <strong>Sí</strong>.</figcaption></figure>
+      <figure class="lamina angosta"><div class="placa"><div class="placa-core"><img src="../assets/img/s1-flujo-factura.svg" alt="Diagrama de flujo de la factura: leer precio y cantidad, calcular subtotal, decidir si el subtotal es mayor o igual a 50 para aplicar 10 % de descuento, calcular base, IVA y total, y mostrar el total." width="610" height="610" loading="lazy" decoding="async"></div></div><figcaption>El mismo algoritmo que el pseudocódigo. Fíjate en la frontera: con un subtotal de exactamente $50 se toma la rama <strong>Sí</strong>.</figcaption></figure>
     </div></div>
     <div class="paso"><div>
       <span class="etq">Resultado</span>
@@ -376,7 +380,7 @@ Sistema de facturación v0.1</code></pre>
         </tbody>
       </table></div>
       <p>Por eso un archivo puede estar: <strong>sin seguimiento</strong> (Git no lo conoce), <strong>modificado</strong>, <strong>preparado</strong> o <strong>confirmado</strong>.</p>
-<figure class="lamina "><div class="placa"><img src="../assets/img/s1-git-areas.svg" alt="Los lugares de Git: el directorio de trabajo pasa al área de preparación con git add, al repositorio local con git commit y a GitHub con git push; git pull trae los cambios del remoto." width="780" height="252" loading="lazy" decoding="async"></div><figcaption><code>add</code> prepara, <code>commit</code> guarda en tu historial local, <code>push</code> lo comparte en GitHub. Son tres pasos distintos.</figcaption></figure>
+<figure class="lamina "><div class="placa"><div class="placa-core"><img src="../assets/img/s1-git-areas.svg" alt="Los lugares de Git: el directorio de trabajo pasa al área de preparación con git add, al repositorio local con git commit y a GitHub con git push; git pull trae los cambios del remoto." width="780" height="252" loading="lazy" decoding="async"></div></div><figcaption><code>add</code> prepara, <code>commit</code> guarda en tu historial local, <code>push</code> lo comparte en GitHub. Son tres pasos distintos.</figcaption></figure>
 
     </div></div>
     <div class="paso"><div>
@@ -401,7 +405,7 @@ git switch feature/ficha-tecnica   # cámbiate a ella (en versiones viejas: git 
 git switch main                    # vuelves a main
 git merge feature/ficha-tecnica    # integras el trabajo
 git branch -d feature/ficha-tecnica  # borra la rama ya integrada</code></pre>
-<figure class="lamina "><div class="placa"><img src="../assets/img/s1-git-ramas.svg" alt="Una rama feature sale del commit C2 de main, recibe los commits F1 y F2, y se integra de vuelta a main con un merge en el commit M." width="740" height="266" loading="lazy" decoding="async"></div><figcaption>Una rama por tarea. <code>git switch -c nombre</code> equivale a <code>git branch nombre</code> + <code>git switch nombre</code>.</figcaption></figure>
+<figure class="lamina "><div class="placa"><div class="placa-core"><img src="../assets/img/s1-git-ramas.svg" alt="Una rama feature sale del commit C2 de main, recibe los commits F1 y F2, y se integra de vuelta a main con un merge en el commit M." width="740" height="266" loading="lazy" decoding="async"></div></div><figcaption>Una rama por tarea. <code>git switch -c nombre</code> equivale a <code>git branch nombre</code> + <code>git switch nombre</code>.</figcaption></figure>
 
       <p><strong>GitHub (repositorio remoto):</strong></p>
 <pre data-file="terminal"><code class="language-bash">git remote add origin git@github.com:usuario/la-ceiba.git   # con SSH
@@ -733,8 +737,8 @@ Declaración de qué partes fueron asistidas y cómo se verificaron (obligatorio
   </ul>
   <p style="font-size:.9rem;color:var(--ink-3)">Esta guía resume los temas asignados por el programa del curso; no reproduce el contenido de los libros ni cita páginas. Los libros de O’Reilly son la fuente principal.</p>
   <nav class="nav-semanas" aria-label="Navegación entre semanas">
-    <a href="../index.html">← Inicio</a>
-    <a href="semana-02.html">Semana 2: variables y condicionales →</a>
+    <a class="nav-prev" href="../index.html"><span class="btn-ico" aria-hidden="true"></span><span>Inicio</span></a>
+    <a class="nav-next" href="semana-02.html"><span>Semana 2: variables y condicionales</span><span class="btn-ico" aria-hidden="true"></span></a>
   </nav>
 </section>
 

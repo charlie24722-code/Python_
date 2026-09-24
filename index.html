@@ -13,17 +13,21 @@
 </head>
 <body>
 
-<header class="topbar">
-  <a class="brand" href="index.html">IDS <span>·</span> <small>Guía de estudio</small></a>
-  <nav aria-label="Semanas">
+<header class="isla-wrap">
+  <div class="isla">
+    <a class="brand" href="index.html">IDS <small>Guía de estudio</small></a>
+    <nav class="isla-semanas" aria-label="Semanas">
     <a href="semanas/semana-01.html">S1</a>
     <a href="semanas/semana-02.html">S2</a>
     <a href="semanas/semana-03.html">S3</a>
     <a href="semanas/semana-04.html">S4</a>
     <a href="semanas/semana-05.html">S5</a>
   </nav>
-  <button class="theme-btn" type="button" aria-label="Cambiar tema claro/oscuro"><span class="ico-tema" aria-hidden="true"></span></button>
+    <button class="theme-btn" type="button" aria-label="Cambiar tema claro/oscuro"><span class="ico-tema" aria-hidden="true"></span></button>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu-completo"><span class="hb" aria-hidden="true"></span><span class="hb" aria-hidden="true"></span><span class="sr">Menú</span></button>
+  </div>
 </header>
+<div class="menu-completo" id="menu-completo" hidden></div>
 
 <section class="portada">
   <div class="portada-in">
@@ -31,12 +35,12 @@
       <h1>Introducción al Desarrollo de Software, <mark>semanas 1 a 5</mark></h1>
       <p class="lead">Algoritmos, Python y Git explicados con casos de negocio: facturas con IVA, préstamos, inventario. Lee, responde el control de lectura, traza a mano, practica y prepara la defensa del proyecto.</p>
       <div class="acciones">
-        <a class="btn-marca" href="semanas/semana-01.html">Empezar por la semana 1</a>
+        <a class="btn-marca" href="semanas/semana-01.html"><span>Empezar por la semana 1</span><span class="btn-ico" aria-hidden="true"></span></a>
         <a class="btn-linea" href="#temario">Ver el temario</a>
       </div>
       <p class="datos">ESEN · Ciclo III/2026 · Secciones 1 y 2 · Catedrático: Alvin Javier Portillo Tiliano · <a href="https://moodle.esen.edu.sv/" target="_blank" rel="noopener">Moodle ESEN</a></p>
     </div>
-    <figure class="ruta" style="margin:0">
+    <figure class="ruta" style="margin:0"><div class="placa-core">
       <img src="assets/img/ruta-ciclo.svg" width="640" height="320" alt="Ruta de las 12 semanas del ciclo con controles en las semanas 2, 5, 8 y 11, parcial en la 6, final en la 12 y fases del proyecto en las semanas 1, 3, 5, 7, 9, 10 y 11.">
     </figure>
   </div>

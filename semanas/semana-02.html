@@ -13,17 +13,21 @@
 </head>
 <body data-semana="s2">
 
-<header class="topbar">
-  <a class="brand" href="../index.html">IDS <span>·</span> <small>Guía de estudio</small></a>
-  <nav aria-label="Semanas">
+<header class="isla-wrap">
+  <div class="isla">
+    <a class="brand" href="../index.html">IDS <small>Guía de estudio</small></a>
+    <nav class="isla-semanas" aria-label="Semanas">
     <a href="semana-01.html">S1</a>
     <a href="semana-02.html" aria-current="page">S2</a>
     <a href="semana-03.html">S3</a>
     <a href="semana-04.html">S4</a>
     <a href="semana-05.html">S5</a>
   </nav>
-  <button class="theme-btn" type="button" aria-label="Cambiar tema claro/oscuro"><span class="ico-tema" aria-hidden="true"></span></button>
+    <button class="theme-btn" type="button" aria-label="Cambiar tema claro/oscuro"><span class="ico-tema" aria-hidden="true"></span></button>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu-completo"><span class="hb" aria-hidden="true"></span><span class="hb" aria-hidden="true"></span><span class="sr">Menú</span></button>
+  </div>
 </header>
+<div class="menu-completo" id="menu-completo" hidden></div>
 
 <header class="hero-semana">
   <div class="hero-in">
@@ -317,7 +321,7 @@ Total:    $56.50
     </div></div>
   </div>
 
-<figure class="lamina "><div class="placa"><img src="../assets/img/s2-variables.svg" alt="Las variables son etiquetas que apuntan a valores. Al reasignar precio de 20 a 25, subtotal sigue valiendo 60 porque se calculó antes." width="760" height="292" loading="lazy" decoding="async"></div><figcaption>Esto es lo que ocurre en la <a href="#trazas">traza 1</a>: reasignar <code>precio</code> no cambia <code>subtotal</code>.</figcaption></figure>
+<figure class="lamina "><div class="placa"><div class="placa-core"><img src="../assets/img/s2-variables.svg" alt="Las variables son etiquetas que apuntan a valores. Al reasignar precio de 20 a 25, subtotal sigue valiendo 60 porque se calculó antes." width="760" height="292" loading="lazy" decoding="async"></div></div><figcaption>Esto es lo que ocurre en la <a href="#trazas">traza 1</a>: reasignar <code>precio</code> no cambia <code>subtotal</code>.</figcaption></figure>
   <div class="box ojo">
     <span class="box-title">Dinero y float</span>
     <p><code>print(0.1 + 0.2)</code> muestra <code>0.30000000000000004</code>, y <code>round(2.675, 2)</code> da <code>2.67</code>, no 2.68: el número guardado es en realidad un poco menor que 2.675. Para este curso basta con <strong>redondear al presentar</strong> y <strong>no comparar flotantes con <code>==</code></strong>. En sistemas contables reales se trabaja en centavos enteros (<code>5650</code> en vez de <code>56.50</code>) o con tipos decimales exactos.</p>
@@ -343,7 +347,7 @@ Total:    $56.50
         <li>Las fronteras son <code>1</code>, <code>5</code> y <code>20</code>. “Hasta 1 kg” incluye el 1 → <code>&lt;=</code>.</li>
         <li>Hay entradas que no tienen sentido: peso 0 o negativo. Se rechazan <em>antes</em> de calcular.</li>
       </ul>
-<figure class="lamina "><div class="placa"><img src="../assets/img/s2-tramos.svg" alt="Recta numérica de peso con los tramos de la tarifa: hasta 1 kg 3.50, de 1 a 5 kg 6.00, de 5 a 20 kg 12.00, más de 20 no se acepta; 0 o menos es error. Las fronteras 1, 5 y 20 pertenecen al tramo de la izquierda." width="760" height="248" loading="lazy" decoding="async"></div><figcaption>Los tramos como recta numérica. Las fronteras (1, 5 y 20 kg) son justo donde hay que probar.</figcaption></figure>
+<figure class="lamina "><div class="placa"><div class="placa-core"><img src="../assets/img/s2-tramos.svg" alt="Recta numérica de peso con los tramos de la tarifa: hasta 1 kg 3.50, de 1 a 5 kg 6.00, de 5 a 20 kg 12.00, más de 20 no se acepta; 0 o menos es error. Las fronteras 1, 5 y 20 pertenecen al tramo de la izquierda." width="760" height="248" loading="lazy" decoding="async"></div></div><figcaption>Los tramos como recta numérica. Las fronteras (1, 5 y 20 kg) son justo donde hay que probar.</figcaption></figure>
 
     </div></div>
     <div class="paso"><div>
@@ -384,7 +388,7 @@ else:
         <li><strong>Varios <code>if</code> independientes</strong> cuando las condiciones se <em>acumulan</em> (recargo rural, recargo por fragilidad, recargo por urgencia…).</li>
         <li><strong>Omitir el <code>else</code></strong> solo cuando “no hacer nada” es una respuesta válida.</li>
       </ul>
-<figure class="lamina "><div class="placa"><img src="../assets/img/s2-cadena-if.svg" alt="Con monto igual a 600, la primera condición monto mayor que 100 es verdadera, se ejecuta la rama A y las ramas siguientes nunca se evalúan." width="760" height="312" loading="lazy" decoding="async"></div><figcaption>Por qué importa el orden de los <code>elif</code> (pregunta 6 del checkpoint y ejercicio E5).</figcaption></figure>
+<figure class="lamina "><div class="placa"><div class="placa-core"><img src="../assets/img/s2-cadena-if.svg" alt="Con monto igual a 600, la primera condición monto mayor que 100 es verdadera, se ejecuta la rama A y las ramas siguientes nunca se evalúan." width="760" height="312" loading="lazy" decoding="async"></div></div><figcaption>Por qué importa el orden de los <code>elif</code> (pregunta 6 del checkpoint y ejercicio E5).</figcaption></figure>
 
     </div></div>
     <div class="paso verif"><div>
@@ -792,8 +796,8 @@ print(f"Descuento: {descuento:.0%}")</code></pre>
   </ul>
   <p style="font-size:.9rem;color:var(--ink-3)">Los valores de impuestos del E2 son ficticios y con fines didácticos.</p>
   <nav class="nav-semanas" aria-label="Navegación entre semanas">
-    <a href="semana-01.html">← Semana 1</a>
-    <a href="semana-03.html">Semana 3: bucles →</a>
+    <a class="nav-prev" href="semana-01.html"><span class="btn-ico" aria-hidden="true"></span><span>Semana 1</span></a>
+    <a class="nav-next" href="semana-03.html"><span>Semana 3: bucles</span><span class="btn-ico" aria-hidden="true"></span></a>
   </nav>
 </section>
 
